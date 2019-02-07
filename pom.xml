@@ -16,9 +16,8 @@
             <version>3.0-alpha-1</version>
             <scope>provided</scope>
         </dependency>
-1234567
 
-
+<!--Morozov-->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
