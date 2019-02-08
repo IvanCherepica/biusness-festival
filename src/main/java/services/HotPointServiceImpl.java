@@ -53,15 +53,16 @@ public class HotPointServiceImpl implements HotPointService{
         hotPointDAO.remove(id);
     }
     
-    @Override
-    public List<HotPoint> getAllList () {
-        return hotPointDAO.getAllList();
-    }
-    
-    @Override
-    public List<HotPoint> getAllByFestival (Festival festival) {
-        return hotPointDAO.getAllByFestival(festival);
-    }
+//    @Override
+//    public List<HotPoint> getAllList () {
+//        return hotPointDAO.getAllList();
+//    }
+//
+//    @Override
+//    public List<HotPoint> getAllByFestival (Festival festival) {
+//        return hotPointDAO.getAllByFestival(festival);
+//    }
+
     private static SessionFactory createSessionFactory(Configuration configuration) {
         StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder();
         builder.applySettings(configuration.getProperties());

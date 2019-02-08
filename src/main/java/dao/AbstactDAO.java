@@ -19,7 +19,7 @@ abstract class AbstactDAO<T> {
     public AbstactDAO(SessionFactory sessionFactory) {
         persistentClass = (Class<T>) ((ParameterizedType) this.getClass().getGenericSuperclass()).getActualTypeArguments()[0];
         String genericClassName = persistentClass.toGenericString();
-        String className = genericClassName.substring(genericClassName.lastIndexOf('.')+1);
+        this.className = genericClassName.substring(genericClassName.lastIndexOf('.')+1);
         this.sessionFactory = sessionFactory;
     }
 

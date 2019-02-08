@@ -8,7 +8,7 @@ public interface FestivalService {
 	
 	Festival getById(long id);
 	Festival getByName(String name);
-	void add(Festival festival);
+	Long add(Festival festival);
 	void update(Festival festival);
 	void remove(long id);
 	List<Festival> getAllList();

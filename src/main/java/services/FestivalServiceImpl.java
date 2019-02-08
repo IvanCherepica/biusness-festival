@@ -44,8 +44,8 @@ public class FestivalServiceImpl implements FestivalService {
 	}
 	
 	@Override
-	public void add (Festival festival) {
-		festivalDao.add(festival);
+	public Long add (Festival festival) {
+		return festivalDao.add(festival);
 	}
 	
 	@Override
