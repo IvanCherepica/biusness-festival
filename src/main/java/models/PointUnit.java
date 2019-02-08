@@ -13,6 +13,11 @@ abstract class PointUnit extends MapUnit {
     public PointUnit() {
     }
 
+    public PointUnit(String name, String description, String geometry, String color, Festival festival) {
+        super(name, description, geometry, color);
+        this.festival = festival;
+    }
+
     public Festival getFestival() {
         return festival;
     }
