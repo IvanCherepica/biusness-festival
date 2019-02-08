@@ -1,4 +1,4 @@
-package src.main.java.servlets;
+package servlets;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/geometry")
+@WebServlet("/rest/geometry")
 public class GeometryServlet extends HttpServlet {
 
     // Геометрическая фигура фестиваля - массив координат в формате JSON

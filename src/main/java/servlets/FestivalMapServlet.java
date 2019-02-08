@@ -1,4 +1,4 @@
-package src.main.java.servlets;
+package servlets;
 
 import com.google.gson.Gson;
 import models.User;
@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/map")
+@WebServlet("/user/map")
 public class FestivalMapServlet extends HttpServlet {
 
 
