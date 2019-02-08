@@ -1,8 +1,7 @@
 package services;
 
-import dao.HotPointDAO;
+
 import dao.HotPointDAOImpl;
-import models.Festival;
 import models.HotPoint;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -10,8 +9,6 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 import util.DBHelper;
 
-import java.sql.SQLException;
-import java.util.List;
 
 public class HotPointServiceImpl implements HotPointService{
     private final HotPointDAOImpl hotPointDAO;
