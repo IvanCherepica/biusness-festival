@@ -12,17 +12,6 @@ import java.sql.SQLException;
 
 public class DBHelper {
 
-	static public Connection getConnection() throws SQLException, ClassNotFoundException, IllegalAccessException, InstantiationException {
-
-		DriverManager.registerDriver((Driver) Class.forName(PropertiesReader.getProperties("driver.class")).newInstance());
-
-		String url = PropertiesReader.getProperties("connection.url") + "?user=" +
-				PropertiesReader.getProperties("username") + "&password=" +
-				PropertiesReader.getProperties("password");
-
-		return DriverManager.getConnection(url);
-
-	}
 
 	static public Configuration getConfiguration() {
 		Configuration configuration = new Configuration();
