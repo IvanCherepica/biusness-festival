@@ -1,6 +1,5 @@
 package dao;
 
-import models.Festival;
 import models.HotPoint;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -12,6 +11,7 @@ import java.util.List;
 public class HotPointDAOImpl implements HotPointDAO {
     //private Session session;
     private SessionFactory sessionFactory;
+public class HotPointDAOImpl extends AbstactDAO<HotPointDAOImpl>  implements HotPointDAO<HotPointDAOImpl> {
 
     public HotPointDAOImpl(SessionFactory sessionFactory) {
 
@@ -93,12 +93,12 @@ public class HotPointDAOImpl implements HotPointDAO {
             session.close();
         }
     }
-    
+
     @Override
     public List<HotPoint> getAllList () {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
-        
+
         List<HotPoint> hotpoints = null;
         try {
             hotpoints = session.createQuery("FROM hot_point").list();
@@ -111,15 +111,15 @@ public class HotPointDAOImpl implements HotPointDAO {
         }
         return hotpoints;
      }
-    
+
     @Override
     public List<HotPoint> getAllByFestival (Festival festival) {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
-        
+
         List<HotPoint> hotpoints = null;
         try {
-            
+
             Query query = session.createQuery("FROM hot_point h WHERE h.id = :id");
             query.setParameter("id", festival.getId());
             transaction.commit();
