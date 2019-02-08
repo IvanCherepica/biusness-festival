@@ -1,5 +1,6 @@
 package dao;
 
+import models.Festival;
 import models.HotPoint;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -8,34 +9,14 @@ import org.hibernate.Transaction;
 
 import java.util.List;
 
-public class HotPointDAOImpl implements HotPointDAO {
-    //private Session session;
-    private SessionFactory sessionFactory;
-public class HotPointDAOImpl extends AbstactDAO<HotPointDAOImpl>  implements HotPointDAO<HotPointDAOImpl> {
+
+public class HotPointDAOImpl extends AbstactDAO<HotPointDAOImpl>  {//implements HotPointDAO<HotPoint> {
+
 
     public HotPointDAOImpl(SessionFactory sessionFactory) {
-
-        this.sessionFactory = sessionFactory;
+        super(sessionFactory);
     }
 
-    @Override
-    public HotPoint getById(long id) {
-        Session session = sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
-        HotPoint hotPoint = null;
-        try {
-            hotPoint = (HotPoint) session.get(HotPoint.class,id);
-            transaction.commit();
-        } catch (Exception e) {
-            System.out.println("Can`t get HotPoint by id: " + e.getMessage());
-            transaction.rollback();
-        } finally {
-                session.close();
-            }
-        return  hotPoint;
-    }
-
-    @Override
     public Long save(HotPoint hotPoint) {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
@@ -79,7 +60,7 @@ public class HotPointDAOImpl extends AbstactDAO<HotPointDAOImpl>  implements Hot
 
     }
 
-    @Override
+
     public void update(HotPoint hotPoint) {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
@@ -94,7 +75,7 @@ public class HotPointDAOImpl extends AbstactDAO<HotPointDAOImpl>  implements Hot
         }
     }
 
-    @Override
+
     public List<HotPoint> getAllList () {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
@@ -112,7 +93,7 @@ public class HotPointDAOImpl extends AbstactDAO<HotPointDAOImpl>  implements Hot
         return hotpoints;
      }
 
-    @Override
+
     public List<HotPoint> getAllByFestival (Festival festival) {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();

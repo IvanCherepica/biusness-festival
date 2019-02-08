@@ -14,7 +14,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class HotPointServiceImpl implements HotPointService{
-    private final HotPointDAO hotPointDAO;
+    private final HotPointDAOImpl hotPointDAO;
 
     private static volatile HotPointServiceImpl instance;
 

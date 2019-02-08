@@ -14,7 +14,7 @@ abstract class AbstactDAO<T> {
 
     private String className;
 
-    private SessionFactory sessionFactory;
+    protected SessionFactory sessionFactory;
 
     public AbstactDAO(SessionFactory sessionFactory) {
         persistentClass = (Class<T>) ((ParameterizedType) this.getClass().getGenericSuperclass()).getActualTypeArguments()[0];
