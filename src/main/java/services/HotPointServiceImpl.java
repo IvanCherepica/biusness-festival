@@ -45,7 +45,12 @@ public class HotPointServiceImpl implements HotPointService{
 
     @Override
     public Long add(HotPoint hotPoint) {
-        return hotPointDAO.add(hotPoint);
+        Long hotPointID = hotPointDAO.add(hotPoint);
+        if (hotPointID==null) {
+            System.out.println("HotPoint " + hotPoint.getName() + " is allready exist!");
+            return getByName(hotPoint.getName()).getId();
+        }
+        return hotPointID;
     }
 
     @Override

@@ -45,7 +45,14 @@ public class FestivalServiceImpl implements FestivalService {
 	
 	@Override
 	public Long add (Festival festival) {
-		return festivalDao.add(festival);
+
+		Long festivalID = festivalDao.add(festival);
+		if (festivalID==null) {
+			System.out.println("Fesival " + festival.getName() + " is allready exist!");
+			return getByName(festival.getName()).getId();
+
+		}
+		return festivalID;
 	}
 	
 	@Override
