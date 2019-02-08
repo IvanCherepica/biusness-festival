@@ -1,15 +1,10 @@
 package dao;
 
-import models.Festival;
 import models.HotPoint;
 
-import java.util.List;
-
-public interface HotPointDAO<T> {
-    T getById(long id);
-    Long add(T hotPoint);
+public interface HotPointDAO {
+    HotPoint getById(long id);
+    Long add(HotPoint hotPoint);
     void remove(long id);
-    List<T> getAllList();
-    List<T> getAllByFestival(Festival festival);
-    void update(T hotPoint);
+    void update(HotPoint hotPoint);
 }
