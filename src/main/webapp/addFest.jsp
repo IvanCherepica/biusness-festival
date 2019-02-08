@@ -10,7 +10,8 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %> -->
 <html>
-<head>
+<head
+>
     <title>Add user</title>
     <style>
         .field {
@@ -18,8 +19,15 @@
             text-align: right;
             line-height: 25px;
         }
+        .gps {
+            clear: both;
+            text-align: right;
+            line-height: 25px;
+
+        }
+
         .submit {
-            margin-top: 5px;
+            margin-top: 10px;
         }
         label {
             float: left;
@@ -33,7 +41,8 @@
             color: red;
             background-color: khaki;
         }
-    </style
+    </style>
+
 </head>
 <body>
 <div align="center">
@@ -48,9 +57,13 @@
                 <label for="uDesc">Описание</label>
                 <input type="text" id="uDesc" name="description" />
             </div>
-            <div class="field">
-                <a href="${pageContext.request.contextPath}/admin/addGps">Опишите координаты</a>
+            <div class="gps">
+
+                <label for="ugps">GPS</label>
+
+                <input  type="text" id="ugps" name="geometry" size="55"/>
             </div>
+
             <div class="submit">
                 <input type="submit" align="center" value="Создать"/>
             </div>

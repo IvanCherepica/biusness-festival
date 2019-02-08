@@ -29,8 +29,5 @@
     </table>
 </div>
 
-<h2>
-    <a href="${pageContext.request.contextPath}/admin/addFest">создайте новый фестиваль</a>
-</h2>
 </body>
 </html>
