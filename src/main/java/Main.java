@@ -12,21 +12,39 @@ public class Main {
 
         Festival festival = festivalService.getById(l1);
 
-        festival.setColor("12344");
+//        festival.setColor("12344");
+//
+//        festivalService.update(festival);
+//
+//        festival = festivalService.getByName("festival");
 
-        festivalService.update(festival);
 
-        festival = festivalService.getByName("festival");
+        //festivalService.remove(l1);
 
-
-        festivalService.remove(l1);
-
-//        HotPointServiceImpl hotPointService = HotPointServiceImpl.getInstance();
+        HotPointServiceImpl hotPointService = HotPointServiceImpl.getInstance();
 //        Festival festival = new Festival("festival","festival1","festival2","festival3");
-//        hotPointService.add(new HotPoint("HotPoint1",
-//                "HotPoint2",
-//                "HotPoint3",
-//                "HotPoint4",
-//                festival));
+        l1 = hotPointService.add(new HotPoint("HotPoint1",
+                "HotPoint2",
+                "HotPoint3",
+                "HotPoint4",
+                festival));
+
+        HotPoint hotPoint = hotPointService.getById(l1);
+
+        hotPoint.setDescription("dflaskdf;ashdfsahf");
+
+        hotPointService.update(hotPoint);
+
+
+        hotPoint = hotPointService.getByName("HotPoint1");
+
+        hotPointService.add(new HotPoint("HotPoint222",
+                "asdasd",
+                "dddddd",
+                "black",
+                festival));
+
+        hotPointService.remove(l1);
+
     }
 }

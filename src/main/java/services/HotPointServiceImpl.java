@@ -39,6 +39,11 @@ public class HotPointServiceImpl implements HotPointService{
     }
 
     @Override
+    public HotPoint getByName(String name) {
+        return hotPointDAO.getByName(name);
+    }
+
+    @Override
     public Long add(HotPoint hotPoint) {
         return hotPointDAO.add(hotPoint);
     }
