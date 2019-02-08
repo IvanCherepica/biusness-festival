@@ -18,11 +18,11 @@ public class FestivalServiceImpl implements FestivalService {
 	
 	private static volatile FestivalServiceImpl instance;
 	
-	private FestivalServiceImpl() throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
+	private FestivalServiceImpl()  {
 		this.festivalDao = new FestivalDaoImpl(createSessionFactory(DBHelper.getConfiguration()));
 	}
 	
-	public static FestivalServiceImpl getInstance() throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
+	public static FestivalServiceImpl getInstance() {
 		if (instance == null) {
 			synchronized (FestivalServiceImpl.class) {
 				if (instance == null) {
