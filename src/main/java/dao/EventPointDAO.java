@@ -1,8 +1,6 @@
 package dao;
 
-import models.HotPoint;
-
-public interface HotPointDAO<T> {
+public interface EventPointDAO<T> {
     T getById(long id);
     Long add(T hotPoint);
     void remove(long id);

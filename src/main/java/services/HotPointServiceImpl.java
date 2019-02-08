@@ -38,7 +38,7 @@ public class HotPointServiceImpl implements HotPointService{
 
     @Override
     public Long add(HotPoint hotPoint) {
-        return hotPointDAO.save(hotPoint);
+        return hotPointDAO.add(hotPoint);
     }
 
     @Override

@@ -6,7 +6,6 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
-import javax.persistence.EntityManager;
 import java.lang.reflect.ParameterizedType;
 
 
@@ -63,12 +62,12 @@ abstract class AbstactDAO<T> {
     }
 
 
-    public void add (T item) {
+    public Long add (T item) {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
-
+        Long itemID = null;
         try {
-            session.save(item);
+            itemID = (Long) session.save(item);
             transaction.commit();
         } catch (Exception e) {
             System.out.println("Can`t add " + className + ": " + e.getMessage());
@@ -76,6 +75,7 @@ abstract class AbstactDAO<T> {
         } finally {
             session.close();
         }
+        return itemID;
     }
 
 
