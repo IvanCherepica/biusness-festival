@@ -17,7 +17,6 @@ public class FestivalMapServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html");
-        //request.setAttribute("data", geometryJSON);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/map.html");
         dispatcher.forward(request, response);
     }
