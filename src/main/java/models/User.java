@@ -1,9 +1,9 @@
-//package models;
-//
-//import javax.persistence.*;
-//
-//@Entity
-//@Table(name = "users")
-//public class User {
-//
-//}
+package models;
+
+import javax.persistence.*;
+
+@Entity
+@Table(name = "users")
+public class User {
+
+}
