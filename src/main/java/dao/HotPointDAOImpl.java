@@ -57,7 +57,7 @@ public class HotPointDAOImpl implements HotPointDAO {
 
         HotPoint hotPoint;
         try {
-            Query query = session.createQuery("SELECT u FROM hot_point u WHERE u.id = :id");
+            Query query = session.createQuery("SELECT u FROM HotPoint u WHERE u.id = :id");
             query.setParameter("id", id);
 
             hotPoint = (HotPoint) query.uniqueResult();
