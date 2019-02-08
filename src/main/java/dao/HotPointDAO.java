@@ -2,9 +2,9 @@ package dao;
 
 import models.HotPoint;
 
-public interface HotPointDAO<T> {
-    T getById(long id);
-    Long add(T hotPoint);
+public interface HotPointDAO {
+    HotPoint getById(long id);
+    Long add(HotPoint hotPoint);
     void remove(long id);
-    void update(T hotPoint);
+    void update(HotPoint hotPoint);
 }

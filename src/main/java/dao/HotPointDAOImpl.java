@@ -6,7 +6,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
-public class HotPointDAOImpl extends AbstactDAO<HotPointDAOImpl>  implements HotPointDAO<HotPointDAOImpl> {
+public class HotPointDAOImpl extends AbstactDAO<HotPoint>  implements HotPointDAO {
 
     public HotPointDAOImpl(SessionFactory sessionFactory) {
         super(sessionFactory);
