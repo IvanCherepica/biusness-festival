@@ -4,7 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "hotPoints")
+@Table(name = "hot_point")
 public class HotPoint extends PointUnit{
 
 }

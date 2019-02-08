@@ -7,7 +7,7 @@ import javax.persistence.MappedSuperclass;
 @MappedSuperclass
 abstract class PointUnit extends MapUnit {
     @ManyToOne
-    @JoinColumn(name="id", referencedColumnName="festivalID") //?
+    @JoinColumn(name="festival_id") //?
     private Festival festival;
 
     public PointUnit() {

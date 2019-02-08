@@ -4,7 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "eventPoints")
+@Table(name = "event_point")
 public class EventPoint extends PointUnit {
 
 }

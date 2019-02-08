@@ -1,6 +1,7 @@
 package dao;
 
 abstract class AbstractDaoImpl<T> implements AbstractDao<T>{
+
     @Override
     public T getById(long id) {
         return null;
