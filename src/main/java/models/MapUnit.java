@@ -24,6 +24,13 @@ abstract class MapUnit  {
     public MapUnit() {
     }
 
+    public MapUnit(String name, String description, String geometry, String color) {
+        this.name = name;
+        this.description = description;
+        this.geometry = geometry;
+        this.color = color;
+    }
+
     public void setId(long id) {
         this.id = id;
     }
