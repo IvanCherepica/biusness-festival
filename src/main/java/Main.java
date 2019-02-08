@@ -1,5 +1,8 @@
+import models.EventPoint;
 import models.Festival;
 import models.HotPoint;
+import services.EventPoinService;
+import services.EventPoinServiceImpl;
 import services.FestivalServiceImpl;
 import services.HotPointServiceImpl;
 
@@ -21,30 +24,45 @@ public class Main {
 
         //festivalService.remove(l1);
 
-        HotPointServiceImpl hotPointService = HotPointServiceImpl.getInstance();
-//        Festival festival = new Festival("festival","festival1","festival2","festival3");
-        l1 = hotPointService.add(new HotPoint("HotPoint1",
-                "HotPoint2",
-                "HotPoint3",
-                "HotPoint4",
-                festival));
+//        HotPointServiceImpl hotPointService = HotPointServiceImpl.getInstance();
+////        Festival festival = new Festival("festival","festival1","festival2","festival3");
+//        l1 = hotPointService.add(new HotPoint("HotPoint1",
+//                "HotPoint2",
+//                "HotPoint3",
+//                "HotPoint4",
+//                festival));
+//
+//        HotPoint hotPoint = hotPointService.getById(l1);
+//
+//        hotPoint.setDescription("dflaskdf;ashdfsahf");
+//
+//        hotPointService.update(hotPoint);
+//
+//
+//        hotPoint = hotPointService.getByName("HotPoint1");
+//
+//        hotPointService.add(new HotPoint("HotPoint222",
+//                "asdasd",
+//                "dddddd",
+//                "black",
+//                festival));
+//
+//        hotPointService.remove(l1);
 
-        HotPoint hotPoint = hotPointService.getById(l1);
+        EventPoinService eventPoinService = EventPoinServiceImpl.getInstance();
 
-        hotPoint.setDescription("dflaskdf;ashdfsahf");
+        l1 = eventPoinService.add(new EventPoint("EventPoint name","qweq","qweqe","qweqe", festival));
 
-        hotPointService.update(hotPoint);
+        EventPoint eventPoint = eventPoinService.getById(l1);
+
+        eventPoint.setDescription("dflaskdf;ashdfsahf");
+
+        eventPoinService.update(eventPoint);
 
 
-        hotPoint = hotPointService.getByName("HotPoint1");
+        eventPoint = eventPoinService.getByName("HotPoint1");
 
-        hotPointService.add(new HotPoint("HotPoint222",
-                "asdasd",
-                "dddddd",
-                "black",
-                festival));
-
-        hotPointService.remove(l1);
+        eventPoinService.remove(l1);
 
     }
 }
