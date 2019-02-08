@@ -7,4 +7,8 @@ import javax.persistence.Table;
 @Table(name = "hot_point")
 public class HotPoint extends PointUnit{
 
+    public HotPoint(String name, String description, String geometry, String color, Festival festival) {
+        super(name, description, geometry, color, festival);
+    }
+
 }
