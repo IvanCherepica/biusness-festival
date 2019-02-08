@@ -26,7 +26,9 @@ public class User {
         this.id = id;
     }
 
-    public User() {
+    public User(String name, String password) {
+        this.name = name;
+        this.password = password;
     }
 
     public long getId() {
