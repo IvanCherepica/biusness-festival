@@ -57,7 +57,7 @@ public class FestivalServiceImpl implements FestivalService {
 	
 	@Override
 	public void update (Festival festival) {
-		festivalDao.update(festival);
+			festivalDao.update(festival);
 	}
 	
 	@Override
