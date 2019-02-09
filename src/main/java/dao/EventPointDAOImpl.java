@@ -1,8 +1,9 @@
 package dao;
 
 import models.EventPoint;
-import models.HotPoint;
 import org.hibernate.*;
+
+import java.util.List;
 
 public class EventPointDAOImpl extends AbstactDAO<EventPoint> implements EventPointDAO{
 
@@ -39,5 +40,24 @@ public class EventPointDAOImpl extends AbstactDAO<EventPoint> implements EventPo
         Transaction transaction = session.beginTransaction();
         query.executeUpdate();
         transaction.commit();
+    }
+
+    @Override
+    public List<EventPoint> getAllList() {
+        Session session = sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+
+        List<EventPoint> eventPoints = null;
+        try {
+            eventPoints = session.createQuery("FROM EventPoint").list();
+            transaction.commit();
+        } catch (Exception e) {
+            System.out.println("Can`t get list of eventPoints: " + e.getMessage());
+            transaction.rollback();
+        } finally {
+            session.close();
+        }
+
+        return eventPoints;
     }
 }
