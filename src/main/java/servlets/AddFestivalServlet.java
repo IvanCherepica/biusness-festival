@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebServlet("/addFest")
+@WebServlet("/addfest")
 public class AddFestivalServlet extends HttpServlet {
     private final FestivalService festivalad=  FestivalServiceImpl.getInstance();
 
