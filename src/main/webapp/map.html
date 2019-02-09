@@ -13,16 +13,17 @@
 
         // get запрос GeometryServlet
         $.ajax({
-            url: "/geometry",
+            url: "/rest/geometry",
             method: "get",
-            async: false,
+            async: true,
             error: function(message) {
                 console.log(message);
             },
             success: function(data) {
-                console.log(data);
 
                 array = data;
+
+                ymaps.ready(init);
                 //$('#somediv').append(data.name);
             }
         });
@@ -35,16 +36,18 @@
         navigator.geolocation.getCurrentPosition(function(position) {
 
             x = position.coords.latitude; y = position.coords.longitude;
-            console.log(" x " + position.coords.latitude);
+            //console.log(" x " + position.coords.latitude);
         });
-        console.log("Map  x " + x + " ; y " + y  );
+        //console.log("Map  x " + x + " ; y " + y  );
         //загрузка данных в карту.
-        ymaps.ready(init);
+        //ymaps.ready(init);
 
         // инициализация карты.
         function init(){
+
             myMap = new ymaps.Map("map", {
                 // определение центра.
+
                 center: [x, y],
                 // приближение.
                 zoom: 16
@@ -57,6 +60,7 @@
             // добавляем метку на карту
             myMap.geoObjects.add(myPlacemark);
 
+            //console.log("Map array " + array );
             // объект геометрицесской фигуры
             var myPolygon = new ymaps.Polygon([
                     // Указываем координаты вершин многоугольника, являющиеся массивом
