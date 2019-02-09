@@ -23,12 +23,11 @@ public class FestivalDaoImpl extends AbstactDAO<Festival> implements FestivalDao
 			throw new HibernateException("No such element");
 		}
 		
-		String queryString = new StringBuilder().
-				append("UPDATE Festival SET name = :name, ").
-				append("description = :description, ").
-				append("geometry = :geometry, ").
-				append("color = :color ").
-				append("WHERE id = :id").toString();
+		String queryString = "UPDATE Festival SET name = :name, " +
+				"description = :description, " +
+				"geometry = :geometry, " +
+				"color = :color " +
+				"WHERE id = :id";
 		
 		query = session.createQuery(queryString);
 		query.setParameter("id",        item.getId());
