@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="biusness-festival:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>biusness-festival</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="crud-jdbc-servlet-jsp-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="biusness-festival:war exploded" />
+    </root>
+  </artifact>
+</component>
