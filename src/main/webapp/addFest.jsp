@@ -1,75 +1,63 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<!--%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: User
-  Date: 02.03.2018
-  Time: 18:36
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %> -->
+
+<!DOCTYPE html>
 <html>
-<head
->
-    <title>Add user</title>
+<head>
+    <meta charset="utf-8">
+    <title>Login page</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <style>
-        .field {
-            clear: both;
-            text-align: right;
-            line-height: 25px;
+        body {
+            background: #eeeeee;
         }
-        .gps {
-            clear: both;
-            text-align: right;
-            line-height: 25px;
+        .login-form {
+            /*margin-top: 100px;*/
+            margin-top: 12px;
+
 
         }
+        <textarea class="login-form" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                                                                 .login-group :last-child {
+                                                                                     margin-top: 5px;
+                                                                                     max-width:280px;
+                                                                                 }
+        <textarea class="login-form" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                                                                 .login-group :last-child {
+                                                                                     margin-top: 5px;
+                                                                                     max-width:280px;
+                                                                                 }
+        .empty-block {
+            height: 88px;
+        }
 
-        .submit {
-            margin-top: 10px;
-        }
-        label {
-            float: left;
-            padding-right: 10px;
-        }
-        .main {
-            width: 253px;
-            margin: 0 auto;
-        }
-        .warning {
-            color: red;
-            background-color: khaki;
-        }
     </style>
 
 </head>
+
 <body>
-<div align="center">
-    <h1>Создание фестиваля</h1>
-    <div class="main">
-        <form action="${pageContext.servletContext.contextPath}/admin/addFest" method="POST">
-            <div class="field">
-                <label for="uName">Название</label>
-                <input type="text" id="uName" name="name" />
-            </div>
-            <div class="field">
-                <label for="uDesc">Описание</label>
-                <input type="text" id="uDesc" name="description" />
-            </div>
-            <div class="gps">
+<div class="container">
+    <div class="row">
 
-                <label for="ugps">GPS</label>
+        <h2>Создание Фестиваля</h2>
+        <form action="${pageContext.request.contextPath}/addfest" method="POST">
+            <div class="form-group login-group">
+                <input type="text" class="form-control"  name="name" placeholder="название Фестиваля"
+                       required/>
 
-                <input  type="text" id="ugps" name="geometry" size="55"/>
+                <textarea  class="form-control" rows="5" name="description" placeholder="краткое описание" required></textarea>
+                <textarea  class="form-control" rows="5" name="geometry" placeholder="координаты" required></textarea>
+
             </div>
-
-            <div class="submit">
-                <input type="submit" align="center" value="Создать"/>
-            </div>
-
+            <input type="submit" class="btn btn-primary btn-block" value="Создать"/>
         </form>
     </div>
+</div>
+</div>
 </div>
 </body>
 </html>
