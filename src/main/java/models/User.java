@@ -13,6 +13,9 @@ public class User {
     private String role;
     //private List<Event> events;
 
+    public User(){}
+
+
     public User(String name, String password, String role) {
         this.name = name;
         this.password = password;

@@ -3,6 +3,7 @@ package util;
 import models.EventPoint;
 import models.Festival;
 import models.HotPoint;
+import models.User;
 import org.hibernate.cfg.Configuration;
 
 import java.sql.Connection;
@@ -18,6 +19,7 @@ public class DBHelper {
 		configuration.addAnnotatedClass(Festival.class);
 		configuration.addAnnotatedClass(HotPoint.class);
 		configuration.addAnnotatedClass(EventPoint.class);
+		configuration.addAnnotatedClass(User.class);
 
 		configuration.setProperty("hibernate.dialect", PropertiesReader.getProperties("dialect"));
 		configuration.setProperty("hibernate.connection.driver_class", PropertiesReader.getProperties("driver.class"));
