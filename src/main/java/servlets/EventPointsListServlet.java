@@ -18,22 +18,19 @@ public class EventPointsListServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-
         List eventPoints = EventPoinServiceImpl.getInstance().getAllList();
-
-        //System.out.println(eventPoints.size());
-
         request.setAttribute("EventPointsList", eventPoints);
-
-
         RequestDispatcher dispatcher = request.getRequestDispatcher("/eventPointsList.jsp");
         dispatcher.forward(request, response);
+    }
 
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String idString =request.getParameter("deleteId");
+        System.out.println(idString);
+        long id = Long.parseLong(idString);
+        EventPoinServiceImpl.getInstance().remove(id);
 
-
-
-
-
-
+        response.sendRedirect("/eventpoints");
     }
 }

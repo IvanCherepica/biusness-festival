@@ -34,21 +34,35 @@
         <tbody>
         <c:forEach var="eventPoint" items="${EventPointsList}">
             <tr>
-                <th scope="row">${eventPoint.getId()}</th>
+                <form>
+                <td>${eventPoint.getId()}</td>
                 <td>${eventPoint.getName()}</td>
                 <td>${eventPoint.getDescription()}</td>
                 <td>${eventPoint.getGeometry()}</td>
                 <td>${eventPoint.getColor()}</td>
-                <%--<td>${eventPoint.getFestival().getId()}</td>--%>
-                <td>tempValue</td>
+                <td>${eventPoint.getFestival().getId()}</td>
                 <td>
-                    <a id="editButton${eventPoint.getId()}" class="btn btn-primary">Edit</a>
-                    <a class="btn btn-primary" href="${pageContext.servletContext.contextPath}/admin/delete/${eventPoint}">Delete</a>
+                    <%-- HELP
+                    button
+                    name
+                    value
+                    formmethod
+                    formaction --%>
+                    <button name="deleteId" value="${eventPoint.getId()}" formmethod="post" formaction="" class="btn btn-primary">Delete</button>
+                    <button name="editId" value="${eventPoint.getId()}" formmethod="get" formaction="\eventpointedit" class="btn btn-primary">Edit</button>
                 </td>
+                </form>>
             </tr>
         </c:forEach>
+
+
+
+
         </tbody>
     </table>
+    <form>
+        <button name="editId" value="-1" formmethod="get" formaction="\eventpointedit" class="btn btn-primary">Add EventPoint</button>
+    </form>
 </div>
 
 
