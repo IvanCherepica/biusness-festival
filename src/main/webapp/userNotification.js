@@ -1,8 +1,9 @@
 
 function userNotification() {
-    var timerID = setTimeout(notifyUserAboutFestival(), 10000);
-
+    //var timerID = setTimeout(notifyUserAboutFestival(), 1000000);
+    setInterval(notifyUserAboutFestival(), 10000)
     function notifyUserAboutFestival() {
+        //alert("Begin");
         //Get user current coordinats
         var x, y;
         var array;
@@ -10,12 +11,13 @@ function userNotification() {
             x = position.coords.latitude;
             y = position.coords.longitude;
         });
-
+        console.log("x " + x + " ; y " + y  );
         // get request for compear user location whith festival position
         $.ajax({
             url: "/compearLocations",
             method: "get",
             data: {xPosition: x, yPosition: y},
+            async:false,
             error: function (message) {
                 console.log(message);
             },
@@ -26,7 +28,7 @@ function userNotification() {
                 //$('#somediv').append(data.name);
             }
         });
-
-        timerID = setTimeout(notifyUserAboutFestival(), 1000);
+        console.log(array);
+        //timerID = setTimeout(notifyUserAboutFestival(), 100000);
     }
 }
