@@ -32,17 +32,19 @@
         </tr>
         </thead>
         <tbody>
-        <c:forEach var="eventPoint" items="${eventPoints}">
+        <c:forEach var="eventPoint" items="${EventPointsList}">
             <tr>
                 <th scope="row">${eventPoint.getId()}</th>
                 <td>${eventPoint.getName()}</td>
                 <td>${eventPoint.getDescription()}</td>
                 <td>${eventPoint.getGeometry()}</td>
                 <td>${eventPoint.getColor()}</td>
-                <td>${eventPoint.getFestival()}</td>
+                <%--<td>${eventPoint.getFestival().getId()}</td>--%>
+                <td>tempValue</td>
                 <td>
                     <a id="editButton${eventPoint.getId()}" class="btn btn-primary">Edit</a>
                     <a class="btn btn-primary" href="${pageContext.servletContext.contextPath}/admin/delete/${eventPoint}">Delete</a>
+                </td>
             </tr>
         </c:forEach>
         </tbody>

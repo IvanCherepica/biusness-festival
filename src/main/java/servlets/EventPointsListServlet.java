@@ -21,7 +21,7 @@ public class EventPointsListServlet extends HttpServlet {
 
         List eventPoints = EventPoinServiceImpl.getInstance().getAllList();
 
-        System.out.println(eventPoints.size());
+        //System.out.println(eventPoints.size());
 
         request.setAttribute("EventPointsList", eventPoints);
 
