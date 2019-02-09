@@ -16,21 +16,21 @@
             background: #eeeeee;
         }
         .login-form {
-            /*margin-top: 100px;*/
+            margin-top: 100px;
             margin-top: 12px;
 
 
         }
-        <textarea class="login-form" id="exampleFormControlTextarea1" rows="3"></textarea>
-                                                                                 .login-group :last-child {
-                                                                                     margin-top: 5px;
-                                                                                     max-width:280px;
-                                                                                 }
-        <textarea class="login-form" id="exampleFormControlTextarea1" rows="3"></textarea>
-                                                                                 .login-group :last-child {
-                                                                                     margin-top: 5px;
-                                                                                     max-width:280px;
-                                                                                 }
+
+        .login-group :last-child {
+            margin-top: 5px;
+            max-width:280px;
+        }
+
+        .login-group :last-child {
+            margin-top: 5px;
+            max-width:280px;
+        }
         .empty-block {
             height: 88px;
         }
@@ -42,22 +42,24 @@
 <body>
 <div class="container">
     <div class="row">
+        <div class="col-lg-6 col-md-6 col-xs-11 col-md-offset-3 col-xs-offset-2 login-form">
+            <div class="col-xs-8 col-md-offset-2">
+                <h2>Создание Фестиваля</h2>
+                <form action="${pageContext.request.contextPath}/addfest" method="POST">
+                    <div class="form-group login-group">
+                        <input type="text" class="form-control"  name="name" placeholder="название Фестиваля"
+                               required></input>
+                        <textarea   class="login-form form-control " rows="3" name="description" placeholder="краткое описание
+                        " required></textarea>
+                        <textarea   class="login-form form-control " rows="6" name="geometry" placeholder="координаты
+                        " required></textarea>
 
-        <h2>Создание Фестиваля</h2>
-        <form action="${pageContext.request.contextPath}/addfest" method="POST">
-            <div class="form-group login-group">
-                <input type="text" class="form-control"  name="name" placeholder="название Фестиваля"
-                       required/>
-
-                <textarea  class="form-control" rows="5" name="description" placeholder="краткое описание" required></textarea>
-                <textarea  class="form-control" rows="5" name="geometry" placeholder="координаты" required></textarea>
-
+                    </div>
+                    <input type="submit" class="btn btn-primary btn-block" value="Создать"/>
+                </form>
             </div>
-            <input type="submit" class="btn btn-primary btn-block" value="Создать"/>
-        </form>
+        </div>
     </div>
-</div>
-</div>
 </div>
 </body>
 </html>

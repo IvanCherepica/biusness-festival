@@ -21,7 +21,7 @@ public class AddFestivalServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html");
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/addfest.html");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/addfest.jsp");
         dispatcher.forward(request, response);
     }
 
@@ -37,6 +37,9 @@ public class AddFestivalServlet extends HttpServlet {
         //HttpSession session = request.getSession();
         //response.getWriter().println("test");
         //System.out.println(fest);
+        response.setContentType("text/html");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/festivalList.jsp");
+        dispatcher.forward(request, response);
         return;
 
     }
