@@ -41,7 +41,6 @@ public class LoginServlet extends HttpServlet {
         if (user.getPassword().equals(password)) {
             HttpSession session = request.getSession();
             response.getWriter().println("test");
-            response.getWriter().write(login);
             return;
         }
     }

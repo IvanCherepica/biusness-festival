@@ -1,0 +1,11 @@
+package dao;
+
+import models.User;
+
+public interface UserDAO {
+    User getById(long id);
+    User getByName (String name);
+    Long add (User user);
+    void remove (long id);
+    void update (User user);
+}
