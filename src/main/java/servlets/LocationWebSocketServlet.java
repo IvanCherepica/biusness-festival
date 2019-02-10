@@ -29,7 +29,7 @@ public class LocationWebSocketServlet {
         @OnClose
         public void onClose(Session userSession) {
             userSessions.remove(userSession);
-            System.out.println("Connected user:" + userSession.getId());
+            System.out.println("Disconnect user:" + userSession.getId());
         }
 
         @OnMessage
