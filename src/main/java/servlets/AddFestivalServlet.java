@@ -1,8 +1,6 @@
 package servlets;
-import com.google.gson.Gson;
-import dao.FestivalDaoImpl;
+
 import models.Festival;
-import models.User;
 import services.FestivalService;
 import services.FestivalServiceImpl;
 
@@ -12,31 +10,45 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+
 import java.io.IOException;
 
-@WebServlet("/addFest")
+@WebServlet("/admin/addFest")
 public class AddFestivalServlet extends HttpServlet {
-    private final FestivalService festivalad=  FestivalServiceImpl.getInstance();
+    private final FestivalService festivalService=  FestivalServiceImpl.getInstance();
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setContentType("text/html");
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/addFest.jsp");
+	    response.setContentType("text/html");
+		String paramId = request.getParameter("edit");
+    	Festival festival;
+    	
+	    if (paramId==null) {
+		    festival = new Festival("Name", "Description", "Coordinates", "Color");
+	    } else {
+		    Long id = Long.parseLong(paramId);
+		    festival = festivalService.getById(id);
+	    }
+		request.setAttribute("festival", festival);
+	    
+	    RequestDispatcher dispatcher = request.getRequestDispatcher("/addFest.jsp");
         dispatcher.forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String login = request.getParameter("name");
-        String description = request.getParameter("description");
-        String geomertyJson = request.getParameter("geometry");
-
-        Festival fest = new Festival(login, description, geomertyJson, "black");
-        festivalad.add(fest);
-
+	    String name = request.getParameter("name");
+	    String description = request.getParameter("description");
+	    String geometry = request.getParameter("geometry");
+	    String color = request.getParameter("color");
+		
+	    if (name==null || name.isEmpty()) {
+		    response.sendRedirect("/error.html");
+	    }
+        Festival festival = new Festival(name, description, geometry, color);
+	    
+        festivalService.add(festival);
 
         response.setContentType("text/html");
-        response.sendRedirect("/festivals");
-		
+        response.sendRedirect("/admin/festivals");
     }
 }
