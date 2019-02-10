@@ -35,33 +35,26 @@
         <c:forEach var="eventPoint" items="${EventPointsList}">
             <tr>
                 <form>
-                <td>${eventPoint.getId()}</td>
-                <td>${eventPoint.getName()}</td>
-                <td>${eventPoint.getDescription()}</td>
-                <td>${eventPoint.getGeometry()}</td>
-                <td>${eventPoint.getColor()}</td>
-                <td>${eventPoint.getFestival().getId()}</td>
+                <td>${eventPoint.id}</td>
+                <td>${eventPoint.name}</td>
+                <td>${eventPoint.description}</td>
+                <td>${eventPoint.geometry}</td>
+                <td style="background-color:${eventPoint.color};"></td>
+                <td>${eventPoint.festival.name} (id:${eventPoint.festival.id})</td>
                 <td>
-                    <%-- HELP
-                    button
-                    name
-                    value
-                    formmethod
-                    formaction --%>
-                    <button name="deleteId" value="${eventPoint.getId()}" formmethod="post" formaction="" class="btn btn-primary">Delete</button>
-                    <button name="editId" value="${eventPoint.getId()}" formmethod="get" formaction="\eventpointedit" class="btn btn-primary">Edit</button>
+                    <button name="eventPointId" value="${eventPoint.id}" formmethod="post" formaction="\admin\eventpoints\delete" class="btn btn-primary">Delete</button>
+                    <button name="eventPointId" value="${eventPoint.id}" formmethod="get" formaction="\admin\eventpoints\edit" class="btn btn-primary">Edit</button>
                 </td>
-                </form>>
+                </form>
             </tr>
         </c:forEach>
-
-
-
-
         </tbody>
     </table>
     <form>
-        <button name="editId" value="new" formmethod="get" formaction="\eventpointedit" class="btn btn-primary">Add EventPoint</button>
+        <button formmethod="get" formaction="\admin\eventpoints\create" class="btn btn-primary">Add EventPoint</button>
+    </form>
+    <form>
+        <button formmethod="get" formaction="\logout" class="btn btn-primary">Logout</button>
     </form>
 </div>
 
