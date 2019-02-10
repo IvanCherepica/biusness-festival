@@ -2,11 +2,17 @@
 <head>
     <title>Geoposition</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+
     <script src="https://api-maps.yandex.ru/2.1/?apikey=e6f8dfbf-7c6d-464f-9a6a-4308cb58f188&lang=ru_RU" type="text/javascript">
     </script>
 
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-    <script src="/userNotification.js"></script>
+
+    <script type="text/javascript">
+        <%@include file="userNotification.js" %>
+    </script>
+
     <script type="text/javascript">
 
         connect();
@@ -94,6 +100,10 @@
     </script>
 </head>
 <body >
-<div id="map" style="width: 600px; height: 400px"></div>
+<div id="map" style="width: 600px; height: 400px">
+
+    test
+
+</div>
 </body>
 </html>
