@@ -51,7 +51,7 @@ public class LoginServlet extends HttpServlet {
             session.setAttribute("user", user);
             response.setContentType("text/html");
             if (user.getRole().equals("admin")) {
-                response.sendRedirect("/admin");
+                response.sendRedirect("/admin/festivals");
                 return;
             }
             response.sendRedirect("/user");
