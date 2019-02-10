@@ -37,9 +37,9 @@
                 <c:if test="${!isNotValid && !logout}">
                     <div class="empty-block"></div>
                 </c:if>
-                <c:if test="${isNotValid}">
+                <c:if test="${isInvalid}">
                     <div id="login-message" class="alert alert-danger">
-                        <h3>Invalid login or password!</h3>
+                        <h3>В доступе отказано!</h3>
                         <div id="error-message"></div>
                     </div>
                 </c:if>
