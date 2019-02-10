@@ -9,6 +9,7 @@ import javax.websocket.server.ServerEndpoint;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.Timer;
 
 @ServerEndpoint(value = "/compareLocations", configurator= LocationWebSocketConfigurator.class)
 public class LocationWebSocketServlet {
@@ -41,6 +42,7 @@ public class LocationWebSocketServlet {
 
 
         public void sendRequestToUpdate(Throwable t) throws Throwable {
+
 
         }
 
