@@ -61,7 +61,7 @@
         </tbody>
     </table>
     <form>
-        <button name="editId" value="-1" formmethod="get" formaction="\eventpointedit" class="btn btn-primary">Add EventPoint</button>
+        <button name="editId" value="new" formmethod="get" formaction="\eventpointedit" class="btn btn-primary">Add EventPoint</button>
     </form>
 </div>
 

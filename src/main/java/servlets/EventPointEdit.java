@@ -21,7 +21,6 @@ public class EventPointEdit extends HttpServlet {
         String idString =request.getParameter("editId");
         System.out.println(idString);
 
-
         long festivalId = 1;
         Festival festival = FestivalServiceImpl.getInstance().getById(festivalId);
 
@@ -34,12 +33,13 @@ public class EventPointEdit extends HttpServlet {
         }
         catch (NumberFormatException e){
             eventPointId = -1;
-            eventPoint = new EventPoint("name", "des", "geometry", "color", festival);
+            eventPoint = new EventPoint("nameNew", "desNew", "geometryNew", "colorNew", festival);
+            eventPoint.setId(eventPointId);
         }
 
         response.setContentType("text/html");
 
-        request.setAttribute("EventPoint", eventPoint);
+        request.setAttribute("eventPoint", eventPoint);
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("/eventPointEdit.jsp");
         dispatcher.forward(request, response);
@@ -47,15 +47,40 @@ public class EventPointEdit extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        String login = request.getParameter("name");
-//        String description = request.getParameter("description");
-//        String geomertyJson = request.getParameter("geometry");
-//
-//        Festival fest = new Festival(login, description, geomertyJson, "black");
-//        festivalad.add(fest);
-//
-//
-//        response.setContentType("text/html");
-//        response.sendRedirect("/festivals");
+        long eventPointId = Long.parseLong(request.getParameter("eventPointId"));
+        String eventName = request.getParameter("eventName");
+        String eventDescription = request.getParameter("description");
+        String eventGeometry = request.getParameter("geometry");
+        String eventColor = request.getParameter("color");
+
+        long festivalId = Long.parseLong(request.getParameter("festivalId"));
+        Festival festival = FestivalServiceImpl.getInstance().getById(festivalId);
+
+        EventPoint eventPoint = EventPoinServiceImpl.getInstance().getById(eventPointId);
+
+        if (eventPoint == null) {
+            eventPoint = new EventPoint();
+            updateEventPoint(eventName, eventDescription, eventGeometry, eventColor, festival, eventPoint);
+            EventPoinServiceImpl.getInstance().add(eventPoint);
+        }
+        else{
+            System.out.println(eventPoint.toString());
+            updateEventPoint(eventName, eventDescription, eventGeometry, eventColor, festival, eventPoint);
+            EventPoinServiceImpl.getInstance().update(eventPoint);
+        }
+
+        System.out.println(eventPoint.toString());
+
+
+
+    }
+
+    private void updateEventPoint(String eventName, String eventDescription, String eventGeometry, String eventColor, Festival festival, EventPoint eventPoint) {
+        eventPoint.setName(eventName);
+        eventPoint.setColor(eventColor);
+        eventPoint.setDescription(eventDescription);
+        eventPoint.setFestival(festival);
+        eventPoint.setGeometry(eventGeometry);
+
     }
 }

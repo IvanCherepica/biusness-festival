@@ -70,4 +70,15 @@ abstract class MapUnit  {
     public String getColor() {
         return color;
     }
+
+    @Override
+    public String toString() {
+        return "MapUnit{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", geometry='" + geometry + '\'' +
+                ", color='" + color + '\'' +
+                '}';
+    }
 }

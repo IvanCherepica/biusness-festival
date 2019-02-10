@@ -23,16 +23,29 @@
         <div class="col-lg-6 col-md-6 col-xs-11 col-md-offset-3 col-xs-offset-2 login-form">
             <div class="col-xs-8 col-md-offset-2">
                 <h2>Edit event point</h2>
-                <form action="" method="POST">
-                    <div class="form-group login-group">
-                        <input type="text" class="form-control"  name="name" placeholder="название Фестиваля"
-                               required>
-                        <textarea   class="login-form form-control " rows="3" name="description" placeholder="краткое описание
-                        " required>456</textarea>
-                        <textarea   class="login-form form-control " rows="6" name="geometry" placeholder="координаты
-                        " required>789</textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary btn-block" value="Создать"/>Save</button>
+                <form action="" method="POST" class="form-group login-group">
+                        <textarea class="login-form form-control " rows="3"
+                                  name="eventPointId" value="${eventPoint.getId()}" placeholder="eventPointId"
+                                  required>${eventPoint.getId()}</textarea>
+
+                        <input name="eventName" value="${eventPoint.getName()}" required class="form-control"/>
+
+                        <textarea class="login-form form-control " rows="3"
+                                  name="description" value="${eventPoint.getDescription()}" placeholder="краткое описание"
+                                  required>${eventPoint.getDescription()}</textarea>
+
+                        <textarea class="login-form form-control " rows="6"
+                                  name="geometry" value="${eventPoint.getGeometry()}" placeholder="координаты"
+                                  required>${eventPoint.getGeometry()}</textarea>
+
+                        <textarea class="login-form form-control " rows="6"
+                                  name="color" value="${eventPoint.getColor()}" placeholder="координаты" required>${eventPoint.getColor()}</textarea>
+
+                        <textarea class="login-form form-control " rows="3"
+                                  name="festivalId" value="${eventPoint.getFestival().getId()}" placeholder="id фестиваля"
+                                  required>${eventPoint.getFestival().getId()}</textarea>
+
+                    <button type="submit" class="btn btn-primary btn-block"/>Save</button>
                 </form>
             </div>
         </div>
