@@ -1,6 +1,7 @@
 package filter;
 
 import models.User;
+
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
@@ -20,7 +21,7 @@ public class UserFilter implements Filter {
 
         User user = (User) session.getAttribute("user");
 
-        if (user != null) {
+        if (user != null && user.getRole().equals("user")) {
             filterChain.doFilter(request, response);
             return;
         }
