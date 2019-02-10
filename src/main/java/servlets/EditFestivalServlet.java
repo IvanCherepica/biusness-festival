@@ -29,7 +29,7 @@ public class EditFestivalServlet extends HttpServlet {
 			festival = festivalService.getById(id);
 			request.setAttribute("festival", festival);
 		}
-		RequestDispatcher dispatcher = request.getRequestDispatcher("editFestival.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/editFestival.jsp");
 		dispatcher.forward(request, response);
 	}
 	
