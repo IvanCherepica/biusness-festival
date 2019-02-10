@@ -10,6 +10,8 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 import util.DBHelper;
 
+import java.util.List;
+
 public class UserServiceImpl implements UserService {
     private final UserDAO userDAO;
 
@@ -61,6 +63,10 @@ public class UserServiceImpl implements UserService {
         userDAO.remove(id);
     }
 
+    @Override
+    public List<User> getAllList() {
+        return userDAO.getAllList();
+    }
 
     private static SessionFactory createSessionFactory(Configuration configuration) {
         StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder();
