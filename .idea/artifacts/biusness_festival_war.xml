@@ -7,7 +7,7 @@
         <packaging>war</packaging>
       </options>
     </properties>
-    <root id="archive" name="biusness-festival.war">
+    <root id="archive" name="business-festival-1.0-SNAPSHOT.war">
       <element id="artifact" artifact-name="biusness-festival:war exploded" />
     </root>
   </artifact>
