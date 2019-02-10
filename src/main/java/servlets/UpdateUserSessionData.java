@@ -1,6 +1,9 @@
 package servlets;
 
+import com.google.gson.Gson;
+import dto.UserSocketDto;
 import models.User;
+import org.json.JSONObject;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,13 +18,20 @@ public class UpdateUserSessionData extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        HttpSession session = ((HttpServletRequest) request).getSession();
+        HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
+        String userInFestival = (String) session.getAttribute("userInFestival");
 
+        UserSocketDto dto = new UserSocketDto();
+        dto.setId(user.getId());
+        dto.setName(user.getName());
+        dto.setInFestival(Boolean.parseBoolean(userInFestival));
 
-//        response.setContentType("application/json");
-        response.setContentType("text/html");
+        String json = new Gson().toJson(dto);
+
+        response.setContentType("application/json");
+        //response.setContentType("text/html");
         response.setCharacterEncoding("UTF-8");
-        response.getWriter().write("Test username");
+        response.getWriter().write(json);
     }
 }

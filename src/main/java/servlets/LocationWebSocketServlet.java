@@ -2,11 +2,14 @@ package servlets;
 
 
 
+import com.google.gson.GsonBuilder;
+import dto.UserServerDto;
 import models.Festival;
+import org.json.JSONObject;
 import services.FestivalService;
 import services.FestivalServiceImpl;
 import services.LocationWebSocketConfigurator;
-import services.LocationWedSocketService;
+import util.UserJSONDataDeserializer;
 
 
 import javax.websocket.*;
@@ -43,7 +46,20 @@ public class LocationWebSocketServlet {
         @OnMessage
         public void onMessage(String message, Session userSession) throws Throwable {
             System.out.println("Message Received: " + message);
-            point = message;
+//            JSONObject obj = new JSONObject(message);
+//            String userName = obj.getJSONObject("userName").getString("userName");
+
+            GsonBuilder gsonBuilder = new GsonBuilder();
+            gsonBuilder.registerTypeAdapter(UserServerDto.class, new UserJSONDataDeserializer());
+
+            UserServerDto userServerDto = gsonBuilder.create().fromJson(message,UserServerDto.class);
+
+            //JSONObject obj = new JSONObject(message);
+
+
+
+
+            point = userServerDto.getCoordinates();
             sendRequestToUpdate(userSession);
 //            LocationWedSocketService.getInstance().sendRequestToUpdate(message, userSession);
         }

@@ -4,7 +4,7 @@ function sendMessage(webSocketClient) {
         navigator.geolocation.getCurrentPosition(function (position) {
             userX = position.coords.latitude;
             userY = position.coords.longitude;
-            var message = userX + " " + userY;
+            var message = '{ "coordinates": "' + userX + " " + userY + '", "userName" : "' +  userName + '", "userID" : "' + userID + '"}';
             //var jsonObj = {"x" : userX, "y" : userY};
             //webSocketClient.send(JSON.stringify(jsonObj));
             webSocketClient.send(message);
@@ -28,7 +28,9 @@ function connect() {
         }
 }
 
-
+var userName;
+var userID;
+var isInFestival;
 // get request for user name and id
 $.ajax({
     url: "/rest/userdata",
@@ -38,8 +40,11 @@ $.ajax({
         console.log(message);
     },
     success: function(data) {
+        userName = data.name;
+        userID = data.id;
+        isInFestival = data.isInFestival;
 
-        console.log("user data" + data);
+        console.log("userName " + userName + "; userID " + userID + "; isInFestival " + isInFestival);
 
     }
 });
