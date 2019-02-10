@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: NICK
-  Date: 08.02.2019
-  Time: 16:10
-  To change this template use File | Settings | File Templates.
---%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
@@ -28,19 +21,23 @@
             <th>Description</th>
             <th>Geometry</th>
             <th>Color</th>
+            <th><a id="addButton" class="btn btn-primary" href="${pageContext.servletContext.contextPath}/admin/addFest">Add</a></th>
         </tr>
         </thead>
         <tbody>
         <c:forEach var="festival" items="${FestivalsList}">
             <tr>
-                <th scope="row">${festival.getId()}</th>
-                <td>${festival.getName()}</td>
-                <td>${festival.getDescription()}</td>
-                <td>${festival.getGeometry()}</td>
-                <td>${festival.getColor()}</td>
-                <td>
-                    <a id="editButton${festival.getId()}" class="btn btn-primary">Edit</a>
-                    <a class="btn btn-primary" href="${pageContext.servletContext.contextPath}/admin/delete/${FestivalsList}">Delete</a>
+                <td width="5%" scope="row">${festival.id}</td>
+                <td width="15%">${festival.name}</td>
+                <td width="30%">${festival.description}</td>
+                <td width="30%">${festival.geometry}</td>
+                <td width="5%" bgcolor="${festival.color}"></td>
+                <td width="10%" class="form-group">
+                    <form  class="form-inline">
+                        <button type="submit" class="btn btn-primary" formmethod="get" formaction="${pageContext.request.contextPath}/admin/editFestival" name="edit" value="${festival.id}">Edit</button>
+                        <button type="submit" class="btn btn-primary" formmethod="get" formaction="${pageContext.request.contextPath}/admin/deleteFestival" name="delete" value="${festival.id}">Delete</button>
+                    </form>
+                </td>
             </tr>
         </c:forEach>
         </tbody>
