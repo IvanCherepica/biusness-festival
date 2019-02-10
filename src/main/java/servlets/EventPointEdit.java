@@ -33,7 +33,7 @@ public class EventPointEdit extends HttpServlet {
         }
         catch (NumberFormatException e){
             eventPointId = -1;
-            eventPoint = new EventPoint("nameNew", "desNew", "geometryNew", "colorNew", festival);
+            eventPoint = new EventPoint("nameNew", "desNew", "geometryNew", "colorNew", festival, "60 40" , 50);
             eventPoint.setId(eventPointId);
         }
 
