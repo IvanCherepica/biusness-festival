@@ -35,12 +35,12 @@
         <c:forEach var="eventPoint" items="${EventPointsList}">
             <tr>
                 <form>
-                <td>${eventPoint.getId()}</td>
-                <td>${eventPoint.getName()}</td>
-                <td>${eventPoint.getDescription()}</td>
-                <td>${eventPoint.getGeometry()}</td>
-                <td style="background-color:${eventPoint.getColor()};"></td>
-                <td>${eventPoint.getFestival().getId()}</td>
+                <td>${eventPoint.id}</td>
+                <td>${eventPoint.name}</td>
+                <td>${eventPoint.description}</td>
+                <td>${eventPoint.geometry}</td>
+                <td style="background-color:${eventPoint.color};"></td>
+                <td>${eventPoint.festival.id}</td>
                 <td>
                     <%-- HELP
                     button
@@ -48,8 +48,8 @@
                     value
                     formmethod
                     formaction --%>
-                    <button name="eventPointId" value="${eventPoint.getId()}" formmethod="post" formaction="\eventpoints\delete" class="btn btn-primary">Delete</button>
-                    <button name="eventPointId" value="${eventPoint.getId()}" formmethod="get" formaction="\eventpoints\edit" class="btn btn-primary">Edit</button>
+                    <button name="eventPointId" value="${eventPoint.id}" formmethod="post" formaction="\eventpoints\delete" class="btn btn-primary">Delete</button>
+                    <button name="eventPointId" value="${eventPoint.id}" formmethod="get" formaction="\eventpoints\edit" class="btn btn-primary">Edit</button>
                 </td>
                 </form>
             </tr>

@@ -24,29 +24,31 @@
             <div class="col-xs-8 col-md-offset-2">
                 <h2>Edit event point</h2>
                 <form action="" method="POST" class="form-group login-group">
-                    <input
-                            name="festivalId" value="${eventPoint.getFestival().getId()}" required
-                            type="hidden" />
+                    <select name="festivalId" value="${festivalId}">
+                        <c:forEach var="item" items="${festivals}">
+                            <option value="${item.id}" ${item.id == festivalId ? 'selected="selected"' : ''}>${item.id}, ${item.name}</option>
+                        </c:forEach>
+                    </select>
 
                     <input
-                            name="eventPointId" value="${eventPoint.getId()}" required
+                            name="eventPointId" value="${eventPoint.id}" required
                             type="hidden" />
 
 
                     <input placeholder="введите имя"
-                           name="name" value="${eventPoint.getName()}" required
+                           name="name" value="${eventPoint.name}" required
                            class="form-control"/>
 
                     <textarea placeholder="введите краткое описание"
-                              name="description" value="${eventPoint.getDescription()}" required
-                              class="login-form form-control" rows="3">${eventPoint.getDescription()}</textarea>
+                              name="description" value="${eventPoint.description}" required
+                              class="login-form form-control" rows="3">${eventPoint.description}</textarea>
 
                     <textarea placeholder="введите координаты"
-                              name="geometry" value="${eventPoint.getGeometry()}" required
-                              class="login-form form-control" rows="6">${eventPoint.getGeometry()}</textarea>
+                              name="geometry" value="${eventPoint.geometry}" required
+                              class="login-form form-control" rows="6">${eventPoint.geometry}</textarea>
 
                     <input type="color"
-                           name="color" value="${eventPoint.getColor()}" required
+                           name="color" value="${eventPoint.color}" required
                            class="form-control"/>
                     <button type="submit" class="btn btn-primary btn-block">Save</button>
                 </form>

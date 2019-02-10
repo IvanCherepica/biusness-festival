@@ -24,34 +24,27 @@
             <div class="col-xs-8 col-md-offset-2">
                 <h2>EventPoint create</h2>
                 <form action="" method="POST" class="form-group login-group">
-                        <input
-                                 value="${festivalId}" required
-                                type="hidden" />
-
-                    <select name="festivalId">
+                    <select name="festivalId" value="${festivalId}">
                         <c:forEach var="item" items="${festivals}">
-                            <option>${item}</option>
+                            <option value="${item.id}" ${item.id == festivalId ? 'selected="selected"' : ''}>${item.id}, ${item.name}</option>
                         </c:forEach>
                     </select>
 
+                    <input placeholder="введите имя"
+                           name="name" required
+                           class="form-control"/>
 
+                    <textarea placeholder="введите краткое описание"
+                              name="description" required
+                              class="login-form form-control" rows="3"></textarea>
 
-                        <input placeholder="введите имя"
-                               name="name" required
-                               class="form-control"/>
+                    <textarea placeholder="введите координаты"
+                              name="geometry" required
+                              class="login-form form-control" rows="6"></textarea>
 
-                        <textarea placeholder="введите краткое описание"
-                                  name="description" required
-                                  class="login-form form-control" rows="3"></textarea>
-
-                        <textarea placeholder="введите координаты"
-                                  name="geometry" required
-                                  class="login-form form-control" rows="6"></textarea>
-
-                        <input type="color"
-                                name="color" required
-                                class="form-control"/>
-
+                    <input type="color"
+                           name="color" required
+                           class="form-control"/>
 
                     <button type="submit" class="btn btn-primary btn-block">Create</button>
                 </form>

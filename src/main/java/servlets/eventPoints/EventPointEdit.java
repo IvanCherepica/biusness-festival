@@ -12,17 +12,23 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 
 @WebServlet("/eventpoints/edit")
 public class EventPointEdit extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        List<Festival> festivals = FestivalServiceImpl.getInstance().getAllList();
+        request.setAttribute("festivals", festivals);
+
+
         long eventPointId = Long.parseLong(request.getParameter("eventPointId"));
-
         EventPoint eventPoint = EventPoinServiceImpl.getInstance().getById(eventPointId);
-
         request.setAttribute("eventPoint", eventPoint);
+        request.setAttribute("festivalId", eventPoint.getFestival().getId());
+
         RequestDispatcher dispatcher = request.getRequestDispatcher("/eventPoints/eventPointEdit.jsp");
         dispatcher.forward(request, response);
     }
