@@ -37,9 +37,9 @@
                 <c:if test="${!isNotValid && !logout}">
                     <div class="empty-block"></div>
                 </c:if>
-                <c:if test="${isNotValid}">
+                <c:if test="${isInvalid}">
                     <div id="login-message" class="alert alert-danger">
-                        <h3>Invalid login or password!</h3>
+                        <h3>В доступе отказано!</h3>
                         <div id="error-message"></div>
                     </div>
                 </c:if>
@@ -57,12 +57,15 @@
                 <h2>Добро пожаловать</h2>
                 <form action="${pageContext.request.contextPath}/login" method="POST">
                     <div class="form-group login-group">
-                        <input type="text" class="form-control" id="uName" name="login" placeholder="Email adress"
+                        <input type="text" class="form-control" id="uName" name="login" placeholder="Login"
                                required/>
                         <input type="password" class="form-control" type="text" id="uPass" name="password"
                                required placeholder="Password" />
+                        <input type="submit" class="btn btn-primary btn-block" value="Sign in"/>
                     </div>
-                    <input type="submit" class="btn btn-primary btn-block" value="Sign in"/>
+                </form>
+                <form action="${pageContext.request.contextPath}/registration" method="GET">
+                <input type="submit" class="btn btn-primary btn-block" value="Зарегистрироваться"/>
                 </form>
             </div>
         </div>

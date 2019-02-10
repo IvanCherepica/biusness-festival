@@ -15,6 +15,7 @@ import java.io.IOException;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
+
     private UserService service = UserServiceImpl.getInstance();
     private boolean isInvalid;
 
@@ -22,17 +23,15 @@ public class LoginServlet extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setContentType("text/html");
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/login");
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException { response.setContentType("text/html");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/login.jsp");
         dispatcher.forward(request, response);
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String login = request.getParameter("login");
         String password = request.getParameter("password");
-
         if (login.isEmpty() || password.isEmpty()) {
             isInvalid = true;
             return;
@@ -45,7 +44,6 @@ public class LoginServlet extends HttpServlet {
             response.sendRedirect("/login");
             return;
         }
-
         if (user.getPassword().equals(password)) {
             HttpSession session = request.getSession();
             session.setAttribute("user", user);
@@ -54,7 +52,7 @@ public class LoginServlet extends HttpServlet {
                 response.sendRedirect("/admin/festivals"); //исправить на путь к админке
                 return;
             }
-            response.sendRedirect("/user"); //исправить на путь к странице юзера
+            response.sendRedirect("/addUser.jsp"); //исправить на путь к странице юзера
         }
 
         if (!user.getPassword().equals(password) || !user.getName().equals(login)) {
