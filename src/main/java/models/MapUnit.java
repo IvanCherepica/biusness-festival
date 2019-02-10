@@ -95,4 +95,15 @@ abstract class MapUnit  {
     public void setRadius(double radius) {
         this.radius = radius;
     }
+
+    @Override
+    public String toString() {
+        return "MapUnit{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", geometry='" + geometry + '\'' +
+                ", color='" + color + '\'' +
+                '}';
+    }
 }
