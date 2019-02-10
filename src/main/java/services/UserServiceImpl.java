@@ -21,7 +21,7 @@ public class UserServiceImpl implements UserService {
 
     public static UserServiceImpl getInstance() {
         if (instance == null) {
-            synchronized (FestivalServiceImpl.class) {
+            synchronized (UserServiceImpl.class) {
                 if (instance == null) {
                     instance = new UserServiceImpl();
                 }
@@ -29,8 +29,6 @@ public class UserServiceImpl implements UserService {
         }
         return instance;
     }
-
-
 
     @Override
     public User getById(long id) {
@@ -46,7 +44,7 @@ public class UserServiceImpl implements UserService {
     public Long add(User user) {
 
         Long userId = userDAO.add(user);
-        if (userId==null) {
+        if (userId == null) {
             System.out.println("User " + user.getName() + " is allready exist!");
             return getByName(user.getName()).getId();
         }
@@ -62,7 +60,6 @@ public class UserServiceImpl implements UserService {
     public void remove(long id) {
         userDAO.remove(id);
     }
-
 
 
     private static SessionFactory createSessionFactory(Configuration configuration) {
