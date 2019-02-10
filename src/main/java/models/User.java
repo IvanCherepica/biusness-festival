@@ -11,16 +11,21 @@ public class User {
     private String name;
     private String password;
     private String role;
+
     //private List<Event> events;
 
     public User(){}
-
 
     public User(String name, String password, String role) {
         this.name = name;
         this.password = password;
         this.role = role;
     }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
 
     public User(long id, String name, String password, String role) {
         this.name = name;

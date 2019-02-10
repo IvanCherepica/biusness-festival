@@ -3,7 +3,7 @@ package models;
 import javax.persistence.*;
 
 @MappedSuperclass
-abstract class MapUnit  {
+public abstract class MapUnit  {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
@@ -21,14 +21,23 @@ abstract class MapUnit  {
     @Column(name = "color")
     private String color;
 
+    @Column(name = "center")
+    private String center;
+
+    @Column(name = "radius")
+    private double radius;
+
     public MapUnit() {
     }
 
-    public MapUnit(String name, String description, String geometry, String color) {
+
+    public MapUnit(String name, String description, String geometry, String color, String center , double radius) {
         this.name = name;
         this.description = description;
         this.geometry = geometry;
         this.color = color;
+        this.center = center;
+        this.radius = radius;
     }
 
     public void setId(long id) {
@@ -69,6 +78,22 @@ abstract class MapUnit  {
 
     public String getColor() {
         return color;
+    }
+
+    public String getCenter() {
+        return center;
+    }
+
+    public void setCenter(String center) {
+        this.center = center;
+    }
+
+    public double getRadius() {
+        return radius;
+    }
+
+    public void setRadius(double radius) {
+        this.radius = radius;
     }
 
     @Override
