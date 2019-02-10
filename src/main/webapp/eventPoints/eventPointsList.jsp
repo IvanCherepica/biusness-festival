@@ -39,7 +39,7 @@
                 <td>${eventPoint.getName()}</td>
                 <td>${eventPoint.getDescription()}</td>
                 <td>${eventPoint.getGeometry()}</td>
-                <td>${eventPoint.getColor()}</td>
+                <td style="background-color:${eventPoint.getColor()};"></td>
                 <td>${eventPoint.getFestival().getId()}</td>
                 <td>
                     <%-- HELP
@@ -48,20 +48,16 @@
                     value
                     formmethod
                     formaction --%>
-                    <button name="deleteId" value="${eventPoint.getId()}" formmethod="post" formaction="" class="btn btn-primary">Delete</button>
-                    <button name="editId" value="${eventPoint.getId()}" formmethod="get" formaction="\eventpointedit" class="btn btn-primary">Edit</button>
+                    <button name="eventPointId" value="${eventPoint.getId()}" formmethod="post" formaction="\eventpoints\delete" class="btn btn-primary">Delete</button>
+                    <button name="eventPointId" value="${eventPoint.getId()}" formmethod="get" formaction="\eventpoints\edit" class="btn btn-primary">Edit</button>
                 </td>
-                </form>>
+                </form>
             </tr>
         </c:forEach>
-
-
-
-
         </tbody>
     </table>
     <form>
-        <button name="editId" value="new" formmethod="get" formaction="\eventpointedit" class="btn btn-primary">Add EventPoint</button>
+        <button formmethod="get" formaction="\eventpoints\create" class="btn btn-primary">Add EventPoint</button>
     </form>
 </div>
 
