@@ -1,21 +1,45 @@
 package dao;
 
 import models.Festival;
-import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
+import org.hibernate.*;
 
 import java.util.List;
 
 public class FestivalDaoImpl extends AbstactDAO<Festival> implements FestivalDao{
-	private SessionFactory sessionFactory;
-
+	
 	public FestivalDaoImpl(SessionFactory sessionFactory) {
 		super(sessionFactory);
-
 	}
 	
+	@Override
+	public void update (Festival item) {
+		//super.update(item);
+		
+		Session session = sessionFactory.openSession();
+		Query query = session.createQuery("FROM Festival WHERE id = :id");
+		query.setParameter("id", item.getId());
+		
+		if (query.uniqueResult() == null) {
+			throw new HibernateException("No such element");
+		}
+		
+		String queryString = "UPDATE Festival SET name = :name, " +
+				"description = :description, " +
+				"geometry = :geometry, " +
+				"color = :color " +
+				"WHERE id = :id";
+		
+		query = session.createQuery(queryString);
+		query.setParameter("id",        item.getId());
+		query.setParameter("name",      item.getName());
+		query.setParameter("description", item.getDescription());
+		query.setParameter("geometry",  item.getGeometry());
+		query.setParameter("color",     item.getColor());
+		
+		Transaction transaction = session.beginTransaction();
+		query.executeUpdate();
+		transaction.commit();
+	}
 	
 	@Override
 	public List<Festival> getAllList () {
@@ -24,7 +48,7 @@ public class FestivalDaoImpl extends AbstactDAO<Festival> implements FestivalDao
 		
 		List<Festival> festivals = null;
 		try {
-			festivals = session.createQuery("FROM festival").list();
+			festivals = session.createQuery("FROM Festival").list();
 			transaction.commit();
 		} catch (Exception e) {
 			System.out.println("Can`t get list of festivals: " + e.getMessage());

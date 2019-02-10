@@ -62,7 +62,7 @@ public class EventPoinServiceImpl implements EventPoinService{
 
     @Override
     public List<EventPoint> getAllList() {
-        return null;
+        return eventPointDAO.getAllList();
     }
 
     @Override

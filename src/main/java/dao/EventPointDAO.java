@@ -1,6 +1,7 @@
 package dao;
 
 import models.EventPoint;
+import java.util.List;
 
 public interface EventPointDAO {
     EventPoint getById(long id);
@@ -8,4 +9,6 @@ public interface EventPointDAO {
     EventPoint getByName(String name);
     void remove(long id);
     void update(EventPoint eventPoint);
+
+    List<EventPoint> getAllList();
 }

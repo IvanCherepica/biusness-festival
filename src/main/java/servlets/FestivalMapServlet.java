@@ -1,8 +1,5 @@
 package servlets;
 
-import com.google.gson.Gson;
-import models.User;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

@@ -1,6 +1,5 @@
 package dao;
 
-import models.HotPoint;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -61,7 +60,6 @@ abstract class AbstactDAO<T> {
         return item;
     }
 
-
     public Long add (T item) {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
@@ -77,13 +75,6 @@ abstract class AbstactDAO<T> {
         }
         return itemID;
     }
-
-
-
-    public void save(T t) {
-
-    }
-
 
     public void remove (long id) {
         Session session = sessionFactory.openSession();
@@ -109,11 +100,10 @@ abstract class AbstactDAO<T> {
         }
     }
 
-
     public void update (T item) {
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
-
+        
         try {
             session.update(item);
             transaction.commit();
