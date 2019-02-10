@@ -10,7 +10,7 @@ public class EventPoint extends PointUnit {
     public EventPoint() {
     }
 
-    public EventPoint(String name, String description, String geometry, String color, Festival festival) {
-        super(name, description, geometry, color, festival);
+    public EventPoint(String name, String description, String geometry, String color, Festival festival, String center, double radius) {
+        super(name, description, geometry, color, festival, center, radius );
     }
 }
