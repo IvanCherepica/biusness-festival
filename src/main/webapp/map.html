@@ -35,19 +35,13 @@
                 navigator.geolocation.getCurrentPosition(function(position) {
 
                     x = position.coords.latitude; y = position.coords.longitude;
+
+                    //загрузка данных в карту.
                     ymaps.ready(init);
                 });
 
-
-                //$('#somediv').append(data.name);
             }
         });
-
-
-
-
-        //загрузка данных в карту.
-
 
         // инициализация карты.
         function init(){

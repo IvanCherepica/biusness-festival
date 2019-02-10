@@ -1,4 +1,5 @@
 
+//send message to server with user coordinates
 function sendMessage(webSocketClient) {
         navigator.geolocation.getCurrentPosition(function (position) {
             userX = position.coords.latitude;
@@ -10,7 +11,7 @@ function sendMessage(webSocketClient) {
         });
 }
 
-
+//connect to server
 function connect() {
     var webSocketClient = new WebSocket("ws://localhost:8080/compareLocations");
     webSocketClient.onopen = function (event) {
@@ -27,3 +28,18 @@ function connect() {
         }
 }
 
+
+// get request for user name and id
+$.ajax({
+    url: "/rest/userdata",
+    method: "get",
+    async: true,
+    error: function(message) {
+        console.log(message);
+    },
+    success: function(data) {
+
+        console.log("user data" + data);
+
+    }
+});
