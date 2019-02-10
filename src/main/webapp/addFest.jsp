@@ -44,15 +44,15 @@
 
                         <label for="name">Name</label>
                         <input type="text" class="form-control" id="name" name="name"
-                               value="${festival.name}">
+                               placeholder="${festival.name}">
 
                         <label for="description">Description</label>
                         <textarea class="form-control" id="description" rows="3" name="description"
-                                  value="${festival.description}">${festival.description}</textarea>
+                                  placeholder="${festival.description}"></textarea>
 
                         <label for="geometry">Geometry</label>
                         <textarea class="form-control" id="geometry" rows="4" name="geometry"
-                                  value="${festival.geometry}">${eventPoint.geometry}</textarea>
+                                  placeholder="${festival.geometry}"></textarea>
 
                         <label for="color">Color</label>
                         <input type="color" class="form-control" id="color" name="color"
