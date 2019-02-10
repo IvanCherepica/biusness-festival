@@ -1,6 +1,8 @@
 package servlets;
 
 import models.Festival;
+import services.FestivalService;
+import services.FestivalServiceImpl;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -17,40 +19,11 @@ public class FestivalsListServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-
-        List festivals = new ArrayList<Festival>();
-
-
-        Festival f1 = new Festival();
-        f1.setId(54);
-        f1.setColor("c1");
-        f1.setDescription("d1");
-        f1.setGeometry("g1");
-        f1.setName("n1");
-
-
-        Festival f2 = new Festival();
-        f2.setId(54);
-        f2.setColor("c2");
-        f2.setDescription("d21");
-        f2.setGeometry("g2");
-        f2.setName("n2");
-
-        festivals.add(f1);
-        festivals.add(f2);
-
-
-
+        FestivalService festivalService = FestivalServiceImpl.getInstance();
+        List<Festival> festivals = festivalService.getAllList();
         request.setAttribute("FestivalsList", festivals);
-
-
         RequestDispatcher dispatcher = request.getRequestDispatcher("/festivalsList.jsp");
         dispatcher.forward(request, response);
-
-
-
-
-
 
 
     }

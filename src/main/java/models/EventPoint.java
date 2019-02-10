@@ -13,4 +13,5 @@ public class EventPoint extends PointUnit {
     public EventPoint(String name, String description, String geometry, String color, Festival festival) {
         super(name, description, geometry, color, festival);
     }
+
 }
