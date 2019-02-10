@@ -5,7 +5,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
-abstract class PointUnit extends MapUnit {
+public abstract class PointUnit extends MapUnit {
     @ManyToOne
     @JoinColumn(name="festival_id") //?
     private Festival festival;
