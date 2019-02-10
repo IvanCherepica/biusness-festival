@@ -1,6 +1,7 @@
 package filter;
 
 import models.User;
+
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
@@ -8,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebFilter(urlPatterns = {"/user/*"})
+@WebFilter(urlPatterns = {"/userr/*"})
 public class UserFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -20,7 +21,7 @@ public class UserFilter implements Filter {
 
         User user = (User) session.getAttribute("user");
 
-        if (user != null) {
+        if (user != null && user.getRole().equals("user")) {
             filterChain.doFilter(request, response);
             return;
         }

@@ -48,7 +48,7 @@ public class FestivalDaoImpl extends AbstactDAO<Festival> implements FestivalDao
 		
 		List<Festival> festivals = null;
 		try {
-			festivals = session.createQuery("FROM festival").list();
+			festivals = session.createQuery("FROM Festival").list();
 			transaction.commit();
 		} catch (Exception e) {
 			System.out.println("Can`t get list of festivals: " + e.getMessage());
