@@ -23,7 +23,7 @@ public class AddFestivalServlet extends HttpServlet {
     	Festival festival;
     	
 	    if (paramId==null) {
-		    festival = new Festival("Name", "Description", "Coordinates", "Color");
+		    festival = new Festival("Name", "Description", "Coordinates", "Color", "1", 1);
 	    } else {
 		    Long id = Long.parseLong(paramId);
 		    festival = festivalService.getById(id);
@@ -44,7 +44,7 @@ public class AddFestivalServlet extends HttpServlet {
 	    if (name==null || name.isEmpty()) {
 		    response.sendRedirect("/error.html");
 	    }
-        Festival festival = new Festival(name, description, geometry, color);
+        Festival festival = new Festival(name, description, geometry, color, "1", 1);
 	    
         festivalService.add(festival);
 
