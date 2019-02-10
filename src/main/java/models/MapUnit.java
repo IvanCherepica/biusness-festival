@@ -3,7 +3,7 @@ package models;
 import javax.persistence.*;
 
 @MappedSuperclass
-abstract class MapUnit  {
+public abstract class MapUnit  {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
