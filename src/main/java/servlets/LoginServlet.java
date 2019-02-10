@@ -3,6 +3,7 @@ package servlets;
 import models.User;
 import services.UserService;
 import services.UserServiceImpl;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -31,10 +32,10 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String login = request.getParameter("login");
         String password = request.getParameter("password");
+        // response.sendRedirect("/login");
 
         if (login.isEmpty() || password.isEmpty()) {
             isInvalid = true;
-            response.sendRedirect("login");
             return;
         }
 
@@ -42,7 +43,7 @@ public class LoginServlet extends HttpServlet {
 
         if (user == null) {
             isInvalid = true;
-            response.sendRedirect("login");
+            response.sendRedirect("/login");
             return;
         }
 
@@ -51,13 +52,17 @@ public class LoginServlet extends HttpServlet {
             session.setAttribute("user", user);
             response.setContentType("text/html");
             if (user.getRole().equals("admin")) {
-                response.sendRedirect("/admin");
+                response.sendRedirect("/admin/festivals"); //исправить на путь к админке
                 return;
             }
-            response.sendRedirect("/user");
-        } else {
-            isInvalid = true;
-            response.sendRedirect("login");
+            response.sendRedirect("/addUser.jsp"); //исправить на путь к странице юзера
+        }
+
+        if (!user.getPassword().equals(password) || !user.getName().equals(login)) {
+            HttpSession session = request.getSession();
+            session.setAttribute("user", user);
+            response.setContentType("text/html");
+            response.sendRedirect("/error.jsp");
         }
     }
 }
