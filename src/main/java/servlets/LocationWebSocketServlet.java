@@ -12,8 +12,8 @@ import java.util.Set;
 
 @ServerEndpoint(value = "/compareLocations", configurator= LocationWebSocketConfigurator.class)
 public class LocationWebSocketServlet {
-        private Set<Session> userSessions = Collections.synchronizedSet(new HashSet<Session>());
 
+        private Set<Session> userSessions = Collections.synchronizedSet(new HashSet<Session>());
 
         @OnOpen
         public void start(Session userSession) {
@@ -37,6 +37,11 @@ public class LocationWebSocketServlet {
         @OnError
         public void onError(Throwable t) throws Throwable {
             //TODO
+        }
+
+
+        public void sendRequestToUpdate(Throwable t) throws Throwable {
+
         }
 
 
