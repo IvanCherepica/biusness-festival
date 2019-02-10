@@ -21,7 +21,7 @@ public class UserServiceImpl implements UserService {
 
     public static UserServiceImpl getInstance() {
         if (instance == null) {
-            synchronized (FestivalServiceImpl.class) {
+            synchronized (UserServiceImpl.class) {
                 if (instance == null) {
                     instance = new UserServiceImpl();
                 }
