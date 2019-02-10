@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet("/eventpoints/create")
+@WebServlet("/admin/eventpoints/create")
 public class EventPointCreate extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -52,6 +52,6 @@ public class EventPointCreate extends HttpServlet {
 
         EventPoinServiceImpl.getInstance().add(eventPoint);
 
-        response.sendRedirect("/eventpoints/list");
+        response.sendRedirect("/admin/eventpoints/list");
     }
 }

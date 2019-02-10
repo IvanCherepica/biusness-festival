@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 
-@WebServlet("/eventpoints/delete")
+@WebServlet("/admin/eventpoints/delete")
 public class EventPointDelete extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -18,6 +18,6 @@ public class EventPointDelete extends HttpServlet {
         long eventPointId = Long.parseLong(request.getParameter("eventPointId"));
         EventPoinServiceImpl.getInstance().remove(eventPointId);
 
-        response.sendRedirect("/eventpoints/list");
+        response.sendRedirect("/admin/eventpoints/list");
     }
 }

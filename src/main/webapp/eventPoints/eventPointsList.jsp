@@ -42,8 +42,8 @@
                 <td style="background-color:${eventPoint.color};"></td>
                 <td>${eventPoint.festival.name} (id:${eventPoint.festival.id})</td>
                 <td>
-                    <button name="eventPointId" value="${eventPoint.id}" formmethod="post" formaction="\eventpoints\delete" class="btn btn-primary">Delete</button>
-                    <button name="eventPointId" value="${eventPoint.id}" formmethod="get" formaction="\eventpoints\edit" class="btn btn-primary">Edit</button>
+                    <button name="eventPointId" value="${eventPoint.id}" formmethod="post" formaction="\admin\eventpoints\delete" class="btn btn-primary">Delete</button>
+                    <button name="eventPointId" value="${eventPoint.id}" formmethod="get" formaction="\admin\eventpoints\edit" class="btn btn-primary">Edit</button>
                 </td>
                 </form>
             </tr>
@@ -51,7 +51,10 @@
         </tbody>
     </table>
     <form>
-        <button formmethod="get" formaction="\eventpoints\create" class="btn btn-primary">Add EventPoint</button>
+        <button formmethod="get" formaction="\admin\eventpoints\create" class="btn btn-primary">Add EventPoint</button>
+    </form>
+    <form>
+        <button formmethod="get" formaction="\logout" class="btn btn-primary">Logout</button>
     </form>
 </div>
 
