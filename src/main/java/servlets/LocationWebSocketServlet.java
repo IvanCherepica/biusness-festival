@@ -12,11 +12,12 @@ import java.util.*;
 
 @ServerEndpoint(value = "/compareLocations", configurator= LocationWebSocketConfigurator.class)
 public class LocationWebSocketServlet {
+
         String point;
         Festival festival = new Festival("Test", "Testing", "Red" ,
             "Some", "60.11173060613703 30.267900556923905", 75);
 
-
+         //список сессий
         private Set<Session> userSessions = Collections.synchronizedSet(new HashSet<Session>());
 
         @OnOpen
@@ -43,6 +44,7 @@ public class LocationWebSocketServlet {
             //TODO
         }
 
+        // делаем запрос координат каждые 10 секунд
         public void sendRequestToUpdate(Session session) throws Throwable {
             Timer timer = new Timer();
             timer.schedule(new TimerTask() {
@@ -54,7 +56,7 @@ public class LocationWebSocketServlet {
             System.out.println(b + " "+ session.getId());
         }
 
-
+        // проверяем, попал ли пользователь в зону фестиваля
         private boolean isInUnit(String point, Festival festival) {
             double[] pointCoordinates = getCoordinates(point);
             double[] festivalCoordinates = getCoordinates(festival.getCenter());
