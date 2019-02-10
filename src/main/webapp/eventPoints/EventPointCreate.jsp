@@ -24,9 +24,9 @@
             <div class="col-xs-8 col-md-offset-2">
                 <h2>EventPoint create</h2>
                 <form action="" method="POST" class="form-group login-group">
-                    <select name="festivalId" value="${festivalId}">
+                    <select name="festivalId" value="${festivalId}" class="form-control" id="sel1">
                         <c:forEach var="item" items="${festivals}">
-                            <option value="${item.id}" ${item.id == festivalId ? 'selected="selected"' : ''}>${item.id}, ${item.name}</option>
+                            <option value="${item.id}" ${item.id == festivalId ? 'selected="selected"' : ''}>${item.name} (id:${item.id})</option>
                         </c:forEach>
                     </select>
 

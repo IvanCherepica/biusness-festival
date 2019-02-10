@@ -24,16 +24,15 @@
             <div class="col-xs-8 col-md-offset-2">
                 <h2>Edit event point</h2>
                 <form action="" method="POST" class="form-group login-group">
-                    <select name="festivalId" value="${festivalId}">
+                    <select name="festivalId" value="${eventPoint.festival.id}"  class="form-control" id="sel1">
                         <c:forEach var="item" items="${festivals}">
-                            <option value="${item.id}" ${item.id == festivalId ? 'selected="selected"' : ''}>${item.id}, ${item.name}</option>
+                            <option value="${item.id}" ${item.id == eventPoint.festival.id ? 'selected="selected"' : ''}>${item.name} (id:${item.id})</option>
                         </c:forEach>
                     </select>
 
                     <input
                             name="eventPointId" value="${eventPoint.id}" required
                             type="hidden" />
-
 
                     <input placeholder="введите имя"
                            name="name" value="${eventPoint.name}" required
@@ -50,6 +49,7 @@
                     <input type="color"
                            name="color" value="${eventPoint.color}" required
                            class="form-control"/>
+
                     <button type="submit" class="btn btn-primary btn-block">Save</button>
                 </form>
             </div>

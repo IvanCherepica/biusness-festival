@@ -27,7 +27,7 @@ public class EventPointEdit extends HttpServlet {
         long eventPointId = Long.parseLong(request.getParameter("eventPointId"));
         EventPoint eventPoint = EventPoinServiceImpl.getInstance().getById(eventPointId);
         request.setAttribute("eventPoint", eventPoint);
-        request.setAttribute("festivalId", eventPoint.getFestival().getId());
+        //request.setAttribute("festivalId", eventPoint.getFestival().getId());
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("/eventPoints/eventPointEdit.jsp");
         dispatcher.forward(request, response);

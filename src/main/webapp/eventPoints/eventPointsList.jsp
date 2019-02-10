@@ -40,14 +40,8 @@
                 <td>${eventPoint.description}</td>
                 <td>${eventPoint.geometry}</td>
                 <td style="background-color:${eventPoint.color};"></td>
-                <td>${eventPoint.festival.id}</td>
+                <td>${eventPoint.festival.name} (id:${eventPoint.festival.id})</td>
                 <td>
-                    <%-- HELP
-                    button
-                    name
-                    value
-                    formmethod
-                    formaction --%>
                     <button name="eventPointId" value="${eventPoint.id}" formmethod="post" formaction="\eventpoints\delete" class="btn btn-primary">Delete</button>
                     <button name="eventPointId" value="${eventPoint.id}" formmethod="get" formaction="\eventpoints\edit" class="btn btn-primary">Edit</button>
                 </td>
