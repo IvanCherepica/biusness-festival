@@ -29,10 +29,12 @@ public class LoginServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        response.sendRedirect("/login");
+
         String login = request.getParameter("login");
         String password = request.getParameter("password");
-        // response.sendRedirect("/login");
+
 
         if (login.isEmpty() || password.isEmpty()) {
             isInvalid = true;
@@ -52,10 +54,10 @@ public class LoginServlet extends HttpServlet {
             session.setAttribute("user", user);
             response.setContentType("text/html");
             if (user.getRole().equals("admin")) {
-                response.sendRedirect("/admin/festivals"); //исправить на путь к админке
+                response.sendRedirect("/admin"); //исправить на путь к админке
                 return;
             }
-            response.sendRedirect("/addUser.jsp"); //исправить на путь к странице юзера
+            response.sendRedirect("/user"); //исправить на путь к странице юзера
         }
 
         if (!user.getPassword().equals(password) || !user.getName().equals(login)) {

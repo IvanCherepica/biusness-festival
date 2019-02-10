@@ -11,7 +11,7 @@ import java.io.IOException;
 public class StartServlet extends HttpServlet {
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws  IOException {
         response.setContentType("text/html");
         response.sendRedirect("/login");
     }
