@@ -16,7 +16,7 @@ public class FestivalDaoImpl extends AbstactDAO<Festival> implements FestivalDao
 		//super.update(item);
 		
 		Session session = sessionFactory.openSession();
-		Query query = session.createQuery("FROM Festival WHERE id = :id");
+		Query query = session.createQuery("FROM  Festival WHERE id = :id");
 		query.setParameter("id", item.getId());
 		
 		if (query.uniqueResult() == null) {
@@ -56,8 +56,6 @@ public class FestivalDaoImpl extends AbstactDAO<Festival> implements FestivalDao
 		} finally {
 			session.close();
 		}
-		
 		return festivals;
-		
 	}
 }
