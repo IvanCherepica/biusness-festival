@@ -1,12 +1,16 @@
 package servlets;
 
+
+
+import services.LocationWebSocketConfigurator;
+
 import javax.websocket.*;
 import javax.websocket.server.ServerEndpoint;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-@ServerEndpoint(value = "/compareLocations")
+@ServerEndpoint(value = "/compareLocations", configurator= LocationWebSocketConfigurator.class)
 public class LocationWebSocketServlet {
         private Set<Session> userSessions = Collections.synchronizedSet(new HashSet<Session>());
 
