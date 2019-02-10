@@ -3,7 +3,10 @@ package servlets;
 
 
 import models.Festival;
+import services.FestivalService;
+import services.FestivalServiceImpl;
 import services.LocationWebSocketConfigurator;
+import services.LocationWedSocketService;
 
 
 import javax.websocket.*;
@@ -20,15 +23,20 @@ public class LocationWebSocketServlet {
          //список сессий
         private Set<Session> userSessions = Collections.synchronizedSet(new HashSet<Session>());
 
+        //private FestivalService festivalService = FestivalServiceImpl.getInstance();
+
+
         @OnOpen
         public void start(Session userSession) {
             System.out.println("Connected user:" + userSession.getId());
             userSessions.add(userSession);
+//            LocationWedSocketService.getInstance().setUserSessions(userSession);
         }
 
         @OnClose
         public void onClose(Session userSession) {
             userSessions.remove(userSession);
+//            LocationWedSocketService.getInstance().removeUserSession(userSession);
             System.out.println("Disconnect user:" + userSession.getId());
         }
 
@@ -37,6 +45,7 @@ public class LocationWebSocketServlet {
             System.out.println("Message Received: " + message);
             point = message;
             sendRequestToUpdate(userSession);
+//            LocationWedSocketService.getInstance().sendRequestToUpdate(message, userSession);
         }
 
         @OnError
@@ -46,18 +55,27 @@ public class LocationWebSocketServlet {
 
         // делаем запрос координат каждые 10 секунд
         public void sendRequestToUpdate(Session session) throws Throwable {
-            Timer timer = new Timer();
-            timer.schedule(new TimerTask() {
-                @Override
-                public void run() { session.getAsyncRemote().sendText("getCoordinates from"+session.getId());
-                }
-            },10000);
-            boolean b = isInUnit(point,festival);
-            System.out.println(b + " "+ session.getId());
+            try {
+                Timer timer = new Timer();
+                timer.schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        session.getAsyncRemote().sendText("getCoordinates from" + session.getId());
+                    }
+                }, 10000);
+                boolean b = isInUnit(point, festival);
+                System.out.println(b + " " + session.getId());
+            } catch (Exception ex) {
+                System.out.println("WebSocket session closed");
+            }
         }
 
         // проверяем, попал ли пользователь в зону фестиваля
         private boolean isInUnit(String point, Festival festival) {
+            //FestivalService festivalService = FestivalServiceImpl.getInstance();
+//            festivalService.add(new Festival("Test", "Testing", "Red" ,
+//                    "Some", "60.11173060613703 30.267900556923905", 75));
+
             double[] pointCoordinates = getCoordinates(point);
             double[] festivalCoordinates = getCoordinates(festival.getCenter());
             double dx = pointCoordinates[0] - festivalCoordinates[0];
