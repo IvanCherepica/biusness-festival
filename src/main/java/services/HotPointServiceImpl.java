@@ -9,6 +9,8 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
 import util.DBHelper;
 
+import java.util.List;
+
 
 public class HotPointServiceImpl implements HotPointService{
     private final HotPointDAOImpl hotPointDAO;
@@ -60,10 +62,10 @@ public class HotPointServiceImpl implements HotPointService{
         hotPointDAO.remove(id);
     }
     
-//    @Override
-//    public List<HotPoint> getAllList () {
-//        return hotPointDAO.getAllList();
-//    }
+    @Override
+    public List<HotPoint> getAllList () {
+        return hotPointDAO.getAllList();
+  }
 //
 //    @Override
 //    public List<HotPoint> getAllByFestival (Festival festival) {
