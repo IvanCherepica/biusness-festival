@@ -1,8 +1,5 @@
 package servlets;
 
-
-
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -13,9 +10,9 @@ import java.io.IOException;
 @WebServlet("/logout")
 public class LogoutServlet extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        HttpSession session = ((HttpServletRequest) request).getSession();
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws  IOException {
+        HttpSession session = request.getSession();
         session.invalidate();
-        ((HttpServletResponse) response).sendRedirect("/login");
+        response.sendRedirect("/login");
     }
 }
