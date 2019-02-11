@@ -8,76 +8,72 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-    <script type="text/javascript">
-        // в массиве будут храниться координаты геометрической фигуры.
-        var array;
-        //Карта, метка на карте.
-        //Ширина,долгота.
-        var myMap, myPlacemark;
-        var x,y;
-        // get запрос GeometryServlet
-        $.ajax({
-            url: "/rest/geometry",
-            method: "get",
-            async: true,
-            error: function(message) {
-                console.log(message);
-            },
-            success: function(data) {
-                array = data;
-                // получение текщей геопопзиции.
-                navigator.geolocation.getCurrentPosition(function(position) {
-                    x = position.coords.latitude; y = position.coords.longitude;
-                    ymaps.ready(init);
-                });
-                //$('#somediv').append(data.name);
-            }
-        });
-        // инициализация карты.
-        function init(){
-            myMap = new ymaps.Map("map", {
-                // определение центра.
-                center: [x, y],
-                // приближение.
-                zoom: 16
-            });
-            //объект метки
-            myPlacemark = new ymaps.Placemark([x,y],{
-                balloonContent: 'Its me',
-                hitContent: 'Hello'
-            });
-            // добавляем метку на карту
-            myMap.geoObjects.add(myPlacemark);
-            //console.log("Map array " + array );
-            // объект геометрицесской фигуры
-            var myPolygon = new ymaps.Polygon([
-                    // Указываем координаты вершин многоугольника, являющиеся массивом
-                    // в формате JSON.
-                    array
-                ],
-                // Описываем свойства геообъекта.
-                {
-                    // Содержимое балуна.
-                    balloonContent: "Фестиваль JAVA BOOTCAMP"
-                }, {
-                    // Описываем опции геообъекта.
-                    // Цвет обводки и цвет поля.
-                    strokeColor: "#FFFFFF",
-                    fillColor: "#FF1F1F70",
-                    // Тип заливки фоном.
-                    fillMethod: 'stretch',
-                    // Убираем видимость обводки.
-                    //stroke: false
-                }
-            );
-            // Добавляем многоугольник на карту.
-            myMap.geoObjects.add(myPolygon);
-        }
-    </script>
     <title>User</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Core Style CSS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <style>
+        body {
+            background: #eeeeee;
+        }
+        .header {
+            padding: 0px 10px 0px 10px;
+            margin-bottom: 0px;
+        }
+        .left-menu {
+            background: white;
+            padding: 20px 0 0 0;
+            min-height: 94vh;
+        }
+        .left-menu ul li {
+            margin: 0px;
+        }
+        .left-menu ul li a {
+            border-radius: 0px;
+        }
+        .nav-content {
+            margin-bottom: -1px;
+        }
+        .edit-form label {
+            font-weight: 100;
+            font-size: 20px;
+            margin: 10px 0 10px 0;
+        }
+        .add-user-button {
+            margin-top: 30px;
+        }
+
+         .usermap {
+             margin: 10px 10px 10px 10px;
+         }
+
+        .container {
+            background-color: white; /* Цвет фона слоя */
+            padding: 5px; /* Поля вокруг текста */
+            margin: 0 10px 10px 10px;
+            width: auto; /* Ширина слоя */
+            height: 200px;
+        }
+    </style>
 </head>
 <body>
-<div id="map" style="width: 600px; height: 400px"></div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="panel panel-info">
+            <div class="navbar navbar-inverse navbar-static-top header">
+                <a class="navbar-brand" href="/user">Your Festival</a>
+                <a class="navbar-brand pull-right" href="/logout">Logout</a>
+            </div>
+        </div>
+        <div class="container">
+            <h1>Hello user.</h1>
+        </div>
+    </div>
+</div>
+<div class="usermap">
+<jsp:include page="pageWithMap.jsp"/>
+</div>
 </body>
 </html>
