@@ -80,12 +80,10 @@
 
                 //console.log("Map array " + array );
                 // объект геометрицесской фигуры
-                var myPolygon = new ymaps.Polygon([
+                var myPolygon = new ymaps.Polygon(
                         // Указываем координаты вершин многоугольника, являющиеся массивом
                         // в формате JSON.
-                        //JSON.stringify(polygonCoords)
-                        polygonCoords
-                    ],
+                        JSON.parse(polygonCoords),
                     // Описываем свойства геообъекта.
                     {
                         // Содержимое балуна.
@@ -97,7 +95,7 @@
 
                         fillColor: "#FF1F1F70",
                         // Тип заливки фоном.
-                        fillMethod: 'stretch',
+                        fillMethod: 'stretch'
                         // Убираем видимость обводки.
                         //stroke: false
                     }
