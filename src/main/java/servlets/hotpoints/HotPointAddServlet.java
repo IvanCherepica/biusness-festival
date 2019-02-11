@@ -47,6 +47,6 @@ public class HotPointAddServlet extends HttpServlet {
 
         HotPointServiceImpl.getInstance().add(hpoint);
 
-        response.sendRedirect("/admin/hotpoints/list");
+        response.sendRedirect("/admin/editFestival?festivalId="+festId);
     }
 }
