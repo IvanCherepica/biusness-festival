@@ -1,4 +1,4 @@
-package services;
+package services.userNotificationServices;
 
 import servlets.LocationWebSocketServlet;
 

@@ -14,4 +14,6 @@ public class EventPoint extends PointUnit {
         super(name, description, geometry, color, festival, center, radius );
     }
 
+
+
 }

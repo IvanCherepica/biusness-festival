@@ -20,6 +20,11 @@
         // в массиве будут храниться координаты геометрической фигуры.
         var array;
 
+        //Карта, метка на карте.
+        //Ширина,долгота.
+        var myMap, myPlacemark;
+        var x,y;
+
         // get запрос GeometryServlet
         $.ajax({
             url: "/rest/geometry",
@@ -32,24 +37,17 @@
 
                 array = data;
 
-                ymaps.ready(init);
-                //$('#somediv').append(data.name);
+                // получение текщей геопопзиции.
+                navigator.geolocation.getCurrentPosition(function(position) {
+
+                    x = position.coords.latitude; y = position.coords.longitude;
+
+                    //загрузка данных в карту.
+                    ymaps.ready(init);
+                });
+
             }
         });
-
-        //Карта, метка на карте.
-        //Ширина,долгота.
-        var myMap, myPlacemark;
-        var x,y;
-        // получение текщей геопопзиции.
-        navigator.geolocation.getCurrentPosition(function(position) {
-
-            x = position.coords.latitude; y = position.coords.longitude;
-            //console.log(" x " + position.coords.latitude);
-        });
-        //console.log("Map  x " + x + " ; y " + y  );
-        //загрузка данных в карту.
-        //ymaps.ready(init);
 
         // инициализация карты.
         function init(){
@@ -59,14 +57,12 @@
 
                 center: [x, y],
                 // приближение.
-                zoom: 18,
-                controls: ['zoomControl'],
-                behaviors: ['drag']
+                zoom: 16
             });
             //объект метки
             myPlacemark = new ymaps.Placemark([x,y],{
-                hitContent: 'Здесь находитесь вы',
-                balloonContent: 'Я'
+                balloonContent: 'Its me',
+                hitContent: 'Hello'
             });
             // добавляем метку на карту
             myMap.geoObjects.add(myPlacemark);
@@ -102,8 +98,10 @@
     </script>
 </head>
 <body >
-<div class="map" id="map" style="width: 100%; height: 100%">
-</div>
+<div id="map" style="width: 600px; height: 400px">
 
+    test
+
+</div>
 </body>
 </html>
