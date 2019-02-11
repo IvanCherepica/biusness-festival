@@ -58,7 +58,7 @@
                 center: [x, y],
                 // приближение.
                 zoom: 18,
-                control: ['zoomControl'],
+                controls: ['zoomControl'],
                 behaviors: ['drag']
 
             });
