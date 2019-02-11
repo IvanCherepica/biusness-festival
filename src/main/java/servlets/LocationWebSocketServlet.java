@@ -62,12 +62,37 @@ public class LocationWebSocketServlet {
             String userName = userServerDto.getUserName();
             Long userID = userServerDto.getId();
             point = userServerDto.getCoordinates();
+
             //find user http session
             UserSessionService userSessionService = UserSessionService.getInstance();
             HttpSession userHttpSession = userSessionService.getUserSession(userID);
             boolean isInFestivalOld = Boolean.parseBoolean((String) userHttpSession.getAttribute("userInFestival"));
 
-            boolean isInFestivalNew = isInUnit(point, festival);
+            Long currentFestivalID;
+            boolean isInFestivalNew = false;
+            Festival usersActivFestival = null;
+            //at first check if user still in current Festival
+            if (isInFestivalOld) {
+                currentFestivalID = Long.parseLong((String) userHttpSession.getAttribute("currentFestivalID"));
+                Festival currentFestivale = festivalService.getById(currentFestivalID);
+                isInFestivalNew =  isInUnit(currentFestivale.getCenter(),currentFestivale);
+                if (isInFestivalNew) {
+                    usersActivFestival = currentFestivale;
+                }
+            }
+
+            //Check for All active festivales
+            if (!isInFestivalNew) {
+                for (Festival currentFestivale : festivalService.getAllList()) {
+                    isInFestivalNew = isInUnit(currentFestivale.getCenter(), currentFestivale);
+                    if (isInFestivalNew) {
+                        userHttpSession.setAttribute("currentFestivalID",Long.toString(currentFestivale.getId()));
+                        usersActivFestival = currentFestivale;
+                        break;
+                    }
+                }
+            }
+//            boolean isInFestivalNew = isInUnit(point, festival);
 
             UserSocketDto dto = new UserSocketDto();
             dto.setId(userID);
@@ -75,7 +100,7 @@ public class LocationWebSocketServlet {
             dto.setInFestival(isInFestivalNew);
 
             if (!isInFestivalOld && isInFestivalNew) {
-                dto.setMessage("Welcome to JAVABOOTCAMP!");
+                dto.setMessage("Wellcome to " + usersActivFestival.getName() + "! \n" + usersActivFestival.getDescription());
             }
 
             try {
@@ -85,7 +110,7 @@ public class LocationWebSocketServlet {
                     public void run() {
                         userSession.getAsyncRemote().sendText(new Gson().toJson(dto));
                     }
-                }, 10000);
+                }, 5000);
 
                 System.out.println(isInFestivalNew + " " + userSession.getId());
             } catch (Exception ex) {
@@ -104,30 +129,9 @@ public class LocationWebSocketServlet {
             //TODO
         }
 
-        // делаем запрос координат каждые 10 секунд
-        private void sendRequestToUpdate(Session session) throws Throwable {
-            boolean b = isInUnit(point, festival);
-            try {
-                Timer timer = new Timer();
-                timer.schedule(new TimerTask() {
-                    @Override
-                    public void run() {
-                        session.getAsyncRemote().sendText("getCoordinates from" + session.getId());
-                    }
-                }, 10000);
-
-                System.out.println(b + " " + session.getId());
-            } catch (Exception ex) {
-                System.out.println("WebSocket session closed");
-            }
-        }
 
         // проверяем, попал ли пользователь в зону фестиваля
         private boolean isInUnit(String point, Festival festival) {
-            //FestivalService festivalService = FestivalServiceImpl.getInstance();
-//            festivalService.add(new Festival("Test", "Testing", "Red" ,
-//                    "Some", "60.11173060613703 30.267900556923905", 75));
-
             double[] pointCoordinates = getCoordinates(point);
             double[] festivalCoordinates = getCoordinates(festival.getCenter());
             double dx = pointCoordinates[0] - festivalCoordinates[0];
