@@ -1,5 +1,6 @@
 package services;
 
+import models.EventPoint;
 import models.User;
 
 import java.util.List;
@@ -11,5 +12,8 @@ public interface UserService {
     void update(User user);
     void remove(long id);
     List<User> getAllList();
+    List<EventPoint> getEventsFromUserId(long id);
+    void addEventsListToUserbyId(long id, List<EventPoint> events);
+    void addEventToUserId(long id, EventPoint event);
 
 }

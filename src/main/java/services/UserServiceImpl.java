@@ -3,6 +3,7 @@ package services;
 
 import dao.UserDAO;
 import dao.UserDAOImpl;
+import models.EventPoint;
 import models.User;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -66,6 +67,23 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> getAllList() {
         return userDAO.getAllList();
+    }
+
+    @Override
+    public List<EventPoint> getEventsFromUserId(long id){
+        User user = userDAO.getById(id);
+        return user.getEventsFromUser();
+    }
+
+    @Override
+    public void addEventsListToUserbyId(long id,List<EventPoint> events){
+        User user= userDAO.getById(id);
+        user.setEventsToUser(events);
+    }
+    @Override
+    public void addEventToUserId(long id, EventPoint event){
+        User user= userDAO.getById(id);
+        user.addEventToUser(event);
     }
 
     private static SessionFactory createSessionFactory(Configuration configuration) {
