@@ -9,7 +9,11 @@
     </script>
 
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script type="text/javascript">
         <%@include file="userNotification.js" %>
     </script>
@@ -45,7 +49,6 @@
                     x = position.coords.latitude;
                     y = position.coords.longitude;
 
-
                     //загрузка данных в карту.
                     ymaps.ready(init);
                 });
@@ -60,7 +63,10 @@
 
                 center: [x, y],
                 // приближение.
-                zoom: 16
+                zoom: 18,
+                controls: ['zoomControl'],
+                behaviors: ['drag']
+
             });
             //объект метки
 
@@ -74,51 +80,37 @@
 
 
 
-            // myPlacemark = new ymaps.Placemark([a,b],{
+            // myPlacemark = new ymaps.Placemark([a,b], {
             //     balloonContent: 'Its me',
             //     hitContent: 'Hello'
             //
             // });
             // добавляем метку на карту
             // myMap.geoObjects.add(myPlacemark);
+setTimeout(newPlacemark(myMap),10000);
 
+            for (var i = 0; i < array.length; i++) {
 
-            //console.log("Map array " + array );
-            // объект геометрицесской фигуры
-            var myPolygon = new ymaps.Polygon([
-                    // Указываем координаты вершин многоугольника, являющиеся массивом
-                    // в формате JSON.
-                    array
-                ],
-                // Описываем свойства геообъекта.
-                {
-                    // Содержимое балуна.
-                    balloonContent: "Фестиваль JAVA BOOTCAMP"
-                }, {
-                    // Описываем опции геообъекта.
-                    // Цвет обводки и цвет поля.
-                    strokeColor: "#FFFFFF",
+                var mapObject = array[i];
 
-                    fillColor: "#FF1F1F70",
-                    // Тип заливки фоном.
-                    fillMethod: 'stretch',
-                    // Убираем видимость обводки.
-                    //stroke: false
-                }
-            );
-            // Добавляем многоугольник на карту.
-            myMap.geoObjects.add(myPolygon);
+                // объект геометрицесской фигуры
+                var myPolygon = new ymaps.Polygon(
+                    JSON.parse(mapObject.geometry), // Указываем координаты вершин многоугольника, являющиеся массивом в формате JSON.
+                    { balloonContent: mapObject.name}, // Содержимое балуна.
+                    { strokeColor: "#FFFFFF", fillColor: mapObject.color, //Цвет обводки и цвет поля.
+                      fillMethod: 'stretch' // Тип заливки фоном
+                        // stroke: falseУбираем видимость обводки.
+                    }
+                );
 
+                // Добавляем многоугольник на карту.
+                myMap.geoObjects.add(myPolygon);
+            }
         }
-
-
     </script>
 </head>
-<body>
-<div id="map" style="width: 600px; height: 400px">
-
-    serv
-
+<body >
+<div class="map" id="map" style="width: 100%; height: 100%">
 </div>
 </body>
 </html>

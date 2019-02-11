@@ -1,6 +1,8 @@
 package models;
 
 import javax.persistence.*;
+import java.util.List;
+
 
 @Entity
 @Table(name = "users")
@@ -12,8 +14,11 @@ public class User {
     private String password;
     private String role;
 
-    //private List<Event> events;
-
+    @ManyToMany(fetch = FetchType.EAGER , targetEntity = EventPoint.class, cascade = CascadeType.ALL)
+    @JoinTable(name = "relations",
+            joinColumns = {@JoinColumn(name = "users_id")},
+            inverseJoinColumns = {@JoinColumn(name = "event_point_id")})
+    private List<EventPoint> events;
     public User(){}
 
     public User(String name, String password, String role) {
@@ -38,6 +43,12 @@ public class User {
         this.name = name;
         this.password = password;
     }
+
+    public List<EventPoint> getEventsFromUser(){ return events;}
+
+    public void setEventsToUser(List<EventPoint> events) {this.events=events;}
+
+    public void addEventToUser(EventPoint event) {this.events.add(event);}
 
     public long getId() {
         return id;

@@ -1,5 +1,7 @@
 package models;
 
+import com.google.gson.annotations.SerializedName;
+
 import javax.persistence.*;
 
 @MappedSuperclass
@@ -7,24 +9,31 @@ public abstract class MapUnit  {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
+    @SerializedName("id")
     private long id;
 
     @Column(name = "name", unique = true, updatable = false)
+    @SerializedName("name")
     private String name;
 
     @Column(name = "description")
+    @SerializedName("description")
     private String description;
 
-    @Column(name = "geometry")
+    @Column(name = "geometry",  columnDefinition="TEXT")
+    @SerializedName("geometry")
     private String geometry; //(JSON)
 
     @Column(name = "color")
+    @SerializedName("color")
     private String color;
 
     @Column(name = "center")
+    @SerializedName("center")
     private String center;
 
     @Column(name = "radius")
+    @SerializedName("radius")
     private double radius;
 
     public MapUnit() {

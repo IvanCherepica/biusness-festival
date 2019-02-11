@@ -17,4 +17,8 @@ public interface UserService {
     void remove(long id);
 
     List<User> getAllList();
+    List<EventPoint> getEventsFromUserId(long id);
+    void addEventsListToUserbyId(long id, List<EventPoint> events);
+    void addEventToUserId(long id, EventPoint event);
+
 }

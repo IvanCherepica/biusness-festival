@@ -1,7 +1,7 @@
 package services;
 
 import models.EventPoint;
-import models.Festival;
+import models.User;
 
 import java.util.List;
 
@@ -14,4 +14,7 @@ public interface EventPoinService {
     void remove(long id);
     List<EventPoint> getAllList();
     List<EventPoint> getAllEventPointByFestivalId(long festivalId);
+    List<User> getUsersByEventId(long id);
+    void addUsersToEventId(long id, List<User> users);
+    void addUserToEventId(long id, User user);
 }
