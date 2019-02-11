@@ -38,7 +38,10 @@
                 <td>${eventPoint.id}</td>
                 <td>${eventPoint.name}</td>
                 <td>${eventPoint.description}</td>
-                <td>${eventPoint.geometry}</td>
+                <td style="white-space: nowrap;
+                                overflow: hidden;
+                                text-overflow: ellipsis;
+                                max-width: 300px;">${eventPoint.geometry}</td>
                 <td style="background-color:${eventPoint.color};"></td>
                 <td>${eventPoint.festival.name} (id:${eventPoint.festival.id})</td>
                 <td>

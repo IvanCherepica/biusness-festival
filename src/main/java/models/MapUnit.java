@@ -20,7 +20,7 @@ public abstract class MapUnit  {
     @SerializedName("description")
     private String description;
 
-    @Column(name = "geometry")
+    @Column(name = "geometry",  columnDefinition="TEXT")
     @SerializedName("geometry")
     private String geometry; //(JSON)
 
