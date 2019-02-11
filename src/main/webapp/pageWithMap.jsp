@@ -57,7 +57,10 @@
 
                 center: [x, y],
                 // приближение.
-                zoom: 16
+                zoom: 18,
+                control: ['zoomControl'],
+                behaviors: ['drag']
+
             });
             //объект метки
             myPlacemark = new ymaps.Placemark([x,y],{
@@ -98,10 +101,7 @@
     </script>
 </head>
 <body >
-<div id="map" style="width: 600px; height: 400px">
-
-    test
-
+<div class="map" id="map" style="width: 100%; height: 100%">
 </div>
 </body>
 </html>
