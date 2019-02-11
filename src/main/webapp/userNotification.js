@@ -1,4 +1,9 @@
 
+var userName;
+var userID;
+var isInFestival;
+
+
 //send message to server with user coordinates
 function sendMessage(webSocketClient) {
         navigator.geolocation.getCurrentPosition(function (position) {
@@ -20,6 +25,12 @@ function connect() {
         };
     webSocketClient.onmessage = function (event) {
             console.log("event.data " + event.data);
+            var messageToUser = JSON.parse(event.data).message;
+            isInFestival = JSON.parse(event.data).isInFestival;
+
+            if (messageToUser.localeCompare("") != 0 ) {
+                sendWelcomMessage(messageToUser);
+            }
             sendMessage(webSocketClient);
         };
     webSocketClient.onclose = function (event) {
@@ -28,9 +39,6 @@ function connect() {
         }
 }
 
-var userName;
-var userID;
-var isInFestival;
 // get request for user name and id
 $.ajax({
     url: "/rest/userdata",
@@ -48,3 +56,8 @@ $.ajax({
 
     }
 });
+
+
+function sendWelcomMessage(message) {
+    confirm(message);
+}

@@ -90,7 +90,12 @@
                             <td width="5%" scope="row">${festival.id}</td>
                             <td width="15%">${festival.name}</td>
                             <td width="25%">${festival.description}</td>
-                            <td width="25%">${festival.geometry}</td>
+                            <td width="25%"
+                                style="white-space: nowrap;
+                                overflow: hidden;
+                                text-overflow: ellipsis;
+                                max-width: 25vw;">
+                                    ${festival.geometry}</td>
                             <td width="5%" bgcolor="${festival.color}"></td>
                             <td width="20%" class="form-group">
                                 <form  class="form-inline">
