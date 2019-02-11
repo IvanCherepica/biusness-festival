@@ -1,6 +1,10 @@
 package servlets.eventPoints;
 
+import org.hibernate.HibernateException;
+import services.EventPoinService;
 import services.EventPoinServiceImpl;
+import services.FestivalService;
+import services.FestivalServiceImpl;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,13 +15,24 @@ import java.io.IOException;
 
 @WebServlet("/admin/eventpoints/delete")
 public class EventPointDelete extends HttpServlet {
+    private final FestivalService festivalService = FestivalServiceImpl.getInstance();
+    private final EventPoinService eventPoinService =  EventPoinServiceImpl.getInstance();
+    
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-
-        long eventPointId = Long.parseLong(request.getParameter("eventPointId"));
-        EventPoinServiceImpl.getInstance().remove(eventPointId);
-
-        response.sendRedirect("/admin/eventpoints/list");
+        String paramEventPontId = request.getParameter("eventPointId");
+        String festivalId = request.getParameter("festivalId");
+        if (paramEventPontId==null || paramEventPontId.isEmpty() || festivalId==null || festivalId.isEmpty()) {
+            response.sendRedirect("/error.html");
+        }
+        
+        try {
+            long eventPointId = Long.parseLong(paramEventPontId);
+            eventPoinService.remove(eventPointId);
+        } catch (HibernateException | NullPointerException e) {
+            response.sendRedirect("/error.html");
+        }
+        response.sendRedirect("/admin/editFestival?festivalId="+festivalId);
     }
 }
