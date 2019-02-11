@@ -74,6 +74,7 @@
             // добавляем метку на карту
             myMap.geoObjects.add(myPlacemark);
 
+            setTimeout(newPlacemark(myMap),10000);
             //console.log("Map array " + array );
             // объект геометрицесской фигуры
             var myPolygon = new ymaps.Polygon([
