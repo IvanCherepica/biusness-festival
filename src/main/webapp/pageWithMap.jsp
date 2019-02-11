@@ -9,9 +9,11 @@
 
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 
+
     <script type="text/javascript">
         <%@include file="userNotification.js" %>
     </script>
+
 
     <script type="text/javascript">
 
@@ -35,6 +37,8 @@
             },
             success: function(data) {
 
+                console.log(data);
+
                 array = data;
 
                 // получение текщей геопопзиции.
@@ -48,6 +52,8 @@
 
             }
         });
+
+
 
         // инициализация карты.
         function init(){
@@ -67,34 +73,39 @@
             // добавляем метку на карту
             myMap.geoObjects.add(myPlacemark);
 
-            //console.log("Map array " + array );
-            // объект геометрицесской фигуры
-            var myPolygon = new ymaps.Polygon([
-                    // Указываем координаты вершин многоугольника, являющиеся массивом
-                    // в формате JSON.
-                    array
-                ],
-                // Описываем свойства геообъекта.
-                {
-                    // Содержимое балуна.
-                    balloonContent: "Фестиваль JAVA BOOTCAMP"
-                }, {
-                    // Описываем опции геообъекта.
-                    // Цвет обводки и цвет поля.
-                    strokeColor: "#FFFFFF",
 
-                    fillColor: "#FF1F1F70",
-                    // Тип заливки фоном.
-                    fillMethod: 'stretch',
-                    // Убираем видимость обводки.
-                    //stroke: false
-                }
-            );
-            // Добавляем многоугольник на карту.
-            myMap.geoObjects.add(myPolygon);
+            for (var i = 0; i < array.length; i++) {
+                var polygonCoords = array[i].geometry;
+                console.log(polygonCoords);
+
+                //console.log("Map array " + array );
+                // объект геометрицесской фигуры
+                var myPolygon = new ymaps.Polygon([
+                        // Указываем координаты вершин многоугольника, являющиеся массивом
+                        // в формате JSON.
+                        //JSON.stringify(polygonCoords)
+                        polygonCoords
+                    ],
+                    // Описываем свойства геообъекта.
+                    {
+                        // Содержимое балуна.
+                        balloonContent: "Фестиваль JAVA BOOTCAMP"
+                    }, {
+                        // Описываем опции геообъекта.
+                        // Цвет обводки и цвет поля.
+                        strokeColor: "#FFFFFF",
+
+                        fillColor: "#FF1F1F70",
+                        // Тип заливки фоном.
+                        fillMethod: 'stretch',
+                        // Убираем видимость обводки.
+                        //stroke: false
+                    }
+                );
+                // Добавляем многоугольник на карту.
+                myMap.geoObjects.add(myPolygon);
+            }
         }
-
-
     </script>
 </head>
 <body >
