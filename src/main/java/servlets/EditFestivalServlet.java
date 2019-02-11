@@ -24,7 +24,7 @@ public class EditFestivalServlet extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
-		String paramId = request.getParameter("edit");
+		String paramId = request.getParameter("festivalId");
 		Festival festival;
 		
 		if (paramId==null) {
@@ -32,7 +32,7 @@ public class EditFestivalServlet extends HttpServlet {
 		} else {
 			long id = Long.parseLong(paramId);
 			festival = festivalService.getById(id);
-			List<EventPoint> eventPoints = eventPoinService.getAllList();
+			List<EventPoint> eventPoints = eventPoinService.getAllByFestival(id);
 			request.setAttribute("festival", festival);
 			request.setAttribute("eventPointsList", eventPoints);
 		}
@@ -60,7 +60,7 @@ public class EditFestivalServlet extends HttpServlet {
 			festivalService.update(festival);
 			
 			response.setContentType("text/html");
-			response.sendRedirect("/admin/festivals");
+			response.sendRedirect("/admin/editFestival?festivalId="+paramId);
 		} catch (HibernateException | NumberFormatException e) {
 			response.sendRedirect("/error.html");
 		}
