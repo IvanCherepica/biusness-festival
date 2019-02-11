@@ -20,6 +20,11 @@
         // в массиве будут храниться координаты геометрической фигуры.
         var array;
 
+        //Карта, метка на карте.
+        //Ширина,долгота.
+        var myMap, myPlacemark;
+        var x,y;
+
         // get запрос GeometryServlet
         $.ajax({
             url: "/rest/geometry",
@@ -32,24 +37,17 @@
 
                 array = data;
 
-                ymaps.ready(init);
-                //$('#somediv').append(data.name);
+                // получение текщей геопопзиции.
+                navigator.geolocation.getCurrentPosition(function(position) {
+
+                    x = position.coords.latitude; y = position.coords.longitude;
+
+                    //загрузка данных в карту.
+                    ymaps.ready(init);
+                });
+
             }
         });
-
-        //Карта, метка на карте.
-        //Ширина,долгота.
-        var myMap, myPlacemark;
-        var x,y;
-        // получение текщей геопопзиции.
-        navigator.geolocation.getCurrentPosition(function(position) {
-
-            x = position.coords.latitude; y = position.coords.longitude;
-            //console.log(" x " + position.coords.latitude);
-        });
-        //console.log("Map  x " + x + " ; y " + y  );
-        //загрузка данных в карту.
-        //ymaps.ready(init);
 
         // инициализация карты.
         function init(){
