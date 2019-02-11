@@ -43,11 +43,11 @@
                               class="login-form form-control" rows="3">${eventPoint.description}</textarea>
 
                     <textarea placeholder="введите координаты"
-                              name="geometry" value="${eventPoint.geometry}"
+                              name="geometry" value="${eventPoint.geometry}" required
                               class="login-form form-control" rows="6">${eventPoint.geometry}</textarea>
 
                     <input type="color"
-                           name="color" value="${eventPoint.color}"
+                           name="color" value="${eventPoint.color}" required
                            class="form-control"/>
 
                     <button type="submit" class="btn btn-primary btn-block">Save</button>

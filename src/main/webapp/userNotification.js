@@ -1,16 +1,22 @@
 
+var userName;
+var userID;
+var isInFestival;
+
+
+//send message to server with user coordinates
 function sendMessage(webSocketClient) {
         navigator.geolocation.getCurrentPosition(function (position) {
             userX = position.coords.latitude;
             userY = position.coords.longitude;
-            var message = userX + " " + userY;
+            var message = '{ "coordinates": "' + userX + " " + userY + '", "userName" : "' +  userName + '", "userID" : "' + userID + '"}';
             //var jsonObj = {"x" : userX, "y" : userY};
             //webSocketClient.send(JSON.stringify(jsonObj));
             webSocketClient.send(message);
         });
 }
 
-
+//connect to server
 function connect() {
     var webSocketClient = new WebSocket("ws://localhost:8080/compareLocations");
     webSocketClient.onopen = function (event) {
@@ -19,6 +25,12 @@ function connect() {
         };
     webSocketClient.onmessage = function (event) {
             console.log("event.data " + event.data);
+            var messageToUser = JSON.parse(event.data).message;
+            isInFestival = JSON.parse(event.data).isInFestival;
+
+            if (messageToUser.localeCompare("") != 0 ) {
+                sendWelcomMessage(messageToUser);
+            }
             sendMessage(webSocketClient);
         };
     webSocketClient.onclose = function (event) {
@@ -27,3 +39,25 @@ function connect() {
         }
 }
 
+// get request for user name and id
+$.ajax({
+    url: "/rest/userdata",
+    method: "get",
+    async: true,
+    error: function(message) {
+        console.log(message);
+    },
+    success: function(data) {
+        userName = data.name;
+        userID = data.id;
+        isInFestival = data.isInFestival;
+
+        console.log("userName " + userName + "; userID " + userID + "; isInFestival " + isInFestival);
+
+    }
+});
+
+
+function sendWelcomMessage(message) {
+    confirm(message);
+}

@@ -5,6 +5,7 @@ import models.Festival;
 import models.HotPoint;
 import models.User;
 import org.hibernate.cfg.Configuration;
+import servlets.UsersListServlet;
 
 import java.sql.Connection;
 import java.sql.Driver;
