@@ -1,25 +1,21 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<%--
+  Created by IntelliJ IDEA.
+  User: matvey
+  Date: 10/02/2019
+  Time: 7:07 PM
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
 <head>
-    <title>Geoposition</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <script src="https://api-maps.yandex.ru/2.1/?apikey=<e6f8dfbf-7c6d-464f-9a6a-4308cb58f188&lang=ru_RU>" type="text/javascript">
-    </script>
-
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-    <script src="/userNotification.js"></script>
     <script type="text/javascript">
-
-        connect();
-
         // в массиве будут храниться координаты геометрической фигуры.
         var array;
-
         //Карта, метка на карте.
         //Ширина,долгота.
         var myMap, myPlacemark;
         var x,y;
-
         // get запрос GeometryServlet
         $.ajax({
             url: "/rest/geometry",
@@ -29,33 +25,19 @@
                 console.log(message);
             },
             success: function(data) {
-
                 array = data;
-
                 // получение текщей геопопзиции.
                 navigator.geolocation.getCurrentPosition(function(position) {
-
                     x = position.coords.latitude; y = position.coords.longitude;
                     ymaps.ready(init);
                 });
-
-
                 //$('#somediv').append(data.name);
             }
         });
-
-
-
-
-        //загрузка данных в карту.
-
-
         // инициализация карты.
         function init(){
-
             myMap = new ymaps.Map("map", {
                 // определение центра.
-
                 center: [x, y],
                 // приближение.
                 zoom: 16
@@ -67,7 +49,6 @@
             });
             // добавляем метку на карту
             myMap.geoObjects.add(myPlacemark);
-
             //console.log("Map array " + array );
             // объект геометрицесской фигуры
             var myPolygon = new ymaps.Polygon([
@@ -83,7 +64,6 @@
                     // Описываем опции геообъекта.
                     // Цвет обводки и цвет поля.
                     strokeColor: "#FFFFFF",
-
                     fillColor: "#FF1F1F70",
                     // Тип заливки фоном.
                     fillMethod: 'stretch',
@@ -94,11 +74,10 @@
             // Добавляем многоугольник на карту.
             myMap.geoObjects.add(myPolygon);
         }
-
-
     </script>
+    <title>User</title>
 </head>
-<body >
+<body>
 <div id="map" style="width: 600px; height: 400px"></div>
 </body>
 </html>

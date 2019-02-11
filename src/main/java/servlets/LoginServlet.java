@@ -52,14 +52,14 @@ public class LoginServlet extends HttpServlet {
                 response.sendRedirect("/admin/festivals"); //исправить на путь к админке
                 return;
             }
-            response.sendRedirect("/addUser.jsp"); //исправить на путь к странице юзера
+            response.sendRedirect("/user");
         }
 
         if (!user.getPassword().equals(password) || !user.getName().equals(login)) {
             HttpSession session = request.getSession();
             session.setAttribute("user", user);
             response.setContentType("text/html");
-            response.sendRedirect("/error.jsp");
+            response.sendRedirect("/error.html");
         }
     }
 }
