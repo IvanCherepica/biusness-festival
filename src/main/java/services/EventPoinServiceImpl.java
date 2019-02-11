@@ -3,6 +3,7 @@ package services;
 import dao.EventPointDAO;
 import dao.EventPointDAOImpl;
 import models.EventPoint;
+import models.User;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
@@ -71,6 +72,22 @@ public class EventPoinServiceImpl implements EventPoinService {
         eventPointDAO.remove(id);
     }
 
+    @Override
+    public List<User> getUsersByEventId(long id){
+        EventPoint event= eventPointDAO.getById(id);
+        return event.getUsersFromEvent();
+    }
+    @Override
+    public void addUsersToEventId(long id, List<User> users){
+        EventPoint event= eventPointDAO.getById(id);
+        event.setUsersToEvent(users);
+    }
+
+    @Override
+    public void addUserToEventId(long id, User user){
+        EventPoint event= eventPointDAO.getById(id);
+        event.addUserToEvent(user);
+    }
     private static SessionFactory createSessionFactory(Configuration configuration) {
         StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder();
         builder.applySettings(configuration.getProperties());
