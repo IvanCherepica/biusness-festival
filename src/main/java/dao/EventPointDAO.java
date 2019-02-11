@@ -11,4 +11,5 @@ public interface EventPointDAO {
     void update(EventPoint eventPoint);
 
     List<EventPoint> getAllList();
+    List<EventPoint> getAllByFestival(long id);
 }

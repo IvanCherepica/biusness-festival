@@ -69,7 +69,12 @@ public class EventPoinServiceImpl implements EventPoinService{
     public void remove(long id) {
         eventPointDAO.remove(id);
     }
-
+    
+    @Override
+    public List<EventPoint> getAllByFestival (long id) {
+        return eventPointDAO.getAllByFestival(id);
+    }
+    
     private static SessionFactory createSessionFactory(Configuration configuration) {
         StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder();
         builder.applySettings(configuration.getProperties());
