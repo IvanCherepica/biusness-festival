@@ -2,11 +2,9 @@ package servlets;
 
 import models.EventPoint;
 import models.Festival;
+import models.HotPoint;
 import org.hibernate.HibernateException;
-import services.EventPoinService;
-import services.EventPoinServiceImpl;
-import services.FestivalService;
-import services.FestivalServiceImpl;
+import services.*;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -21,6 +19,7 @@ import java.util.List;
 public class EditFestivalServlet extends HttpServlet {
 	private final FestivalService festivalService =  FestivalServiceImpl.getInstance();
 	private final EventPoinService eventPoinService =  EventPoinServiceImpl.getInstance();
+	private final HotPointService hotPointService =  HotPointServiceImpl.getInstance();
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
@@ -33,8 +32,10 @@ public class EditFestivalServlet extends HttpServlet {
 			long id = Long.parseLong(paramId);
 			festival = festivalService.getById(id);
 			List<EventPoint> eventPoints = eventPoinService.getAllByFestival(id);
+			List<HotPoint> hotPoints = hotPointService.getAllByFestival(id);
 			request.setAttribute("festival", festival);
 			request.setAttribute("eventPointsList", eventPoints);
+			request.setAttribute("hotPointList", hotPoints);
 		}
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/editFestival.jsp");
 		dispatcher.forward(request, response);
