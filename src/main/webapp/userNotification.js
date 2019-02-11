@@ -3,6 +3,24 @@ var userName;
 var userID;
 var isInFestival;
 
+// get request for user name and id
+$.ajax({
+    url: "/rest/userdata",
+    method: "get",
+    async: true,
+    error: function(message) {
+        console.log(message);
+    },
+    success: function(data) {
+        userName = data.name;
+        userID = data.id;
+        isInFestival = data.isInFestival;
+
+        console.log("userName " + userName + "; userID " + userID + "; isInFestival " + isInFestival);
+
+    }
+});
+
 
 //send message to server with user coordinates
 function sendMessage(webSocketClient) {
@@ -13,6 +31,7 @@ function sendMessage(webSocketClient) {
             //var jsonObj = {"x" : userX, "y" : userY};
             //webSocketClient.send(JSON.stringify(jsonObj));
             webSocketClient.send(message);
+            newPlacemark(myMap);
         });
 }
 
@@ -39,25 +58,29 @@ function connect() {
         }
 }
 
-// get request for user name and id
-$.ajax({
-    url: "/rest/userdata",
-    method: "get",
-    async: true,
-    error: function(message) {
-        console.log(message);
-    },
-    success: function(data) {
-        userName = data.name;
-        userID = data.id;
-        isInFestival = data.isInFestival;
-
-        console.log("userName " + userName + "; userID " + userID + "; isInFestival " + isInFestival);
-
-    }
-});
-
 
 function sendWelcomMessage(message) {
     confirm(message);
+}
+
+function newPlacemark(myMap) {
+    if (myMap != undefined) {
+
+        // получение текщей геопопзиции.
+        navigator.geolocation.getCurrentPosition(function (position) {
+
+            x = position.coords.latitude;
+            y = position.coords.longitude;
+
+            myMap.geoObjects.remove(myPlacemark);
+            //обновляем местоположение метки
+            myPlacemark = new ymaps.Placemark([x, y], {
+                balloonContent: 'Its me',
+                hitContent: 'Hello'
+            });
+            // добавляем метку на карту
+            myMap.geoObjects.add(myPlacemark);
+            //setTimeout(newPlacemark(myMap),10000);
+        });
+    }
 }

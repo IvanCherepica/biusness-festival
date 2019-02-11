@@ -18,7 +18,6 @@
         <%@include file="userNotification.js" %>
     </script>
 
-
     <script type="text/javascript">
 
         connect();
@@ -56,7 +55,6 @@
             }
         });
 
-
         // инициализация карты.
         function init() {
 
@@ -77,7 +75,7 @@
             });
             // добавляем метку на карту
             myMap.geoObjects.add(myPlacemark);
-
+            setTimeout(newPlacemark(myMap),10000);
 
             for (var i = 0; i < array.length; i++) {
 
