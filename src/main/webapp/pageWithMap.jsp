@@ -29,6 +29,7 @@
         //Ширина,долгота.
         var myMap, myPlacemark;
         var x, y;
+        var a, b;
 
         // get запрос GeometryServlet
         $.ajax({
@@ -42,7 +43,7 @@
 
                 array = data;
 
-                // получение текщей геопопзиции.
+                //получение текщей геопопзиции.
                 navigator.geolocation.getCurrentPosition(function (position) {
 
                     x = position.coords.latitude;
@@ -69,12 +70,14 @@
 
             });
             //объект метки
-            myPlacemark = new ymaps.Placemark([x, y], {
+
+            myPlacemark = new ymaps.Placemark([a,b], {
                 balloonContent: 'Its me',
                 hitContent: 'Hello'
+
             });
             // добавляем метку на карту
-            myMap.geoObjects.add(myPlacemark);
+            // myMap.geoObjects.add(myPlacemark);
             setTimeout(newPlacemark(myMap),10000);
 
             for (var i = 0; i < array.length; i++) {
