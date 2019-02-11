@@ -23,7 +23,7 @@
         <div class="col-lg-6 col-md-6 col-xs-11 col-md-offset-3 col-xs-offset-2 login-form">
             <div class="col-xs-8 col-md-offset-2">
                 <h2>Edit event point</h2>
-                <form action="" method="POST" class="form-group login-group">
+                <form action="/admin/eventpoints/edit" method="POST" class="form-group login-group">
                     <select name="festivalId" value="${eventPoint.festival.id}"  class="form-control" id="sel1">
                         <c:forEach var="item" items="${festivals}">
                             <option value="${item.id}" ${item.id == eventPoint.festival.id ? 'selected="selected"' : ''}>${item.name} (id:${item.id})</option>
@@ -39,21 +39,18 @@
                            class="form-control"/>
 
                     <textarea placeholder="введите краткое описание"
-                              name="description" value="${eventPoint.description}" required
+                              name="description" value="${eventPoint.description}"
                               class="login-form form-control" rows="3">${eventPoint.description}</textarea>
 
                     <textarea placeholder="введите координаты"
-                              name="geometry" value="${eventPoint.geometry}" required
+                              name="geometry" value="${eventPoint.geometry}"
                               class="login-form form-control" rows="6">${eventPoint.geometry}</textarea>
 
                     <input type="color"
-                           name="color" value="${eventPoint.color}" required
+                           name="color" value="${eventPoint.color}"
                            class="form-control"/>
 
                     <button type="submit" class="btn btn-primary btn-block">Save</button>
-                </form>
-                <form>
-                    <button formmethod="get" formaction="\logout" class="btn btn-primary">Logout</button>
                 </form>
             </div>
         </div>
