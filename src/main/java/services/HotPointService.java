@@ -11,6 +11,6 @@ public interface HotPointService {
     Long add(HotPoint hotPoint);
     void update(HotPoint hotPoint);
     void remove(long id);
-//    List<HotPoint> getAllList();
+    List<HotPoint> getAllList();
 //    List<HotPoint> getAllByFestival(Festival festival);
 }

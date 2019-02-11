@@ -1,7 +1,6 @@
 package filter;
 
 import models.User;
-
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
@@ -27,7 +26,6 @@ public class AdminFilter implements Filter {
             filterChain.doFilter(request, response);
             return;
         }
-
         ((HttpServletResponse) response).sendRedirect("/error.html");
     }
 
