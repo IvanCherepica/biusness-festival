@@ -48,7 +48,7 @@ public class EventPointDAOImpl extends AbstactDAO<EventPoint> implements EventPo
         Transaction transaction = session.beginTransaction();
         List<EventPoint> eventPoints = null;
         try {
-            eventPoints = session.createSQLQuery("select *from event_point where festival_id=festivalId").list();
+            eventPoints = session.createSQLQuery("select *from event_point where festival_id = festival_id").list();
             transaction.commit();
         } catch (Exception e) {
             System.out.println("Can`t get list of eventPoints: " + e.getMessage());
