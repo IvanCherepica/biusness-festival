@@ -5,7 +5,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>EventPoint edit</title>
+    <title>HotPoint edit</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 </head>
@@ -15,7 +15,7 @@
     <div class="row">
         <div class="col-lg-6 col-md-6 col-xs-11 col-md-offset-3 col-xs-offset-2 login-form">
             <div class="col-xs-8 col-md-offset-2">
-                <h2>Edit event point</h2>
+                <h2>Hot PoInt EdiTor</h2>
                 <form action="" method="POST" class="form-group login-group">
                     <select name="fId" value="${hPoint.festival.id}"  class="form-control" id="sel1">
                         <c:forEach var="item" items="${festivals}">
