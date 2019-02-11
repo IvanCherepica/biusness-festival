@@ -1,7 +1,10 @@
 package servlets;
 
+import models.EventPoint;
 import models.Festival;
 import org.hibernate.HibernateException;
+import services.EventPoinService;
+import services.EventPoinServiceImpl;
 import services.FestivalService;
 import services.FestivalServiceImpl;
 
@@ -12,10 +15,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet("/admin/editFestival")
 public class EditFestivalServlet extends HttpServlet {
 	private final FestivalService festivalService =  FestivalServiceImpl.getInstance();
+	private final EventPoinService eventPoinService =  EventPoinServiceImpl.getInstance();
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
@@ -27,7 +32,9 @@ public class EditFestivalServlet extends HttpServlet {
 		} else {
 			long id = Long.parseLong(paramId);
 			festival = festivalService.getById(id);
+			List<EventPoint> eventPoints = eventPoinService.getAllList();
 			request.setAttribute("festival", festival);
+			request.setAttribute("eventPointsList", eventPoints);
 		}
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/editFestival.jsp");
 		dispatcher.forward(request, response);

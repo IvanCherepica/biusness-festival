@@ -1,24 +1,24 @@
-<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>Geoposition</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <script src="https://api-maps.yandex.ru/2.1/?apikey=<e6f8dfbf-7c6d-464f-9a6a-4308cb58f188&lang=ru_RU>" type="text/javascript">
+
+
+    <script src="https://api-maps.yandex.ru/2.1/?apikey=e6f8dfbf-7c6d-464f-9a6a-4308cb58f188&lang=ru_RU" type="text/javascript">
     </script>
 
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-    <script src="/userNotification.js"></script>
+
+    <script type="text/javascript">
+        <%@include file="userNotification.js" %>
+    </script>
+
     <script type="text/javascript">
 
         connect();
 
         // в массиве будут храниться координаты геометрической фигуры.
         var array;
-
-        //Карта, метка на карте.
-        //Ширина,долгота.
-        var myMap, myPlacemark;
-        var x,y;
 
         // get запрос GeometryServlet
         $.ajax({
@@ -32,23 +32,24 @@
 
                 array = data;
 
-                // получение текщей геопопзиции.
-                navigator.geolocation.getCurrentPosition(function(position) {
-
-                    x = position.coords.latitude; y = position.coords.longitude;
-                    ymaps.ready(init);
-                });
-
-
+                ymaps.ready(init);
                 //$('#somediv').append(data.name);
             }
         });
 
+        //Карта, метка на карте.
+        //Ширина,долгота.
+        var myMap, myPlacemark;
+        var x,y;
+        // получение текщей геопопзиции.
+        navigator.geolocation.getCurrentPosition(function(position) {
 
-
-
+            x = position.coords.latitude; y = position.coords.longitude;
+            //console.log(" x " + position.coords.latitude);
+        });
+        //console.log("Map  x " + x + " ; y " + y  );
         //загрузка данных в карту.
-
+        //ymaps.ready(init);
 
         // инициализация карты.
         function init(){
@@ -99,6 +100,10 @@
     </script>
 </head>
 <body >
-<div id="map" style="width: 600px; height: 400px"></div>
+<div id="map" style="width: 600px; height: 400px">
+
+    test
+
+</div>
 </body>
 </html>

@@ -21,7 +21,13 @@ public class UserFilter implements Filter {
 
         User user = (User) session.getAttribute("user");
 
-        if (user != null && user.getRole().equals("user")) {
+        if (user == null) {
+            ((HttpServletResponse) response).sendRedirect("/error.html");
+        }
+
+        String role = user.getRole();
+
+        if (role.equals("admin") || role.equals("user")) {
             filterChain.doFilter(request, response);
             return;
         }
