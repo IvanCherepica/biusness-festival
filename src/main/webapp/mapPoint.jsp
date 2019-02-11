@@ -1,11 +1,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>Geoposition</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
 
-    <script src="https://api-maps.yandex.ru/2.1/?apikey=e6f8dfbf-7c6d-464f-9a6a-4308cb58f188&lang=ru_RU"
-            type="text/javascript">
+    <script src="https://api-maps.yandex.ru/2.1/?apikey=e6f8dfbf-7c6d-464f-9a6a-4308cb58f188&lang=ru_RU" type="text/javascript">
     </script>
 
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
@@ -24,36 +23,37 @@
         //Карта, метка на карте.
         //Ширина,долгота.
         var myMap, myPlacemark;
-        var x, y;
-        var a, b;
+        var x,y;
 
         // get запрос GeometryServlet
         $.ajax({
             url: "/rest/geometry",
             method: "get",
             async: true,
-            error: function (message) {
+            error: function(message) {
                 console.log(message);
             },
-            success: function (data) {
+            success: function(data) {
 
                 array = data;
 
-                //получение текщей геопопзиции.
-                navigator.geolocation.getCurrentPosition(function (position) {
+                // получение текщей геопопзиции.
+                navigator.geolocation.getCurrentPosition(function(position) {
 
-                    x = position.coords.latitude;
-                    y = position.coords.longitude;
-
+                    //x = position.coords.latitude;
+                    //y = position.coords.longitude;
+                    x = 60.111374;
+                    y = 30.269210;
 
                     //загрузка данных в карту.
                     ymaps.ready(init);
                 });
+
             }
         });
 
         // инициализация карты.
-        function init() {
+        function init(){
 
             myMap = new ymaps.Map("map", {
                 // определение центра.
@@ -63,25 +63,12 @@
                 zoom: 16
             });
             //объект метки
-
-
-            myMap.geoObjects.add(new ymaps.Placemark([60.111352, 30.268653], {
-                balloonContent: 'цвет <strong>воды пляжа бонди</strong>'
-            }, {
-                preset: 'islands#icon',
-                iconColor: '#0095b6'
-            }))
-
-
-
-            // myPlacemark = new ymaps.Placemark([a,b],{
-            //     balloonContent: 'Its me',
-            //     hitContent: 'Hello'
-            //
-            // });
+            myPlacemark = new ymaps.Placemark([x,y],{
+                balloonContent: 'Its me',
+                hitContent: 'Hello'
+            });
             // добавляем метку на карту
-            // myMap.geoObjects.add(myPlacemark);
-
+            myMap.geoObjects.add(myPlacemark);
 
             //console.log("Map array " + array );
             // объект геометрицесской фигуры
@@ -108,16 +95,15 @@
             );
             // Добавляем многоугольник на карту.
             myMap.geoObjects.add(myPolygon);
-
         }
 
 
     </script>
 </head>
-<body>
+<body >
 <div id="map" style="width: 600px; height: 400px">
 
-    serv
+    test
 
 </div>
 </body>
