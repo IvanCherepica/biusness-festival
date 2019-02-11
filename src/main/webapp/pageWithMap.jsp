@@ -70,24 +70,14 @@
             });
             //объект метки
 
+            myPlacemark = new ymaps.Placemark([a,b], {
+                balloonContent: 'Its me',
+                hitContent: 'Hello'
 
-            myMap.geoObjects.add(new ymaps.Placemark([60.111352, 30.268653], {
-                balloonContent: 'цвет <strong>воды пляжа бонди</strong>'
-            }, {
-                preset: 'islands#icon',
-                iconColor: '#0095b6'
-            }))
-
-
-
-            // myPlacemark = new ymaps.Placemark([a,b], {
-            //     balloonContent: 'Its me',
-            //     hitContent: 'Hello'
-            //
-            // });
+            });
             // добавляем метку на карту
             // myMap.geoObjects.add(myPlacemark);
-setTimeout(newPlacemark(myMap),10000);
+            setTimeout(newPlacemark(myMap),10000);
 
             for (var i = 0; i < array.length; i++) {
 
