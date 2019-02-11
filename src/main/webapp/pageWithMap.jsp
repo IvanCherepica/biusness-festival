@@ -9,8 +9,11 @@
     </script>
 
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script type="text/javascript">
         <%@include file="userNotification.js" %>
     </script>
@@ -38,8 +41,6 @@
             },
             success: function (data) {
 
-                console.log(data);
-
                 array = data;
 
                 // получение текщей геопопзиции.
@@ -64,7 +65,10 @@
 
                 center: [x, y],
                 // приближение.
-                zoom: 16
+                zoom: 18,
+                controls: ['zoomControl'],
+                behaviors: ['drag']
+
             });
             //объект метки
             myPlacemark = new ymaps.Placemark([x, y], {
@@ -95,11 +99,8 @@
         }
     </script>
 </head>
-<body>
-<div id="map" style="width: 600px; height: 400px">
-
-    test
-
+<body >
+<div class="map" id="map" style="width: 100%; height: 100%">
 </div>
 </body>
 </html>

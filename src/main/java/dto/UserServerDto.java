@@ -1,5 +1,8 @@
 package dto;
 
+/**
+ * Используется парсинга сообщения от клиента, полученного через WebSocket
+ */
 public class UserServerDto {
     private String coordinates;
 

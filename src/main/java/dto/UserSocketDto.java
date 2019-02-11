@@ -1,5 +1,8 @@
 package dto;
 
+/**
+ * Используется для отправки ответного сообщения пользователю через WebSocket
+ */
 public class UserSocketDto {
 
     private long id;
