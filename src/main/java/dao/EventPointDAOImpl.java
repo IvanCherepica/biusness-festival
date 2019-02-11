@@ -18,6 +18,7 @@ public class EventPointDAOImpl extends AbstactDAO<EventPoint> implements EventPo
         Query query = session.createQuery("FROM EventPoint WHERE id = :id");
         query.setParameter("id", item.getId());
 
+
         if (query.uniqueResult() == null) {
             throw new HibernateException("No such element");
         }
@@ -48,7 +49,10 @@ public class EventPointDAOImpl extends AbstactDAO<EventPoint> implements EventPo
         Transaction transaction = session.beginTransaction();
         List<EventPoint> eventPoints = null;
         try {
-            eventPoints = session.createSQLQuery("select *from event_point where festival_id = festival_id").list();
+
+            Query query = session.createSQLQuery("select *from event_point where festival_id = :festivalId");
+            query.setParameter("festivalId", festivalId);
+            eventPoints = query.list();
             transaction.commit();
         } catch (Exception e) {
             System.out.println("Can`t get list of eventPoints: " + e.getMessage());
