@@ -94,7 +94,7 @@
                                 style="white-space: nowrap;
                                 overflow: hidden;
                                 text-overflow: ellipsis;
-                                max-width: 300px;">
+                                max-width: 25vw;">
                                     ${festival.geometry}</td>
                             <td width="5%" bgcolor="${festival.color}"></td>
                             <td width="20%" class="form-group">

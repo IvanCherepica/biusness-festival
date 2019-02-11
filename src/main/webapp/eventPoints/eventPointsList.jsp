@@ -35,16 +35,17 @@
         <c:forEach var="eventPoint" items="${EventPointsList}">
             <tr>
                 <form>
-                <td>${eventPoint.id}</td>
-                <td>${eventPoint.name}</td>
-                <td>${eventPoint.description}</td>
-                <td style="white-space: nowrap;
+                <td width="5%">${eventPoint.id}</td>
+                <td width="15%">${eventPoint.name}</td>
+                <td width="25%">${eventPoint.description}</td>
+                <td width="20%"
+                    style="white-space: nowrap;
                                 overflow: hidden;
                                 text-overflow: ellipsis;
-                                max-width: 300px;">${eventPoint.geometry}</td>
-                <td style="background-color:${eventPoint.color};"></td>
-                <td>${eventPoint.festival.name} (id:${eventPoint.festival.id})</td>
-                <td>
+                                max-width: 25vw;">${eventPoint.geometry}</td>
+                <td width="5%" style="background-color:${eventPoint.color};"></td>
+                <td width="5%">${eventPoint.festival.name} (id:${eventPoint.festival.id})</td>
+                <td width="20%">
                     <button name="eventPointId" value="${eventPoint.id}" formmethod="post" formaction="\admin\eventpoints\delete" class="btn btn-primary">Delete</button>
                     <button name="eventPointId" value="${eventPoint.id}" formmethod="get" formaction="\admin\eventpoints\edit" class="btn btn-primary">Edit</button>
                 </td>
