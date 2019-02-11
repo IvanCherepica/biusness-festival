@@ -17,9 +17,9 @@ public class HotPointListServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        List eventPoints = HotPointServiceImpl.getInstance().getAllList();
-        request.setAttribute("HotPointList", eventPoints);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/eventPoints/eventPointsList.jsp");
+        List hPoints = HotPointServiceImpl.getInstance().getAllList();
+        request.setAttribute("HotPointList", hPoints);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/hotpoints/hotpointlist.jsp");
         dispatcher.forward(request, response);
     }
 }

@@ -1,15 +1,9 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: NICK
-  Date: 08.02.2019
-  Time: 16:10
-  To change this template use File | Settings | File Templates.
---%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Event Points</title>
+    <title>HotSPots</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 </head>
@@ -19,7 +13,7 @@
 
 
 <div class="panel-body">
-    <h4>All Event Points</h4>
+    <h4>All Hot Spots</h4>
     <table class="table table-striped table-responsive">
         <thead>
         <tr>
@@ -29,6 +23,9 @@
             <th>Geometry</th>
             <th>Color</th>
             <th>FestivalId</th>
+            <form>
+                <button formmethod="get" formaction="/admin/hotpoints/addhot" class="btn btn-primary">Add</button>
+            </form>
         </tr>
         </thead>
         <tbody>
@@ -39,20 +36,18 @@
                     <td>${hotPoint.name}</td>
                     <td>${hotPoint.description}</td>
                     <td>${hotPoint.geometry}</td>
-                    <td style="background-color:${eventPoint.color};"></td>
+                    <td  bgcolor="${hotPoint.color}"></td>
                     <td>${hotPoint.festival.name} (id:${hotPoint.festival.id})</td>
                     <td>
-                       <!-- <button name="eventPointId" value="${eventPoint.id}" formmethod="post" formaction="\admin\eventpoints\delete" class="btn btn-primary">Delete</button>
-                        <button name="eventPointId" value="${eventPoint.id}" formmethod="get" formaction="\admin\eventpoints\edit" class="btn btn-primary">Edit</button>-->
+                        <button name="hPointId" value="${hotPoint.id}" formmethod="post" formaction="\admin\hotpoints\delete" class="btn btn-primary">Delete</button>
+                        <button name="hPointId" value="${hotPoint.id}" formmethod="get" formaction="\admin\hotpoints\edit" class="btn btn-primary">Edit</button>
                     </td>
                 </form>
             </tr>
         </c:forEach>
         </tbody>
     </table>
-    <form>
-        <!--<button formmethod="get" formaction="\admin\eventpoints\create" class="btn btn-primary">Add HotPoint</button>-->
-    </form>
+
     <form>
         <button formmethod="get" formaction="\logout" class="btn btn-primary">Logout</button>
     </form>

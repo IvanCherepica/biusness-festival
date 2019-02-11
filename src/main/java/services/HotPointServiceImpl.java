@@ -3,6 +3,7 @@ package services;
 
 import dao.HotPointDAOImpl;
 import models.HotPoint;
+import models.Festival;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
@@ -66,11 +67,11 @@ public class HotPointServiceImpl implements HotPointService{
     public List<HotPoint> getAllList () {
         return hotPointDAO.getAllList();
   }
-//
-//    @Override
-//    public List<HotPoint> getAllByFestival (Festival festival) {
-//        return hotPointDAO.getAllByFestival(festival);
-//    }
+
+   // @Override
+  //  public List<HotPoint> getAllByFestival (Festival festival) {
+   //     return hotPointDAO.getAllByFestival(festival);
+  //  }
 
     private static SessionFactory createSessionFactory(Configuration configuration) {
         StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder();
