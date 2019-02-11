@@ -5,7 +5,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Add festival</title>
+    <title>Редактирование пользователя</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
@@ -40,8 +40,8 @@
     <div class="row">
         <div class="col-lg-6 col-md-6 col-xs-11 col-md-offset-3 col-xs-offset-2 edit-form">
             <div class="col-xs-8 col-md-offset-2">
-                <h2>Создание пользователя</h2>
-                <form action="${pageContext.request.contextPath}/admin/addUser" method="POST">
+                <h2>Редактирование пользователя</h2>
+                <form action="${pageContext.request.contextPath}/admin/editUser" method="POST">
                     <div class="form-group edit-group">
                         <label for="id">Id</label>
                         <input type="text" class="form-control" id="id" name="id"
@@ -49,18 +49,18 @@
 
                         <label for="name">Name</label>
                         <input type="text" class="form-control" id="name" name="name"
-                               placeholder="${user.name}">
+                               value="${user.name}">
 
                         <label for="password">Password</label>
                         <input class="form-control" id="password" rows="3" name="password"
-                                  placeholder="${user.password}">
+                                  value="${user.password}">
 
                         <label for="role">Role</label>
                         <input class="form-control" id="role" rows="4" name="role"
-                                  placeholder="${user.role}">
+                                  value="${user.role}">
 
                     </div>
-                    <input type="submit" class="btn btn-primary btn-block" value="Создать"/>
+                    <input type="submit" class="btn btn-primary btn-block" value="Сохранить"/>
                 </form>
             </div>
         </div>

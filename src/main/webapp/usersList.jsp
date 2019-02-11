@@ -21,7 +21,8 @@
             <th>id</th>
             <th>Name</th>
             <th>role</th>
-            <th><a id="addButton" class="btn btn-primary" href="${pageContext.servletContext.contextPath}/admin/users">Add</a>
+            <th><a id="addButton" class="btn btn-primary"
+                   href="${pageContext.servletContext.contextPath}/admin/addUser">Add</a>
             </th>
         </tr>
         </thead>
@@ -33,14 +34,16 @@
                 <td width="30%">${user.role}</td>
                 <td width="10%" class="form-group">
                     <form class="form-inline">
-                        <!--button type="submit" class="btn btn-primary" formmethod="get"
-                                formaction="${pageContext.request.contextPath}/admin/users" name="edit"
+
+                        <button type="submit" class="btn btn-primary" formmethod="get"
+                                formaction="${pageContext.request.contextPath}/admin/editUser" name="edit"
                                 value="${user.id}">Edit
                         </button>
+
                         <button type="submit" class="btn btn-primary" formmethod="get"
-                                formaction="${pageContext.request.contextPath}/admin/users" name="delete"
-                                value="${festival.id}">Delete
-                        </button-->
+                                formaction="${pageContext.request.contextPath}/admin/deleteUser" name="delete"
+                                value="${user.id}">Delete
+                        </button>
                     </form>
                 </td>
             </tr>
