@@ -7,10 +7,12 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="biusness-festival" />
+        <module name="BuisenesFestival" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="biusness-festival" target="1.8" />
+      <module name="BuisenesFestival" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
