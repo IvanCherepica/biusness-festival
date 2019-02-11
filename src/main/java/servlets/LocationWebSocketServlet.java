@@ -2,16 +2,19 @@ package servlets;
 
 
 
+import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import dto.UserServerDto;
+import dto.UserSocketDto;
 import models.Festival;
-import org.json.JSONObject;
 import services.FestivalService;
 import services.FestivalServiceImpl;
-import services.LocationWebSocketConfigurator;
+import services.userNotificationServices.LocationWebSocketConfigurator;
+import services.userNotificationServices.UserSessionService;
 import util.UserJSONDataDeserializer;
 
 
+import javax.servlet.http.HttpSession;
 import javax.websocket.*;
 import javax.websocket.server.ServerEndpoint;
 import java.util.*;
@@ -19,8 +22,10 @@ import java.util.*;
 @ServerEndpoint(value = "/compareLocations", configurator= LocationWebSocketConfigurator.class)
 public class LocationWebSocketServlet {
 
-        String point;
-        Festival festival = new Festival("Test", "Testing", "Red" ,
+        private FestivalService festivalService = FestivalServiceImpl.getInstance();
+
+        private String point;
+        private Festival festival = new Festival("Test", "Testing", "Red" ,
             "Some", "60.11173060613703 30.267900556923905", 75);
 
          //список сессий
@@ -49,18 +54,48 @@ public class LocationWebSocketServlet {
 //            JSONObject obj = new JSONObject(message);
 //            String userName = obj.getJSONObject("userName").getString("userName");
 
+            //разбираем данные из JSON строки
             GsonBuilder gsonBuilder = new GsonBuilder();
             gsonBuilder.registerTypeAdapter(UserServerDto.class, new UserJSONDataDeserializer());
 
             UserServerDto userServerDto = gsonBuilder.create().fromJson(message,UserServerDto.class);
-
-            //JSONObject obj = new JSONObject(message);
-
-
-
-
+            String userName = userServerDto.getUserName();
+            Long userID = userServerDto.getId();
             point = userServerDto.getCoordinates();
-            sendRequestToUpdate(userSession);
+            //find user http session
+            UserSessionService userSessionService = UserSessionService.getInstance();
+            HttpSession userHttpSession = userSessionService.getUserSession(userID);
+            boolean isInFestivalOld = Boolean.parseBoolean((String) userHttpSession.getAttribute("userInFestival"));
+
+            boolean isInFestivalNew = isInUnit(point, festival);
+
+            UserSocketDto dto = new UserSocketDto();
+            dto.setId(userID);
+            dto.setName(userName);
+            dto.setInFestival(isInFestivalNew);
+
+            if (!isInFestivalOld && isInFestivalNew) {
+                dto.setMessage("Welcome to JAVABOOTCAMP!");
+            }
+
+            try {
+                Timer timer = new Timer();
+                timer.schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        userSession.getAsyncRemote().sendText(new Gson().toJson(dto));
+                    }
+                }, 10000);
+
+                System.out.println(isInFestivalNew + " " + userSession.getId());
+            } catch (Exception ex) {
+                System.out.println("WebSocket session closed");
+            }
+
+            userHttpSession.setAttribute("userInFestival",Boolean.toString(isInFestivalNew));
+
+
+//            sendRequestToUpdate(userSession);
 //            LocationWedSocketService.getInstance().sendRequestToUpdate(message, userSession);
         }
 
@@ -70,7 +105,8 @@ public class LocationWebSocketServlet {
         }
 
         // делаем запрос координат каждые 10 секунд
-        public void sendRequestToUpdate(Session session) throws Throwable {
+        private void sendRequestToUpdate(Session session) throws Throwable {
+            boolean b = isInUnit(point, festival);
             try {
                 Timer timer = new Timer();
                 timer.schedule(new TimerTask() {
@@ -79,7 +115,7 @@ public class LocationWebSocketServlet {
                         session.getAsyncRemote().sendText("getCoordinates from" + session.getId());
                     }
                 }, 10000);
-                boolean b = isInUnit(point, festival);
+
                 System.out.println(b + " " + session.getId());
             } catch (Exception ex) {
                 System.out.println("WebSocket session closed");

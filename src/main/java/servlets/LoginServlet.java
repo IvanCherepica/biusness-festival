@@ -3,7 +3,7 @@ package servlets;
 import models.User;
 import services.UserService;
 import services.UserServiceImpl;
-import services.UserSessionService;
+import services.userNotificationServices.UserSessionService;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;

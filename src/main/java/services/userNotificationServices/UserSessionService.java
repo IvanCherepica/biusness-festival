@@ -1,6 +1,6 @@
-package services;
+package services.userNotificationServices;
 
-import models.Festival;
+import services.FestivalServiceImpl;
 
 import javax.servlet.http.HttpSession;
 import java.util.*;
@@ -27,6 +27,10 @@ public class UserSessionService {
     public void addUserSessions (Long userID, HttpSession userSession){
         this.userSessions.add(userSession);
         this.userSessionsMap.put(userID,userSession);
+    }
+
+    public HttpSession getUserSession (Long userID) {
+        return this.userSessionsMap.get(userID);
     }
 
     public void removeUserSession(HttpSession userSession) {

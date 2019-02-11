@@ -8,6 +8,8 @@ public class UserSocketDto {
 
     private boolean isInFestival;
 
+    private String message = "";
+
     public UserSocketDto(long id, String name, boolean isInFestival) {
         this.id = id;
         this.name = name;
@@ -39,5 +41,13 @@ public class UserSocketDto {
 
     public void setInFestival(boolean inFestival) {
         isInFestival = inFestival;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
     }
 }

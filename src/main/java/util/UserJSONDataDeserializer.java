@@ -2,9 +2,7 @@ package util;
 
 import com.google.gson.*;
 import dto.UserServerDto;
-
 import java.lang.reflect.Type;
-import java.util.Map;
 
 public class UserJSONDataDeserializer implements JsonDeserializer<UserServerDto> {
     @Override

@@ -1,6 +1,7 @@
-package services;
+package services.userNotificationServices;
 
 import models.Festival;
+import services.FestivalServiceImpl;
 
 import javax.websocket.Session;
 import java.util.*;
@@ -15,7 +16,7 @@ public class LocationWedSocketService {
         this.festival = new Festival("Test", "Testing", "Red" ,
                 "Some", "60.11173060613703 30.267900556923905", 75);
         this.point = "";
-        //this.hotPointDAO = new HotPointDAOImpl(createSessionFactory(DBHelper.getConfiguration()));
+
     }
 
     public static LocationWedSocketService getInstance() {
