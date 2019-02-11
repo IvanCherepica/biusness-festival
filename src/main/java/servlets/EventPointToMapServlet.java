@@ -26,5 +26,6 @@ public class EventPointToMapServlet extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         String gson = new Gson().toJson(eventPoints);
         response.getWriter().write(gson);
+
     }
 }
