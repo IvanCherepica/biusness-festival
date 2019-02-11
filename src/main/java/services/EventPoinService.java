@@ -1,6 +1,7 @@
 package services;
 
 import models.EventPoint;
+import models.Festival;
 import models.User;
 
 import java.util.List;
