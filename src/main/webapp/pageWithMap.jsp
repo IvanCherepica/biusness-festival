@@ -21,6 +21,14 @@
         <%@include file="poligonActions.js" %>
     </script>
 
+<%--<script type="text/javascript">--%>
+    <%--<%@include file="mapDataReceive.js" %>--%>
+<%--</script>--%>
+
+
+
+
+</html>
     <script type="text/javascript">
 
         connect();
@@ -32,7 +40,7 @@
         //Ширина,долгота.
         var myMap, myPlacemark;
         var x, y;
-        var myPolygon
+        var myPolygon;
         var a, b;
 
         // get запрос GeometryServlet
@@ -75,15 +83,15 @@
             });
             //объект метки
 
-            myPlacemark = new ymaps.Placemark([a,b], {
+            myPlacemark = new ymaps.Placemark([x,y], {
                 balloonContent: 'Its me',
                 hitContent: 'Hello'
 
             });
             // добавляем метку на карту
             myMap.geoObjects.add(myPlacemark);
-            //setTimeout(newPlacemark(myMap),10000);
 
+            //draw festivals
             for (var i = 0; i < array.length; i++) {
 
                 var mapObject = array[i];
@@ -91,9 +99,12 @@
                 // объект геометрицесской фигуры
                 myPolygon = new ymaps.Polygon(
                     JSON.parse(mapObject.geometry), // Указываем координаты вершин многоугольника, являющиеся массивом в формате JSON.
+                    // {
+                    //     balloonContent: mapObject.name
+                    // }, // Содержимое балуна.
                     {
-                        balloonContent: mapObject.name
-                    }, // Содержимое балуна.
+                        hintContent: mapObject.name
+                    },
                     {
                         strokeColor: mapObject.color,
                         strokeOpacity: 1,
@@ -107,7 +118,7 @@
 
                 // Добавляем многоугольник на карту.
                 myMap.geoObjects.add(myPolygon);
-                festivalPoligons[mapObject.id] = myPolygon;
+                festivalPolygons[mapObject.id] = myPolygon;
                 myPolygon.events.add('click', function (event) {
 
                     festilvalPoligonOnClick(event);
@@ -115,11 +126,37 @@
                 });
             }
 
+            //draw event points
+            GetEventPoints();
+
         }
+
+
     </script>
 </head>
 <body >
 <div class="map" id="map" style="width: 100%; height: 100%">
+</div>
+
+<!-- Modal -->
+<div id="festival_list_Modal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"><a id="festival_list_title"></a></h4>
+            </div>
+            <div class="modal-body">
+                <p>Some text in the modal.</p>
+            </div>
+            <%--<div class="modal-footer">--%>
+                <%--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>--%>
+            <%--</div>--%>
+        </div>
+
+    </div>
 </div>
 </body>
 </html>
