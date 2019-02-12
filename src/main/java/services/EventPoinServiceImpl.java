@@ -56,27 +56,32 @@ public class EventPoinServiceImpl implements EventPoinService {
     public void update(EventPoint eventPoint) {
         eventPointDAO.update(eventPoint);
     }
-
-    @Override
-    public List<EventPoint> getAllList() {
-        return eventPointDAO.getAllList();
-    }
-
-    @Override
-    public List<EventPoint> getAllEventPointByFestivalId(long festivalId) {
-        return eventPointDAO.getAllEventPointByFestivalId(festivalId);
-    }
-
+    
     @Override
     public void remove(long id) {
         eventPointDAO.remove(id);
     }
-
+    
     @Override
+    public List<EventPoint> getAllList() {
+        return eventPointDAO.getAllList();
+    }
+    
+    @Override
+    public List<EventPoint> getAllByFestival (long id) {
+        return eventPointDAO.getAllByFestival(id);
+    }
+    
+    @Override
+    public List<EventPoint> getAllEventPointByFestivalId(long festivalId) {
+        return eventPointDAO.getAllEventPointByFestivalId(festivalId);
+    }
+    
     public List<User> getUsersByEventId(long id){
         EventPoint event= eventPointDAO.getById(id);
         return event.getUsersFromEvent();
     }
+    
     @Override
     public void addUsersToEventId(long id, List<User> users){
         EventPoint event= eventPointDAO.getById(id);
@@ -88,6 +93,7 @@ public class EventPoinServiceImpl implements EventPoinService {
         EventPoint event= eventPointDAO.getById(id);
         event.addUserToEvent(user);
     }
+    
     private static SessionFactory createSessionFactory(Configuration configuration) {
         StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder();
         builder.applySettings(configuration.getProperties());

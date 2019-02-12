@@ -62,10 +62,10 @@
     <div class="row">
         <div class="col-lg-2 col-md-1 col-xs-1 left-bar left-menu">
             <ul class="nav nav-pills nav-stacked nav-content">
-                <li class="active">
-                    <a href="/admin/festivals" aria-controls="admin-page" role="tab" data-toggle="tab">Events</a>
+                <li class="active" role="presentation">
+                    <a href="/admin/festivals" aria-controls="admin-page">Festivals</a>
                 </li>
-                <li>
+                <li role="presentation">
                     <a href="/users" aria-controls="user-page" role="tab" data-toggle="tab">Users</a>
                 </li>
             </ul>
@@ -99,8 +99,8 @@
                             <td width="5%" bgcolor="${festival.color}"></td>
                             <td width="20%" class="form-group">
                                 <form  class="form-inline">
-                                    <button type="submit" class="btn btn-primary" formmethod="get" formaction="${pageContext.request.contextPath}/admin/editFestival" name="edit" value="${festival.id}">Edit</button>
-                                    <button type="submit" class="btn btn-primary" formmethod="get" formaction="${pageContext.request.contextPath}/admin/deleteFestival" name="delete" value="${festival.id}">Delete</button>
+                                    <button type="submit" class="btn btn-primary" formmethod="get" formaction="${pageContext.request.contextPath}/admin/editFestival" name="festivalId" value="${festival.id}">Edit</button>
+                                    <button type="submit" class="btn btn-primary" formmethod="get" formaction="${pageContext.request.contextPath}/admin/deleteFestival" name="festivalId" value="${festival.id}">Delete</button>
                                 </form>
                             </td>
                         </tr>
