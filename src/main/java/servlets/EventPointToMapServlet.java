@@ -20,8 +20,15 @@ public class EventPointToMapServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        long festivalId = Long.parseLong(request.getParameter("festival_id"));
-        List<EventPoint> eventPoints = EventPoinServiceImpl.getInstance().getAllEventPointByFestivalId(festivalId);
+        String fesivalID = request.getParameter("festival_id");
+        if (fesivalID != null) {
+            Long festivalId = Long.parseLong(fesivalID);
+            List<EventPoint> eventPoints = EventPoinServiceImpl.getInstance().getAllEventPointByFestivalId(festivalId);
+        } else {
+            List<EventPoint> eventPoints = EventPoinServiceImpl.getInstance().getAllList();
+        }
+        //List<EventPoint> eventPoints = EventPoinServiceImpl.getInstance().getAllEventPointByFestivalId(festivalId);
+        List<EventPoint> eventPoints = EventPoinServiceImpl.getInstance().getAllList();
         request.setAttribute("eventPoints", eventPoints);
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
