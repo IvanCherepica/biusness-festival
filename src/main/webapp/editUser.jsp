@@ -6,6 +6,20 @@
 <head>
     <meta charset="utf-8">
     <title>Редактирование пользователя</title>
+    <script
+            src="http://code.jquery.com/jquery-3.3.1.js"
+            integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+
+    <!--BEAUTIFUL MULTIPLE SELECTS WITH LIVE SEARCH-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.2/css/bootstrap-select.min.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.2/js/bootstrap-select.min.js"></script>
+    <!-- Soo beautiful -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
@@ -56,8 +70,22 @@
                                   value="${user.password}">
 
                         <label for="role">Role</label>
-                        <input class="form-control" id="role" rows="4" name="role"
-                                  value="${user.role}">
+                        <select class="form-control" id="role" rows="2" name="role"
+                                placeholder="${user.role}" >
+                            <option>user</option>
+                            <option>admin</option>
+                        </select>
+
+                        <label for="epoint">Events</label>
+                        <select name="epoint" id="epoint" class="selectpicker" multiple="multiple" data-live-search="true">
+                            <c:forEach var="uevent" items="${ueventsp}">
+                                <option value="${uevent.id}" selected>${uevent.name}</option>
+                            </c:forEach>
+                            <c:forEach var="event" items="${eventsp}">
+                                <option value="${event.id}">${event.name}</option>
+                            </c:forEach>
+                        </select>
+
 
                     </div>
                     <input type="submit" class="btn btn-primary btn-block" value="Сохранить"/>
