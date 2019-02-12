@@ -72,7 +72,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<EventPoint> getEventsFromUserId(long id){
         User user = userDAO.getById(id);
-        return user.getEventsFromUser();
+        return user.getEvents();
     }
 
     @Override
