@@ -2,6 +2,8 @@
 var userName;
 var userID;
 var isInFestival;
+var festival;
+var user;
 
 // get request for user name and id
 $.ajax({
@@ -15,7 +17,7 @@ $.ajax({
         userName = data.name;
         userID = data.id;
         isInFestival = data.isInFestival;
-
+        user = data.user;
         console.log("userName " + userName + "; userID " + userID + "; isInFestival " + isInFestival);
 
     }
@@ -32,6 +34,7 @@ function sendMessage(webSocketClient) {
             //webSocketClient.send(JSON.stringify(jsonObj));
             webSocketClient.send(message);
             newPlacemark(myMap);
+
         });
 }
 
@@ -46,6 +49,8 @@ function connect() {
             console.log("event.data " + event.data);
             var messageToUser = JSON.parse(event.data).message;
             isInFestival = JSON.parse(event.data).isInFestival;
+            festival = JSON.parse(event.data).festival;
+
 
             if (messageToUser.localeCompare("") != 0 ) {
                 sendWelcomMessage(messageToUser);
@@ -84,3 +89,5 @@ function newPlacemark(myMap) {
         });
     }
 }
+
+
