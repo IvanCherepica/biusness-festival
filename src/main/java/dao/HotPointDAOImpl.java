@@ -59,5 +59,25 @@ public class HotPointDAOImpl extends AbstactDAO<HotPoint>  implements HotPointDA
 
         return hotPoints;
     }
-
+    
+    @Override
+    public List<HotPoint> getAllByFestival (long id){
+        Session session = sessionFactory.openSession();
+        Transaction transaction = session.beginTransaction();
+        
+        List<HotPoint> hotPoints = null;
+        try {
+            Query query = session.createQuery("FROM HotPoint WHERE festival_id=:id");
+            query.setParameter("id", id);
+            hotPoints = query.list();
+            transaction.commit();
+        } catch (Exception e) {
+            System.out.println("Can`t get list of eventPoints: " + e.getMessage());
+            transaction.rollback();
+        } finally {
+            session.close();
+        }
+        
+        return hotPoints;
+    }
 }

@@ -48,9 +48,6 @@
 
                     <button type="submit" class="btn btn-primary btn-block">Create</button>
                 </form>
-                <form>
-                    <button formmethod="get" formaction="\logout" class="btn btn-primary">Logout</button>
-                </form>
             </div>
         </div>
     </div>

@@ -25,6 +25,7 @@ public class UpdateUserSessionData extends HttpServlet {
         UserSocketDto dto = new UserSocketDto();
         dto.setId(user.getId());
         dto.setName(user.getName());
+        dto.setUser(user);
         dto.setInFestival(Boolean.parseBoolean(userInFestival));
 
         String json = new Gson().toJson(dto);

@@ -35,7 +35,7 @@ public class EventPointEdit extends HttpServlet {
 
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         long eventPointId = Long.parseLong(request.getParameter("eventPointId"));
         long festivalId = Long.parseLong(request.getParameter("festivalId"));
@@ -55,7 +55,9 @@ public class EventPointEdit extends HttpServlet {
         eventPoint.setGeometry(eventGeometry);
 
         EventPoinServiceImpl.getInstance().update(eventPoint);
-
-        response.sendRedirect("/admin/eventpoints/list");
+        
+        response.setContentType("text/html");
+        response.sendRedirect("/admin/editFestival?festivalId="+festivalId);
+        
         }
     }
