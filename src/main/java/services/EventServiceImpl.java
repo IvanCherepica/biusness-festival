@@ -20,6 +20,17 @@ public class EventServiceImpl implements EventService {
 		this.eventDAO = new EventDAOImpl(createSessionFactory(DBHelper.getConfiguration()));
 	}
 	
+	public static EventServiceImpl getInstance() {
+		if (instance == null) {
+			synchronized (EventServiceImpl.class) {
+				if (instance == null) {
+					instance = new EventServiceImpl();
+				}
+			}
+		}
+		return instance;
+	}
+	
 	public Event getById (long id) {
 		return eventDAO.getById(id);
 	}
