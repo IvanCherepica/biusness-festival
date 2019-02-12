@@ -97,6 +97,8 @@ public class LocationWebSocketServlet {
             dto.setId(userID);
             dto.setName(userName);
             dto.setInFestival(isInFestivalNew);
+            dto.setFestival(usersActivFestival);
+
 
             if (!isInFestivalOld && isInFestivalNew) {
                 dto.setMessage("Wellcome to " + usersActivFestival.getName() + "! \n" + usersActivFestival.getDescription());
