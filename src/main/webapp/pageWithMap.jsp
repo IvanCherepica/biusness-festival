@@ -18,7 +18,7 @@
         <%@include file="userNotification.js" %>
     </script>
     <script type="text/javascript">
-        <%@include file="poligonActions.js" %>
+        <%@include file="userMap/poligonActions.js" %>
     </script>
 
 <%--<script type="text/javascript">--%>

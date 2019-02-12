@@ -12,8 +12,8 @@ function festilvalPoligonOnClick(event) {
 
     $("#festival_list_title").text(currentPoligonID);
 
-    var eventPoinList = GetEventPoints2(currentPoligonID);
-    //putValues("${editedUser.id}", "${editedUser.login}", "${editedUser.password}", "${editedUser.email}");
+    var eventPoinList = GetEventPointsForFesival(currentPoligonID);
+
     $("#festival_list_Modal").modal('show');
     $("#error-edit-message").removeClass('hidden');
 
@@ -46,7 +46,7 @@ function GetEventPoints(){
     });
 }
 
-function GetEventPoints2(festival_id){
+function GetEventPointsForFesival(festival_id){
     console.log("[GetData] Receiving event points...");
 
     // if (festival_id == undefined) {
