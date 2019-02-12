@@ -13,24 +13,25 @@ To change this template use File | Settings | File Templates.
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script>
-        $.ajax({
-            url: "/rest/info",
-            method: "get",
-            async: true,
-            error: function(message) {
-                console.log(message);
-            },
-            success: function(data) {
-                $("#userLogin").append("<p> Hello <b>" + data.user.name  + "</b></p>");
-                $("#userLogin").append("<p> Your ID: " + data.user.id + "</p>");
-                $("#userLogin").append("<p> Your Role: " + data.user.role + "</p>");
-                if(data.isInFestival) {
-                    $("#festivalInfo").append("<p> Hello <b>" + data.festivalId + "</b></p>");
-                    $("#festivalInfo").append("<p> Your ID: " + data.festivalId + "</p>");
-                    $("#festivalInfo").append("<p> Your Role: " + data.festivalId + "</p>");
-                }
-            }
-        });
+        // $.ajax({
+        //     url: "/rest/info",
+        //     method: "get",
+        //     async: true,
+        //     error: function (message) {
+        //         console.log(message);
+        //     },
+        //     success: function (data) {
+        //         console.log(data);
+        //         $("#userLg").append("<p> Hello <b>" + data.user.name + "</b></p>");
+        //         $("#userLg").append("<p> Your ID: " + data.user.id + "</p>");
+        //         $("#userLg").append("<p> Your Role: " + data.user.role + "</p>");
+        //         if (data.isInFestival) {
+        //             $("#festivalInfo").append("<p> You are at  <b>" + data.festival.name + "</b></p>");
+        //         } else {
+        //             $("#festivalInfo").append("<p> There is no information about any festival near you. Please fuck off</b></p>");
+        //         }
+        //     }
+        // });
     </script>
     <style>
         body {
@@ -71,7 +72,7 @@ To change this template use File | Settings | File Templates.
         .informUser {
             position: absolute;
             width: 25%;
-            height: 70%;
+            height: 90%;
             right: 10px;
             padding: 10px;
             background: #ffffff;
@@ -79,13 +80,27 @@ To change this template use File | Settings | File Templates.
             opacity: 0.8;
             margin: 10px 10px 10px 10px;
         }
-        #userInfo{
+        #userBlock{
+            text-align: center;
+            position: initial;
+            width: initial;
+            height: initial;
+            right: 10px;
+            z-index: 4;
+            opacity: 1;
             background: #eeeeee;
             height: 40%;
         }
-        #festivalInfo{
+        #festivalBlock{
+            text-align: center;
+            position: initial;
+            width: initial;
+            height: initial;
+            z-index: 4;
+            opacity: 1;
             background: #eeeeee;
-            height: 58%;
+            height: 50%;
+            margin: 20px 0 0 0;
         }
     </style>
 </head>
@@ -104,19 +119,18 @@ To change this template use File | Settings | File Templates.
 </div>
 <div class="main">
     <div class="informUser">
-        <div id="userInfo">
-            <div id="userImage"><img style="height: 50%; width: 50%" src="http://bootstraptema.ru/snippets/element/2016/profilesection/myprofile.jpg"></div>
-            <div id="userLogin"></div>
+        <div id="userBlock">
+            <div id="userImage"><img style="margin-top: 10px; width: 200px; height: 200px" src="http://bootstraptema.ru/snippets/element/2016/profilesection/myprofile.jpg"></div>
+            <div id="userLg"></div>
         </div>
-        <div id="festivalInfo">
-            <div id="infp"></div>
+        <div id="festivalBlock">
+            <p id="festivalInfo1"></p>
+            <p id="festivalInfo2"></p>
         </div>
     </div>
     <div class="usermap">
         <jsp:include page="pageWithMap.jsp"/>
     </div>
 </div>
-<script>
-</script>
 </body>
 </html>
