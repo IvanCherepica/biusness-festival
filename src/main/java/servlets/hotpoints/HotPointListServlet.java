@@ -17,6 +17,7 @@ import java.util.List;
 
 @WebServlet("/admin/hotpoints/list")
 public class HotPointListServlet extends HttpServlet {
+    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     
@@ -37,7 +38,7 @@ public class HotPointListServlet extends HttpServlet {
         }
         request.setAttribute("HotPointList", hotPoints);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/hotpoints/hotpointlist.jsp");
-        dispatcher.forward(request, response);
+        dispatcher.include(request, response);
     }
 }
 
