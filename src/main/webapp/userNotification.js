@@ -19,7 +19,9 @@ $.ajax({
         isInFestival = data.isInFestival;
         user = data.user;
         console.log("userName " + userName + "; userID " + userID + "; isInFestival " + isInFestival);
-
+        $("#userLg").append("<p> Hello <b>" + userName + "</b></p>");
+        $("#userLg").append("<p> Your ID: " + userID + "</p>");
+        $("#userLg").append("<p> Your Role: " + data.user.role + "</p>");
     }
 });
 
@@ -50,7 +52,8 @@ function connect() {
             var messageToUser = JSON.parse(event.data).message;
             isInFestival = JSON.parse(event.data).isInFestival;
             festival = JSON.parse(event.data).festival;
-
+            $("#festivalInfo1").text("You are at " + festival.name);
+            $("#festivalInfo2").text("About: " + festival.description);
 
             if (messageToUser.localeCompare("") != 0 ) {
                 sendWelcomMessage(messageToUser);
@@ -89,5 +92,6 @@ function newPlacemark(myMap) {
         });
     }
 }
+
 
 
