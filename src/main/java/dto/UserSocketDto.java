@@ -1,5 +1,8 @@
 package dto;
 
+import models.Festival;
+import models.User;
+
 /**
  * Используется для отправки ответного сообщения пользователю через WebSocket
  */
@@ -12,6 +15,10 @@ public class UserSocketDto {
     private boolean isInFestival;
 
     private String message = "";
+
+    private Festival festival;
+
+    private User user;
 
     public UserSocketDto(long id, String name, boolean isInFestival) {
         this.id = id;
@@ -52,5 +59,21 @@ public class UserSocketDto {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public Festival getFestival() {
+        return festival;
+    }
+
+    public void setFestival(Festival festival) {
+        this.festival = festival;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }
