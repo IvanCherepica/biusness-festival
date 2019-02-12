@@ -12,4 +12,5 @@ public interface EventPointDAO {
 
     List<EventPoint> getAllList();
     List<EventPoint> getAllByFestival (long id);
+    List<EventPoint> getAllEventPointByFestivalId(long festivalId);
 }

@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet("/admin/editFestival")
@@ -26,6 +27,11 @@ public class EditFestivalServlet extends HttpServlet {
 		String paramId = request.getParameter("festivalId");
 		Festival festival;
 		
+		List<String> test = new ArrayList<>();
+		test.add("1");
+		test.add("12");
+		test.add("13");
+		
 		if (paramId==null) {
 			response.sendRedirect("/error.html");
 		} else {
@@ -34,6 +40,7 @@ public class EditFestivalServlet extends HttpServlet {
 			List<EventPoint> eventPoints = eventPoinService.getAllByFestival(id);
 			List<HotPoint> hotPoints = hotPointService.getAllByFestival(id);
 			request.setAttribute("festival", festival);
+			//request.setAttribute("eventPointsList", eventPoints);
 			request.setAttribute("eventPointsList", eventPoints);
 			request.setAttribute("hotPointList", hotPoints);
 		}

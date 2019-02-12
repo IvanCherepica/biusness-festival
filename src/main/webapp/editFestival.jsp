@@ -64,7 +64,7 @@
                     <a href="/admin/festivals" aria-controls="admin-page">Festivals</a>
                 </li>
                 <li>
-                    <a href="/admin/users" aria-controls="user-page" role="tab" data-toggle="tab">Users</a>
+                    <a href="/admin/users" aria-controls="user-page">Users</a>
                 </li>
             </ul>
         </div>
@@ -101,7 +101,7 @@
                                                     </div>
                                                     <div class="col-xs-9 col-md-6">
                                                         <input type="text" class="form-control" id="id" name="id"
-                                                            value="${festival.id}" readonly>
+                                                               value="${festival.id}" readonly>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
@@ -119,7 +119,7 @@
                                                     </div>
                                                     <div  class="col-xs-9 col-md-6">
                                                         <textarea class="form-control" id="description" rows="3" name="description" style="max-width: 25vw;"
-                                                              value="${festival.description}">${festival.description}</textarea>
+                                                                  value="${festival.description}">${festival.description}</textarea>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
@@ -128,11 +128,11 @@
                                                     </div>
                                                     <div  class="col-xs-9 col-md-6">
                                                         <textarea class="form-control" id="geometry" rows="4" name="geometry"
-                                                                style="white-space: nowrap;
+                                                                  style="white-space: nowrap;
                                                                 overflow: hidden;
                                                                 text-overflow: ellipsis;
                                                                 max-width: 25vw;"
-                                                                value="${festival.geometry}">${festival.geometry}</textarea>
+                                                                  value="${festival.geometry}">${festival.geometry}</textarea>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
@@ -141,7 +141,7 @@
                                                     </div>
                                                     <div  class="col-xs-9 col-md-6">
                                                         <input type="color" class="form-control" id="color" name="color"
-                                                           value="${festival.color}">
+                                                               value="${festival.color}">
                                                     </div>
                                                 </div>
                                                 <div  class="col-xs-9 col-md-6">
@@ -154,6 +154,9 @@
                                 </div>
                             </div>
                         </div>
+
+
+
 
                         <div role="tabpanel" class="tab-pane" id="hotpoints-panel">
                             <div class="panel panel-default table-panel">
@@ -169,7 +172,7 @@
                                                     <th>Description</th>
                                                     <th>Geometry</th>
                                                     <th>Color</th>
-                                                    <!--<th>FestivalId</th> -->
+
                                                     <th><a id="addHotpointButton" class="btn btn-primary" href="/admin/hotpoints/addhot">Add</a></th>
                                                 </tr>
                                                 </thead>
@@ -206,12 +209,17 @@
                             </div>
                         </div>
 
+
+
+
                         <div role="tabpanel" class="tab-pane" id="eventpoints-panel">
                             <div class="panel panel-default table-panel">
                                 <div class="tab-content">
                                     <div class="panel-body">
                                         <h4>Event-points list</h4>
                                         <div class="container-fluid">
+
+
                                             <table class="table table-striped table-responsive">
                                                 <thead>
                                                 <tr>
@@ -220,19 +228,22 @@
                                                     <th>Description</th>
                                                     <th>Geometry</th>
                                                     <th>Color</th>
-                                                    <!--<th>FestivalId</th> -->
+
                                                     <th><a id="addEventpointButton" class="btn btn-primary" href="${pageContext.servletContext.contextPath}/admin/eventpoints/create">Add</a></th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
+
                                                 <c:forEach var="eventPoint" items="${eventPointsList}">
+
+                                                    <p>${eventPoint.name}</p>
                                                     <tr id="eprow${eventPoint.id}">
                                                         <td width="5%">${eventPoint.id}</td>
                                                         <td width="15%">${eventPoint.name}</td>
                                                         <td width="25%">${eventPoint.description}</td>
                                                         <td width="25%">${eventPoint.geometry}</td>
                                                         <td width="5%" style="background-color:${eventPoint.color};"></td>
-                                                        <!--<td width="20%">${eventPoint.festival.name} (id:${eventPoint.festival.id})</td>-->
+
                                                         <td width="20%">
                                                             <form  class="form-inline ep-edit-form">
                                                                 <a id="epEditButton${eventPoint.id}" class="btn btn-primary">Edit</a>
@@ -250,15 +261,22 @@
 
                                                         </script>
                                                     </tr>
+
                                                 </c:forEach>
+
                                                 </tbody>
                                             </table>
+
+
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+
+
+
                 </div>
                 <div role="tabpanel" class="tab-pane" id="user-page">
 
@@ -361,7 +379,7 @@
         console.log("Delete button "+festivalId);
         var data = { festivalId: festivalId, eventPointId: id };
         $.get( "/admin/eventpoints/delete", data );
-        $("#eprow"+id).empty();
+        $("#eprow"+id).remove();
 
     }
 
@@ -370,7 +388,7 @@
         var data = { festivalId: festivalId, hotPointId: id };
         $.get( "/admin/hotpoints/delete", data );
         console.log($("#hprow"+id));
-        $("#hprow"+id).empty();
+        $("#hprow"+id).remove();
     }
 
     function putEventpointValues(id, festival_id, name, description, geometry, color ) {
@@ -427,7 +445,7 @@
                 success : function() {
                     // обработка ответа от сервера
                     $('#hp-close-btn').click();
-                    $("#admin-page").refresh(true);
+                    $("#admin-page").refresh();
                 }
             });
         })
