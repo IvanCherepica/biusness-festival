@@ -68,10 +68,10 @@ public class HotPointServiceImpl implements HotPointService{
         return hotPointDAO.getAllList();
   }
 
-   // @Override
-  //  public List<HotPoint> getAllByFestival (Festival festival) {
-   //     return hotPointDAO.getAllByFestival(festival);
-  //  }
+    @Override
+    public List<HotPoint> getAllByFestival (long id) {
+        return hotPointDAO.getAllByFestival(id);
+    }
 
     private static SessionFactory createSessionFactory(Configuration configuration) {
         StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder();

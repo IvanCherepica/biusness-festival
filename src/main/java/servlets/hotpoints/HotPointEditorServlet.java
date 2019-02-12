@@ -34,8 +34,8 @@ public class HotPointEditorServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-        long hPointId = Long.parseLong(request.getParameter("hPointId"));
-        long fId = Long.parseLong(request.getParameter("fId"));
+        long hPointId = Long.parseLong(request.getParameter("hotPointId"));
+        long fId = Long.parseLong(request.getParameter("festivalId"));
 
         HotPoint hPoint = HotPointServiceImpl.getInstance().getById(hPointId);
         Festival festival = FestivalServiceImpl.getInstance().getById(fId);
@@ -53,7 +53,7 @@ public class HotPointEditorServlet extends HttpServlet {
 
         HotPointServiceImpl.getInstance().update(hPoint);
 
-        response.sendRedirect("/admin/hotpoints/list");
+        response.sendRedirect("/admin/editFestival?festivalId="+fId);
     }
 
 }

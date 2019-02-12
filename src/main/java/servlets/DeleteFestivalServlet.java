@@ -20,7 +20,7 @@ public class DeleteFestivalServlet extends HttpServlet {
 	
 	protected void doGet (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
-		String paramId = request.getParameter("delete");
+		String paramId = request.getParameter("festivalId");
 		
 		if (paramId == null) {
 			response.sendRedirect("/error.html");
