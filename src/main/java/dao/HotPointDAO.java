@@ -11,5 +11,5 @@ public interface HotPointDAO {
     void remove(long id);
     void update(HotPoint hotPoint);
     List<HotPoint> getAllList();
-    List<HotPoint> getAllByFestival(long id);
+    List<HotPoint> getAllByFestival (long id);
 }

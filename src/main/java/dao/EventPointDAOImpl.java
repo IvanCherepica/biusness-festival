@@ -42,27 +42,7 @@ public class EventPointDAOImpl extends AbstactDAO<EventPoint> implements EventPo
         query.executeUpdate();
         transaction.commit();
     }
-
-    @Override
-    public List<EventPoint> getAllEventPointByFestivalId(long festivalId) {
-        Session session = sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
-        List<EventPoint> eventPoints = null;
-        try {
-
-            Query query = session.createSQLQuery("select *from event_point where festival_id = :festivalId");
-            query.setParameter("festivalId", festivalId);
-            eventPoints = query.list();
-            transaction.commit();
-        } catch (Exception e) {
-            System.out.println("Can`t get list of eventPoints: " + e.getMessage());
-            transaction.rollback();
-        } finally {
-            session.close();
-        }
-        return eventPoints;
-    }
-
+    
     @Override
     public List<EventPoint> getAllList() {
         Session session = sessionFactory.openSession();
@@ -89,7 +69,7 @@ public class EventPointDAOImpl extends AbstactDAO<EventPoint> implements EventPo
     
         List<EventPoint> eventPoints = null;
         try {
-            Query query = session.createQuery("FROM EventPoint WHERE festival_id=:id");
+            Query query = session.createSQLQuery("select * from event_point where festival_id = :id");
             query.setParameter("id", id);
             eventPoints = query.list();
             transaction.commit();

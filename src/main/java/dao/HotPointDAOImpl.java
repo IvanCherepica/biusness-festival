@@ -61,7 +61,7 @@ public class HotPointDAOImpl extends AbstactDAO<HotPoint>  implements HotPointDA
     }
     
     @Override
-    public List<HotPoint> getAllByFestival (long id) {
+    public List<HotPoint> getAllByFestival (long id){
         Session session = sessionFactory.openSession();
         Transaction transaction = session.beginTransaction();
         
