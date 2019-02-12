@@ -13,7 +13,6 @@ public class User {
     private String name;
     private String password;
     private String role;
-    private String image;
 
     @ManyToMany(fetch = FetchType.EAGER , targetEntity = EventPoint.class, cascade = CascadeType.ALL)
     @JoinTable(name = "relations",
