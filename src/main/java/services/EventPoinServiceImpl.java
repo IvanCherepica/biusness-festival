@@ -2,11 +2,8 @@ package services;
 
 import dao.EventPointDAO;
 import dao.EventPointDAOImpl;
-import dao.FestivalDao;
-import dao.FestivalDaoImpl;
 import models.EventPoint;
-import models.Festival;
-import models.HotPoint;
+import models.User;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
@@ -15,12 +12,12 @@ import util.DBHelper;
 
 import java.util.List;
 
-public class EventPoinServiceImpl implements EventPoinService{
+public class EventPoinServiceImpl implements EventPoinService {
     private final EventPointDAO eventPointDAO;
 
     private static volatile EventPoinServiceImpl instance;
 
-    private EventPoinServiceImpl()  {
+    private EventPoinServiceImpl() {
         this.eventPointDAO = new EventPointDAOImpl(createSessionFactory(DBHelper.getConfiguration()));
     }
 
@@ -48,7 +45,7 @@ public class EventPoinServiceImpl implements EventPoinService{
     @Override
     public Long add(EventPoint eventPoint) {
         Long eventPointID = eventPointDAO.add(eventPoint);
-        if (eventPointID==null) {
+        if (eventPointID == null) {
             System.out.println("HotPoint " + eventPoint.getName() + " is allready exist!");
             return getByName(eventPoint.getName()).getId();
         }
@@ -69,12 +66,23 @@ public class EventPoinServiceImpl implements EventPoinService{
     public void remove(long id) {
         eventPointDAO.remove(id);
     }
-    
+
     @Override
-    public List<EventPoint> getAllByFestival (long id) {
-        return eventPointDAO.getAllByFestival(id);
+    public List<User> getUsersByEventId(long id){
+        EventPoint event= eventPointDAO.getById(id);
+        return event.getUsersFromEvent();
     }
-    
+    @Override
+    public void addUsersToEventId(long id, List<User> users){
+        EventPoint event= eventPointDAO.getById(id);
+        event.setUsersToEvent(users);
+    }
+
+    @Override
+    public void addUserToEventId(long id, User user){
+        EventPoint event= eventPointDAO.getById(id);
+        event.addUserToEvent(user);
+    }
     private static SessionFactory createSessionFactory(Configuration configuration) {
         StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder();
         builder.applySettings(configuration.getProperties());

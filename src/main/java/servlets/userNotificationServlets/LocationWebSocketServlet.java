@@ -1,4 +1,4 @@
-package servlets;
+package servlets.userNotificationServlets;
 
 
 
@@ -25,25 +25,24 @@ public class LocationWebSocketServlet {
         private FestivalService festivalService = FestivalServiceImpl.getInstance();
 
         private String point;
-        private Festival festival = new Festival("Test", "Testing", "Red" ,
-            "Some", "60.11173060613703 30.267900556923905", 75);
+//        private Festival festival = new Festival("Test", "Testing", "Red" ,
+//            "Some", "60.11173060613703 30.267900556923905", 75);
 
          //список сессий
-        private Set<Session> userSessions = Collections.synchronizedSet(new HashSet<Session>());
+//        private Set<Session> userSessions = Collections.synchronizedSet(new HashSet<Session>());
 
-        //private FestivalService festivalService = FestivalServiceImpl.getInstance();
 
 
         @OnOpen
         public void start(Session userSession) {
             System.out.println("Connected user:" + userSession.getId());
-            userSessions.add(userSession);
+            //userSessions.add(userSession);
 //            LocationWedSocketService.getInstance().setUserSessions(userSession);
         }
 
         @OnClose
         public void onClose(Session userSession) {
-            userSessions.remove(userSession);
+//            userSessions.remove(userSession);
 //            LocationWedSocketService.getInstance().removeUserSession(userSession);
             System.out.println("Disconnect user:" + userSession.getId());
         }
@@ -75,7 +74,7 @@ public class LocationWebSocketServlet {
             if (isInFestivalOld) {
                 currentFestivalID = Long.parseLong((String) userHttpSession.getAttribute("currentFestivalID"));
                 Festival currentFestivale = festivalService.getById(currentFestivalID);
-                isInFestivalNew =  isInUnit(currentFestivale.getCenter(),currentFestivale);
+                isInFestivalNew =  isInUnit(point,currentFestivale);
                 if (isInFestivalNew) {
                     usersActivFestival = currentFestivale;
                 }
@@ -84,7 +83,7 @@ public class LocationWebSocketServlet {
             //Check for All active festivales
             if (!isInFestivalNew) {
                 for (Festival currentFestivale : festivalService.getAllList()) {
-                    isInFestivalNew = isInUnit(currentFestivale.getCenter(), currentFestivale);
+                    isInFestivalNew = isInUnit(point, currentFestivale);
                     if (isInFestivalNew) {
                         userHttpSession.setAttribute("currentFestivalID",Long.toString(currentFestivale.getId()));
                         usersActivFestival = currentFestivale;
@@ -117,6 +116,9 @@ public class LocationWebSocketServlet {
                 System.out.println("WebSocket session closed");
             }
 
+            if (usersActivFestival == null) {
+                userHttpSession.setAttribute("currentFestivalID",null);
+            }
             userHttpSession.setAttribute("userInFestival",Boolean.toString(isInFestivalNew));
 
 

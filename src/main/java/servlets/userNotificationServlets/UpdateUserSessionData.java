@@ -1,4 +1,4 @@
-package servlets;
+package servlets.userNotificationServlets;
 
 import com.google.gson.Gson;
 import dto.UserSocketDto;
