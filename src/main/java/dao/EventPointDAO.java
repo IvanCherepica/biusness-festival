@@ -9,6 +9,7 @@ public interface EventPointDAO {
     EventPoint getByName(String name);
     void remove(long id);
     void update(EventPoint eventPoint);
+    public void clearCash ();
 
     List<EventPoint> getAllList();
     List<EventPoint> getAllByFestival (long id);
