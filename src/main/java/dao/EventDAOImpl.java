@@ -76,7 +76,7 @@ public class EventDAOImpl extends AbstactDAO<Event> implements EventDAO{
 			events = query.list();
 			transaction.commit();
 		} catch (Exception e) {
-			System.out.println("Can`t get list of eventPoints: " + e.getMessage());
+			System.out.println("Can`t get list of Events by Eventpoint: " + e.getMessage());
 			transaction.rollback();
 		} finally {
 			session.close();
@@ -96,7 +96,7 @@ public class EventDAOImpl extends AbstactDAO<Event> implements EventDAO{
 			events = query.list();
 			transaction.commit();
 		} catch (Exception e) {
-			System.out.println("Can`t get list of Events: " + e.getMessage());
+			System.out.println("Can`t get list of Events by Festival: " + e.getMessage());
 			transaction.rollback();
 		} finally {
 			session.close();

@@ -11,6 +11,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
 
     <style>
         body {
@@ -485,16 +487,51 @@
                 </div>
 
                 <div class="raw">
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <label class="input-group-text">From-To</label>
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <div class="input-group date" id="datetimepicker7">
+                                <input id="ev-date-from" type="text" class="form-control"/>
+                                <span class="input-group-addon">
+                                    <i class="glyphicon glyphicon-calendar"></i>
+                                </span>
+                            </div>
                         </div>
-                        <input id="ev-date-from" type="text" class="form-control">
-                        <input id="ev-date-to" type="text" class="form-control">
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <div class="input-group date" id="datetimepicker8">
+                                <input id="ev-date-to" type="text" class="form-control"/>
+                                <span class="input-group-addon">
+                                    <i class="glyphicon glyphicon-calendar"></i>
+                                </span>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <input id="ev-q-type" type="hidden" readonly>
+
+
+            <!--
+                    <div class="input-group mb-2">
+                        <div class="input-group" id="datetimepicker2">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text">From-To</label>
+                            </div>
+                            <input id="ev-date-from" type="datetime-local" class="form-control">
+                                <span class="input-group-addon">
+                                    <i class="glyphicon glyphicon-calendar"></i>
+                                </span>
+                            <input id="ev-date-to" type="datetime-local" class="form-control">
+                                <span class="input-group-addon">
+                                    <i class="glyphicon glyphicon-calendar"></i>
+                                </span>
+                    </div>
+                </div>-->
+                 <input id="ev-q-type" type="hidden" readonly>
+
+
             </div>
+
+
             <div class="modal-footer">
                 <form  class="form-inline">
                     <button id="ev-save-btn" type="button" class="btn btn-primary">Save</button>
@@ -576,8 +613,17 @@
     $(document).ready(function($){
 
         //задание заполнителя с помощью параметра placeholder
-        $("#ev-date-from").mask("99.99.9999 99:99", {placeholder: "дд.мм.гггг чч:мм" });
-        $("#ev-date-to").mask("99.99.9999 99:99", {placeholder: "дд.мм.гггг чч:мм" });
+        // $("#ev-date-from").mask("99.99.9999 99:99", {placeholder: "дд.мм.гггг чч:мм" });
+        // $("#ev-date-to").mask("99.99.9999 99:99", {placeholder: "дд.мм.гггг чч:мм" });
+
+        $("#datetimepicker7").datetimepicker({
+            locale: 'ru',
+            stepping: 10
+        });
+        $("#datetimepicker8").datetimepicker({
+            locale: 'ru',
+            stepping: 10
+        });
 
         $("#ep-save-btn").click(function(){
             $.ajax({
