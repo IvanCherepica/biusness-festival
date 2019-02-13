@@ -44,8 +44,8 @@ public class AddEventServlet extends HttpServlet {
 		    eventPoint = eventPoinService.getById(eventPointId);
 		    long festivalId = Long.parseLong(festivalIdParam);
 		    festival = festivalService.getById(festivalId);
-		    dateBegin = LocalDateTime.parse(dateBeginParam+":00", DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss"));
-		    dateEnd = LocalDateTime.parse(dateEndParam+":00", DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss"));
+		    dateBegin = LocalDateTime.parse(dateBeginParam); //, DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:"));
+		    dateEnd = LocalDateTime.parse(dateEndParam); //, DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss"));
 		    
 		    if (!(eventPoint instanceof EventPoint || festival instanceof Festival)) {
 			    response.sendRedirect("/error.html");

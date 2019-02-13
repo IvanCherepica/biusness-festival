@@ -129,9 +129,9 @@ public class Event {
 				"id=" + id +
 				", name='" + name + '\'' +
 				", description='" + description + '\'' +
-				", eventPoint=" + eventPoint +
-				", beginDate=" + dateBegin.format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss")) +
-				", endDate=" + dateEnd.format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss")) +
+				", eventPoint='" + eventPoint + '\'' +
+				", beginDate='" + dateBegin + '\'' +
+				", endDate='"+ dateEnd + '\'' +
 				'}';
 	}
 
