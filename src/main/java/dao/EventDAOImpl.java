@@ -1,11 +1,8 @@
 package dao;
 
 import models.Event;
-import models.EventPoint;
-import models.Festival;
 import org.hibernate.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class EventDAOImpl extends AbstactDAO<Event> implements EventDAO{
@@ -27,7 +24,7 @@ public class EventDAOImpl extends AbstactDAO<Event> implements EventDAO{
 		
 		String queryString = "UPDATE Event SET name = :name, " +
 				"description = :description, " +
-				"eventpoint_id = :eventPoint " +
+				"eventpoint_id = :eventPoint, " +
 				"festival_id = :festival " +
 				"WHERE id = :id";
 		
@@ -83,17 +80,15 @@ public class EventDAOImpl extends AbstactDAO<Event> implements EventDAO{
 		return events;
 	}
 	
-	public List<Event> getAllByFestival(long fetsivalId) {
+	public List<Event> getAllByFestival(long festivalId) {
 		Session session = sessionFactory.openSession();
 		Transaction transaction = session.beginTransaction();
 		
 		List<Event> events = null;
 		try {
-			SQLQuery query = session.createSQLQuery("select * from events where festival_id = :id");
-			query.addEntity(Event.class);
-			query.addEntity(EventPoint.class);
-			query.addEntity(Festival.class);
-			query.setParameter("id", fetsivalId);
+			Query query = session.createQuery("FROM Event where festival_id = :id");
+			//query.addEntity(Event.class);
+			query.setParameter("id", festivalId);
 			events = query.list();
 			transaction.commit();
 		} catch (Exception e) {

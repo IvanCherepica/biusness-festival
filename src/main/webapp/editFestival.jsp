@@ -10,6 +10,7 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="jquery.maskedinput.min.js"></script>
 
     <style>
         body {
@@ -322,7 +323,7 @@
                                                         <script type="text/javascript">
                                                             jQuery(document).ready( function() {
                                                                 jQuery("#evEditButton${event.id}").click(function(){
-                                                                    putEventValues("${event.id}", "${event.eventpoint.id}", "${festival.id}", "${event.name}", "${event.description}");
+                                                                    putEventValues("${event.id}", "${event.eventPoint.id}", "${festival.id}", "${event.name}", "${event.description}", "${event.dateBegin}", "${event.dateEnd}");
                                                                     editEvent("${festival.id}");
                                                                 });
                                                             })
@@ -351,7 +352,7 @@
             </div>
         </div>
     </div>
-</div>
+
 
 
 <!-- Modal edit Eventpoint-->
@@ -482,6 +483,21 @@
                     <textarea id="ev-description" placeholder="введите краткое описание" name="description"
                           class="form-control" rows="3"></textarea>
                 </div>
+
+                <div class="raw">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">From (date)</span>
+                        </div>
+                        <input id="ev-date-from" type="text" class="form-control" aria-label="From">
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">To (date)</span>
+                        </div>
+                    </div>
+                    <input id="ev-date-to" type="text" class="form-control" aria-label="From">
+                </div>
                 <input id="ev-q-type" type="hidden" readonly>
             </div>
             <div class="modal-footer">
@@ -513,15 +529,19 @@
         $("#hprow"+id).remove();
     }
     function addEvent(festivalId) {
-        console.log("Add event button "+festivalId);
         $('#ev-q-type').val("new");
         $('#efestival_id').val(festivalId);
+        $('#ev-name').val("");
+        $('#ev-description').val("");
+        $('#ev-date-from').val("");
+        $('#ev-date-to').val("");
         $("#editEventModal").modal('show');
     }
     function editEvent(festivalId) {
-        console.log("Edit event button "+festivalId);
         $('#ev-q-type').val("");
         $('#efestival_id').val(festivalId);
+
+
         $("#editEventModal").modal('show');
     }
     function deleteEvent(id, festivalId) {
@@ -550,12 +570,14 @@
         $('#hp-color').val(color);
     }
 
-    function putEventValues(id, eventpoint_id, festival_id, name, description) {
+    function putEventValues(id, eventpoint_id, festival_id, name, description, dateFrom, dateTo) {
         $('#efestival_id').val(festival_id);
         $('#ev_eventPoint').val(eventpoint_id);
         $('#ev-id').val(id);
         $('#ev-name').val(name);
         $('#ev-description').val(description);
+        $('#ev-date-from').val(dateFrom);
+        $('#ev-date-to').val(dateTo);
     }
 
     $(document).ready(function(){
@@ -574,7 +596,7 @@
                 success : function() {
                     // обработка ответа от сервера
                     $('#ep-close-btn').click();
-                    $("#admin-page").refresh(true);
+
                 }
             });
         })
@@ -594,26 +616,29 @@
                 success : function() {
                     // обработка ответа от сервера
                     $('#hp-close-btn').click();
-                    $("#admin-page").refresh();
+
                 }
             });
         })
 
         $("#ev-save-btn").click(function(){
+            console.log("Event save button = "+$('#ev-q-type'));
             $.ajax({
                 type : "POST",
-                url : ($('#ev-q-type')=="new") ? '/admin/events/add' : '/admin/events/edit' ,
+                url : ($('#ev-q-type').val()=="new") ? '/admin/events/add' : '/admin/events/edit' ,
                 data : {                 // передаваемые сервлету данные
                     festivalId : $('#efestival_id').val(),
                     eventId : $('#ev-id').val(),
                     name : $('#ev-name').val(),
                     description : $('#ev-description').val(),
-                    eventPointId : $('#ev_eventPoint').val()
+                    eventPointId : $('#ev_eventPoint').val(),
+                    dateBegin : $('#ev-date-from').val(),
+                    dateEnd  :$('#ev-date-to').val()
                 },
                 success : function() {
                     // обработка ответа от сервера
                     $('#ev-close-btn').click();
-                    $("#admin-page").refresh();
+                    $("#admin-page").click();
                 }
             });
         })

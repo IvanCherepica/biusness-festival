@@ -3,8 +3,6 @@ package servlets.events;
 import org.hibernate.HibernateException;
 import services.EventService;
 import services.EventServiceImpl;
-import services.FestivalService;
-import services.FestivalServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
