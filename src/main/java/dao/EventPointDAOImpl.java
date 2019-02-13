@@ -3,6 +3,7 @@ package dao;
 import models.EventPoint;
 import org.hibernate.*;
 
+import javax.persistence.TypedQuery;
 import java.util.List;
 
 public class EventPointDAOImpl extends AbstactDAO<EventPoint> implements EventPointDAO {
@@ -69,6 +70,7 @@ public class EventPointDAOImpl extends AbstactDAO<EventPoint> implements EventPo
     
         List<EventPoint> eventPoints = null;
         try {
+
             SQLQuery query = session.createSQLQuery("select * from event_point where festival_id = :id");
             query.addEntity(EventPoint.class);
             query.setParameter("id", id);
@@ -89,9 +91,11 @@ public class EventPointDAOImpl extends AbstactDAO<EventPoint> implements EventPo
     
         List<EventPoint> eventPoints = null;
         try {
+            session.clear();
+
             Query query = session.createSQLQuery("select * from event_point where festival_id = :id");
             query.setParameter("id", festivalId);
-            eventPoints = query.list();
+            eventPoints = (List<EventPoint>)query.list();
             transaction.commit();
         } catch (Exception e) {
             System.out.println("Can`t get list of eventPoints: " + e.getMessage());
@@ -100,5 +104,13 @@ public class EventPointDAOImpl extends AbstactDAO<EventPoint> implements EventPo
             session.close();
         }
         return eventPoints;
+    }
+
+    public void clearCash () {
+        Cache cache = sessionFactory.getCache();
+
+        if (cache != null) {
+            cache.evictAllRegions(); // Evict data from all query regions.
+        }
     }
 }

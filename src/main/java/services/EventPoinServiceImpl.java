@@ -93,11 +93,18 @@ public class EventPoinServiceImpl implements EventPoinService {
         EventPoint event= eventPointDAO.getById(id);
         event.addUserToEvent(user);
     }
-    
+
+    public void clearCash() {
+        eventPointDAO.clearCash();
+    }
+
+
     private static SessionFactory createSessionFactory(Configuration configuration) {
         StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder();
         builder.applySettings(configuration.getProperties());
         ServiceRegistry serviceRegistry = builder.build();
         return configuration.buildSessionFactory(serviceRegistry);
     }
+
+
 }

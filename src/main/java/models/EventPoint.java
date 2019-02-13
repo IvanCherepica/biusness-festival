@@ -6,7 +6,7 @@ import java.util.List;
 @Entity
 @Table(name = "event_point")
 public class EventPoint extends PointUnit {
-    @ManyToMany(fetch = FetchType.EAGER, targetEntity = User.class, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER, targetEntity = User.class)
     @JoinTable(name = "relations",
             joinColumns = {@JoinColumn(name = "event_point_id")},
             inverseJoinColumns = {@JoinColumn(name = "users_id")})

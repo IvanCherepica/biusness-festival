@@ -14,7 +14,7 @@ public class User {
     private String password;
     private String role;
 
-    @ManyToMany(fetch = FetchType.EAGER , targetEntity = EventPoint.class, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER , targetEntity = EventPoint.class)
     @JoinTable(name = "relations",
             joinColumns = {@JoinColumn(name = "users_id")},
             inverseJoinColumns = {@JoinColumn(name = "event_point_id")})

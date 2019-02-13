@@ -1,7 +1,6 @@
 var festivalPolygons= {};
 
 
-
 function getKeyByValue(object, value) {
     return Object.keys(object).find(key => object[key] === value);
 }
@@ -10,24 +9,40 @@ function festilvalPoligonOnClick(event) {
     var currentPoligon = event.get('target');
     var currentPoligonID = getKeyByValue(festivalPolygons, currentPoligon);
 
-    $("#festival_list_title").text(currentPoligonID);
+    GetEventPointsForFesival(currentPoligonID);
 
-    var eventPoinList = GetEventPointsForFesival(currentPoligonID);
+    //eventPointList.each()
 
+    //console.log('polygon clicked. currentPoligonID:' + currentPoligonID);
+}
+
+
+function openListOfFesivalEventPoints(data,festival_id) {
+    $("#festival_list_title").append("<p> " + data.festival.name + "</p>");
+    $("#festival_list_title_description").text(data.festival.description);
+
+    //Column names
+    $("#festival_list_table").append("<thead> <tr><th>Event Point</th><th>Description</th><th>Working time</th></tr></thead><tbody>");
+
+
+    $.each(JSON.parse(data.eventPointsGson), function (index, value) {
+        console.log(value.name);
+        $("#festival_list_table").append("<tr><td>" + value[4] + "</td><td>" + value[2] + "</td><td></td></tr>");
+
+        //$("#festival_list_title").append("<p> " + value[4] + "</p><p> " + value[2] + "</p>");
+
+    });
+
+    $("#festival_list_table").append("</tbody>");
     $("#festival_list_Modal").modal('show');
     $("#error-edit-message").removeClass('hidden');
 
-
-    //console.log('polygon clicked. currentPoligonID:' + currentPoligonID);
 }
 
 
 function GetEventPoints(){
     console.log("[GetData] Receiving event points...");
 
-    // if (festival_id == undefined) {
-    //
-    // }
 
     // get запрос EventPointToMapServlet
     $.ajax({
@@ -49,13 +64,9 @@ function GetEventPoints(){
 function GetEventPointsForFesival(festival_id){
     console.log("[GetData] Receiving event points...");
 
-    // if (festival_id == undefined) {
-    //
-    // }
-
     // get запрос EventPointToMapServlet
     $.ajax({
-        url: "/user/event-to-map",
+        url: "/map/data_for_festivalList",
         method: "get",
         async: true,
         data: {festival_id : festival_id},
@@ -66,7 +77,7 @@ function GetEventPointsForFesival(festival_id){
 
             console.log("[GetData] EventPoints received. Count=" + data.length);
 
-            return data;
+            openListOfFesivalEventPoints(data,festival_id);
 
         }
     });
@@ -93,7 +104,7 @@ function DrawMapUnits(arrayOfMapUnits){
                 strokeOpacity: 1,
                 fillColor: mapObject.color, //Цвет обводки и цвет поля.
                 //fillMethod: 'stretch', // Тип заливки фоном
-                opacity: 0.3,
+                opacity: 0.5,
                 // stroke: falseУбираем видимость обводки.
             }
         );
