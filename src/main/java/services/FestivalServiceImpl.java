@@ -69,7 +69,7 @@ public class FestivalServiceImpl implements FestivalService {
 	public List<Festival> getAllList () {
 		return festivalDao.getAllList();
 	}
-	
+
 	private static SessionFactory createSessionFactory(Configuration configuration) {
 		StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder();
 		builder.applySettings(configuration.getProperties());

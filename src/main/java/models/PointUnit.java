@@ -1,12 +1,13 @@
 package models;
 
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
 public abstract class PointUnit extends MapUnit {
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity=Festival.class/*, cascade = CascadeType.ALL*/)
     @JoinColumn(name="festival_id") //?
     private Festival festival;
 

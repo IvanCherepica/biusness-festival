@@ -54,7 +54,7 @@
     <div class="row">
         <div class="panel panel-info">
             <div class="navbar navbar-inverse navbar-static-top header">
-                <a class="navbar-brand" href="/admin/festivals">Business Festival</a>
+                <a class="navbar-brand" href="/user">Business Festival</a>
                 <a class="navbar-brand pull-right" href="/logout">Logout</a>
             </div>
         </div>
@@ -66,7 +66,7 @@
                     <a href="/admin/festivals" aria-controls="admin-page">Festivals</a>
                 </li>
                 <li role="presentation">
-                    <a href="/users" aria-controls="user-page" role="tab" data-toggle="tab">Users</a>
+                    <a href="/admin/users" aria-controls="user-page" role="tab" data-toggle="tab">Users</a>
                 </li>
             </ul>
         </div>
