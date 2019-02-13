@@ -1,9 +1,8 @@
-package servlets.userNotificationServlets;
+package servlets.mapUpdateServlets;
 
 import com.google.gson.Gson;
 import dto.UserSocketDto;
 import models.User;
-import org.json.JSONObject;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

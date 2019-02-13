@@ -1,4 +1,4 @@
-package servlets.userNotificationServlets;
+package servlets.mapUpdateServlets;
 
 import com.google.gson.Gson;
 import dto.UserSocketDto;
@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.Array;
 import java.util.List;
 
 @WebServlet("/map/data_for_festivalList")

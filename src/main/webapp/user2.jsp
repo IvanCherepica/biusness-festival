@@ -62,12 +62,12 @@ To change this template use File | Settings | File Templates.
         }
         .usermap {
             margin: 10px 10px 10px 10px;
-            z-index: 1;
+            /*z-index: 1;*/
             position: relative;
         }
         .main{
-            position: relative;
-            z-index: 0;
+            /*position: relative;
+            z-index: 0;*/
         }
         .informUser {
             position: absolute;
@@ -76,7 +76,7 @@ To change this template use File | Settings | File Templates.
             right: 10px;
             padding: 10px;
             background: #ffffff;
-            z-index: 2;
+            z-index: 2000;
             opacity: 0.8;
             margin: 10px 10px 10px 10px;
         }
@@ -86,7 +86,7 @@ To change this template use File | Settings | File Templates.
             width: initial;
             height: initial;
             right: 10px;
-            z-index: 4;
+            z-index: 2001;
             opacity: 1;
             background: #eeeeee;
             height: 40%;
@@ -96,7 +96,7 @@ To change this template use File | Settings | File Templates.
             position: initial;
             width: initial;
             height: initial;
-            z-index: 4;
+            z-index: 2003;
             opacity: 1;
             background: #eeeeee;
             height: 50%;

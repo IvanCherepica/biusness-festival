@@ -1,5 +1,5 @@
 var festivalPolygons= {};
-
+var eventPointsPolygons= {};
 
 function getKeyByValue(object, value) {
     return Object.keys(object).find(key => object[key] === value);
@@ -139,9 +139,43 @@ function DrawMapUnits(arrayOfMapUnits){
             }
         );
 
+        eventPointsPolygons[mapObject.id] = myPolygon;
+        myPolygon.events.add('click', function (event) {
+
+            eventPointsOnClick(event);
+
+        });
         // Добавляем многоугольник на карту.
         myMap.geoObjects.add(myPolygon);
     }
 }
 
+function eventPointsOnClick(event) {
+    var currentPoligon = event.get('target');
+    var currentPoligonID = getKeyByValue(eventPointsPolygons, currentPoligon);
 
+    GetEventsForEventPoint(currentPoligonID);
+
+}
+
+function GetEventsForEventPoint(eventPoint_id){
+    console.log("[GetData] Receiving event points...");
+
+    // get запрос EventPointToMapServlet
+    $.ajax({
+        url: "/map/data_for_eventPointList",
+        method: "get",
+        async: true,
+        data: {eventPoint_id : eventPoint_id},
+        error: function (message) {
+            console.log(message);
+        },
+        success: function (data) {
+
+            console.log("[GetData] EventPoints received. Count=" + data.length);
+
+            //openListOfFesivalEventPoints(data,festival_id);
+
+        }
+    });
+}
