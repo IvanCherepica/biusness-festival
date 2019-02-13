@@ -71,6 +71,9 @@ To change this template use File | Settings | File Templates.
         <div id="userBlock">
             <div id="userImage"></div>
             <div id="userLg"></div>
+            <c:if test="${!isNotValid && !logout}">
+                <div class="empty-block"></div>
+            </c:if>
         </div>
         <div id="festivalBlock">
             <p id="festivalInfo1"></p>
