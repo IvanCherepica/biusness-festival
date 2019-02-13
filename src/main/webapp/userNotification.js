@@ -24,7 +24,7 @@ $.ajax({
             "border-radius: 50%;" +
             " opacity: 0.8; " +
             "width: 50%; height: 55%\" " +
-            "src=\"http://bootstraptema.ru/snippets/element/2016/profilesection/myprofile.jpg\">");
+            "src=\"" + user.imagePath +"\">");
 
         $("#userLg").append("<p> Hello <b>" + userName + "</b></p>");
         $("#userLg").append("<p> Your ID: " + userID + "</p>");
@@ -93,7 +93,7 @@ function newPlacemark(myMap) {
             //обновляем местоположение метки
             myPlacemark = new ymaps.Placemark([x, y], {
                 hitContent: 'Hello',
-                balloonContent: 'Its me'
+                balloonContent: 'It is you'
                 }, {
                     iconLayout: 'default#image',
                     iconImageHref: 'http://thebestapp.ru/wp-content/uploads/2016/07/Location_marker@2x.png',

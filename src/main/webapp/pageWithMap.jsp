@@ -84,8 +84,8 @@
             //объект метки
 
             myPlacemark = new ymaps.Placemark([x,y], {
-                balloonContent: 'Its me',
-                hitContent: 'Hello'
+                hitContent: 'Hello',
+                balloonContent: 'It is you'
             }, {
                 iconLayout: 'default#image',
                 iconImageHref:'http://thebestapp.ru/wp-content/uploads/2016/07/Location_marker@2x.png',
