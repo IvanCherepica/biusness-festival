@@ -20,6 +20,7 @@ public class DeleteEventServlet extends HttpServlet {
 	protected void doGet (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
 		String paramId = request.getParameter("eventId");
+		String festivalId = request.getParameter("festivalId");
 		
 		if (paramId == null) {
 			response.sendRedirect("/error.html");
@@ -32,7 +33,7 @@ public class DeleteEventServlet extends HttpServlet {
 			}
 		}
 		response.setContentType("text/html");
-		response.sendRedirect("/admin/festivals");
+		response.sendRedirect("/admin/editfestival?id="+festivalId);
 	}
 	
 }
