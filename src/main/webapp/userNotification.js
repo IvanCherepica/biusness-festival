@@ -14,14 +14,7 @@ $.ajax({
         console.log(message);
     },
     success: function(data) {
-        userName = data.name;
-        userID = data.id;
-        isInFestival = data.isInFestival;
-        user = data.user;
-        console.log("userName " + userName + "; userID " + userID + "; isInFestival " + isInFestival);
-        $("#userLg").append("<p> Hello <b>" + userName + "</b></p>");
-        $("#userLg").append("<p> Your ID: " + userID + "</p>");
-        $("#userLg").append("<p> Your Role: " + data.user.role + "</p>");
+        processDataForUserPage(data);
     }
 });
 
@@ -48,13 +41,8 @@ function connect() {
         sendMessage(webSocketClient);
         };
     webSocketClient.onmessage = function (event) {
-            console.log("event.data " + event.data);
             var messageToUser = JSON.parse(event.data).message;
-            isInFestival = JSON.parse(event.data).isInFestival;
-            festival = JSON.parse(event.data).festival;
-            $("#festivalInfo1").text("You are at " + festival.name);
-            $("#festivalInfo2").text("About: " + festival.description);
-
+            processDataForFestivalBlock(event);
             if (messageToUser.localeCompare("") != 0 ) {
                 sendWelcomMessage(messageToUser);
             }
@@ -83,9 +71,14 @@ function newPlacemark(myMap) {
             myMap.geoObjects.remove(myPlacemark);
             //обновляем местоположение метки
             myPlacemark = new ymaps.Placemark([x, y], {
-                balloonContent: 'Its me',
-                hitContent: 'Hello'
-            });
+                hitContent: 'Hello',
+                balloonContent: 'It is you'
+                }, {
+                    iconLayout: 'default#image',
+                    iconImageHref: 'http://thebestapp.ru/wp-content/uploads/2016/07/Location_marker@2x.png',
+                    iconImageSize: [32, 32],
+                    iconImageOffset: [-15, -15]
+                });
             // добавляем метку на карту
             myMap.geoObjects.add(myPlacemark);
             //setTimeout(newPlacemark(myMap),10000);
@@ -94,4 +87,29 @@ function newPlacemark(myMap) {
 }
 
 
+function processDataForUserPage(data) {
+    userName = data.name;
+    userID = data.id;
+    isInFestival = data.isInFestival;
+    user = data.user;
+    console.log("userName " + userName + "; userID " + userID + "; isInFestival " + isInFestival);
+    $("#userLg").append("<img " +
+        "style=\"margin-top: 10px; " +
+        "border-radius: 50%;" +
+        " opacity: 0.8; " +
+        "width: 50%; height: 55%\" " +
+        "src=\"" + user.imagePath +"\">");
 
+    $("#userLg").append("<p> Hello <b>" + userName + "</b></p>");
+    $("#userLg").append("<p> Your ID: " + userID + "</p>");
+    $("#userLg").append("<p> Your Role: " + data.user.role + "</p>");
+}
+
+function processDataForFestivalBlock(event) {
+    isInFestival = JSON.parse(event.data).isInFestival;
+    festival = JSON.parse(event.data).festival;
+    $("#festivalInfo1").text("You are at " + festival.name);
+    $("#festivalInfo2").text("About: " + festival.description);
+    $("#informUserBlock").css('height','770');
+    $("#festivalBlock").css('height','450');
+}

@@ -51,9 +51,11 @@
             <div class="field">
                 <input type="text" class="form-control" id="uName" name="name" placeholder="Login"/>
             </div>
+            <br>
             <div class="field">
                 <input type="password" class="form-control" id="uPass" name="password" placeholder="Password" />
             </div>
+            <br>
             <div class="submit">
                 <input type="submit" class="btn btn-primary btn-block" align="center" value="Submit"/>
             </div>
