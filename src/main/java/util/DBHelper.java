@@ -14,6 +14,7 @@ import java.sql.SQLException;
 
 public class DBHelper {
 
+
 	static public Configuration getConfiguration() {
 
 		Configuration configuration = new Configuration();

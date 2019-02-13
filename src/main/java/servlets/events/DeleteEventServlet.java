@@ -3,8 +3,6 @@ package servlets.events;
 import org.hibernate.HibernateException;
 import services.EventService;
 import services.EventServiceImpl;
-import services.FestivalService;
-import services.FestivalServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,6 +18,7 @@ public class DeleteEventServlet extends HttpServlet {
 	protected void doGet (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
 		String paramId = request.getParameter("eventId");
+		String festivalId = request.getParameter("festivalId");
 		
 		if (paramId == null) {
 			response.sendRedirect("/error.html");
@@ -32,7 +31,7 @@ public class DeleteEventServlet extends HttpServlet {
 			}
 		}
 		response.setContentType("text/html");
-		response.sendRedirect("/admin/festivals");
+		response.sendRedirect("/admin/editfestival?id="+festivalId);
 	}
 	
 }

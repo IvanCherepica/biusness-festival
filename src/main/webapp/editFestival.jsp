@@ -10,6 +10,7 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="jquery.maskedinput.min.js"></script>
 
     <style>
         body {
@@ -54,7 +55,7 @@
     <div class="row">
         <div class="navbar navbar-inverse navbar-static-top header">
             <a class="navbar-brand" href="/admin/festivals">Business Festival</a>
-            <a class="navbar-brand pull-right" href="/logout">Logout</a>
+            <a class="navbar-brand pull-right" href="/admin/users">Logout</a>
         </div>
     </div>
     <div class="row">
@@ -79,10 +80,13 @@
                             <a href="#festival-panel" aria-controls="festival-panel" role="tab" data-toggle="tab">Festival</a>
                         </li>
                         <li id="hotpoint-list-nav">
-                            <a href="#hotpoints-panel" aria-controls="hotpoints-panel" role="tab" data-toggle="tab">Hot-points</a>
+                            <a href="#hotpoints_panel" aria-controls="hotpoints_panel" role="tab" data-toggle="tab">Hot-points</a>
                         </li>
                         <li id="eventpoint-list-nav">
                             <a href="#eventpoints-panel" aria-controls="eventpoints-panel" role="tab" data-toggle="tab">Event-points</a>
+                        </li>
+                        <li id="event-list-nav">
+                            <a href="#events-panel" aria-controls="events-panel" role="tab" data-toggle="tab">Events</a>
                         </li>
                     </ul>
 
@@ -137,6 +141,28 @@
                                                 </div>
                                                 <div class="form-group row">
                                                     <div  class="col-xs-9 col-md-2">
+                                                        <label for="center">Center</label>
+                                                    </div>
+                                                    <div  class="col-xs-9 col-md-6">
+                                                        <textarea class="form-control" id="center" rows="4" name="center"
+                                                                  style="white-space: nowrap;
+                                                                overflow: hidden;
+                                                                text-overflow: ellipsis;
+                                                                max-width: 25vw;"
+                                                                  value="${festival.center}">${festival.center}</textarea>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <div  class="col-xs-9 col-md-2">
+                                                        <label for="radius">Radius</label>
+                                                    </div>
+                                                    <div  class="col-xs-9 col-md-6">
+                                                        <input class="form-control" id="radius" name="radius"
+                                                                  value="${festival.radius}">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <div  class="col-xs-9 col-md-2">
                                                         <label for="color">Color</label>
                                                     </div>
                                                     <div  class="col-xs-9 col-md-6">
@@ -155,10 +181,7 @@
                             </div>
                         </div>
 
-
-
-
-                        <div role="tabpanel" class="tab-pane" id="hotpoints-panel">
+                        <div id="hotpoints_panel" role="tabpanel" class="tab-pane">
                             <div class="panel panel-default table-panel">
                                 <div class="tab-content">
                                     <div class="panel-body">
@@ -209,16 +232,12 @@
                             </div>
                         </div>
 
-
-
-
                         <div role="tabpanel" class="tab-pane" id="eventpoints-panel">
                             <div class="panel panel-default table-panel">
                                 <div class="tab-content">
                                     <div class="panel-body">
                                         <h4>Event-points list</h4>
                                         <div class="container-fluid">
-
 
                                             <table class="table table-striped table-responsive">
                                                 <thead>
@@ -236,7 +255,6 @@
 
                                                 <c:forEach var="eventPoint" items="${eventPointsList}">
 
-                                                    <p>${eventPoint.name}</p>
                                                     <tr id="eprow${eventPoint.id}">
                                                         <td width="5%">${eventPoint.id}</td>
                                                         <td width="15%">${eventPoint.name}</td>
@@ -256,9 +274,7 @@
                                                                     putEventpointValues("${eventPoint.id}", "${eventPoint.festival.id}", "${eventPoint.name}", "${eventPoint.description}", "${eventPoint.geometry}", "${eventPoint.color}");
                                                                     $("#editEventpointModal").modal('show');
                                                                 });
-
                                                             })
-
                                                         </script>
                                                     </tr>
 
@@ -273,6 +289,58 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div role="tabpanel" class="tab-pane" id="events-panel">
+                            <div class="panel panel-default table-panel">
+                                <div class="tab-content">
+                                    <div class="panel-body">
+                                        <h4>Events list</h4>
+                                        <div class="container-fluid">
+                                            <table class="table table-striped table-responsive">
+                                                <thead>
+                                                <tr>
+                                                    <th>id</th>
+                                                    <th>Name</th>
+                                                    <th>Description</th>
+                                                    <th>Event-point</th>
+
+                                                    <th><a id="addEventButton" onclick="addEvent(${festival.id})"class="btn btn-primary">Add</a></th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <c:forEach var="event" items="${eventList}">
+                                                    <tr id="erow${event.id}">
+                                                        <td width="5%">${event.id}</td>
+                                                        <td width="15%">${event.name}</td>
+                                                        <td width="25%">${event.description}</td>
+                                                        <td width="25%">${event.eventPoint.name}</td>
+                                                        <td width="20%">
+                                                            <form  class="form-inline ev-edit-form">
+                                                                <a id="evEditButton${event.id}" class="btn btn-primary">Edit</a>
+                                                                <a id="evDeleteButton" onclick="deleteEvent(${event.id}, ${festival.id})" class="btn btn-primary">Delete</a>
+                                                            </form>
+                                                        </td>
+                                                        <script type="text/javascript">
+                                                            jQuery(document).ready( function() {
+                                                                jQuery("#evEditButton${event.id}").click(function(){
+                                                                    putEventValues("${event.id}", "${event.eventPoint.id}", "${festival.id}", "${event.name}", "${event.description}", "${event.dateBegin}", "${event.dateEnd}");
+                                                                    editEvent("${festival.id}");
+                                                                });
+                                                            })
+
+                                                        </script>
+                                                    </tr>
+                                                </c:forEach>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        </div>
+
                     </div>
 
 
@@ -284,7 +352,7 @@
             </div>
         </div>
     </div>
-</div>
+
 
 
 <!-- Modal edit Eventpoint-->
@@ -315,7 +383,9 @@
                 <textarea id="ep-description" placeholder="введите краткое описание" name="description"
                           class="form-control" rows="3"></textarea>
 
+                <label for="ep-geometry">Geometry</label>
                 <textarea id="ep-geometry" placeholder="введите координаты" name="geometry" class="form-control" rows="3"></textarea>
+
                 <label for="ep-color">Color</label>
                 <input id="ep-color" type="color" name="color" class="form-control">
             </div>
@@ -373,10 +443,78 @@
     </div>
 </div>
 
+<!-- Modal edit Events-->
+<div id="editEventModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Event</h4>
+            </div>
+            <div class="modal-body">
+                <div class="raw">
+                    <label for="efestival_id">Festival id:</label>
+                    <input id="efestival_id" name="festival_id" readonly>
+
+                    <label for="ev-id">ID:</label>
+                    <input id="ev-id" name="eventPointId" readonly>
+                </div>
+
+                <div class="raw">
+                    <label for="ev_eventPoint">Event-point id:</label>
+                    <select id="ev_eventPoint" name="eventpoint_id">
+                        <c:forEach var="item" items="${eventPointsList}">
+                            <option value="${item.id}">${item.name} (id:${item.id})</option>
+
+                        </c:forEach>
+                    </select>
+                    <!-- ${item.festival_id == id ? 'selected="selected"' : ''} -->
+                </div>
+
+                <div class="raw">
+                    <label for="ev-name">Name</label>
+                    <input id="ev-name" placeholder="введите имя" name="name" class="form-control" required>
+                </div>
+
+                <div class="raw">
+                    <label for="ev-description">Description</label>
+                    <textarea id="ev-description" placeholder="введите краткое описание" name="description"
+                          class="form-control" rows="3"></textarea>
+                </div>
+
+                <div class="raw">
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">From (date)</span>
+                        </div>
+                        <input id="ev-date-from" type="text" class="form-control" aria-label="From">
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">To (date)</span>
+                        </div>
+                    </div>
+                    <input id="ev-date-to" type="text" class="form-control" aria-label="From">
+                </div>
+                <input id="ev-q-type" type="hidden" readonly>
+            </div>
+            <div class="modal-footer">
+                <form  class="form-inline">
+                    <button id="ev-save-btn" type="button" class="btn btn-primary">Save</button>
+                    <button id="ev-close-btn" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+
 <script type="text/javascript">
 
     function deleteEventPoint(id, festivalId) {
-        console.log("Delete button "+festivalId);
+        console.log("Delete event point button "+festivalId);
         var data = { festivalId: festivalId, eventPointId: id };
         $.get( "/admin/eventpoints/delete", data );
         $("#eprow"+id).remove();
@@ -384,11 +522,34 @@
     }
 
     function deleteHotPoint(id, festivalId) {
-        console.log("Delete button "+festivalId);
+        console.log("Delete hotpoint button "+festivalId);
         var data = { festivalId: festivalId, hotPointId: id };
         $.get( "/admin/hotpoints/delete", data );
         console.log($("#hprow"+id));
         $("#hprow"+id).remove();
+    }
+    function addEvent(festivalId) {
+        $('#ev-q-type').val("new");
+        $('#efestival_id').val(festivalId);
+        $('#ev-name').val("");
+        $('#ev-description').val("");
+        $('#ev-date-from').val("");
+        $('#ev-date-to').val("");
+        $("#editEventModal").modal('show');
+    }
+    function editEvent(festivalId) {
+        $('#ev-q-type').val("");
+        $('#efestival_id').val(festivalId);
+
+
+        $("#editEventModal").modal('show');
+    }
+    function deleteEvent(id, festivalId) {
+        console.log("Delete button "+festivalId);
+        var data = { festivalId: festivalId, eventId: id };
+        $.get( "/admin/events/delete", data );
+        console.log($("#erow"+id));
+        $("#erow"+id).remove();
     }
 
     function putEventpointValues(id, festival_id, name, description, geometry, color ) {
@@ -409,6 +570,16 @@
         $('#hp-color').val(color);
     }
 
+    function putEventValues(id, eventpoint_id, festival_id, name, description, dateFrom, dateTo) {
+        $('#efestival_id').val(festival_id);
+        $('#ev_eventPoint').val(eventpoint_id);
+        $('#ev-id').val(id);
+        $('#ev-name').val(name);
+        $('#ev-description').val(description);
+        $('#ev-date-from').val(dateFrom);
+        $('#ev-date-to').val(dateTo);
+    }
+
     $(document).ready(function(){
         $("#ep-save-btn").click(function(){
             $.ajax({
@@ -425,7 +596,7 @@
                 success : function() {
                     // обработка ответа от сервера
                     $('#ep-close-btn').click();
-                    $("#admin-page").refresh(true);
+
                 }
             });
         })
@@ -445,7 +616,44 @@
                 success : function() {
                     // обработка ответа от сервера
                     $('#hp-close-btn').click();
-                    $("#admin-page").refresh();
+
+                }
+            });
+        })
+
+        $("#ev-save-btn").click(function(){
+            console.log("Event save button = "+$('#ev-q-type'));
+            $.ajax({
+                type : "POST",
+                url : ($('#ev-q-type').val()=="new") ? '/admin/events/add' : '/admin/events/edit' ,
+                data : {                 // передаваемые сервлету данные
+                    festivalId : $('#efestival_id').val(),
+                    eventId : $('#ev-id').val(),
+                    name : $('#ev-name').val(),
+                    description : $('#ev-description').val(),
+                    eventPointId : $('#ev_eventPoint').val(),
+                    dateBegin : $('#ev-date-from').val(),
+                    dateEnd  :$('#ev-date-to').val()
+                },
+                success : function() {
+                    // обработка ответа от сервера
+                    $('#ev-close-btn').click();
+                    $("#admin-page").click();
+                }
+            });
+        })
+
+        $("#hotpoints_panel").click(function() {
+            console.log("${festival.id}");
+            $.ajax({
+                url : '/admin/hotpoints/list',     // URL - сервлет
+                type : "GET",
+                data : {                 // передаваемые сервлету данные
+                    id : "${festival.id}"
+                },
+                success : function(response) {
+                    // обработка ответа от сервера
+                    $("#hotpoints_panel").appendChild(response.response.outputStream.ob.cb.toString());
                 }
             });
         })

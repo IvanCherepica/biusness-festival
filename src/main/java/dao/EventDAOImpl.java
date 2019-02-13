@@ -24,7 +24,8 @@ public class EventDAOImpl extends AbstactDAO<Event> implements EventDAO{
 		
 		String queryString = "UPDATE Event SET name = :name, " +
 				"description = :description, " +
-				"eventpoint_id = :eventPoint " +
+				"eventpoint_id = :eventPoint, " +
+				"festival_id = :festival " +
 				"WHERE id = :id";
 		
 		query = session.createQuery(queryString);
@@ -32,6 +33,7 @@ public class EventDAOImpl extends AbstactDAO<Event> implements EventDAO{
 		query.setParameter("name", event.getName());
 		query.setParameter("description", event.getDescription());
 		query.setParameter("eventPoint", event.getEventPoint().getId());
+		query.setParameter("festival", event.getFestival().getId());
 		
 		Transaction transaction = session.beginTransaction();
 		query.executeUpdate();
@@ -76,5 +78,26 @@ public class EventDAOImpl extends AbstactDAO<Event> implements EventDAO{
 			session.close();
 		}
 		return events;
+	}
+	
+	public List<Event> getAllByFestival(long festivalId) {
+		Session session = sessionFactory.openSession();
+		Transaction transaction = session.beginTransaction();
+		
+		List<Event> events = null;
+		try {
+			Query query = session.createQuery("FROM Event where festival_id = :id");
+			//query.addEntity(Event.class);
+			query.setParameter("id", festivalId);
+			events = query.list();
+			transaction.commit();
+		} catch (Exception e) {
+			System.out.println("Can`t get list of Events: " + e.getMessage());
+			transaction.rollback();
+		} finally {
+			session.close();
+		}
+		return events;
+		
 	}
 }
