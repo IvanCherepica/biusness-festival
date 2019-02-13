@@ -1,9 +1,9 @@
 <%--
-  Created by IntelliJ IDEA.
-  User: matvey
-  Date: 10/02/2019
-  Time: 7:07 PM
-  To change this template use File | Settings | File Templates.
+Created by IntelliJ IDEA.
+User: matvey
+Date: 10/02/2019
+Time: 7:07 PM
+To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
@@ -11,69 +11,78 @@
     <title>User</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-
-    <!-- Core Style CSS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <style>
         body {
             background: #eeeeee;
         }
-        .header {
-            padding: 0px 10px 0px 10px;
-            margin-bottom: 0px;
+        .usermap {
+            margin: 3px 3px 3px 3px;
+            z-index: 1;
+            position: relative;
         }
-        .left-menu {
-            background: white;
-            padding: 20px 0 0 0;
-            min-height: 94vh;
+        .container{
+            width: 568px!important;
         }
-        .left-menu ul li {
-            margin: 0px;
-        }
-        .left-menu ul li a {
-            border-radius: 0px;
-        }
-        .nav-content {
-            margin-bottom: -1px;
-        }
-        .edit-form label {
-            font-weight: 100;
-            font-size: 20px;
-            margin: 10px 0 10px 0;
-        }
-        .add-user-button {
-            margin-top: 30px;
+        .main{
+            position: relative;
+            z-index: 0;
         }
 
-         .usermap {
-             margin: 10px 10px 10px 10px;
-         }
+        .informUser {
+            border-radius: 20px;
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            right: 10px;
+            padding: 10px;
+            background: #ffffff;
+            z-index: 2000;
+            opacity: 0.8;
+            margin: 10px 10px 10px 10px;
+        }
 
-        .container {
-            background-color: white; /* Цвет фона слоя */
-            padding: 5px; /* Поля вокруг текста */
-            margin: 0 10px 10px 10px;
-            width: auto; /* Ширина слоя */
-            height: 200px;
+        #userBlock{
+            border-radius: 20px;
+            text-align: center;
+            position: initial;
+            width: initial;
+            height: initial;
+            right: 10px;
+            z-index: 2001;
+            opacity: 1;
+            background: #eeeeee;
+            height: 270px;
+        }
+        #festivalBlock{
+            border-radius: 20px;
+            text-align: center;
+            position: initial;
+            width: initial;
+            height: initial;
+            z-index: 2003;
+            opacity: 1;
+            background: #eeeeee;
+            height: 0px;
+            margin: 20px 0 0 0;
         }
     </style>
 </head>
 <body>
-<div class="container-fluid">
-    <div class="row">
-        <div class="panel panel-info">
-            <div class="navbar navbar-inverse navbar-static-top header">
-                <a class="navbar-brand" href="/user">Your Festival</a>
-                <a class="navbar-brand pull-right" href="/logout">Logout</a>
-            </div>
+<div class="main">
+    <div id="informUserBlock" class="informUser">
+        <div id="userBlock">
+            <div id="userImage"></div>
+            <div id="userLg"></div>
+        </div>
+        <div id="festivalBlock">
+            <p id="festivalInfo1"></p>
+            <p id="festivalInfo2"></p>
         </div>
     </div>
-</div>
-<div class="usermap">
-<jsp:include page="pageWithMap.jsp"/>
-</div>
-<div class="container">
-    <h1>Hello user.</h1>
+    <div class="usermap">
+        <jsp:include page="pageWithMap.jsp"/>
+    </div>
 </div>
 </body>
 </html>

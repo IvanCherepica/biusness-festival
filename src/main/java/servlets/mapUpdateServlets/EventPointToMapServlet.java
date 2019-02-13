@@ -1,4 +1,4 @@
-package servlets;
+package servlets.mapUpdateServlets;
 
 import com.google.gson.Gson;
 import models.EventPoint;

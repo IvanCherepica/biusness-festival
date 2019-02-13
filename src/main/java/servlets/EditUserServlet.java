@@ -1,12 +1,10 @@
 package servlets;
 
+import models.Event;
 import models.EventPoint;
 import models.User;
 import org.hibernate.HibernateException;
-import services.EventPoinService;
-import services.EventPoinServiceImpl;
-import services.UserService;
-import services.UserServiceImpl;
+import services.*;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -16,13 +14,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @WebServlet("/admin/editUser")
 public class EditUserServlet extends HttpServlet {
 
     private final UserService userService = UserServiceImpl.getInstance();
-    private final EventPoinService eventPoinService= EventPoinServiceImpl.getInstance();
+    private final EventService eventService= EventServiceImpl.getInstance();
 
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -36,8 +36,8 @@ public class EditUserServlet extends HttpServlet {
         } else {
             long id = Long.parseLong(paramId);
             user = userService.getById(id);
-            List<EventPoint> eventFromUser = user.getEvents();
-            List<EventPoint> allEventsFromDB=eventPoinService.getAllList();
+            Set<Event> eventFromUser = user.getEvents();
+            List<Event> allEventsFromDB=eventService.getAllList();
             request.setAttribute("user", user);
             boolean p= allEventsFromDB.removeAll(eventFromUser);
             request.setAttribute("eventsp",allEventsFromDB);
@@ -62,19 +62,19 @@ public class EditUserServlet extends HttpServlet {
             user.setName(name == null ? "" : name);
             user.setPassword(password == null ? "" : password);
             user.setRole(role == null ? "" : role);
-            List<EventPoint> userEvents= user.getEvents();
+            Set<Event> userEvents= user.getEvents();
             //добавление ивентов для участника
             if (userEvents != null) {
                if (eventId != null) {
-                   List<EventPoint> events = new ArrayList<>();
+                   Set<Event> events = new HashSet<>();
                    for (String eve : eventId) {
-                       events.add(eventPoinService.getById(Long.parseLong(eve)));
+                       events.add(eventService.getById(Long.parseLong(eve)));
                    }
-                   user.setEventsToUser(events);
+                   user.setEventsFromFest(events);
                }
                else {
                    userEvents.removeAll(userEvents);
-                   user.setEventsToUser(userEvents);
+                   user.setEventsFromFest(userEvents);
                }
             }
 

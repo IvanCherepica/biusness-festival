@@ -12,6 +12,7 @@ import org.hibernate.service.ServiceRegistry;
 import util.DBHelper;
 
 import java.util.List;
+import java.util.Set;
 
 public class UserServiceImpl implements UserService {
     private final UserDAO userDAO;
@@ -70,20 +71,20 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<EventPoint> getEventsFromUserId(long id){
+    public Set<EventPoint> getEventsFromUserId(long id){
         User user = userDAO.getById(id);
-        return user.getEvents();
+        return user.getEventPoints();
     }
 
     @Override
-    public void addEventsListToUserbyId(long id,List<EventPoint> events){
+    public void addEventsListToUserbyId(long id,Set<EventPoint> events){
         User user= userDAO.getById(id);
-        user.setEventsToUser(events);
+        user.setEventPoints(events);
     }
     @Override
     public void addEventToUserId(long id, EventPoint event){
         User user= userDAO.getById(id);
-        user.addEventToUser(event);
+        user.addEventPoint(event);
     }
 
     private static SessionFactory createSessionFactory(Configuration configuration) {

@@ -4,6 +4,7 @@ import models.EventPoint;
 import models.User;
 
 import java.util.List;
+import java.util.Set;
 
 public interface UserService {
     User getById(long id);
@@ -17,8 +18,10 @@ public interface UserService {
     void remove(long id);
 
     List<User> getAllList();
-    List<EventPoint> getEventsFromUserId(long id);
-    void addEventsListToUserbyId(long id, List<EventPoint> events);
+    Set<EventPoint> getEventsFromUserId(long id);
+
+    void addEventsListToUserbyId(long id, Set<EventPoint> events);
+
     void addEventToUserId(long id, EventPoint event);
 
 }

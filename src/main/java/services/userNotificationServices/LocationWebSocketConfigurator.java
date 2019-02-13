@@ -1,6 +1,6 @@
 package services.userNotificationServices;
 
-import servlets.userNotificationServlets.LocationWebSocketServlet;
+import servlets.mapUpdateServlets.LocationWebSocketServlet;
 
 import javax.websocket.server.ServerEndpointConfig.Configurator;
 
