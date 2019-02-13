@@ -65,6 +65,9 @@ To change this template use File | Settings | File Templates.
             /*z-index: 1;*/
             position: relative;
         }
+        .container{
+            width: 568px!important;
+        }
         .main{
             /*position: relative;
             z-index: 0;*/

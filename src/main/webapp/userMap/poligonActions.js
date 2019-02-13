@@ -174,8 +174,47 @@ function GetEventsForEventPoint(eventPoint_id){
 
             console.log("[GetData] EventPoints received. Count=" + data.length);
 
-            //openListOfFesivalEventPoints(data,festival_id);
+            openListOfEventPointsEvents(data,eventPoint_id);
 
         }
     });
+}
+
+
+function openListOfEventPointsEvents(data,festival_id) {
+    $("#festival_list_body").append("<button id=\"festival_list_close\" type=\"button\" class=\"close\" data-dismiss=\"modal\">&times;</button>");
+
+
+    $("#festival_list_body").append("<h2>" + data.eventPoint.name + "</h2>");
+    $("#festival_list_body").append("<p>" + data.eventPoint.description + "</p>");
+
+
+    $("#festival_list_body").append("<table id=\"festival_list_table\" class=\"table table-striped\"></table>");
+    //Column names
+    $("#festival_list_table").append("<thead> <tr><th>Event</th><th>Description</th><th>Working time</th></tr></thead><tbody>");
+
+    //fill the table
+    $.each(data.eventList, function (index, value) {
+
+        //$("#festival_list_table").append("<tr href=\"javascript:void(0)\" onclick=\"moveMapCentrToPoint('"+ value.center + "', '"+ value.id + "')\" id='" + value.id + "' ><td>" + value.name + "</td><td>" + value.description + "</td><td></td></tr>");
+        $("#festival_list_table").append("<tr id='" + value.id + "' ><td>" + value.name + "</td><td>" + value.description + "</td><td></td></tr>");
+
+    });
+
+    $("#festival_list_table").append("</tbody>");
+    $("#festival_list_Modal").modal('show');
+
+    //clear modal window after close
+    $("#festival_list_Modal").on("hide.bs.modal", function (e) {
+        // $("#festival_list_table > tbody > tr").each(function (index, value) {
+        //         console.log("index : " + index + "; value : " + $(value).attr('id'));
+        // });
+
+
+        $("#festival_list_body").empty();
+
+
+    });
+    $("#error-edit-message").removeClass('hidden');
+
 }
