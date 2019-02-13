@@ -73,6 +73,7 @@ To change this template use File | Settings | File Templates.
             z-index: 0;*/
         }
         .informUser {
+            border-radius: 20px;
             position: absolute;
             width: 25%;
             height: 90%;
@@ -84,6 +85,7 @@ To change this template use File | Settings | File Templates.
             margin: 10px 10px 10px 10px;
         }
         #userBlock{
+            border-radius: 20px;
             text-align: center;
             position: initial;
             width: initial;
@@ -95,6 +97,7 @@ To change this template use File | Settings | File Templates.
             height: 40%;
         }
         #festivalBlock{
+            border-radius: 20px;
             text-align: center;
             position: initial;
             width: initial;
@@ -108,23 +111,15 @@ To change this template use File | Settings | File Templates.
     </style>
 </head>
 <body>
-<div class="container-fluid">
-    <div class="row">
-        <div class="panel panel-info">
-            <div class="navbar navbar-inverse navbar-static-top header">
-                <a class="navbar-brand" href="/user">Your Festival</a>
-                <a class="navbar-brand" href="/user/profile">Profile</a>
-                <a class="navbar-brand pull-right" href="/logout">Logout</a>
-            </div>
-        </div>
 
-    </div>
-</div>
 <div class="main">
-    <div class="informUser">
+    <div id="informUserBlock" class="informUser">
         <div id="userBlock">
-            <div id="userImage"><img style="margin-top: 10px; width: 200px; height: 200px" src="http://bootstraptema.ru/snippets/element/2016/profilesection/myprofile.jpg"></div>
+            <div id="userImage"></div>
             <div id="userLg"></div>
+            <c:if test="${!isNotValid && !logout}">
+                <div class="empty-block"></div>
+            </c:if>
         </div>
         <div id="festivalBlock">
             <p id="festivalInfo1"></p>
