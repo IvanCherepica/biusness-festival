@@ -11,72 +11,28 @@ To change this template use File | Settings | File Templates.
     <title>User</title>
     <link rel="stylesheet" href="https://bootswatch.com/3/united/bootstrap.min.css" >
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script>
-        // $.ajax({
-        //     url: "/rest/info",
-        //     method: "get",
-        //     async: true,
-        //     error: function (message) {
-        //         console.log(message);
-        //     },
-        //     success: function (data) {
-        //         console.log(data);
-        //         $("#userLg").append("<p> Hello <b>" + data.user.name + "</b></p>");
-        //         $("#userLg").append("<p> Your ID: " + data.user.id + "</p>");
-        //         $("#userLg").append("<p> Your Role: " + data.user.role + "</p>");
-        //         if (data.isInFestival) {
-        //             $("#festivalInfo").append("<p> You are at  <b>" + data.festival.name + "</b></p>");
-        //         } else {
-        //             $("#festivalInfo").append("<p> There is no information about any festival near you. Please fuck off</b></p>");
-        //         }
-        //     }
-        // });
-    </script>
     <style>
         body {
             background: #eeeeee;
         }
-        .header {
-            padding: 0px 10px 0px 10px;
-            margin-bottom: 0px;
-        }
-        .left-menu {
-            background: white;
-            padding: 20px 0 0 0;
-            min-height: 94vh;
-        }
-        .left-menu ul li {
-            margin: 0px;
-        }
-        .left-menu ul li a {
-            border-radius: 0px;
-        }
-        .edit-form label {
-            font-weight: 100;
-            font-size: 20px;
-            margin: 10px 0 10px 0;
-        }
-        .nav-content {
-            margin-bottom: -1px;
-        }
         .usermap {
-            margin: 10px 10px 10px 10px;
-            /*z-index: 1;*/
+            margin: 3px 3px 3px 3px;
+            z-index: 1;
             position: relative;
         }
         .container{
             width: 568px!important;
         }
         .main{
-            /*position: relative;
-            z-index: 0;*/
+            position: relative;
+            z-index: 0;
         }
 
         .informUser {
             border-radius: 20px;
             position: absolute;
-            width: 25%;
-            height: 90%;
+            width: 300px;
+            height: 300px;
             right: 10px;
             padding: 10px;
             background: #ffffff;
@@ -95,7 +51,7 @@ To change this template use File | Settings | File Templates.
             z-index: 2001;
             opacity: 1;
             background: #eeeeee;
-            height: 40%;
+            height: 270px;
         }
         #festivalBlock{
             border-radius: 20px;
@@ -106,7 +62,7 @@ To change this template use File | Settings | File Templates.
             z-index: 2003;
             opacity: 1;
             background: #eeeeee;
-            height: 50%;
+            height: 0px;
             margin: 20px 0 0 0;
         }
     </style>
@@ -117,9 +73,6 @@ To change this template use File | Settings | File Templates.
         <div id="userBlock">
             <div id="userImage"></div>
             <div id="userLg"></div>
-            <c:if test="${!isNotValid && !logout}">
-                <div class="empty-block"></div>
-            </c:if>
         </div>
         <div id="festivalBlock">
             <p id="festivalInfo1"></p>
