@@ -18,24 +18,54 @@ function festilvalPoligonOnClick(event) {
 
 
 function openListOfFesivalEventPoints(data,festival_id) {
-    $("#festival_list_title").append("<p> " + data.festival.name + "</p>");
-    $("#festival_list_title_description").text(data.festival.description);
+    $("#festival_list_body").append("<button id=\"festival_list_close\" type=\"button\" class=\"close\" data-dismiss=\"modal\">&times;</button>");
 
+    $("#festival_list_body").append("<h2>" + data.festival.name + "</h2>");
+    $("#festival_list_body").append("<p>" + data.festival.description + "</p>");
+
+
+    $("#festival_list_body").append("<table id=\"festival_list_table\" class=\"table table-striped\"></table>");
     //Column names
     $("#festival_list_table").append("<thead> <tr><th>Event Point</th><th>Description</th><th>Working time</th></tr></thead><tbody>");
 
+    //fill the table
+    $.each(data.eventPointList, function (index, value) {
 
-    $.each(JSON.parse(data.eventPointsGson), function (index, value) {
-        console.log(value.name);
-        $("#festival_list_table").append("<tr><td>" + value[4] + "</td><td>" + value[2] + "</td><td></td></tr>");
-
-        //$("#festival_list_title").append("<p> " + value[4] + "</p><p> " + value[2] + "</p>");
+        $("#festival_list_table").append("<tr href=\"javascript:void(0)\" onclick=\"moveMapCentrToPoint('"+ value.center + "', '"+ value.id + "')\" id='" + value.id + "' ><td>" + value.name + "</td><td>" + value.description + "</td><td></td></tr>");
 
     });
 
     $("#festival_list_table").append("</tbody>");
     $("#festival_list_Modal").modal('show');
+
+    //clear modal window after close
+    $("#festival_list_Modal").on("hide.bs.modal", function (e) {
+        // $("#festival_list_table > tbody > tr").each(function (index, value) {
+        //         console.log("index : " + index + "; value : " + $(value).attr('id'));
+        // });
+
+
+        $("#festival_list_body").empty();
+
+
+    });
     $("#error-edit-message").removeClass('hidden');
+
+}
+
+
+
+function moveMapCentrToPoint(centr, eventPoinID) {
+    console.log("centr : " + centr + " eventPoinID : " + eventPoinID);
+    var centrX = centr.split(" ")[0];
+    var centrY = centr.split(" ")[1];
+
+
+    $("#festival_list_close").click();
+    $("#festival_list_table").remove();
+    if (centrX!=undefined&&centrY!=undefined) {
+        myMap.setCenter([Number(centrX), Number(centrY)], 17, {checkZoomRange: true});
+    }
 
 }
 
@@ -113,4 +143,5 @@ function DrawMapUnits(arrayOfMapUnits){
         myMap.geoObjects.add(myPolygon);
     }
 }
+
 
