@@ -92,9 +92,14 @@ function newPlacemark(myMap) {
             myMap.geoObjects.remove(myPlacemark);
             //обновляем местоположение метки
             myPlacemark = new ymaps.Placemark([x, y], {
-                balloonContent: 'Its me',
-                hitContent: 'Hello'
-            });
+                hitContent: 'Hello',
+                balloonContent: 'Its me'
+                }, {
+                    iconLayout: 'default#image',
+                    iconImageHref: 'http://thebestapp.ru/wp-content/uploads/2016/07/Location_marker@2x.png',
+                    iconImageSize: [32, 32],
+                    iconImageOffset: [-15, -15]
+                });
             // добавляем метку на карту
             myMap.geoObjects.add(myPlacemark);
             //setTimeout(newPlacemark(myMap),10000);
