@@ -96,29 +96,11 @@ public class Event {
 		this.eventPoint = eventPoint;
 	}
 
-	public Event () {
-	}
-
-	public Event (String name, String description) {
-		this.name = name;
-		this.description = description;
-	}
-
 	public Event (String name, String description, EventPoint eventPoint) {
 		this.name = name;
 		this.description = description;
 		this.eventPoint = eventPoint;
 	}
-
-//	public Set<User> getUsers(){return this.users;}
-//	public void setUsers(Set<User> users){this.users=users;}
-//ublic void addUser(User user){
-		//if (users.contains(user)){
-//			return false;
-//		}
-//		else{
-//	users.add(user);
-//
 
 	public Festival getFestival () {
 		return festival;

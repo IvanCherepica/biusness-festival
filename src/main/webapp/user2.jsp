@@ -72,7 +72,6 @@ To change this template use File | Settings | File Templates.
             /*position: relative;
             z-index: 0;*/
         }
-
         .informUser {
             border-radius: 20px;
             position: absolute;
@@ -85,7 +84,6 @@ To change this template use File | Settings | File Templates.
             opacity: 0.8;
             margin: 10px 10px 10px 10px;
         }
-
         #userBlock{
             border-radius: 20px;
             text-align: center;
@@ -113,6 +111,7 @@ To change this template use File | Settings | File Templates.
     </style>
 </head>
 <body>
+
 <div class="main">
     <div id="informUserBlock" class="informUser">
         <div id="userBlock">
