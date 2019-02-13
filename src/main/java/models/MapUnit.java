@@ -3,6 +3,7 @@ package models;
 import com.google.gson.annotations.SerializedName;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @MappedSuperclass
 public abstract class MapUnit  {
@@ -114,5 +115,24 @@ public abstract class MapUnit  {
                 ", geometry='" + geometry + '\'' +
                 ", color='" + color + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        MapUnit mapUnit = (MapUnit) o;
+        return id == mapUnit.id &&
+                Double.compare(mapUnit.radius, radius) == 0 &&
+                Objects.equals(name, mapUnit.name) &&
+                Objects.equals(description, mapUnit.description) &&
+                Objects.equals(geometry, mapUnit.geometry) &&
+                Objects.equals(color, mapUnit.color) &&
+                Objects.equals(center, mapUnit.center);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, description, geometry, color, center, radius);
     }
 }
