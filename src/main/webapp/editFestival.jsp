@@ -10,7 +10,7 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="jquery.maskedinput.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.js"></script>
 
     <style>
         body {
@@ -487,16 +487,11 @@
                 <div class="raw">
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                            <span class="input-group-text">From (date)</span>
+                            <label class="input-group-text">From-To</label>
                         </div>
-                        <input id="ev-date-from" type="text" class="form-control" aria-label="From">
+                        <input id="ev-date-from" type="text" class="form-control">
+                        <input id="ev-date-to" type="text" class="form-control">
                     </div>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">To (date)</span>
-                        </div>
-                    </div>
-                    <input id="ev-date-to" type="text" class="form-control" aria-label="From">
                 </div>
                 <input id="ev-q-type" type="hidden" readonly>
             </div>
@@ -540,8 +535,6 @@
     function editEvent(festivalId) {
         $('#ev-q-type').val("");
         $('#efestival_id').val(festivalId);
-
-
         $("#editEventModal").modal('show');
     }
     function deleteEvent(id, festivalId) {
@@ -580,7 +573,12 @@
         $('#ev-date-to').val(dateTo);
     }
 
-    $(document).ready(function(){
+    $(document).ready(function($){
+
+        //задание заполнителя с помощью параметра placeholder
+        $("#ev-date-from").mask("99.99.9999 99:99", {placeholder: "дд.мм.гггг чч:мм" });
+        $("#ev-date-to").mask("99.99.9999 99:99", {placeholder: "дд.мм.гггг чч:мм" });
+
         $("#ep-save-btn").click(function(){
             $.ajax({
                 url : '/admin/eventpoints/edit',     // URL - сервлет
@@ -622,7 +620,7 @@
         })
 
         $("#ev-save-btn").click(function(){
-            console.log("Event save button = "+$('#ev-q-type'));
+            console.log("Event save button = "+$('#ev-q-type').val());
             $.ajax({
                 type : "POST",
                 url : ($('#ev-q-type').val()=="new") ? '/admin/events/add' : '/admin/events/edit' ,

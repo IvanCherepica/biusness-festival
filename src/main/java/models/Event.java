@@ -1,12 +1,14 @@
 package models;
 
 import com.google.gson.annotations.SerializedName;
+import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 import java.util.Objects;
 import java.util.Set;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 @Entity
@@ -37,10 +39,12 @@ public class Event {
 
 	@Column(name = "date_begin")
 	@SerializedName("date_begin")
+	@ColumnDefault("2000-01-01T00:00:00")
 	private LocalDateTime dateBegin;
 
 	@Column(name = "date_end")
 	@SerializedName("date_end")
+	@ColumnDefault("2000-01-01T00:00:00")
 	private LocalDateTime dateEnd;
 
 	@ManyToMany(fetch= FetchType.EAGER, targetEntity = User.class)
@@ -126,6 +130,8 @@ public class Event {
 				", name='" + name + '\'' +
 				", description='" + description + '\'' +
 				", eventPoint=" + eventPoint +
+				", beginDate=" + dateBegin.format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss")) +
+				", endDate=" + dateEnd.format(DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss")) +
 				'}';
 	}
 
