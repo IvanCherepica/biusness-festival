@@ -1,4 +1,4 @@
-package servlets.userNotificationServlets;
+package servlets.mapUpdateServlets;
 
 
 

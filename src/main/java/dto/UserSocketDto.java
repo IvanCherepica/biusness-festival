@@ -1,9 +1,6 @@
 package dto;
 
-import models.EventPoint;
-import models.Festival;
-import models.PointUnit;
-import models.User;
+import models.*;
 
 import java.util.List;
 
@@ -22,7 +19,11 @@ public class UserSocketDto {
 
     private Festival festival;
 
+    private EventPoint eventPoint;
+
     private User user;
+
+    private List<Event> eventList;
 
     private List<EventPoint> eventPointList;
 
@@ -101,5 +102,21 @@ public class UserSocketDto {
 
     public void setEventPointsGson(String eventPointsGson) {
         this.eventPointsGson = eventPointsGson;
+    }
+
+    public EventPoint getEventPoint() {
+        return eventPoint;
+    }
+
+    public void setEventPoint(EventPoint eventPoint) {
+        this.eventPoint = eventPoint;
+    }
+
+    public List<Event> getEventList() {
+        return eventList;
+    }
+
+    public void setEventList(List<Event> eventList) {
+        this.eventList = eventList;
     }
 }
