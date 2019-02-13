@@ -12,8 +12,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @WebServlet("/admin/events/add")
 public class AddEventServlet extends HttpServlet {
@@ -42,8 +44,8 @@ public class AddEventServlet extends HttpServlet {
 		    eventPoint = eventPoinService.getById(eventPointId);
 		    long festivalId = Long.parseLong(festivalIdParam);
 		    festival = festivalService.getById(festivalId);
-		    dateBegin = LocalDateTime.parse(dateBeginParam);
-		    dateEnd = LocalDateTime.parse(dateEndParam);
+		    dateBegin = LocalDateTime.parse(dateBeginParam+":00", DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss"));
+		    dateEnd = LocalDateTime.parse(dateEndParam+":00", DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss"));
 		    
 		    if (!(eventPoint instanceof EventPoint || festival instanceof Festival)) {
 			    response.sendRedirect("/error.html");

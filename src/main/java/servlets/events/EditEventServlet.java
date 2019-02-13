@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @WebServlet("/admin/events/edit")
 public class EditEventServlet extends HttpServlet {
@@ -51,12 +52,16 @@ public class EditEventServlet extends HttpServlet {
 		String dateBeginParam = request.getParameter("dateBegin");
 		String dateEndParam = request.getParameter("dateEnd");
 		
+		LocalDateTime dateBegin = LocalDateTime.now();
+		LocalDateTime dateEnd = LocalDateTime.now();
+		
 		try {
 			long festivalId = Long.parseLong(festivalIdParam);
 			long eventId = Long.parseLong(eventIdParam);
 			long eventPointId = Long.parseLong(eventPointIdParam);
-			LocalDateTime dateBegin = LocalDateTime.now();
-			LocalDateTime dateEnd = LocalDateTime.now();
+			
+			dateBegin = LocalDateTime.parse(dateBeginParam+":00", DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss"));
+			dateEnd = LocalDateTime.parse(dateEndParam+":00", DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss"));
 			
 			EventPoint eventPoint = eventPoinService.getById(eventPointId);
 			
