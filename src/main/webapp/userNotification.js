@@ -19,6 +19,13 @@ $.ajax({
         isInFestival = data.isInFestival;
         user = data.user;
         console.log("userName " + userName + "; userID " + userID + "; isInFestival " + isInFestival);
+        $("#userLg").append("<img " +
+            "style=\"margin-top: 10px; " +
+            "border-radius: 50%;" +
+            " opacity: 0.8; " +
+            "width: 50%; height: 55%\" " +
+            "src=\"http://bootstraptema.ru/snippets/element/2016/profilesection/myprofile.jpg\">");
+
         $("#userLg").append("<p> Hello <b>" + userName + "</b></p>");
         $("#userLg").append("<p> Your ID: " + userID + "</p>");
         $("#userLg").append("<p> Your Role: " + data.user.role + "</p>");
@@ -54,6 +61,8 @@ function connect() {
             festival = JSON.parse(event.data).festival;
             $("#festivalInfo1").text("You are at " + festival.name);
             $("#festivalInfo2").text("About: " + festival.description);
+            $("#informUserBlock").css('height','770');
+            $("#festivalBlock").css('height','450');
 
             if (messageToUser.localeCompare("") != 0 ) {
                 sendWelcomMessage(messageToUser);

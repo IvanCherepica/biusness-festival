@@ -13,6 +13,7 @@ public class User {
     private String name;
     private String password;
     private String role;
+    private String imagePath;
 
     @ManyToMany(fetch = FetchType.EAGER , targetEntity = EventPoint.class)
     @JoinTable(name = "users_on_events",
@@ -81,6 +82,16 @@ public class User {
     public void setRole(String role) {
         this.role = role;
     }
+
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
+
+
 
     @Override
     public boolean equals(Object o) {

@@ -37,31 +37,8 @@ To change this template use File | Settings | File Templates.
         body {
             background: #eeeeee;
         }
-        .header {
-            padding: 0px 10px 0px 10px;
-            margin-bottom: 0px;
-        }
-        .left-menu {
-            background: white;
-            padding: 20px 0 0 0;
-            min-height: 94vh;
-        }
-        .left-menu ul li {
-            margin: 0px;
-        }
-        .left-menu ul li a {
-            border-radius: 0px;
-        }
-        .edit-form label {
-            font-weight: 100;
-            font-size: 20px;
-            margin: 10px 0 10px 0;
-        }
-        .nav-content {
-            margin-bottom: -1px;
-        }
         .usermap {
-            margin: 10px 10px 10px 10px;
+            margin: 3px 3px 3px 3px;
             z-index: 1;
             position: relative;
         }
@@ -69,10 +46,12 @@ To change this template use File | Settings | File Templates.
             position: relative;
             z-index: 0;
         }
+
         .informUser {
+            border-radius: 20px;
             position: absolute;
-            width: 25%;
-            height: 90%;
+            width: 300px;
+            height: 300px;
             right: 10px;
             padding: 10px;
             background: #ffffff;
@@ -80,7 +59,9 @@ To change this template use File | Settings | File Templates.
             opacity: 0.8;
             margin: 10px 10px 10px 10px;
         }
+
         #userBlock{
+            border-radius: 20px;
             text-align: center;
             position: initial;
             width: initial;
@@ -89,38 +70,27 @@ To change this template use File | Settings | File Templates.
             z-index: 4;
             opacity: 1;
             background: #eeeeee;
-            height: 40%;
+            height: 270px;
         }
         #festivalBlock{
+            border-radius: 20px;
             text-align: center;
             position: initial;
             width: initial;
             height: initial;
-            z-index: 4;
+            z-index: 0;
             opacity: 1;
             background: #eeeeee;
-            height: 50%;
+            height: 0px;
             margin: 20px 0 0 0;
         }
     </style>
 </head>
 <body>
-<div class="container-fluid">
-    <div class="row">
-        <div class="panel panel-info">
-            <div class="navbar navbar-inverse navbar-static-top header">
-                <a class="navbar-brand" href="/user">Your Festival</a>
-                <a class="navbar-brand" href="/user/profile">Profile</a>
-                <a class="navbar-brand pull-right" href="/logout">Logout</a>
-            </div>
-        </div>
-
-    </div>
-</div>
 <div class="main">
-    <div class="informUser">
+    <div id="informUserBlock" class="informUser">
         <div id="userBlock">
-            <div id="userImage"><img style="margin-top: 10px; width: 200px; height: 200px" src="http://bootstraptema.ru/snippets/element/2016/profilesection/myprofile.jpg"></div>
+            <div id="userImage"></div>
             <div id="userLg"></div>
         </div>
         <div id="festivalBlock">
