@@ -1,7 +1,11 @@
 package dto;
 
+import models.EventPoint;
 import models.Festival;
+import models.PointUnit;
 import models.User;
+
+import java.util.List;
 
 /**
  * Используется для отправки ответного сообщения пользователю через WebSocket
@@ -19,6 +23,11 @@ public class UserSocketDto {
     private Festival festival;
 
     private User user;
+
+    private List<EventPoint> eventPointList;
+
+    private String eventPointsGson;
+
 
     public UserSocketDto(long id, String name, boolean isInFestival) {
         this.id = id;
@@ -75,5 +84,22 @@ public class UserSocketDto {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public List<EventPoint> getEventPointList() {
+
+        return eventPointList;
+    }
+
+    public void setEventPointList(List<EventPoint> eventPointList) {
+        this.eventPointList = eventPointList;
+    }
+
+    public String getEventPointsGson() {
+        return eventPointsGson;
+    }
+
+    public void setEventPointsGson(String eventPointsGson) {
+        this.eventPointsGson = eventPointsGson;
     }
 }
