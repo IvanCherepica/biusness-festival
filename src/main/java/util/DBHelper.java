@@ -1,16 +1,7 @@
 package util;
 
-import models.EventPoint;
-import models.Festival;
-import models.HotPoint;
-import models.User;
+import models.*;
 import org.hibernate.cfg.Configuration;
-import servlets.UsersListServlet;
-
-import java.sql.Connection;
-import java.sql.Driver;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 
 public class DBHelper {
 
@@ -21,6 +12,7 @@ public class DBHelper {
 		configuration.addAnnotatedClass(HotPoint.class);
 		configuration.addAnnotatedClass(EventPoint.class);
 		configuration.addAnnotatedClass(User.class);
+		configuration.addAnnotatedClass(Event.class);
 
 		configuration.setProperty("hibernate.dialect", PropertiesReader.getProperties("dialect"));
 		configuration.setProperty("hibernate.connection.driver_class", PropertiesReader.getProperties("driver.class"));

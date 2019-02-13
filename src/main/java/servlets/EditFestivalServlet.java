@@ -1,5 +1,6 @@
 package servlets;
 
+import models.Event;
 import models.EventPoint;
 import models.Festival;
 import models.HotPoint;
@@ -21,16 +22,12 @@ public class EditFestivalServlet extends HttpServlet {
 	private final FestivalService festivalService =  FestivalServiceImpl.getInstance();
 	private final EventPoinService eventPoinService =  EventPoinServiceImpl.getInstance();
 	private final HotPointService hotPointService =  HotPointServiceImpl.getInstance();
+	private final EventService eventService =  EventServiceImpl.getInstance();
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
 		String paramId = request.getParameter("festivalId");
 		Festival festival;
-		
-		List<String> test = new ArrayList<>();
-		test.add("1");
-		test.add("12");
-		test.add("13");
 		
 		if (paramId==null) {
 			response.sendRedirect("/error.html");
@@ -39,10 +36,13 @@ public class EditFestivalServlet extends HttpServlet {
 			festival = festivalService.getById(id);
 			List<EventPoint> eventPoints = eventPoinService.getAllByFestival(id);
 			List<HotPoint> hotPoints = hotPointService.getAllByFestival(id);
+			List<Event> events = eventService.getAllByFestival(id);
+			
 			request.setAttribute("festival", festival);
 			//request.setAttribute("eventPointsList", eventPoints);
 			request.setAttribute("eventPointsList", eventPoints);
 			request.setAttribute("hotPointList", hotPoints);
+			request.setAttribute("eventList", events);
 		}
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/editFestival.jsp");
 		dispatcher.forward(request, response);
@@ -56,14 +56,20 @@ public class EditFestivalServlet extends HttpServlet {
 		String description = request.getParameter("description");
 		String geometry = request.getParameter("geometry");
 		String color = request.getParameter("color");
+		String radius = request.getParameter("radius");
+		String center = request.getParameter("center");
 		
 		try {
-			Long id = Long.parseLong(paramId);
+			long id = Long.parseLong(paramId);
+			long r = Long.parseLong(radius);
+			
 			Festival festival = festivalService.getById(id);
 			festival.setName(name == null ? "" : name);
 			festival.setDescription(description == null ? "" : description);
 			festival.setGeometry(geometry == null ? "" : geometry);
 			festival.setColor(color == null ? "" : color);
+			festival.setRadius(Long.valueOf(radius));
+			festival.setCenter(center == null ? "" : center);
 			
 			festivalService.update(festival);
 			

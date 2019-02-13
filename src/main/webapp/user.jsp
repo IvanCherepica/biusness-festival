@@ -67,13 +67,13 @@
                 <a class="navbar-brand pull-right" href="/logout">Logout</a>
             </div>
         </div>
-        <div class="container">
-            <h1>Hello user.</h1>
-        </div>
     </div>
 </div>
 <div class="usermap">
 <jsp:include page="pageWithMap.jsp"/>
+</div>
+<div class="container">
+    <h1>Hello user.</h1>
 </div>
 </body>
 </html>

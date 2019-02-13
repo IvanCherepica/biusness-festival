@@ -15,7 +15,7 @@ public class User {
     private String role;
 
     @ManyToMany(fetch = FetchType.EAGER , targetEntity = EventPoint.class)
-    @JoinTable(name = "relations",
+    @JoinTable(name = "users_on_events",
             joinColumns = {@JoinColumn(name = "users_id")},
             inverseJoinColumns = {@JoinColumn(name = "event_point_id")})
     private List<EventPoint> events;
@@ -44,7 +44,7 @@ public class User {
         this.password = password;
     }
 
-    public List<EventPoint> getEventsFromUser(){ return events;}
+    public List<EventPoint> getEvents(){ return events;}
 
     public void setEventsToUser(List<EventPoint> events) {this.events=events;}
 
