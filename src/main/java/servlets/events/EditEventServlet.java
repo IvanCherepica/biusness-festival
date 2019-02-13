@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.time.LocalDateTime;
 
 @WebServlet("/admin/events/edit")
 public class EditEventServlet extends HttpServlet {
@@ -47,11 +48,15 @@ public class EditEventServlet extends HttpServlet {
 		String name = request.getParameter("name");
 		String description = request.getParameter("description");
 		String eventPointIdParam = request.getParameter("eventPointId");
+		String dateBeginParam = request.getParameter("dateBegin");
+		String dateEndParam = request.getParameter("dateEnd");
 		
 		try {
 			long festivalId = Long.parseLong(festivalIdParam);
 			long eventId = Long.parseLong(eventIdParam);
 			long eventPointId = Long.parseLong(eventPointIdParam);
+			LocalDateTime dateBegin = LocalDateTime.now();
+			LocalDateTime dateEnd = LocalDateTime.now();
 			
 			EventPoint eventPoint = eventPoinService.getById(eventPointId);
 			
@@ -60,6 +65,8 @@ public class EditEventServlet extends HttpServlet {
 			event.setName(name == null ? "" : name);
 			event.setDescription(description == null ? "" : description);
 			event.setEventPoint(eventPoint);
+			event.setDateBegin(dateBegin);
+			event.setDateEnd(dateEnd);
 			
 			eventService.update(event);
 			
