@@ -12,29 +12,76 @@ To change this template use File | Settings | File Templates.
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>
+        // $.ajax({
+        //     url: "/rest/info",
+        //     method: "get",
+        //     async: true,
+        //     error: function (message) {
+        //         console.log(message);
+        //     },
+        //     success: function (data) {
+        //         console.log(data);
+        //         $("#userLg").append("<p> Hello <b>" + data.user.name + "</b></p>");
+        //         $("#userLg").append("<p> Your ID: " + data.user.id + "</p>");
+        //         $("#userLg").append("<p> Your Role: " + data.user.role + "</p>");
+        //         if (data.isInFestival) {
+        //             $("#festivalInfo").append("<p> You are at  <b>" + data.festival.name + "</b></p>");
+        //         } else {
+        //             $("#festivalInfo").append("<p> There is no information about any festival near you. Please fuck off</b></p>");
+        //         }
+        //     }
+        // });
+    </script>
     <style>
         body {
             background: #eeeeee;
         }
+        .header {
+            padding: 0px 10px 0px 10px;
+            margin-bottom: 0px;
+        }
+        .left-menu {
+            background: white;
+            padding: 20px 0 0 0;
+            min-height: 94vh;
+        }
+        .left-menu ul li {
+            margin: 0px;
+        }
+        .left-menu ul li a {
+            border-radius: 0px;
+        }
+        .edit-form label {
+            font-weight: 100;
+            font-size: 20px;
+            margin: 10px 0 10px 0;
+        }
+        .nav-content {
+            margin-bottom: -1px;
+        }
         .usermap {
-            margin: 3px 3px 3px 3px;
-            z-index: 1;
+            margin: 10px 10px 10px 10px;
+            /*z-index: 1;*/
             position: relative;
         }
+        .container{
+            width: 568px!important;
+        }
         .main{
-            position: relative;
-            z-index: 0;
+            /*position: relative;
+            z-index: 0;*/
         }
 
         .informUser {
             border-radius: 20px;
             position: absolute;
-            width: 300px;
-            height: 300px;
+            width: 25%;
+            height: 90%;
             right: 10px;
             padding: 10px;
             background: #ffffff;
-            z-index: 2;
+            z-index: 2000;
             opacity: 0.8;
             margin: 10px 10px 10px 10px;
         }
@@ -46,10 +93,10 @@ To change this template use File | Settings | File Templates.
             width: initial;
             height: initial;
             right: 10px;
-            z-index: 4;
+            z-index: 2001;
             opacity: 1;
             background: #eeeeee;
-            height: 270px;
+            height: 40%;
         }
         #festivalBlock{
             border-radius: 20px;
@@ -57,10 +104,10 @@ To change this template use File | Settings | File Templates.
             position: initial;
             width: initial;
             height: initial;
-            z-index: 0;
+            z-index: 2003;
             opacity: 1;
             background: #eeeeee;
-            height: 0px;
+            height: 50%;
             margin: 20px 0 0 0;
         }
     </style>
