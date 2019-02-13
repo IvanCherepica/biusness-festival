@@ -25,7 +25,9 @@ public class EventDAOImpl extends AbstactDAO<Event> implements EventDAO{
 		String queryString = "UPDATE Event SET name = :name, " +
 				"description = :description, " +
 				"eventpoint_id = :eventPoint, " +
-				"festival_id = :festival " +
+				"festival_id = :festival, " +
+				"date_begin = :dateBegin, " +
+				"date_end = :dateEnd " +
 				"WHERE id = :id";
 		
 		query = session.createQuery(queryString);
@@ -34,6 +36,8 @@ public class EventDAOImpl extends AbstactDAO<Event> implements EventDAO{
 		query.setParameter("description", event.getDescription());
 		query.setParameter("eventPoint", event.getEventPoint().getId());
 		query.setParameter("festival", event.getFestival().getId());
+		query.setParameter("dateBegin", event.getDateBegin());
+		query.setParameter("dateEnd", event.getDateEnd());
 		
 		Transaction transaction = session.beginTransaction();
 		query.executeUpdate();
