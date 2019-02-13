@@ -39,13 +39,11 @@ public class Event {
 
 	@Column(name = "date_begin")
 	@SerializedName("date_begin")
-	@ColumnDefault("2000-01-01T00:00:00")
-	private LocalDateTime dateBegin;
+	private LocalDateTime dateBegin = LocalDateTime.now();
 
 	@Column(name = "date_end")
 	@SerializedName("date_end")
-	@ColumnDefault("2000-01-01T00:00:00")
-	private LocalDateTime dateEnd;
+	private LocalDateTime dateEnd = LocalDateTime.now();
 
 	@ManyToMany(fetch= FetchType.EAGER, targetEntity = User.class)
 	@JoinTable(name ="users_on_event",
