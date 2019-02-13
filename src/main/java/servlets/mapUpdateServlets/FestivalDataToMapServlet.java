@@ -4,8 +4,8 @@ import com.google.gson.Gson;
 import dto.UserSocketDto;
 import models.EventPoint;
 import models.Festival;
-import services.EventPoinServiceImpl;
-import services.FestivalServiceImpl;
+import services.implementation.EventPoinServiceImpl;
+import services.implementation.FestivalServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -25,13 +25,17 @@ public class FestivalDataToMapServlet  extends HttpServlet {
         String fesivalID = request.getParameter("festival_id");
         List<EventPoint> eventPoints = null;
         Festival festival = null;
-        EventPoinServiceImpl eventPoinService = EventPoinServiceImpl.getInstance();
-        eventPoinService.clearCash();
+        EventPoinServiceImpl eventPoinService = null;
+
+        eventPoinService = EventPoinServiceImpl.getInstance();
+
 
         if (fesivalID != null) {
             Long festivalId = Long.parseLong(fesivalID);
             eventPoints = eventPoinService.getAllEventPointByFestivalId(festivalId);
+
             festival = FestivalServiceImpl.getInstance().getById(festivalId);
+
         } else {
             eventPoints = eventPoinService.getAllList();
         }

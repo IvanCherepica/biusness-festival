@@ -3,8 +3,8 @@ package servlets.hotpoints;
 
 import models.HotPoint;
 import models.Festival;
-import services.FestivalServiceImpl;
-import services.HotPointServiceImpl;
+import services.implementation.FestivalServiceImpl;
+import services.implementation.HotPointServiceImpl;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.RequestDispatcher;

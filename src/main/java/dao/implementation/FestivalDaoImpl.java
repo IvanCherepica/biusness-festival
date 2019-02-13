@@ -1,11 +1,13 @@
-package dao;
+package dao.implementation;
 
+import dao.AbstactDAO;
+import dao.abstraction.FestivalDao;
 import models.Festival;
 import org.hibernate.*;
 
 import java.util.List;
 
-public class FestivalDaoImpl extends AbstactDAO<Festival> implements FestivalDao{
+public class FestivalDaoImpl extends AbstactDAO<Festival> implements FestivalDao {
 	
 	public FestivalDaoImpl(SessionFactory sessionFactory) {
 		super(sessionFactory);

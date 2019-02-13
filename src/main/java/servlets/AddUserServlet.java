@@ -1,9 +1,8 @@
 package servlets;
 
-import models.Festival;
 import models.User;
-import services.UserService;
-import services.UserServiceImpl;
+import services.abstraction.UserService;
+import services.implementation.UserServiceImpl;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;

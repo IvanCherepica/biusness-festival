@@ -1,20 +1,24 @@
 package servlets.hotpoints;
 
 import org.hibernate.HibernateException;
-import services.HotPointService;
-import services.HotPointServiceImpl;
+import services.abstraction.HotPointService;
+import services.implementation.HotPointServiceImpl;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.SQLException;
 
 
 @WebServlet("/admin/hotpoints/delete")
 public class HotPointDeleteServlet extends HttpServlet {
     private final HotPointService hotPointService =  HotPointServiceImpl.getInstance();
-    
+
+    public HotPointDeleteServlet() throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
+    }
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String paramHotPontId = request.getParameter("hotPointId");

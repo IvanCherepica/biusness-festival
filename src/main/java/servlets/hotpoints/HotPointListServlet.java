@@ -2,8 +2,8 @@ package servlets.hotpoints;
 
 import models.HotPoint;
 import org.hibernate.HibernateException;
-import services.HotPointService;
-import services.HotPointServiceImpl;
+import services.abstraction.HotPointService;
+import services.implementation.HotPointServiceImpl;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;

@@ -5,7 +5,14 @@ import models.EventPoint;
 import models.Festival;
 import models.HotPoint;
 import org.hibernate.HibernateException;
-import services.*;
+import services.abstraction.EventPoinService;
+import services.abstraction.EventService;
+import services.abstraction.FestivalService;
+import services.abstraction.HotPointService;
+import services.implementation.EventPoinServiceImpl;
+import services.implementation.EventServiceImpl;
+import services.implementation.FestivalServiceImpl;
+import services.implementation.HotPointServiceImpl;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,7 +21,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.sql.SQLException;
 import java.util.List;
 
 @WebServlet("/admin/editFestival")
@@ -23,7 +30,10 @@ public class EditFestivalServlet extends HttpServlet {
 	private final EventPoinService eventPoinService =  EventPoinServiceImpl.getInstance();
 	private final HotPointService hotPointService =  HotPointServiceImpl.getInstance();
 	private final EventService eventService =  EventServiceImpl.getInstance();
-	
+
+	public EditFestivalServlet() throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
+	}
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
 		String paramId = request.getParameter("festivalId");
