@@ -7,22 +7,29 @@ import java.util.List;
 @Table(name = "event_point")
 public class EventPoint extends PointUnit {
     @ManyToMany(fetch = FetchType.EAGER, targetEntity = User.class)
-    @JoinTable(name = "users_on_events",
+    @JoinTable(name = "users_on_eventpoints",
             joinColumns = {@JoinColumn(name = "event_point_id")},
             inverseJoinColumns = {@JoinColumn(name = "users_id")})
     private List<User> users;
 
-    public List<User> getUsersFromEvent() {
+    public List<User> getUsers() {
         return users;
     }
 
-    public void setUsersToEvent(List<User> users) {
+    public void setUsers(List<User> users) {
         this.users = users;
     }
 
-    public void addUserToEvent(User user) {
-        this.users.add(user);
+    public boolean addUserToEvent(User user) {
+        if (users.contains(user)){return false;}
+        else {
+            users.add(user);
+            return true;
+        }
     }
+
+
+
 
     public EventPoint() {
     }

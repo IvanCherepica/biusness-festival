@@ -16,6 +16,6 @@ public interface EventPoinService {
     List<EventPoint> getAllList();
 	List<EventPoint> getAllByFestival(long id);
 	List<EventPoint> getAllEventPointByFestivalId(long festivalId);
-	void addUsersToEventId(long id, List<User> users);
-	void addUserToEventId(long id, User user);
+//	void addUsersToEventId(long id, List<User> users);
+//	void addUserToEventId(long id, User user);
 }
