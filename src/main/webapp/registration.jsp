@@ -11,6 +11,14 @@
     <title>Registration</title>
     <link rel="stylesheet" href="https://bootswatch.com/3/united/bootstrap.min.css" >
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <style>
+        .form-control{
+            width: 20%;
+        }
+        .submit{
+            width: 20%;
+        }
+    </style>
 </head>
 <body>
 <div align="center">
