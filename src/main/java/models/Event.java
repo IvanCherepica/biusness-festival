@@ -3,6 +3,8 @@ package models;
 import com.google.gson.annotations.SerializedName;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -23,23 +25,21 @@ public class Event {
 	@SerializedName("description")
 	private String description;
 	
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "eventpoint_id")
 	private EventPoint eventPoint;
 	
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "festival_id")
 	private Festival festival;
 	
 	@Column(name = "date_begin")
 	@SerializedName("date_begin")
-	@Temporal(value=TemporalType.TIMESTAMP)
-	Date dateBegin;
+	private LocalDateTime dateBegin;
 	
 	@Column(name = "date_end")
 	@SerializedName("date_end")
-	@Temporal(value=TemporalType.TIMESTAMP)
-	Date dateEnd;
+	private LocalDateTime dateEnd;
 	
 	public Event () {
 	}
@@ -91,17 +91,17 @@ public class Event {
 		this.festival = festival;
 	}
 	
-	public Date getDateBegin () {
+	public LocalDateTime getDateBegin () {
 		return dateBegin;
 	}
-		public void setDateBegin (Date dateBegin) {
+	public void setDateBegin (LocalDateTime dateBegin) {
 		this.dateBegin = dateBegin;
 	}
 	
-	public Date getDateEnd () {
+	public LocalDateTime getDateEnd () {
 		return dateEnd;
 	}
-	public void setDateEnd (Date dateEnd) {
+	public void setDateEnd (LocalDateTime dateEnd) {
 		this.dateEnd = dateEnd;
 	}
 	
