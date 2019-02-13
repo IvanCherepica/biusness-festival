@@ -9,42 +9,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <title>Festivals</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 
-    <!-- Core Style CSS -->
+    <link rel="stylesheet" href="https://bootswatch.com/3/united/bootstrap.min.css" >
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <style>
-        body {
-            background: #eeeeee;
-        }
-        .header {
-            padding: 0px 10px 0px 10px;
-            margin-bottom: 0px;
-        }
-        .left-menu {
-            background: white;
-            padding: 20px 0 0 0;
-            min-height: 94vh;
-        }
-        .left-menu ul li {
-            margin: 0px;
-        }
-        .left-menu ul li a {
-            border-radius: 0px;
-        }
-        .nav-content {
-            margin-bottom: -1px;
-        }
-        .edit-form label {
-            font-weight: 100;
-            font-size: 20px;
-            margin: 10px 0 10px 0;
-        }
-        .add-user-button {
-            margin-top: 30px;
-        }
-    </style>
+
 </head>
 
 
