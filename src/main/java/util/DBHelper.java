@@ -1,10 +1,10 @@
 package util;
 
-import models.EventPoint;
-import models.Festival;
-import models.HotPoint;
-import models.User;
+import models.*;
+import org.hibernate.SessionFactory;
+import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.service.ServiceRegistry;
 import servlets.UsersListServlet;
 
 import java.sql.Connection;
@@ -14,13 +14,16 @@ import java.sql.SQLException;
 
 public class DBHelper {
 
-
 	static public Configuration getConfiguration() {
+
 		Configuration configuration = new Configuration();
+		configuration.addAnnotatedClass(Event.class);
+		configuration.addAnnotatedClass(User.class);
 		configuration.addAnnotatedClass(Festival.class);
 		configuration.addAnnotatedClass(HotPoint.class);
 		configuration.addAnnotatedClass(EventPoint.class);
-		configuration.addAnnotatedClass(User.class);
+
+
 
 		configuration.setProperty("hibernate.dialect", PropertiesReader.getProperties("dialect"));
 		configuration.setProperty("hibernate.connection.driver_class", PropertiesReader.getProperties("driver.class"));

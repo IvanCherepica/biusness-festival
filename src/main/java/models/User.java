@@ -1,7 +1,9 @@
 package models;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.*;
+
+import static org.hibernate.internal.util.collections.ArrayHelper.toList;
 
 
 @Entity
@@ -14,12 +16,20 @@ public class User {
     private String password;
     private String role;
 
-    @ManyToMany(fetch = FetchType.EAGER , targetEntity = EventPoint.class)
-    @JoinTable(name = "users_on_events",
+    @ManyToMany(fetch = FetchType.EAGER, targetEntity = EventPoint.class)
+    @JoinTable(name = "users_on_eventpoints",
             joinColumns = {@JoinColumn(name = "users_id")},
             inverseJoinColumns = {@JoinColumn(name = "event_point_id")})
-    private List<EventPoint> events;
-    public User(){}
+    private Set<EventPoint> eventPoints;
+
+    @ManyToMany(fetch = FetchType.EAGER, targetEntity = Event.class)
+    @JoinTable(name = "users_on_event",
+            joinColumns = {@JoinColumn(name = "users_id")},
+            inverseJoinColumns = {@JoinColumn(name = "events_id")})
+    private Set<Event> events;
+
+    public User() {
+    }
 
     public User(String name, String password, String role) {
         this.name = name;
@@ -44,11 +54,43 @@ public class User {
         this.password = password;
     }
 
-    public List<EventPoint> getEvents(){ return events;}
+    public Set<EventPoint> getEventPoints() {
+        return eventPoints;
+    }
 
-    public void setEventsToUser(List<EventPoint> events) {this.events=events;}
+    public void setEventPoints(Set<EventPoint> eventsp) {
+        this.eventPoints = eventsp;
+    }
 
-    public void addEventToUser(EventPoint event) {this.events.add(event);}
+    public void addEventPoint(EventPoint event) {
+            eventPoints.add(event);
+    }
+
+    public Set<Event> getEvents() {
+        return events;
+    }
+
+    public void setEventsFromFest(Set<Event> events) {
+        this.events = events;
+        Set<EventPoint> EventPointSet = new LinkedHashSet<>();
+        for (Event eve : events) {
+                EventPointSet.add(eve.getEventPoint());
+        }
+        setEventPoints(EventPointSet);
+    }
+
+    public void setEventsFromEPoint(Set<Event> events, EventPoint eventPoint) {
+        this.events = events;
+        if (events.size() > 0) {
+            addEventPoint(eventPoint);
+        } else {
+            eventPoints.remove(eventPoint);
+        }
+    }
+
+    public void addEvent(Event event) {
+            events.add(event);
+    }
 
     public long getId() {
         return id;
