@@ -46,7 +46,8 @@ function connect() {
             if (messageToUser.localeCompare("") != 0 ) {
                 sendWelcomMessage(messageToUser);
             }
-            sendMessage(webSocketClient);
+            var messaaaage = "dsdsdsdsds";
+            sendMessage(messaaaage);
         };
     webSocketClient.onclose = function (event) {
             console.log("close");
@@ -97,7 +98,7 @@ function processDataForUserPage(data) {
         "style=\"margin-top: 10px; " +
         "border-radius: 50%;" +
         " opacity: 0.8; " +
-        "width: 50%; height: 55%\" " +
+        "width: 50%; height: 50%\" " +
         "src=\"" + user.imagePath +"\">");
 
     $("#userLg").append("<p> Hello <b>" + userName + "</b></p>");
@@ -120,13 +121,17 @@ function processDataForFestivalBlock(event, eventspoints) {
             $("#events").append("<h4><b>Todays events</b></h4>");
             for (var i = 0; i < eventspoints.length; i++) {
                 var j = i + 1;
-                $("#events").append("</bt><button style='' data-toggle=\"collapse\" data-target=\"#demo" + j + "\">"+ eventspoints[i].name +"</button><br>\n" +
+                $("#events").append("<li style='margin: 3px 3px 3px 3px;'><a href=\"#\"><button style='color: #fff; /* цвет текста */\n" +
+                    "  text-decoration: none; /* убирать подчёркивание у ссылок */\n" +
+                    "  user-select: none; /* убирать выделение текста */\n" +
+                    "  background: rgb(212,75,56); /* фон кнопки */\n" +
+                    "  padding: .1em 0.5em; /* отступ от текста */\n" +
+                    "  outline: none; /* убирать контур в Mozilla */' data-toggle=\"collapse\" data-target=\"#demo" + j
+                    + "\">"+ eventspoints[i].name +"</button></li></a>\n" +
                     "\n" +
                     "<div id=\"demo" + j + "\" class=\"collapse\">\n" +
                     "Description:"+ eventspoints[i].description +"\n" +
                     "</div>");
-
-
                 if (i === eventspoints.length - 1) {
                     flag = true;
                 }

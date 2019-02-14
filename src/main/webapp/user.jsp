@@ -11,6 +11,7 @@ To change this template use File | Settings | File Templates.
     <title>User</title>
     <link rel="stylesheet" href="https://bootswatch.com/3/united/bootstrap.min.css" >
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
     <style>
         body {
             background: #eeeeee;
@@ -32,13 +33,14 @@ To change this template use File | Settings | File Templates.
             border-radius: 20px;
             position: absolute;
             width: 300px;
-            height: 300px;
+            height: 293px;
             right: 10px;
             padding: 10px;
-            background: #ffffff;
+            background: #D3D4DA;
             z-index: 2000;
             opacity: 0.8;
             margin: 10px 10px 10px 10px;
+            color: #292929;
         }
 
         #userBlock{
@@ -50,7 +52,7 @@ To change this template use File | Settings | File Templates.
             right: 10px;
             z-index: 2001;
             opacity: 1;
-            background: #eeeeee;
+            background: #ffffff;
             height: 270px;
         }
         #festivalBlock {
@@ -67,8 +69,56 @@ To change this template use File | Settings | File Templates.
         }
 
         #events{
-            all: initial;
             margin: 10px 10px 10px 10px;
+        }
+
+
+        .rectangle {
+            all: initial;
+            counter-reset: li;
+            list-style: none;
+            font: 14px "Trebuchet MS", "Lucida Sans";
+            padding: 0;
+            text-shadow: 0 1px 0 rgba(255,255,255,.5);
+        }
+        .rectangle a {
+            position: relative;
+            display: block;
+            padding: .4em .4em .4em .8em;
+            margin: .5em 0 .5em 2.5em;
+            background: #D3D4DA;
+            color: #444;
+            text-decoration: none;
+            transition: all .3s ease-out;
+        }
+        .rectangle a:hover {background: #DCDDE1;}
+
+        .rectangle a:before {
+            content: counter(li);
+            counter-increment: li;
+            position: absolute;
+            left: -2.5em;
+            top: 50%;
+            margin-top: -1em;
+            background: #9097A2;
+            height: 2em;
+            width: 2em;
+            line-height: 2em;
+            text-align: center;
+            font-weight: bold;
+        }
+        .rectangle a:after {
+            position: absolute;
+            content: "";
+            border: .5em solid transparent;
+            left: -1em;
+            top: 50%;
+            margin-top: -.5em;
+            transition: all .3s ease-out;
+        }
+        .rectangle a:hover:after {
+            left: -.5em;
+            border-left-color: #9097A2;
         }
     </style>
 </head>
@@ -82,7 +132,10 @@ To change this template use File | Settings | File Templates.
         <div id="festivalBlock">
             <p id="festivalInfo1"></p>
             <p id="festivalInfo2"></p>
-            <div id="events"></div>
+            <div>
+                <ol id="events" class="rectangle">
+                </ol>
+            </div>
         </div>
     </div>
     <div class="usermap">
