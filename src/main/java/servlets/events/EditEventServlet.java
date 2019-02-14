@@ -7,6 +7,7 @@ import services.abstraction.EventPoinService;
 import services.abstraction.EventService;
 import services.implementation.EventPoinServiceImpl;
 import services.implementation.EventServiceImpl;
+import util.DateTimeConverter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -61,8 +62,8 @@ public class EditEventServlet extends HttpServlet {
 			long eventId = Long.parseLong(eventIdParam);
 			long eventPointId = Long.parseLong(eventPointIdParam);
 			
-			dateBegin = LocalDateTime.parse(dateBeginParam+":00", DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm"));
-			dateEnd = LocalDateTime.parse(dateEndParam+":00", DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm"));
+			dateBegin = DateTimeConverter.parse(dateBeginParam);
+			dateEnd = DateTimeConverter.parse(dateEndParam);
 			
 			EventPoint eventPoint = eventPoinService.getById(eventPointId);
 			

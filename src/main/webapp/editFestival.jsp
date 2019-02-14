@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://sargue.net/jsptags/time" prefix="javatime" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
@@ -15,6 +16,7 @@
 </head>
 
 <body>
+<%@page import="util.DateTimeConverter"%>
 
 <div class="container-fluid">
     <div class="row">
@@ -284,6 +286,9 @@
                                                                 <a id="evEditButton${event.id}" class="btn btn-primary">Edit</a>
                                                                 <a id="evDeleteButton" onclick="deleteEvent(${event.id}, ${festival.id})" class="btn btn-primary">Delete</a>
                                                             </form>
+                                                            <javatime:format value="${event.dateBegin}" pattern="dd.MM.yyyy HH:mm" var="parsedDateBegin"/>
+                                                            <javatime:format value="${event.dateEnd}" pattern="dd.MM.yyyy HH:mm" var="parsedDateEnd"/>
+
                                                         </td>
                                                         <script type="text/javascript">
                                                             jQuery(document).ready( function() {
@@ -463,7 +468,8 @@
                     <div class="col-xs-6">
                         <div class="form-group">
                             <div class="input-group date" id="datetimepicker8">
-                                <input id="ev-date-to" type="text" class="form-control"/>
+                                <input id="ev-date-to" type="text" name="ev-date-to" class="form-control"/>
+
                                 <span class="input-group-addon">
                                     <i class="glyphicon glyphicon-calendar"></i>
                                 </span>
