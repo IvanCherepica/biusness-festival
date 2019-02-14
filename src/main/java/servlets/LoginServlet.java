@@ -1,8 +1,8 @@
 package servlets;
 
 import models.User;
-import services.UserService;
-import services.UserServiceImpl;
+import services.abstraction.UserService;
+import services.implementation.UserServiceImpl;
 import services.userNotificationServices.UserSessionService;
 
 import javax.servlet.RequestDispatcher;
@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.sql.SQLException;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
@@ -21,7 +22,7 @@ public class LoginServlet extends HttpServlet {
     private UserSessionService userSessionService = UserSessionService.getInstance();
     private boolean isInvalid;
 
-    public LoginServlet() {
+    public LoginServlet() throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
     }
 
     @Override

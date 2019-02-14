@@ -1,5 +1,7 @@
-package dao;
+package dao.implementation;
 
+import dao.AbstactDAO;
+import dao.abstraction.UserDAO;
 import models.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;

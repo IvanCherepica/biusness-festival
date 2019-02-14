@@ -1,25 +1,21 @@
-package services;
+package services.implementation;
 
 
-import dao.HotPointDAOImpl;
+import dao.SessionFactoryHolder;
+import dao.implementation.HotPointDAOImpl;
 import models.HotPoint;
-import models.Festival;
-import org.hibernate.SessionFactory;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.service.ServiceRegistry;
-import util.DBHelper;
+import services.abstraction.HotPointService;
 
 import java.util.List;
 
 
-public class HotPointServiceImpl implements HotPointService{
+public class HotPointServiceImpl implements HotPointService {
     private final HotPointDAOImpl hotPointDAO;
 
     private static volatile HotPointServiceImpl instance;
 
     private HotPointServiceImpl() {
-        this.hotPointDAO = new HotPointDAOImpl(createSessionFactory(DBHelper.getConfiguration()));
+        this.hotPointDAO = new HotPointDAOImpl(SessionFactoryHolder.getSessionFactory());
     }
 
     public static HotPointServiceImpl getInstance() {
@@ -73,10 +69,4 @@ public class HotPointServiceImpl implements HotPointService{
         return hotPointDAO.getAllByFestival(id);
     }
 
-    private static SessionFactory createSessionFactory(Configuration configuration) {
-        StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder();
-        builder.applySettings(configuration.getProperties());
-        ServiceRegistry serviceRegistry = builder.build();
-        return configuration.buildSessionFactory(serviceRegistry);
-    }
 }

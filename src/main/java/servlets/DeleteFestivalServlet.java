@@ -1,11 +1,9 @@
 package servlets;
 
-import models.Festival;
 import org.hibernate.HibernateException;
-import services.FestivalService;
-import services.FestivalServiceImpl;
+import services.abstraction.FestivalService;
+import services.implementation.FestivalServiceImpl;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;

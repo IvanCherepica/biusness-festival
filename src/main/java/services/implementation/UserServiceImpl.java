@@ -1,15 +1,12 @@
-package services;
+package services.implementation;
 
 
-import dao.UserDAO;
-import dao.UserDAOImpl;
+import dao.SessionFactoryHolder;
+import dao.abstraction.UserDAO;
+import dao.implementation.UserDAOImpl;
 import models.EventPoint;
 import models.User;
-import org.hibernate.SessionFactory;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.service.ServiceRegistry;
-import util.DBHelper;
+import services.abstraction.UserService;
 
 import java.util.List;
 import java.util.Set;
@@ -20,7 +17,7 @@ public class UserServiceImpl implements UserService {
     private static volatile UserServiceImpl instance;
 
     private UserServiceImpl() {
-        this.userDAO = new UserDAOImpl(createSessionFactory(DBHelper.getConfiguration()));
+        this.userDAO = new UserDAOImpl(SessionFactoryHolder.getSessionFactory());
     }
 
     public static UserServiceImpl getInstance() {
@@ -87,10 +84,4 @@ public class UserServiceImpl implements UserService {
         user.addEventPoint(event);
     }
 
-    private static SessionFactory createSessionFactory(Configuration configuration) {
-        StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder();
-        builder.applySettings(configuration.getProperties());
-        ServiceRegistry serviceRegistry = builder.build();
-        return configuration.buildSessionFactory(serviceRegistry);
-    }
 }

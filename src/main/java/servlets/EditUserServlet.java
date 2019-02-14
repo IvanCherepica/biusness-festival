@@ -1,10 +1,12 @@
 package servlets;
 
 import models.Event;
-import models.EventPoint;
 import models.User;
 import org.hibernate.HibernateException;
-import services.*;
+import services.abstraction.EventService;
+import services.abstraction.UserService;
+import services.implementation.EventServiceImpl;
+import services.implementation.UserServiceImpl;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,7 +15,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;

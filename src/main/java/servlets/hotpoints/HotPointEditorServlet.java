@@ -2,8 +2,8 @@ package servlets.hotpoints;
 
 import models.HotPoint;
 import models.Festival;
-import services.HotPointServiceImpl;
-import services.FestivalServiceImpl;
+import services.implementation.HotPointServiceImpl;
+import services.implementation.FestivalServiceImpl;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.RequestDispatcher;
@@ -53,7 +53,7 @@ public class HotPointEditorServlet extends HttpServlet {
 
         HotPointServiceImpl.getInstance().update(hPoint);
 
-        response.sendRedirect("/admin/editFestival?festivalId="+fId);
+        response.sendRedirect("/admin/editFestival");
     }
 
 }

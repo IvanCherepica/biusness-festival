@@ -1,8 +1,8 @@
 package servlets;
 
 import models.Festival;
-import services.FestivalService;
-import services.FestivalServiceImpl;
+import services.abstraction.FestivalService;
+import services.implementation.FestivalServiceImpl;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,12 +12,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 @WebServlet("/admin/addFest")
 public class AddFestivalServlet extends HttpServlet {
     private final FestivalService festivalService=  FestivalServiceImpl.getInstance();
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public AddFestivalServlet() throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
+	}
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	    response.setContentType("text/html");
 		String paramId = request.getParameter("edit");
     	Festival festival;

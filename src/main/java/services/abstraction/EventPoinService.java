@@ -1,4 +1,4 @@
-package services;
+package services.abstraction;
 
 import models.EventPoint;
 import models.Festival;

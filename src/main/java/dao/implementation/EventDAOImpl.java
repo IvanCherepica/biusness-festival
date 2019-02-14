@@ -1,11 +1,13 @@
-package dao;
+package dao.implementation;
 
+import dao.AbstactDAO;
+import dao.abstraction.EventDAO;
 import models.Event;
 import org.hibernate.*;
 
 import java.util.List;
 
-public class EventDAOImpl extends AbstactDAO<Event> implements EventDAO{
+public class EventDAOImpl extends AbstactDAO<Event> implements EventDAO {
 	
 	public EventDAOImpl(SessionFactory sessionFactory) {
 		super(sessionFactory);

@@ -1,11 +1,13 @@
-package dao;
+package dao.implementation;
 
+import dao.AbstactDAO;
+import dao.abstraction.HotPointDAO;
 import models.HotPoint;
 import org.hibernate.*;
 
 import java.util.List;
 
-public class HotPointDAOImpl extends AbstactDAO<HotPoint>  implements HotPointDAO {
+public class HotPointDAOImpl extends AbstactDAO<HotPoint> implements HotPointDAO {
 
     public HotPointDAOImpl(SessionFactory sessionFactory) {
         super(sessionFactory);

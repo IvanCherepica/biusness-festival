@@ -1,15 +1,11 @@
-package services;
+package services.implementation;
 
-import dao.FestivalDao;
-import dao.FestivalDaoImpl;
+import dao.SessionFactoryHolder;
+import dao.abstraction.FestivalDao;
+import dao.implementation.FestivalDaoImpl;
 import models.Festival;
-import org.hibernate.SessionFactory;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.service.ServiceRegistry;
-import util.DBHelper;
+import services.abstraction.FestivalService;
 
-import java.sql.SQLException;
 import java.util.List;
 
 public class FestivalServiceImpl implements FestivalService {
@@ -18,8 +14,8 @@ public class FestivalServiceImpl implements FestivalService {
 	
 	private static volatile FestivalServiceImpl instance;
 	
-	private FestivalServiceImpl()  {
-		this.festivalDao = new FestivalDaoImpl(createSessionFactory(DBHelper.getConfiguration()));
+	private FestivalServiceImpl() {
+		this.festivalDao = new FestivalDaoImpl(SessionFactoryHolder.getSessionFactory());
 	}
 	
 	public static FestivalServiceImpl getInstance() {
@@ -70,10 +66,4 @@ public class FestivalServiceImpl implements FestivalService {
 		return festivalDao.getAllList();
 	}
 
-	private static SessionFactory createSessionFactory(Configuration configuration) {
-		StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder();
-		builder.applySettings(configuration.getProperties());
-		ServiceRegistry serviceRegistry = builder.build();
-		return configuration.buildSessionFactory(serviceRegistry);
-	}
 }

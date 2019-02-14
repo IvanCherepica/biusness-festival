@@ -2,8 +2,8 @@ package servlets.eventPoints;
 
 import models.EventPoint;
 import org.hibernate.HibernateException;
-import services.EventPoinService;
-import services.EventPoinServiceImpl;
+import services.abstraction.EventPoinService;
+import services.implementation.EventPoinServiceImpl;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;

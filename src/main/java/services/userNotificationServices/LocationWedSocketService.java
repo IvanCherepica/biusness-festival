@@ -1,7 +1,7 @@
 package services.userNotificationServices;
 
 import models.Festival;
-import services.FestivalServiceImpl;
+import services.implementation.FestivalServiceImpl;
 
 import javax.websocket.Session;
 import java.util.*;

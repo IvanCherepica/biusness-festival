@@ -1,9 +1,10 @@
-package dao;
+package dao.implementation;
 
+import dao.AbstactDAO;
+import dao.abstraction.EventPointDAO;
 import models.EventPoint;
 import org.hibernate.*;
 
-import javax.persistence.TypedQuery;
 import java.util.List;
 
 public class EventPointDAOImpl extends AbstactDAO<EventPoint> implements EventPointDAO {
