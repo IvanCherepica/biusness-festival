@@ -621,7 +621,8 @@
                     color : $('#hp-color').val()
                 },
                 success : function(data) {
-                    window.location.href = "/admin/editFestival";
+                    //alert('wow');
+                    //window.location.href = "/admin/editFestival";
                 },
                 error : function (error) {
                     console.log(error);
