@@ -27,12 +27,18 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException { response.setContentType("text/html");
+        request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html;UTF-8");
+
         RequestDispatcher dispatcher = request.getRequestDispatcher("/login.jsp");
         dispatcher.forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html;UTF-8");
+
         String login = request.getParameter("login");
         String password = request.getParameter("password");
         if (login.isEmpty() || password.isEmpty()) {
@@ -52,7 +58,6 @@ public class LoginServlet extends HttpServlet {
             userSessionService.addUserSessions(user.getId(),session);
             session.setAttribute("user", user);
             session.setAttribute("userInFestival","false");
-            response.setContentType("text/html");
             if (user.getRole().equals("admin")) {
                 response.sendRedirect("/admin/festivals"); //исправить на путь к админке
                 return;
@@ -63,7 +68,6 @@ public class LoginServlet extends HttpServlet {
         if (!user.getPassword().equals(password) || !user.getName().equals(login)) {
             HttpSession session = request.getSession();
             session.setAttribute("user", user);
-            response.setContentType("text/html");
             response.sendRedirect("/error.html");
         }
     }

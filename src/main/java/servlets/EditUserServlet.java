@@ -27,7 +27,9 @@ public class EditUserServlet extends HttpServlet {
 
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setContentType("text/html");
+        request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html;UTF-8");
+
         String paramId = request.getParameter("edit");
         User user;
 
@@ -50,6 +52,8 @@ public class EditUserServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html;UTF-8");
 
         String paramId = request.getParameter("id");
         String name = request.getParameter("name");
@@ -82,7 +86,6 @@ public class EditUserServlet extends HttpServlet {
             //конец добавления
             userService.update(user);
 
-            response.setContentType("text/html");
             response.sendRedirect("/admin/users");
         } catch (HibernateException | NumberFormatException e) {
             response.sendRedirect("/error.html");

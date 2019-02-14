@@ -20,7 +20,9 @@ public class DeleteUserServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        response.setContentType("text/html");
+        request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html;UTF-8");
+
         String paramId = request.getParameter("delete");
 
         if (paramId == null) {
@@ -33,7 +35,7 @@ public class DeleteUserServlet extends HttpServlet {
                 response.sendRedirect("/error.html");
             }
         }
-        response.setContentType("text/html");
+
         response.sendRedirect("/admin/users");
     }
 

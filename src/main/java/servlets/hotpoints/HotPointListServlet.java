@@ -20,7 +20,9 @@ public class HotPointListServlet extends HttpServlet {
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    
+        request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html;UTF-8");
+
         String paramId = request.getParameter("id");
         HotPointService hotPoinService = HotPointServiceImpl.getInstance();
     
