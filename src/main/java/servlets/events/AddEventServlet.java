@@ -9,6 +9,7 @@ import services.abstraction.FestivalService;
 import services.implementation.EventPoinServiceImpl;
 import services.implementation.EventServiceImpl;
 import services.implementation.FestivalServiceImpl;
+import util.DateTimeConverter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -52,8 +53,8 @@ public class AddEventServlet extends HttpServlet {
 		    eventPoint = eventPoinService.getById(eventPointId);
 		    long festivalId = Long.parseLong(festivalIdParam);
 		    festival = festivalService.getById(festivalId);
-		    dateBegin = LocalDateTime.parse(dateBeginParam); //, DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:"));
-		    dateEnd = LocalDateTime.parse(dateEndParam); //, DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss"));
+		    dateBegin = DateTimeConverter.parse(dateBeginParam);
+		    dateEnd = DateTimeConverter.parse(dateEndParam);
 		    
 		    if (!(eventPoint instanceof EventPoint || festival instanceof Festival)) {
 			    response.sendRedirect("/error.html");

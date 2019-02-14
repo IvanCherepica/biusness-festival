@@ -1,15 +1,14 @@
 package models;
 
 import com.google.gson.annotations.SerializedName;
-import org.hibernate.annotations.ColumnDefault;
+import util.LocalDateTimeAttributeConverter;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Date;
+
 
 @Entity
 @Table(name = "events")
@@ -37,12 +36,14 @@ public class Event {
 	@JoinColumn(name = "festival_id")
 	private Festival festival;
 
-	@Column(name = "date_begin")
+	@Column(name = "date_begin", columnDefinition="TIMESTAMP")
 	@SerializedName("date_begin")
+	@Convert(converter = LocalDateTimeAttributeConverter.class)
 	private LocalDateTime dateBegin = LocalDateTime.now();
 
-	@Column(name = "date_end")
+	@Column(name = "date_end", columnDefinition="TIMESTAMP")
 	@SerializedName("date_end")
+	@Convert(converter = LocalDateTimeAttributeConverter.class)
 	private LocalDateTime dateEnd = LocalDateTime.now();
 
 	@ManyToMany(fetch= FetchType.EAGER, targetEntity = User.class)
@@ -57,6 +58,7 @@ public class Event {
 	public Event (String name, String description) {
 		this.name = name;
 		this.description = description;
+		this.users = new HashSet<>();
 	}
 
 	public Event (String name, String description, EventPoint eventPoint, Festival festival) {
@@ -64,6 +66,7 @@ public class Event {
 		this.description = description;
 		this.eventPoint = eventPoint;
 		this.festival = festival;
+		this.users = new HashSet<>();
 	}
 
 	public long getId () {
@@ -98,6 +101,7 @@ public class Event {
 		this.name = name;
 		this.description = description;
 		this.eventPoint = eventPoint;
+		this.users = new HashSet<>();
 	}
 
 	public Festival getFestival () {
