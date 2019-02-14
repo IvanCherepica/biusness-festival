@@ -32,12 +32,12 @@ public class AddUserServlet extends HttpServlet {
         }
         request.setAttribute("user", user);
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/addUser.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/admin/userAdd.jsp");
         dispatcher.forward(request, response);
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;UTF-8");
 
