@@ -1,6 +1,7 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://sargue.net/jsptags/time" prefix="javatime" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,13 +11,11 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
 </head>
 
 <body>
-<%@page import="util.DateTimeConverter"%>
 
 <div class="container-fluid">
     <div class="row">
@@ -286,8 +285,6 @@
                                                                 <a id="evEditButton${event.id}" class="btn btn-primary">Edit</a>
                                                                 <a id="evDeleteButton" onclick="deleteEvent(${event.id}, ${festival.id})" class="btn btn-primary">Delete</a>
                                                             </form>
-                                                            <javatime:format value="${event.dateBegin}" pattern="dd.MM.yyyy HH:mm" var="parsedDateBegin"/>
-                                                            <javatime:format value="${event.dateEnd}" pattern="dd.MM.yyyy HH:mm" var="parsedDateEnd"/>
 
                                                         </td>
                                                         <script type="text/javascript">
@@ -458,7 +455,7 @@
                     <div class="col-xs-6">
                         <div class="form-group">
                             <div class="input-group date" id="datetimepicker7">
-                                <input id="ev-date-from" type="text" class="form-control"/>
+                                <input id="ev-date-from" type="text" pattern="dd.MM.yyyy HH:mm" class="form-control"/>
                                 <span class="input-group-addon">
                                     <i class="glyphicon glyphicon-calendar"></i>
                                 </span>
@@ -468,8 +465,7 @@
                     <div class="col-xs-6">
                         <div class="form-group">
                             <div class="input-group date" id="datetimepicker8">
-                                <input id="ev-date-to" type="text" name="ev-date-to" class="form-control"/>
-
+                                <input id="ev-date-to" type="text" pattern="dd.MM.yyyy HH:mm" class="form-control"/>
                                 <span class="input-group-addon">
                                     <i class="glyphicon glyphicon-calendar"></i>
                                 </span>
