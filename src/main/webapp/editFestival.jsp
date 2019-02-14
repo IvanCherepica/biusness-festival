@@ -581,11 +581,13 @@
 
         $("#datetimepicker7").datetimepicker({
             locale: 'ru',
-            stepping: 10
+            stepping: 10,
+            format: "DD.MM.YYYY HH:mm"
         });
         $("#datetimepicker8").datetimepicker({
             locale: 'ru',
-            stepping: 10
+            stepping: 10,
+            format: "DD.MM.YYYY HH:mm"
         });
 
         $("#ep-save-btn").click(function(){

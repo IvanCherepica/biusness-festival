@@ -60,8 +60,8 @@ public class EditEventServlet extends HttpServlet {
 			long eventId = Long.parseLong(eventIdParam);
 			long eventPointId = Long.parseLong(eventPointIdParam);
 			
-			dateBegin = LocalDateTime.parse(dateBeginParam); //, DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm"));
-			dateEnd = LocalDateTime.parse(dateEndParam); //, DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm"));
+			dateBegin = LocalDateTime.parse(dateBeginParam+":00", DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm"));
+			dateEnd = LocalDateTime.parse(dateEndParam+":00", DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm"));
 			
 			EventPoint eventPoint = eventPoinService.getById(eventPointId);
 			
