@@ -9,7 +9,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Registration</title>
+    <title>Регистрация</title>
     <link rel="stylesheet" href="https://bootswatch.com/3/united/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <style>
@@ -33,16 +33,16 @@
         <form action="${pageContext.servletContext.contextPath}/registration" method="POST">
 
             <div class="field">
-                <input type="text" class="form-control" id="uName" name="name" placeholder="Login" required/>
+                <input type="text" class="form-control" id="uName" name="name" placeholder="Логин" required/>
             </div>
             <br>
             <div class="field">
-                <input type="password" class="form-control" id="uPass" name="password" placeholder="Password"
+                <input type="password" class="form-control" id="uPass" name="password" placeholder="Пароль"
                        required/>
             </div>
             <br>
             <div class="submit">
-                <input type="submit" class="btn btn-primary btn-block" align="center" value="Submit"/>
+                <input type="submit" class="btn btn-primary btn-block" align="center" value="Зарегистрироваться"/>
             </div>
             <br>
             <c:if test="${isExists}">
