@@ -21,12 +21,12 @@ public class User {
     private String role;
     private String imagePath;
 
-//    @Expose
-//    @ManyToMany(fetch = FetchType.EAGER, targetEntity = EventPoint.class)
-//    @JoinTable(name = "users_on_eventpoints",
-//            joinColumns = {@JoinColumn(name = "users_id")},
-//            inverseJoinColumns = {@JoinColumn(name = "event_point_id")})
-//    private Set<EventPoint> eventPoints;
+    @Expose
+    @ManyToMany(fetch = FetchType.EAGER, targetEntity = EventPoint.class)
+    @JoinTable(name = "users_on_eventpoints",
+            joinColumns = {@JoinColumn(name = "users_id")},
+            inverseJoinColumns = {@JoinColumn(name = "event_point_id")})
+    private Set<EventPoint> eventPoints;
 
     @Expose
     @ManyToMany(fetch = FetchType.EAGER, targetEntity = Event.class)
@@ -61,39 +61,39 @@ public class User {
         this.password = password;
     }
 
-//    public Set<EventPoint> getEventPoints() {
-//        return eventPoints;
-//    }
-//
-//    public void setEventPoints(Set<EventPoint> eventsp) {
-//        this.eventPoints = eventsp;
-//    }
-//
-//    public void addEventPoint(EventPoint event) {
-//            eventPoints.add(event);
-//    }
+    public Set<EventPoint> getEventPoints() {
+        return eventPoints;
+    }
+
+    public void setEventPoints(Set<EventPoint> eventsp) {
+        this.eventPoints = eventsp;
+    }
+
+    public void addEventPoint(EventPoint event) {
+            eventPoints.add(event);
+    }
 
     public Set<Event> getEvents() {
         return events;
     }
 
-//    public void setEventsFromFest(Set<Event> events) {
-//        this.events = events;
-//        Set<EventPoint> EventPointSet = new LinkedHashSet<>();
-//        for (Event eve : events) {
-//                EventPointSet.add(eve.getEventPoint());
-//        }
-//        setEventPoints(EventPointSet);
-//    }
+    public void setEventsFromFest(Set<Event> events) {
+        this.events = events;
+        Set<EventPoint> EventPointSet = new LinkedHashSet<>();
+        for (Event eve : events) {
+                EventPointSet.add(eve.getEventPoint());
+        }
+        setEventPoints(EventPointSet);
+    }
 
-//    public void setEventsFromEPoint(Set<Event> events, EventPoint eventPoint) {
-//        this.events = events;
-//        if (events.size() > 0) {
-//            addEventPoint(eventPoint);
-//        } else {
-//            eventPoints.remove(eventPoint);
-//        }
-//    }
+    public void setEventsFromEPoint(Set<Event> events, EventPoint eventPoint) {
+        this.events = events;
+        if (events.size() > 0) {
+            addEventPoint(eventPoint);
+        } else {
+            eventPoints.remove(eventPoint);
+        }
+    }
 
     public void addEvent(Event event) {
             events.add(event);

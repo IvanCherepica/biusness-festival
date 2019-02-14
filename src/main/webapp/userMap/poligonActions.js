@@ -66,7 +66,7 @@ function moveMapCentrToPoint(centr, eventPoinID) {
     $("#festival_list_close").click();
     $("#festival_list_table").remove();
     if (centrX!=undefined&&centrY!=undefined) {
-        myMap.setCenter([Number(centrX), Number(centrY)], 17, {checkZoomRange: true});
+        myMap.setCenter([Number(centrX), Number(centrY)], 19, {checkZoomRange: true});
     }
 
 }
@@ -199,8 +199,8 @@ function openListOfEventPointsEvents(data,festival_id) {
     //fill the table
     $.each(data.eventList, function (index, value) {
 
-        //$("#festival_list_table").append("<tr href=\"javascript:void(0)\" onclick=\"moveMapCentrToPoint('"+ value.center + "', '"+ value.id + "')\" id='" + value.id + "' ><td>" + value.name + "</td><td>" + value.description + "</td><td></td></tr>");
-        $("#festival_list_table").append("<tr id='" + value.id + "' ><td>" + value.name + "</td><td>" + value.description + "</td><td></td><td><div class=\"check-material\"><input id=\"toggle-1\" checked=\"checked\" type=\"checkbox\" href=\"javascript:void(0)\" onclick=\"checkBoxOnClick(event,"+ value.id + ")\"><label for=\"toggle-1\"></label></label></div></td></tr>");
+        //checked="checked"
+        $("#festival_list_table").append("<tr id='" + value.id + "' ><td>" + value.name + "</td><td>" + value.description + "</td><td></td><td><div class=\"check-material\"><input id=\"toggle-1\"  type=\"checkbox\" href=\"javascript:void(0)\" onclick=\"checkBoxOnClick(event,"+ value.id + ")\"><label for=\"toggle-1-\"></label></label></div></td></tr>");
 //<input id="toggle-2" type="checkbox" checked="checked"><label for="toggle-2">
     });
 
