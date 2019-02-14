@@ -19,25 +19,6 @@
         <%@include file="userMap/poligonActions.js" %>
     </script>
 
-    <style>
-        .customAlert {
-            display: none;
-            position: fixed;
-            max-width: 25%;
-            min-width: 250px !important;
-            min-height: 20%;
-            height: 200px;
-            left: 50%;
-            top: 50%;
-            padding: 10px;
-            box-sizing: border-box;
-            margin-left: -12.5%;
-            margin-top: -5.2%;
-            background: #088A68;
-        }
-    </style>
-
-
 <%--<script type="text/javascript">--%>
     <%--<%@include file="mapDataReceive.js" %>--%>
 <%--</script>--%>
