@@ -22,7 +22,7 @@ public class RegistrationServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;UTF-8");
         request.setAttribute("isExists",isExists);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/registration.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/login/registration.jsp");
         dispatcher.forward(request, response);
     }
 
