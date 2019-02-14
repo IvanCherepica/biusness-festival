@@ -65,7 +65,7 @@ public class LoginServlet extends HttpServlet {
             session.setAttribute("user", user);
             session.setAttribute("userInFestival","false");
             if (user.getRole().equals("admin")) {
-                response.sendRedirect("/admin/editFestival"); //исправить на путь к админке
+                response.sendRedirect("/admin/festivals"); //исправить на путь к админке
                 return;
             }
             response.sendRedirect("/user");
