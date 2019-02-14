@@ -38,7 +38,7 @@ public class LoginServlet extends HttpServlet {
         request.setAttribute("isInvalid",isInvalid);
         request.setAttribute("isPass", isPass);
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/login.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/login/login.jsp");
         dispatcher.forward(request, response);
     }
 

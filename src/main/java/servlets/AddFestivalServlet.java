@@ -34,7 +34,7 @@ public class AddFestivalServlet extends HttpServlet {
 	    }
 		request.setAttribute("festival", festival);
 	    
-	    RequestDispatcher dispatcher = request.getRequestDispatcher("/addFest.jsp");
+	    RequestDispatcher dispatcher = request.getRequestDispatcher("/admin/festivalAdd.jsp");
         dispatcher.forward(request, response);
     }
 

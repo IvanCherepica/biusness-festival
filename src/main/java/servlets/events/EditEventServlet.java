@@ -40,7 +40,7 @@ public class EditEventServlet extends HttpServlet {
 //			request.setAttribute("eventPointsList", eventPoints);
 //			request.setAttribute("hotPointList", hotPoints);
 //		}
-//		RequestDispatcher dispatcher = request.getRequestDispatcher("/editFestival.jsp");
+//		RequestDispatcher dispatcher = request.getRequestDispatcher("/admin/festivalEdit.jsp");
 //		dispatcher.forward(request, response);
 	}
 	
