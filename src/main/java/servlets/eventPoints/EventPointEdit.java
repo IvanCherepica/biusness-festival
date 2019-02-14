@@ -72,7 +72,7 @@ public class EventPointEdit extends HttpServlet {
 
          EventPoinServiceImpl.getInstance().update(eventPoint);
 
-        response.sendRedirect("/admin/editFestival?festivalId="+festivalId);
+        //response.sendRedirect("/admin/editFestival?festivalId="+festivalId);
         
         }
     }
