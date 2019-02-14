@@ -54,7 +54,7 @@
                     </thead>
 
                     <tbody>
-                    <c:forEach var="festival" items="${FestivalsList}">
+                        <c:forEach var="festival" items="${FestivalsList}">
                         <tr>
                             <td width="5%" scope="row">${festival.id}</td>
                             <td width="15%">${festival.name}</td>
