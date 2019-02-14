@@ -120,7 +120,13 @@ function processDataForFestivalBlock(event, eventspoints) {
             $("#events").append("<h4><b>Todays events</b></h4>");
             for (var i = 0; i < eventspoints.length; i++) {
                 var j = i + 1;
-                $("#events").append("<p>" + j + ")" + eventspoints[i].name + "</p>");
+                $("#events").append("</bt><button style='' data-toggle=\"collapse\" data-target=\"#demo" + j + "\">"+ eventspoints[i].name +"</button><br>\n" +
+                    "\n" +
+                    "<div id=\"demo" + j + "\" class=\"collapse\">\n" +
+                    "Description:"+ eventspoints[i].description +"\n" +
+                    "</div>");
+
+
                 if (i === eventspoints.length - 1) {
                     flag = true;
                 }
