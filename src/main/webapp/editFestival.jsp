@@ -421,23 +421,23 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title">Event</h4>
             </div>
-            <div class="modal-body">
+            <div class="modal-body" style="margin-bottom: 70px">
                 <div class="raw">
-                    <label for="efestival_id">Festival id:</label>
-                    <input id="efestival_id" name="festival_id" readonly>
+                    <!--<label for="efestival_id">Festival id:</label>-->
+                    <input id="efestival_id" name="festival_id" readonly type="hidden">
 
-                    <label for="ev-id">ID:</label>
-                    <input id="ev-id" name="eventPointId" readonly>
+                    <!--<label for="ev-id">ID:</label>-->
+                    <input id="ev-id" name="eventPointId" readonly type="hidden">
                 </div>
 
                 <div class="raw">
-                    <label for="ev_eventPoint">Event-point id:</label>
+                    <!--<label for="ev_eventPoint">Event-point id:</label>
                     <select id="ev_eventPoint" name="eventpoint_id">
                         <c:forEach var="item" items="${eventPointsList}">
                             <option value="${item.id}">${item.name} (id:${item.id})</option>
 
                         </c:forEach>
-                    </select>
+                    </select>-->
                     <!-- ${item.festival_id == id ? 'selected="selected"' : ''} -->
                 </div>
 
@@ -453,8 +453,9 @@
                 </div>
 
                 <div class="raw">
-                    <div class="col-xs-6">
+                    <div class="col-xs-6" style="padding: 0px 5px 5px 0; margin-top: 5px">
                         <div class="form-group">
+                            <label for="ev-date-from">Start date</label>
                             <div class="input-group date" id="datetimepicker7">
                                 <input id="ev-date-from" type="text" pattern="dd.MM.yyyy HH:mm" class="form-control"/>
                                 <span class="input-group-addon">
@@ -463,8 +464,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-xs-6">
+                    <div class="col-xs-6" style="padding: 0px 5px 5px 0; margin-top: 5px">
                         <div class="form-group">
+                            <label for="ev-date-to">To date</label>
                             <div class="input-group date" id="datetimepicker8">
                                 <input id="ev-date-to" type="text" pattern="dd.MM.yyyy HH:mm" class="form-control"/>
                                 <span class="input-group-addon">
@@ -475,26 +477,31 @@
                     </div>
                 </div>
 
-
-            <!--
-                    <div class="input-group mb-2">
-                        <div class="input-group" id="datetimepicker2">
-                            <div class="input-group-prepend">
-                                <label class="input-group-text">From-To</label>
+                <!--<div class="raw">
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="ev-date-from">Start date</label>
+                            <div class="input-group date" id="datetimepicker7">
+                                <input id="ev-date-from" type="text" pattern="dd.MM.yyyy HH:mm" class="form-control"/>
+                                <span class="input-group-addon">
+                                    <i class="glyphicon glyphicon-calendar"></i>
+                                </span>
                             </div>
-                            <input id="ev-date-from" type="datetime-local" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="form-group">
+                            <label for="ev-date-to">To date</label>
+                            <div class="input-group date" id="datetimepicker8">
+                                <input id="ev-date-to" type="text" pattern="dd.MM.yyyy HH:mm" class="form-control"/>
                                 <span class="input-group-addon">
                                     <i class="glyphicon glyphicon-calendar"></i>
                                 </span>
-                            <input id="ev-date-to" type="datetime-local" class="form-control">
-                                <span class="input-group-addon">
-                                    <i class="glyphicon glyphicon-calendar"></i>
-                                </span>
+                            </div>
+                        </div>
                     </div>
                 </div>-->
-                 <input id="ev-q-type" type="hidden" readonly>
-
-
+                <input id="ev-q-type" type="hidden" readonly>
             </div>
 
 
