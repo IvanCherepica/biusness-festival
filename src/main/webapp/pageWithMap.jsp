@@ -160,13 +160,7 @@
                 <%--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>--%>
             <%--</div>--%>
         </div>
-
     </div>
-    <div class='customAlert'>
-        <p class='message'></p>
-        <input type='button' class='confirmButton' value='Ok'>
-    </div>
-    <input type='button' class='rab' value='Raise alert'>
 </div>
 </body>
 </html>
