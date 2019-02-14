@@ -68,6 +68,6 @@ public class AddEventServlet extends HttpServlet {
 	    
         eventService.add(event);
 
-        response.sendRedirect("/admin/festivals");
+        //response.sendRedirect("/admin/festivals");
     }
 }

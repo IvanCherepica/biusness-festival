@@ -31,9 +31,6 @@
     <%--<%@include file="mapDataReceive.js" %>--%>
 <%--</script>--%>
 
-
-
-
 </html>
     <script type="text/javascript">
 
@@ -173,6 +170,11 @@
         </div>
 
     </div>
+    <div class='customAlert'>
+        <p class='message'></p>
+        <input type='button' class='confirmButton' value='Ok'>
+    </div>
+    <input type='button' class='rab' value='Raise alert'>
 </div>
 </body>
 </html>

@@ -80,7 +80,7 @@ public class EditEventServlet extends HttpServlet {
 			
 			eventService.update(event);
 
-			response.sendRedirect("/admin/editFestival?festivalId="+festivalId);
+			//response.sendRedirect("/admin/editFestival?festivalId="+festivalId);
 		} catch (HibernateException | NumberFormatException e) {
 			response.sendRedirect("/error.html");
 		}

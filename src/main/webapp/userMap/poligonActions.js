@@ -1,7 +1,6 @@
 var festivalPolygons= {};
 var eventPointsPolygons= {};
 var festivalEvents;
-var Event
 
 function getKeyByValue(object, value) {
     return Object.keys(object).find(key => object[key] === value);
@@ -15,6 +14,7 @@ function festilvalPoligonOnClick(event) {
 
     //eventPointList.each()
 
+    //console.log('polygon clicked. currentPoligonID:' + currentPoligonID);
     //console.log('polygon clicked. currentPoligonID:' + currentPoligonID);
 }
 

@@ -43,16 +43,16 @@
                     <h4> ${festival.name}</h4>
                     <ul class="nav nav-tabs nav-content" role="tablist">
                         <li id="festival-edit-nav">
-                            <a href="#festival-panel" aria-controls="festival-panel" role="tab" data-toggle="tab">Festival</a>
+                            <a id="festival-tab" href="#festival-panel" aria-controls="festival-panel" role="tab" data-toggle="tab">Festival</a>
                         </li>
                         <li id="hotpoint-list-nav">
-                            <a href="#hotpoints_panel" aria-controls="hotpoints_panel" role="tab" data-toggle="tab">Hot-points</a>
+                            <a id="hotpoint-tab" href="#hotpoints_panel" aria-controls="hotpoints_panel" role="tab" data-toggle="tab">Hot-points</a>
                         </li>
                         <li id="eventpoint-list-nav">
-                            <a href="#eventpoints-panel" aria-controls="eventpoints-panel" role="tab" data-toggle="tab">Event-points</a>
+                            <a id="eventpoint-tab" href="#eventpoints-panel" aria-controls="eventpoints-panel" role="tab" data-toggle="tab">Event-points</a>
                         </li>
                         <li id="event-list-nav">
-                            <a href="#events-panel" aria-controls="events-panel" role="tab" data-toggle="tab">Events</a>
+                            <a id="event-tab" href="#events-panel" aria-controls="events-panel" role="tab" data-toggle="tab">Events</a>
                         </li>
                     </ul>
 
@@ -161,8 +161,7 @@
                                                     <th>Description</th>
                                                     <th>Geometry</th>
                                                     <th>Color</th>
-
-                                                    <th><a id="addHotpointButton" class="btn btn-primary" href="/admin/hotpoints/addhot">Add</a></th>
+                                                    <th><a id="addHotpointButton" onclick="addHotpoint(${festival.id})" class="btn btn-primary">Add</a></th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
@@ -176,14 +175,14 @@
                                                         <td width="20%">
                                                             <form  class="form-inline hp-edit-form">
                                                                 <a id="hpEditButton${hotPoint.id}" class="btn btn-primary">Edit</a>
-                                                                <a id="hpDeleteButton" onclick="deleteHotPoint(${hotPoint.id}, ${hotPoint.festival.id})" name="hotPointId" class="btn btn-primary">Delete</a>
+                                                                <a id="hpDeleteButton" onclick="deleteHotPoint(${hotPoint.id}, ${hotPoint.festival.id})" class="btn btn-primary">Delete</a>
                                                             </form>
                                                         </td>
                                                         <script type="text/javascript">
                                                             jQuery(document).ready( function() {
                                                                 jQuery("#hpEditButton${hotPoint.id}").click(function(){
                                                                     putHotpointValues("${hotPoint.id}", "${hotPoint.festival.id}", "${hotPoint.name}", "${hotPoint.description}", "${hotPoint.geometry}", "${hotPoint.color}");
-                                                                    $("#editHotpointModal").modal('show');
+                                                                    editHotpoint("${festival.id}");
                                                                 });
                                                             })
 
@@ -375,30 +374,31 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Event-point</h4>
+                <h4 class="modal-title">Hot-point</h4>
             </div>
+
             <div class="modal-body">
                 <div class="raw">
-                    <!--<label for="hfestival_id">Festival id:</label>-->
-                    <input id="hfestival_id" name="festival_id" readonly type="hidden">
-
-                    <!--<label for="hp-id">ID:</label>-->
-                    <input id="hp-id" name="eventPointId" readonly type="hidden">
+                    <input type="hidden" id="hfestival_id" name="festival_id" readonly>
+                    <input type="hidden" id="hp-id" name="eventPointId" readonly>
                 </div>
-
                 <div class="raw">
                     <label for="hp-name">Name</label>
                     <input id="hp-name" placeholder="введите имя" name="name" class="form-control" required>
                 </div>
-
-                <label for="hp-description">Description</label>
-                <textarea id="hp-description" placeholder="введите краткое описание" name="description"
-                          class="form-control" rows="3"></textarea>
-
-                <label for="hp-geometry">Geometry</label>
-                <textarea id="hp-geometry" placeholder="введите координаты" name="geometry" class="form-control" rows="3"></textarea>
-                <label for="hp-color">Color</label>
-                <input id="hp-color" type="color" name="color" class="form-control">
+                <div class="raw">
+                    <label for="hp-description">Description</label>
+                    <textarea id="hp-description" placeholder="введите краткое описание" name="description"
+                              class="form-control" rows="3"></textarea>
+                </div>
+                <div class="raw">
+                    <label for="hp-geometry">Geometry</label>
+                    <textarea id="hp-geometry" placeholder="введите координаты" name="geometry" class="form-control" rows="3"></textarea>
+                </div>
+                <div class="raw">
+                    <label for="hp-color">Color</label>
+                    <input id="hp-color" type="color" name="color" class="form-control">
+                </div>
             </div>
             <div class="modal-footer">
                 <form  class="form-inline">
@@ -406,6 +406,7 @@
                     <button id="hp-close-btn" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </form>
             </div>
+            <input id="hp-q-type" type="hidden" readonly>
         </div>
 
     </div>
@@ -421,24 +422,20 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title">Event</h4>
             </div>
-            <div class="modal-body" style="margin-bottom: 70px">
+            <div class="modal-body">
                 <div class="raw">
-                    <!--<label for="efestival_id">Festival id:</label>-->
-                    <input id="efestival_id" name="festival_id" readonly type="hidden">
-
-                    <!--<label for="ev-id">ID:</label>-->
-                    <input id="ev-id" name="eventPointId" readonly type="hidden">
+                    <input type="hidden" id="efestival_id" name="festival_id" readonly>
+                    <input type="hidden" id="ev-id" name="eventPointId" readonly>
                 </div>
 
                 <div class="raw">
-                    <!--<label for="ev_eventPoint">Event-point id:</label>
+                    <label for="ev_eventPoint">Event-point id:</label>
                     <select id="ev_eventPoint" name="eventpoint_id">
                         <c:forEach var="item" items="${eventPointsList}">
                             <option value="${item.id}">${item.name} (id:${item.id})</option>
 
                         </c:forEach>
-                    </select>-->
-                    <!-- ${item.festival_id == id ? 'selected="selected"' : ''} -->
+                    </select>
                 </div>
 
                 <div class="raw">
@@ -453,9 +450,8 @@
                 </div>
 
                 <div class="raw">
-                    <div class="col-xs-6" style="padding: 0px 5px 5px 0; margin-top: 5px">
+                    <div class="col-xs-6">
                         <div class="form-group">
-                            <label for="ev-date-from">Start date</label>
                             <div class="input-group date" id="datetimepicker7">
                                 <input id="ev-date-from" type="text" pattern="dd.MM.yyyy HH:mm" class="form-control"/>
                                 <span class="input-group-addon">
@@ -464,9 +460,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-xs-6" style="padding: 0px 5px 5px 0; margin-top: 5px">
+                    <div class="col-xs-6">
                         <div class="form-group">
-                            <label for="ev-date-to">To date</label>
                             <div class="input-group date" id="datetimepicker8">
                                 <input id="ev-date-to" type="text" pattern="dd.MM.yyyy HH:mm" class="form-control"/>
                                 <span class="input-group-addon">
@@ -476,34 +471,8 @@
                         </div>
                     </div>
                 </div>
-
-                <!--<div class="raw">
-                    <div class="col-xs-6">
-                        <div class="form-group">
-                            <label for="ev-date-from">Start date</label>
-                            <div class="input-group date" id="datetimepicker7">
-                                <input id="ev-date-from" type="text" pattern="dd.MM.yyyy HH:mm" class="form-control"/>
-                                <span class="input-group-addon">
-                                    <i class="glyphicon glyphicon-calendar"></i>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xs-6">
-                        <div class="form-group">
-                            <label for="ev-date-to">To date</label>
-                            <div class="input-group date" id="datetimepicker8">
-                                <input id="ev-date-to" type="text" pattern="dd.MM.yyyy HH:mm" class="form-control"/>
-                                <span class="input-group-addon">
-                                    <i class="glyphicon glyphicon-calendar"></i>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                </div>-->
                 <input id="ev-q-type" type="hidden" readonly>
             </div>
-
 
             <div class="modal-footer">
                 <form  class="form-inline">
@@ -592,6 +561,45 @@
         $('#events-panel').removeClass('active');
     }
 
+    function putHotpointValues(id, festival_id, name, description, geometry, color ) {
+        $('#hp-id').val(id);
+        $('#hfestival_id').val(festival_id);
+        $('#hp-name').val(name);
+        $('#hp-description').val(description);
+        $('#hp-geometry').val(geometry);
+        $('#hp-color').val(color);
+    }
+    function addHotpoint(festivalId) {
+        $('#hp-q-type').val("new");
+        $('#hfestival_id').val(festivalId);
+        $('#hp-name').val("");
+        $('#hp-description').val("");
+        $('#hp-geometry').val("");
+        $('#hp-color').val("");
+        $("#editHotpointModal").modal('show');
+    }
+    function editHotpoint(festivalId) {
+        $('#hp-q-type').val("");
+        $('#hfestival_id').val(festivalId);
+        $("#editHotpointModal").modal('show');
+    }
+    function deleteHotPoint(id, festivalId) {
+        console.log("Delete hotpoint button "+festivalId);
+        var data = { festivalId: festivalId, hotPointId: id };
+        $.get( "/admin/hotpoints/delete", data );
+        console.log($("#hprow"+id));
+        $("#hprow"+id).remove();
+    }
+
+
+    function putEventpointValues(id, festival_id, name, description, geometry, color ) {
+        $('#ep-id').val(id);
+        $('#festival_id').val(festival_id);
+        $('#ep-name').val(name);
+        $('#ep-description').val(description);
+        $('#ep-geometry').val(geometry);
+        $('#ep-color').val(color);
+    }
     function deleteEventPoint(id, festivalId) {
         console.log("Delete event point button "+festivalId);
         var data = { festivalId: festivalId, eventPointId: id };
@@ -600,12 +608,15 @@
 
     }
 
-    function deleteHotPoint(id, festivalId) {
-        console.log("Delete hotpoint button "+festivalId);
-        var data = { festivalId: festivalId, hotPointId: id };
-        $.get( "/admin/hotpoints/delete", data );
-        console.log($("#hprow"+id));
-        $("#hprow"+id).remove();
+
+    function putEventValues(id, eventpoint_id, festival_id, name, description, dateFrom, dateTo) {
+        $('#efestival_id').val(festival_id);
+        $('#ev_eventPoint').val(eventpoint_id);
+        $('#ev-id').val(id);
+        $('#ev-name').val(name);
+        $('#ev-description').val(description);
+        $('#ev-date-from').val(dateFrom);
+        $('#ev-date-to').val(dateTo);
     }
     function addEvent(festivalId) {
         $('#ev-q-type').val("new");
@@ -629,39 +640,8 @@
         $("#erow"+id).remove();
     }
 
-    function putEventpointValues(id, festival_id, name, description, geometry, color ) {
-        $('#ep-id').val(id);
-        $('#festival_id').val(festival_id);
-        $('#ep-name').val(name);
-        $('#ep-description').val(description);
-        $('#ep-geometry').val(geometry);
-        $('#ep-color').val(color);
-    }
-
-    function putHotpointValues(id, festival_id, name, description, geometry, color ) {
-        $('#hp-id').val(id);
-        $('#hfestival_id').val(festival_id);
-        $('#hp-name').val(name);
-        $('#hp-description').val(description);
-        $('#hp-geometry').val(geometry);
-        $('#hp-color').val(color);
-    }
-
-    function putEventValues(id, eventpoint_id, festival_id, name, description, dateFrom, dateTo) {
-        $('#efestival_id').val(festival_id);
-        $('#ev_eventPoint').val(eventpoint_id);
-        $('#ev-id').val(id);
-        $('#ev-name').val(name);
-        $('#ev-description').val(description);
-        $('#ev-date-from').val(dateFrom);
-        $('#ev-date-to').val(dateTo);
-    }
 
     $(document).ready(function($){
-
-        //задание заполнителя с помощью параметра placeholder
-        // $("#ev-date-from").mask("99.99.9999 99:99", {placeholder: "дд.мм.гггг чч:мм" });
-        // $("#ev-date-to").mask("99.99.9999 99:99", {placeholder: "дд.мм.гггг чч:мм" });
 
         $("#datetimepicker7").datetimepicker({
             locale: 'ru',
@@ -673,6 +653,34 @@
             stepping: 10,
             format: "DD.MM.YYYY HH:mm"
         });
+
+        $("#hp-save-btn").click(function(){
+            console.log("Hotpoint save button = "+$('#hp-q-type').val());
+            $.ajax({
+                url : ($('#hp-q-type').val()=="new") ? '/admin/hotpoints/addhot' : '/admin/hotpoints/edit' ,
+                type : "POST",
+                data : {                 // передаваемые сервлету данные
+                    festivalId : $('#hfestival_id').val(),
+                    hotPointId : $('#hp-id').val(),
+                    name : $('#hp-name').val(),
+                    description : $('#hp-description').val(),
+                    geometry : $('#hp-geometry').val(),
+                    color : $('#hp-color').val()
+                },
+                success : function(data) {
+                    //alert('wow');
+                    //window.location.href = "/admin/editFestival";
+                    (location).reload();
+                    $('#hotpoint-list-nav').show();
+                    $('#hp-close-btn').click();
+
+
+                },
+                error : function (error) {
+                    console.log(error);
+                }
+            });
+        })
 
         $("#ep-save-btn").click(function(){
             $.ajax({
@@ -688,30 +696,11 @@
                 },
                 success : function() {
                     // обработка ответа от сервера
-                    location.reload();
+                    (location).reload();
+                    $('#eventpoint-list-nav').show();
 
-                }
-            });
-        })
+                    $('#ep-close-btn').click();
 
-        $("#hp-save-btn").click(function(){
-            $.ajax({
-                url : '/admin/hotpoints/edit',     // URL - сервлет
-                type : "POST",
-                data : {                 // передаваемые сервлету данные
-                    festivalId : $('#hfestival_id').val(),
-                    hotPointId : $('#hp-id').val(),
-                    name : $('#hp-name').val(),
-                    description : $('#hp-description').val(),
-                    geometry : $('#hp-geometry').val(),
-                    color : $('#hp-color').val(),
-
-                    //redirect :
-                },
-                success : function(data) {
-                    location.reload();
-                    //alert('wow');
-                    //window.location.href = "/admin/editFestival";
                 },
                 error : function (error) {
                     console.log(error.message);
@@ -735,26 +724,17 @@
                 },
                 success : function() {
                     // обработка ответа от сервера
+                    (location).reload();
+                    $('event-list-nav').click();
                     $('#ev-close-btn').click();
-                    $("#admin-page").click();
+                },
+                error : function (error) {
+                    console.log(error);
                 }
+
             });
         })
 
-        $("#hotpoints_panel").click(function() {
-            console.log("${festival.id}");
-            $.ajax({
-                url : '/admin/hotpoints/list',     // URL - сервлет
-                type : "GET",
-                data : {                 // передаваемые сервлету данные
-                    id : "${festival.id}"
-                },
-                success : function(response) {
-                    // обработка ответа от сервера
-                    $("#hotpoints_panel").appendChild(response.response.outputStream.ob.cb.toString());
-                }
-            });
-        })
     })
 
 </script>

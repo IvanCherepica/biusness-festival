@@ -46,12 +46,12 @@ public class EditUserServlet extends HttpServlet {
             request.setAttribute("eventsp",allEventsFromDB);
             request.setAttribute( "ueventsp",eventFromUser);
         }
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/editUser.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/admin/userEdit.jsp");
         dispatcher.forward(request, response);
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;UTF-8");
 
