@@ -10,8 +10,8 @@
     <title>Пользователи</title>
 
     <link rel="stylesheet" href="https://bootswatch.com/3/united/bootstrap.min.css">
-    <style>
-        <jsp:include page="/admin/dashboard.jsp"/>
+    <style type="text/css">
+        <%@ include file="/css/dashboard.css" %>
     </style>
 </head>
 
@@ -29,7 +29,7 @@
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
             <jsp:include page="/admin/admin-left-panel.jsp">
-                <jsp:param name='selected' value='festivals'/>
+                <jsp:param name='selected' value='users'/>
             </jsp:include>
         </div>
 
