@@ -22,7 +22,7 @@ public class UsersListServlet extends HttpServlet {
         List<User> userList = UserServiceImpl.getInstance().getAllList();
         request.setAttribute("usersList", userList);
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/usersList.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/admin/usersList.jsp");
         dispatcher.forward(request, response);
     }
 }
