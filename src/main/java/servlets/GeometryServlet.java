@@ -16,6 +16,8 @@ public class GeometryServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html;UTF-8");
 
         List<Festival> festivals= FestivalServiceImpl.getInstance().getAllList();
 
@@ -23,7 +25,6 @@ public class GeometryServlet extends HttpServlet {
         String message = gson.toJson(festivals);
 
         response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
         response.getWriter().write(message);
     }
 }

@@ -7,6 +7,7 @@ import services.abstraction.EventPoinService;
 import services.abstraction.EventService;
 import services.implementation.EventPoinServiceImpl;
 import services.implementation.EventServiceImpl;
+import util.DateTimeConverter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,7 +23,8 @@ public class EditEventServlet extends HttpServlet {
 	private final EventService eventService =  EventServiceImpl.getInstance();
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		response.setContentType("text/html");
+//		request.setCharacterEncoding("UTF-8");
+//		response.setContentType("text/html;UTF-8");
 //		String paramId = request.getParameter("festivalId");
 //		Festival festival;
 //
@@ -44,7 +46,9 @@ public class EditEventServlet extends HttpServlet {
 	
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html;UTF-8");
+
 		String festivalIdParam = request.getParameter("festivalId");
 		String eventIdParam = request.getParameter("eventId");
 		String name = request.getParameter("name");
@@ -61,8 +65,8 @@ public class EditEventServlet extends HttpServlet {
 			long eventId = Long.parseLong(eventIdParam);
 			long eventPointId = Long.parseLong(eventPointIdParam);
 			
-			dateBegin = LocalDateTime.parse(dateBeginParam); //, DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm"));
-			dateEnd = LocalDateTime.parse(dateEndParam); //, DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm"));
+			dateBegin = DateTimeConverter.parse(dateBeginParam);
+			dateEnd = DateTimeConverter.parse(dateEndParam);
 			
 			EventPoint eventPoint = eventPoinService.getById(eventPointId);
 			
@@ -75,8 +79,7 @@ public class EditEventServlet extends HttpServlet {
 //			event.setDateEnd(dateEnd);
 			
 			eventService.update(event);
-			
-			response.setContentType("text/html");
+
 			response.sendRedirect("/admin/editFestival?festivalId="+festivalId);
 		} catch (HibernateException | NumberFormatException e) {
 			response.sendRedirect("/error.html");

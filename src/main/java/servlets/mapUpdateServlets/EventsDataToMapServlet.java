@@ -26,7 +26,7 @@ public class EventsDataToMapServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        request.setCharacterEncoding("UTF-8");
 
         String eventPointID = request.getParameter("eventPoint_id");
         List<Event> events = null;

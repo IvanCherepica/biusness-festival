@@ -5,6 +5,7 @@ import dao.abstraction.EventDAO;
 import models.Event;
 import org.hibernate.*;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 public class EventDAOImpl extends AbstactDAO<Event> implements EventDAO {
@@ -38,8 +39,8 @@ public class EventDAOImpl extends AbstactDAO<Event> implements EventDAO {
 		query.setParameter("description", event.getDescription());
 		query.setParameter("eventPoint", event.getEventPoint().getId());
 		query.setParameter("festival", event.getFestival().getId());
-		query.setParameter("dateBegin", event.getDateBegin());
-		query.setParameter("dateEnd", event.getDateEnd());
+		query.setParameter("dateBegin", Timestamp.valueOf(event.getDateBegin()));
+		query.setParameter("dateEnd", Timestamp.valueOf(event.getDateEnd()));
 		
 		Transaction transaction = session.beginTransaction();
 		query.executeUpdate();

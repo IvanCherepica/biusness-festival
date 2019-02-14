@@ -19,6 +19,8 @@ import java.util.List;
 public class EventPointEdit extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html;UTF-8");
 
         List<Festival> festivals = null;
 
@@ -42,6 +44,8 @@ public class EventPointEdit extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html;UTF-8");
 
         long eventPointId = Long.parseLong(request.getParameter("eventPointId"));
         long festivalId = Long.parseLong(request.getParameter("festivalId"));
@@ -68,8 +72,6 @@ public class EventPointEdit extends HttpServlet {
 
          EventPoinServiceImpl.getInstance().update(eventPoint);
 
-
-        response.setContentType("text/html");
         response.sendRedirect("/admin/editFestival?festivalId="+festivalId);
         
         }

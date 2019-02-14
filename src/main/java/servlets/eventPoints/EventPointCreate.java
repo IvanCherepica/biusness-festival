@@ -19,6 +19,8 @@ import java.util.List;
 public class EventPointCreate extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html;UTF-8");
 
         long festivalId = 1;
         request.setAttribute("festivalId", festivalId);
@@ -36,6 +38,8 @@ public class EventPointCreate extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html;UTF-8");
 
         String eventName = request.getParameter("name");
         String eventDescription = request.getParameter("description");
