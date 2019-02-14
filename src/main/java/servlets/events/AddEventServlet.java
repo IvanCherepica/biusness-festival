@@ -59,8 +59,8 @@ public class AddEventServlet extends HttpServlet {
 		    response.sendRedirect("/error.html");
 	    }
         Event event = new Event(name, description, eventPoint, festival);
-	    event.setDateBegin(dateBegin);
-	    event.setDateEnd(dateEnd);
+//	    event.setDateBegin(dateBegin);
+//	    event.setDateEnd(dateEnd);
 	    
         eventService.add(event);
 

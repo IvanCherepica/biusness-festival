@@ -17,15 +17,15 @@ To change this template use File | Settings | File Templates.
         }
         .usermap {
             margin: 3px 3px 3px 3px;
-            z-index: 1;
+            /*z-index: 1;*/
             position: relative;
         }
         .container{
             width: 568px!important;
         }
         .main{
-            position: relative;
-            z-index: 0;
+            /*position: relative;
+            z-index: 0;*/
         }
 
         .informUser {

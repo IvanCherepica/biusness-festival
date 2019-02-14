@@ -71,11 +71,11 @@ public class EditUserServlet extends HttpServlet {
                    for (String eve : eventId) {
                        events.add(eventService.getById(Long.parseLong(eve)));
                    }
-                   user.setEventsFromFest(events);
+//                   user.setEventsFromFest(events);
                }
                else {
                    userEvents.removeAll(userEvents);
-                   user.setEventsFromFest(userEvents);
+//                   user.setEventsFromFest(userEvents);
                }
             }
 

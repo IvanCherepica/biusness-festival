@@ -182,23 +182,24 @@ function GetEventsForEventPoint(eventPoint_id){
 
 
 function openListOfEventPointsEvents(data,festival_id) {
-    $("#festival_list_body").append("<button id=\"festival_list_close\" type=\"button\" class=\"close\" data-dismiss=\"modal\">&times;</button>");
+    var festivalListBody = $("#festival_list_body");
+    festivalListBody.append("<button id=\"festival_list_close\" type=\"button\" class=\"close\" data-dismiss=\"modal\">&times;</button>");
 
 
-    $("#festival_list_body").append("<h2>" + data.eventPoint.name + "</h2>");
-    $("#festival_list_body").append("<p>" + data.eventPoint.description + "</p>");
+    festivalListBody.append("<h2>" + data.eventPoinName + "</h2>");
+    festivalListBody.append("<p>" + data.eventPoinDescription + "</p>");
 
 
-    $("#festival_list_body").append("<table id=\"festival_list_table\" class=\"table table-striped\"></table>");
+    festivalListBody.append("<table id=\"festival_list_table\" class=\"table table-striped\"></table>");
     //Column names
-    $("#festival_list_table").append("<thead> <tr><th>Event</th><th>Description</th><th>Working time</th></tr></thead><tbody>");
+    $("#festival_list_table").append("<thead> <tr><th>Event</th><th>Description</th><th>Working time</th><th>Add to \n personal \n schedule</th></tr></thead><tbody>");
 
     //fill the table
     $.each(data.eventList, function (index, value) {
 
         //$("#festival_list_table").append("<tr href=\"javascript:void(0)\" onclick=\"moveMapCentrToPoint('"+ value.center + "', '"+ value.id + "')\" id='" + value.id + "' ><td>" + value.name + "</td><td>" + value.description + "</td><td></td></tr>");
-        $("#festival_list_table").append("<tr id='" + value.id + "' ><td>" + value.name + "</td><td>" + value.description + "</td><td></td></tr>");
-
+        $("#festival_list_table").append("<tr id='" + value.id + "' ><td>" + value.name + "</td><td>" + value.description + "</td><td></td><td><div class=\"check-material\"><input id=\"toggle-1\" checked=\"checked\" type=\"checkbox\" href=\"javascript:void(0)\" onclick=\"checkBoxOnClick(event,"+ value.id + ")\"><label for=\"toggle-1\"></label></label></div></td></tr>");
+//<input id="toggle-2" type="checkbox" checked="checked"><label for="toggle-2">
     });
 
     $("#festival_list_table").append("</tbody>");
@@ -216,5 +217,29 @@ function openListOfEventPointsEvents(data,festival_id) {
 
     });
     $("#error-edit-message").removeClass('hidden');
+
+}
+
+function checkBoxOnClick(event,eventID) {
+    var includeToSchedule = false;
+    if (event.currentTarget.checked) {
+        includeToSchedule = true;
+    }
+
+    // get запрос EventPointToMapServlet
+    $.ajax({
+        url: "/user/userScheduleUpdate",
+        method: "get",
+        async: true,
+        data: {includeToSchedule : includeToSchedule, eventID : eventID},
+        error: function (message) {
+            console.log(message);
+        },
+        success: function (data) {
+
+            console.log("UpdateUserSchedule : " + data);
+
+        }
+    });
 
 }

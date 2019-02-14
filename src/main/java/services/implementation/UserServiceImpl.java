@@ -67,21 +67,21 @@ public class UserServiceImpl implements UserService {
         return userDAO.getAllList();
     }
 
-    @Override
-    public Set<EventPoint> getEventsFromUserId(long id){
-        User user = userDAO.getById(id);
-        return user.getEventPoints();
-    }
-
-    @Override
-    public void addEventsListToUserbyId(long id,Set<EventPoint> events){
-        User user= userDAO.getById(id);
-        user.setEventPoints(events);
-    }
-    @Override
-    public void addEventToUserId(long id, EventPoint event){
-        User user= userDAO.getById(id);
-        user.addEventPoint(event);
-    }
+//    @Override
+//    public Set<EventPoint> getEventsFromUserId(long id){
+//        User user = userDAO.getById(id);
+//        return user.getEventPoints();
+//    }
+//
+//    @Override
+//    public void addEventsListToUserbyId(long id,Set<EventPoint> events){
+//        User user= userDAO.getById(id);
+//        user.setEventPoints(events);
+//    }
+//    @Override
+//    public void addEventToUserId(long id, EventPoint event){
+//        User user= userDAO.getById(id);
+//        user.addEventPoint(event);
+//    }
 
 }

@@ -71,8 +71,8 @@ public class EditEventServlet extends HttpServlet {
 			event.setName(name == null ? "" : name);
 			event.setDescription(description == null ? "" : description);
 			event.setEventPoint(eventPoint);
-			event.setDateBegin(dateBegin);
-			event.setDateEnd(dateEnd);
+//			event.setDateBegin(dateBegin);
+//			event.setDateEnd(dateEnd);
 			
 			eventService.update(event);
 			
