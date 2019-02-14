@@ -21,6 +21,17 @@ $.ajax({
 
 //send message to server with user coordinates
 function sendMessage(webSocketClient) {
+
+        var options = {
+            timeout: 5000, // timeout at 60000 milliseconds (60 seconds)
+            enableHighAccuracy: true,
+            maximumAge: 0
+        };
+
+        //https://developer.mozilla.org/en-US/docs/Web/API/PositionOptions
+
+
+
         navigator.geolocation.watchPosition(function (position) {
             userX = position.coords.latitude;
             userY = position.coords.longitude;
@@ -30,7 +41,14 @@ function sendMessage(webSocketClient) {
             //webSocketClient.send(JSON.stringify(jsonObj));
             webSocketClient.send(message);
             newPlacemark(myMap, userX, userY);
-        });
+        }, function (err) {
+        if(err.code == 1) {
+            alert("Error: Access is denied!");
+        } else if( err.code == 2) {
+            alert("Error: Position is unavailable!");
+        }
+    },
+            options);
 
 
 }
