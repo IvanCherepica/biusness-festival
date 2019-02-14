@@ -62,6 +62,6 @@ public class EventPointCreate extends HttpServlet {
 
         EventPoinServiceImpl.getInstance().add(eventPoint);
 
-        response.sendRedirect("/admin/editFestival?festivalId="+festivalId);
+       // response.sendRedirect("/admin/editFestival?festivalId="+festivalId);
     }
 }
