@@ -2,7 +2,7 @@ package servlets;
 
 import com.google.gson.Gson;
 import models.Festival;
-import services.FestivalServiceImpl;
+import services.implementation.FestivalServiceImpl;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;

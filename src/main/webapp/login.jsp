@@ -35,13 +35,15 @@
                     <div id="success-message">You have been logged out successfully.</div>
                 </div>
 
-                <h2>Добро пожаловать</h2>
+                <h2 style="text-align: center;">Добро пожаловать</h2>
                 <form action="${pageContext.request.contextPath}/login" method="POST">
                     <div class="form-group login-group">
                         <input type="text" class="form-control" id="uName" name="login" placeholder="Login"
                                required/>
+                        <br>
                         <input type="password" class="form-control" type="text" id="uPass" name="password"
                                required placeholder="Password" />
+                        <br>
                         <input type="submit" class="btn btn-primary btn-block" value="Sign in"/>
                     </div>
                 </form>

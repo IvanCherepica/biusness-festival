@@ -1,8 +1,7 @@
 package servlets;
 
 import models.Festival;
-import services.FestivalService;
-import services.FestivalServiceImpl;
+import services.implementation.FestivalServiceImpl;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;

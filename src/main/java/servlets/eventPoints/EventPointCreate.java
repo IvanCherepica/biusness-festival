@@ -3,8 +3,8 @@ package servlets.eventPoints;
 
 import models.EventPoint;
 import models.Festival;
-import services.EventPoinServiceImpl;
-import services.FestivalServiceImpl;
+import services.implementation.EventPoinServiceImpl;
+import services.implementation.FestivalServiceImpl;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.RequestDispatcher;
@@ -23,7 +23,10 @@ public class EventPointCreate extends HttpServlet {
         long festivalId = 1;
         request.setAttribute("festivalId", festivalId);
 
-        List<Festival> festivals = FestivalServiceImpl.getInstance().getAllList();
+        List<Festival> festivals = null;
+
+        festivals = FestivalServiceImpl.getInstance().getAllList();
+
         request.setAttribute("festivals", festivals);
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("/eventPoints/EventPointCreate.jsp");
@@ -41,7 +44,10 @@ public class EventPointCreate extends HttpServlet {
 
         long festivalId = Long.parseLong(request.getParameter("festivalId"));
 
-        Festival festival = FestivalServiceImpl.getInstance().getById(festivalId);
+        Festival festival = null;
+
+        festival = FestivalServiceImpl.getInstance().getById(festivalId);
+
 
         EventPoint eventPoint = new EventPoint();
         eventPoint.setName(eventName);

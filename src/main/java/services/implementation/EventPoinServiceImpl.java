@@ -1,24 +1,21 @@
-package services;
+package services.implementation;
 
-import dao.EventPointDAO;
-import dao.EventPointDAOImpl;
+import dao.SessionFactoryHolder;
+import dao.abstraction.EventPointDAO;
+import dao.implementation.EventPointDAOImpl;
 import models.EventPoint;
-import models.User;
-import org.hibernate.SessionFactory;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.service.ServiceRegistry;
-import util.DBHelper;
+import services.abstraction.EventPoinService;
 
 import java.util.List;
 
 public class EventPoinServiceImpl implements EventPoinService {
+
     private final EventPointDAO eventPointDAO;
 
     private static volatile EventPoinServiceImpl instance;
 
     private EventPoinServiceImpl() {
-        this.eventPointDAO = new EventPointDAOImpl(createSessionFactory(DBHelper.getConfiguration()));
+        this.eventPointDAO = new EventPointDAOImpl(SessionFactoryHolder.getSessionFactory());
     }
 
     public static EventPoinServiceImpl getInstance() {
@@ -31,6 +28,8 @@ public class EventPoinServiceImpl implements EventPoinService {
         }
         return instance;
     }
+
+
 
     @Override
     public EventPoint getById(long id) {
@@ -76,33 +75,5 @@ public class EventPoinServiceImpl implements EventPoinService {
     public List<EventPoint> getAllEventPointByFestivalId(long festivalId) {
         return eventPointDAO.getAllEventPointByFestivalId(festivalId);
     }
-    
-//    public List<User> getUsersByEventId(long id){
-//        EventPoint event= eventPointDAO.getById(id);
-//        return event.getUsers();
-//    }
-//
-//    @Override
-//    public void addUsersToEventId(long id, List<User> users){
-//        EventPoint event= eventPointDAO.getById(id);
-//        event.setUsers(users);
-//    }
-//
-//    @Override
-//    public void addUserToEventId(long id, User user){
-//        EventPoint event= eventPointDAO.getById(id);
-//        event.addUserToEvent(user);
-//    }
-        public void clearCash() {
-            eventPointDAO.clearCash();
-        }
-
-    private static SessionFactory createSessionFactory(Configuration configuration) {
-        StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder();
-        builder.applySettings(configuration.getProperties());
-        ServiceRegistry serviceRegistry = builder.build();
-        return configuration.buildSessionFactory(serviceRegistry);
-    }
-
 
 }

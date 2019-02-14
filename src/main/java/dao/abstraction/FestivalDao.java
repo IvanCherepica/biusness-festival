@@ -1,4 +1,4 @@
-package dao;
+package dao.abstraction;
 
 import models.Festival;
 

@@ -1,15 +1,11 @@
-package services;
+package services.implementation;
 
-import dao.EventDAO;
-import dao.EventDAOImpl;
+import dao.SessionFactoryHolder;
+import dao.abstraction.EventDAO;
+import dao.implementation.EventDAOImpl;
 import models.Event;
-import org.hibernate.SessionFactory;
-import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.service.ServiceRegistry;
-import util.DBHelper;
+import services.abstraction.EventService;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class EventServiceImpl implements EventService {
@@ -18,7 +14,7 @@ public class EventServiceImpl implements EventService {
 	private static volatile EventServiceImpl instance;
 	
 	private EventServiceImpl() {
-		this.eventDAO = new EventDAOImpl(createSessionFactory(DBHelper.getConfiguration()));
+		this.eventDAO = new EventDAOImpl(SessionFactoryHolder.getSessionFactory());
 	}
 	
 	public static EventServiceImpl getInstance() {
@@ -69,11 +65,5 @@ public class EventServiceImpl implements EventService {
 	public List<Event> getAllByFestival(long fetsivalId) {
 		return eventDAO.getAllByFestival(fetsivalId);
 	}
-	
-	private static SessionFactory createSessionFactory(Configuration configuration) {
-		StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder();
-		builder.applySettings(configuration.getProperties());
-		ServiceRegistry serviceRegistry = builder.build();
-		return configuration.buildSessionFactory(serviceRegistry);
-	}
+
 }

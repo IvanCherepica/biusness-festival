@@ -1,8 +1,8 @@
 package servlets.events;
 
 import org.hibernate.HibernateException;
-import services.EventService;
-import services.EventServiceImpl;
+import services.abstraction.EventService;
+import services.implementation.EventServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

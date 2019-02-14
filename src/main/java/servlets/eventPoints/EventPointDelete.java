@@ -1,10 +1,10 @@
 package servlets.eventPoints;
 
 import org.hibernate.HibernateException;
-import services.EventPoinService;
-import services.EventPoinServiceImpl;
-import services.FestivalService;
-import services.FestivalServiceImpl;
+import services.abstraction.EventPoinService;
+import services.implementation.EventPoinServiceImpl;
+import services.abstraction.FestivalService;
+import services.implementation.FestivalServiceImpl;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;

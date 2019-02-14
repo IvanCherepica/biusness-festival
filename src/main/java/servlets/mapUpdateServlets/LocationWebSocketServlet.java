@@ -7,8 +7,8 @@ import com.google.gson.GsonBuilder;
 import dto.UserServerDto;
 import dto.UserSocketDto;
 import models.Festival;
-import services.FestivalService;
-import services.FestivalServiceImpl;
+import services.abstraction.FestivalService;
+import services.implementation.FestivalServiceImpl;
 import services.userNotificationServices.LocationWebSocketConfigurator;
 import services.userNotificationServices.UserSessionService;
 import util.UserJSONDataDeserializer;
@@ -17,6 +17,7 @@ import util.UserJSONDataDeserializer;
 import javax.servlet.http.HttpSession;
 import javax.websocket.*;
 import javax.websocket.server.ServerEndpoint;
+import java.sql.SQLException;
 import java.util.*;
 
 @ServerEndpoint(value = "/compareLocations", configurator= LocationWebSocketConfigurator.class)
@@ -25,6 +26,9 @@ public class LocationWebSocketServlet {
         private FestivalService festivalService = FestivalServiceImpl.getInstance();
 
         private String point;
+
+    public LocationWebSocketServlet() throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
+    }
 //        private Festival festival = new Festival("Test", "Testing", "Red" ,
 //            "Some", "60.11173060613703 30.267900556923905", 75);
 

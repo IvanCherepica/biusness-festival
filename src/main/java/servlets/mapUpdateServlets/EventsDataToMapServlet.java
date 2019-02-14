@@ -4,8 +4,8 @@ import com.google.gson.Gson;
 import dto.UserSocketDto;
 import models.Event;
 import models.EventPoint;
-import services.EventPoinServiceImpl;
-import services.EventServiceImpl;
+import services.implementation.EventPoinServiceImpl;
+import services.implementation.EventServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

@@ -1,6 +1,6 @@
 package services.userNotificationServices;
 
-import services.FestivalServiceImpl;
+import services.implementation.FestivalServiceImpl;
 
 import javax.servlet.http.HttpSession;
 import java.util.*;

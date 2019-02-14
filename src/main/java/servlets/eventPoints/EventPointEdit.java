@@ -2,8 +2,8 @@ package servlets.eventPoints;
 
 import models.EventPoint;
 import models.Festival;
-import services.EventPoinServiceImpl;
-import services.FestivalServiceImpl;
+import services.implementation.EventPoinServiceImpl;
+import services.implementation.FestivalServiceImpl;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.RequestDispatcher;
@@ -20,12 +20,18 @@ public class EventPointEdit extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        List<Festival> festivals = FestivalServiceImpl.getInstance().getAllList();
+        List<Festival> festivals = null;
+
+        festivals = FestivalServiceImpl.getInstance().getAllList();
+
         request.setAttribute("festivals", festivals);
 
 
         long eventPointId = Long.parseLong(request.getParameter("eventPointId"));
-        EventPoint eventPoint = EventPoinServiceImpl.getInstance().getById(eventPointId);
+        EventPoint eventPoint = null;
+
+        eventPoint = EventPoinServiceImpl.getInstance().getById(eventPointId);
+
         request.setAttribute("eventPoint", eventPoint);
         //request.setAttribute("festivalId", eventPoint.getFestival().getId());
 
@@ -40,8 +46,14 @@ public class EventPointEdit extends HttpServlet {
         long eventPointId = Long.parseLong(request.getParameter("eventPointId"));
         long festivalId = Long.parseLong(request.getParameter("festivalId"));
 
-        EventPoint eventPoint = EventPoinServiceImpl.getInstance().getById(eventPointId);
-        Festival festival = FestivalServiceImpl.getInstance().getById(festivalId);
+        EventPoint eventPoint = null;
+
+        eventPoint = EventPoinServiceImpl.getInstance().getById(eventPointId);
+
+        Festival festival = null;
+
+        festival = FestivalServiceImpl.getInstance().getById(festivalId);
+
 
         String eventName = request.getParameter("name");
         String eventDescription = request.getParameter("description");
@@ -54,8 +66,9 @@ public class EventPointEdit extends HttpServlet {
         eventPoint.setFestival(festival);
         eventPoint.setGeometry(eventGeometry);
 
-        EventPoinServiceImpl.getInstance().update(eventPoint);
-        
+         EventPoinServiceImpl.getInstance().update(eventPoint);
+
+
         response.setContentType("text/html");
         response.sendRedirect("/admin/editFestival?festivalId="+festivalId);
         

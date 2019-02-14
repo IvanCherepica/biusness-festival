@@ -1,16 +1,17 @@
-package dao;
+package services.abstraction;
 
 import models.Event;
+
 import java.util.List;
 
-public interface EventDAO {
+public interface EventService {
 	Event getById(long id);
-	Long add(Event event);
 	Event getByName(String name);
-	void remove(long id);
+	Long add(Event event);
 	void update(Event event);
+	void remove(long id);
 	
 	List<Event> getAllList();
 	List<Event> getAllByEventPoint(long id);
-	List<Event> getAllByFestival(long fetsivalId);
+	List<Event> getAllByFestival(long festivalId);
 }

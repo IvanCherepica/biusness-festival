@@ -8,7 +8,7 @@ import org.hibernate.Transaction;
 import java.lang.reflect.ParameterizedType;
 
 
-abstract class AbstactDAO<T> {
+public abstract class AbstactDAO<T> {
     private final Class<T> persistentClass;
 
     private String className;
