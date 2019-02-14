@@ -40,7 +40,7 @@
 
 
         <div class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-2 main">
-                <h1>Добавление пользователя</h1>
+                <h1 class="page-header">Добавление пользователя</h1>
                 <form action="${pageContext.request.contextPath}/admin/addUser" method="POST">
                     <div class="form-group edit-group">
 

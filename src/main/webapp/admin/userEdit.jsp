@@ -57,7 +57,7 @@
 
 
         <div class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-2 main">
-                <h1>Редактирование пользователя</h1>
+                <h1 class="page-header">Редактирование пользователя</h1>
                 <form action="${pageContext.request.contextPath}/admin/editUser" method="POST">
                     <div class="form-group edit-group">
                         <label for="id">Id</label>
