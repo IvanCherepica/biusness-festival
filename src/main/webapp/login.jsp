@@ -32,6 +32,7 @@
                         <input type="submit" class="btn btn-primary btn-block" value="Зарегистрироваться"/>
                     </form>
                 </c:if>
+                <br>
                 <c:if test="${isInvalid}">
                     <div id="login-message" class="alert alert-danger">
                         <h3>Неверные Данные</h3>

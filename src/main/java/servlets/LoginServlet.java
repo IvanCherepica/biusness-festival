@@ -33,8 +33,10 @@ public class LoginServlet extends HttpServlet {
         String succes = request.getParameter("regSucces");
         if (succes !=null){
             regSucces=true;
-            request.setAttribute("regSucces",regSucces);
+            isInvalid=false;
+            isPass=false;
         }
+        request.setAttribute("regSucces",regSucces);
         request.setAttribute("isInvalid",isInvalid);
         request.setAttribute("isPass", isPass);
 
