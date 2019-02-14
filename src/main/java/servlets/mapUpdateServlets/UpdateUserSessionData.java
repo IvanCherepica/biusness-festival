@@ -17,6 +17,8 @@ public class UpdateUserSessionData extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
         String userInFestival = (String) session.getAttribute("userInFestival");

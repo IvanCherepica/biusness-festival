@@ -22,7 +22,8 @@ public class EditEventServlet extends HttpServlet {
 	private final EventService eventService =  EventServiceImpl.getInstance();
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		response.setContentType("text/html");
+//		request.setCharacterEncoding("UTF-8");
+//		response.setContentType("text/html;UTF-8");
 //		String paramId = request.getParameter("festivalId");
 //		Festival festival;
 //
@@ -44,7 +45,9 @@ public class EditEventServlet extends HttpServlet {
 	
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html;UTF-8");
+
 		String festivalIdParam = request.getParameter("festivalId");
 		String eventIdParam = request.getParameter("eventId");
 		String name = request.getParameter("name");
@@ -75,8 +78,7 @@ public class EditEventServlet extends HttpServlet {
 			event.setDateEnd(dateEnd);
 			
 			eventService.update(event);
-			
-			response.setContentType("text/html");
+
 			response.sendRedirect("/admin/editFestival?festivalId="+festivalId);
 		} catch (HibernateException | NumberFormatException e) {
 			response.sendRedirect("/error.html");

@@ -14,12 +14,13 @@ public class StartServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws  IOException {
+        request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html;UTF-8");
+
         User user = (User) request.getSession().getAttribute("user");
         if(user==null) {
-            response.setContentType("text/html");
             response.sendRedirect("/login");
         } else {
-            response.setContentType("text/html");
             response.sendRedirect("/user");
         }
     }

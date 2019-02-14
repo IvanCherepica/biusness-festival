@@ -13,7 +13,9 @@ public class FestivalMapServlet extends HttpServlet {
 
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setContentType("text/html");
+        request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html;UTF-8");
+
         RequestDispatcher dispatcher = request.getRequestDispatcher("/pageWithMap.jsp");
         dispatcher.forward(request, response);
     }
