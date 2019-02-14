@@ -21,6 +21,9 @@ public class HotPointDeleteServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html;UTF-8");
+
         String paramHotPontId = request.getParameter("hotPointId");
         String festivalId = request.getParameter("festivalId");
         

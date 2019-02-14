@@ -40,9 +40,9 @@
             <div class="tab-content">
                 <div role="tabpanel" class="tab-pane active" id="admin-page">
                     <h2>Admin panel</h2>
-                    <h4> ${festival.name} (${festival.id})</h4>
-                    <ul class="nav nav-tabs nav-content" role="tablist" id="myTabs">
-                        <li id="festival-edit-nav" class="active">
+                    <h4> ${festival.name}</h4>
+                    <ul class="nav nav-tabs nav-content" role="tablist">
+                        <li id="festival-edit-nav">
                             <a id="festival-tab" href="#festival-panel" aria-controls="festival-panel" role="tab" data-toggle="tab">Festival</a>
                         </li>
                         <li id="hotpoint-list-nav">
@@ -57,7 +57,7 @@
                     </ul>
 
                     <div class="tab-content">
-                        <div role="tabpanel" class="tab-pane active" id="festival-panel">
+                        <div role="tabpanel" class="tab-pane" id="festival-panel">
                             <div class="panel panel-default table-panel">
                                 <div class="tab-content">
                                     <div class="panel-body">
@@ -333,11 +333,11 @@
             </div>
             <div class="modal-body">
                 <div class="raw">
-                    <label for="festival_id">Festival id:</label>
-                    <input id="festival_id" name="festival_id" readonly>
+                    <!--<label for="festival_id">Festival id:</label>-->
+                    <input id="festival_id" name="festival_id" readonly type="hidden">
 
-                    <label for="ep-id">ID:</label>
-                    <input id="ep-id" name="eventPointId" readonly>
+                    <!--<label for="ep-id">ID:</label>-->
+                    <input id="ep-id" name="eventPointId" readonly type="hidden">
                 </div>
 
                 <div class="raw">
@@ -487,6 +487,80 @@
 
 <script type="text/javascript">
 
+    $( document ).ready(function() {
+        var url = new URL(window.location.href);
+        var activePanel = url.searchParams.get("active-panel");
+
+        /*if (activePanel === null) {
+            window.location.href = url.toString() + '&active-panel=edit-fest';
+        }*/
+
+        switch (activePanel) {
+            case 'edit-fest':
+                resetAllActivePanels();
+                $('#festival-edit-nav').addClass('active');
+                $('#festival-panel').addClass('active');
+                break;
+            case 'edit-hp':
+                resetAllActivePanels();
+                $('#hotpoint-list-nav').addClass('active');
+                $('#hotpoints_panel').addClass('active');
+                break;
+            case 'edit-ep':
+                resetAllActivePanels();
+                $('#eventpoint-list-nav').addClass('active');
+                $('#eventpoints-panel').addClass('active');
+                break;
+            case 'edit-ev':
+                resetAllActivePanels();
+                $('#event-list-nav').addClass('active');
+                $('#events-panel').addClass('active');
+                break;
+            default:
+                resetAllActivePanels();
+                $('#festival-edit-nav').addClass('active');
+                $('#festival-panel').addClass('active');
+        }
+
+
+
+        $("#festival-edit-nav").click(function(){
+            var path = '/' + window.location.href.split('/')[3] + '/' + window.location.href.split('/')[4].split('?')[0];
+            var param = window.location.href.split('/')[4].split('?')[1].split('&')[0];
+            window.history.pushState("object or string", "Title", path + '?' + param + '&' + 'active-panel=edit-fest');
+        });
+
+        $("#hotpoint-list-nav").click(function(){
+            var path = '/' + window.location.href.split('/')[3] + '/' + window.location.href.split('/')[4].split('?')[0];
+            var param = window.location.href.split('/')[4].split('?')[1].split('&')[0];
+            window.history.pushState("object or string", "Title", path + '?' + param + '&' + 'active-panel=edit-hp');
+        });
+
+        $("#eventpoint-list-nav").click(function(){
+            var path = '/' + window.location.href.split('/')[3] + '/' + window.location.href.split('/')[4].split('?')[0];
+            var param = window.location.href.split('/')[4].split('?')[1].split('&')[0];
+            window.history.pushState("object or string", "Title", path + '?' + param + '&' + 'active-panel=edit-ep');
+        });
+
+        $("#event-list-nav").click(function(){
+            var path = '/' + window.location.href.split('/')[3] + '/' + window.location.href.split('/')[4].split('?')[0];
+            var param = window.location.href.split('/')[4].split('?')[1].split('&')[0];
+            window.history.pushState("object or string", "Title", path + '?' + param + '&' + 'active-panel=edit-ev');
+        });
+
+    });
+
+    function resetAllActivePanels() {
+        $('#festival-edit-nav').removeClass('active');
+        $('#festival-panel').removeClass('active');
+        $('#hotpoint-list-nav').removeClass('active');
+        $('#hotpoints_panel').removeClass('active');
+        $('#eventpoint-list-nav').removeClass('active');
+        $('#eventpoints-panel').removeClass('active');
+        $('#event-list-nav').removeClass('active');
+        $('#events-panel').removeClass('active');
+    }
+
     function putHotpointValues(id, festival_id, name, description, geometry, color ) {
         $('#hp-id').val(id);
         $('#hfestival_id').val(festival_id);
@@ -629,7 +703,7 @@
 
                 },
                 error : function (error) {
-                    console.log(error);
+                    console.log(error.message);
                 }
             });
         })

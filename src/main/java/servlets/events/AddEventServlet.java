@@ -31,7 +31,10 @@ public class AddEventServlet extends HttpServlet {
 
 	@Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	    String festivalIdParam = request.getParameter("festivalId");
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html;UTF-8");
+
+		String festivalIdParam = request.getParameter("festivalId");
 	    String eventPointIdParam = request.getParameter("eventPointId");
 	    String name = request.getParameter("name");
 	    String description = request.getParameter("description");
@@ -65,7 +68,6 @@ public class AddEventServlet extends HttpServlet {
 	    
         eventService.add(event);
 
-        response.setContentType("text/html");
         response.sendRedirect("/admin/festivals");
     }
 }

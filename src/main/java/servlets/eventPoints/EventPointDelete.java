@@ -20,6 +20,8 @@ public class EventPointDelete extends HttpServlet {
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html;UTF-8");
 
         String paramEventPontId = request.getParameter("eventPointId");
         String festivalId = request.getParameter("festivalId");

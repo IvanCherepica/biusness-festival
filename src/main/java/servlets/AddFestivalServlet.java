@@ -22,7 +22,7 @@ public class AddFestivalServlet extends HttpServlet {
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	    response.setContentType("text/html");
+	    response.setContentType("text/html;UTF-8");
 		String paramId = request.getParameter("edit");
     	Festival festival;
     	
@@ -40,7 +40,10 @@ public class AddFestivalServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	    String name = request.getParameter("name");
+	    request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html;UTF-8");
+
+		String name = request.getParameter("name");
 	    String description = request.getParameter("description");
 	    String geometry = request.getParameter("geometry");
 	    String color = request.getParameter("color");
@@ -52,7 +55,7 @@ public class AddFestivalServlet extends HttpServlet {
 	    
         festivalService.add(festival);
 
-        response.setContentType("text/html");
+
         response.sendRedirect("/admin/festivals");
     }
 }
