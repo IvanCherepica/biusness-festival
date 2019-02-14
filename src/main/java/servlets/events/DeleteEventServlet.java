@@ -16,7 +16,9 @@ public class DeleteEventServlet extends HttpServlet {
 	private final EventService eventService = EventServiceImpl.getInstance();
 	
 	protected void doGet (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("text/html");
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html;UTF-8");
+
 		String paramId = request.getParameter("eventId");
 		String festivalId = request.getParameter("festivalId");
 		
@@ -30,7 +32,7 @@ public class DeleteEventServlet extends HttpServlet {
 				response.sendRedirect("/error.html");
 			}
 		}
-		response.setContentType("text/html");
+
 		response.sendRedirect("/admin/editfestival?id="+festivalId);
 	}
 	

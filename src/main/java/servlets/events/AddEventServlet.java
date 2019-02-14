@@ -9,6 +9,7 @@ import services.abstraction.FestivalService;
 import services.implementation.EventPoinServiceImpl;
 import services.implementation.EventServiceImpl;
 import services.implementation.FestivalServiceImpl;
+import util.DateTimeConverter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -30,7 +31,10 @@ public class AddEventServlet extends HttpServlet {
 
 	@Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	    String festivalIdParam = request.getParameter("festivalId");
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html;UTF-8");
+
+		String festivalIdParam = request.getParameter("festivalId");
 	    String eventPointIdParam = request.getParameter("eventPointId");
 	    String name = request.getParameter("name");
 	    String description = request.getParameter("description");
@@ -49,8 +53,8 @@ public class AddEventServlet extends HttpServlet {
 		    eventPoint = eventPoinService.getById(eventPointId);
 		    long festivalId = Long.parseLong(festivalIdParam);
 		    festival = festivalService.getById(festivalId);
-		    dateBegin = LocalDateTime.parse(dateBeginParam); //, DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:"));
-		    dateEnd = LocalDateTime.parse(dateEndParam); //, DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm:ss"));
+		    dateBegin = DateTimeConverter.parse(dateBeginParam);
+		    dateEnd = DateTimeConverter.parse(dateEndParam);
 		    
 		    if (!(eventPoint instanceof EventPoint || festival instanceof Festival)) {
 			    response.sendRedirect("/error.html");
@@ -64,7 +68,6 @@ public class AddEventServlet extends HttpServlet {
 	    
         eventService.add(event);
 
-        response.setContentType("text/html");
         response.sendRedirect("/admin/festivals");
     }
 }

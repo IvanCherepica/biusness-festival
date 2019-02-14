@@ -16,7 +16,9 @@ import java.util.List;
 public class FestivalsListServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        
+        request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html;UTF-8");
+
         List<Festival> festivals = FestivalServiceImpl.getInstance().getAllList();
         request.setAttribute("FestivalsList", festivals);
         

@@ -18,7 +18,9 @@ public class AddUserServlet extends HttpServlet {
     private final UserService userService = UserServiceImpl.getInstance();
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setContentType("text/html");
+        request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html;UTF-8");
+
         String paramId = request.getParameter("edit");
         User user;
 
@@ -36,6 +38,9 @@ public class AddUserServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html;UTF-8");
+
         String name = request.getParameter("name");
         String password = request.getParameter("password");
         String role = request.getParameter("role");
@@ -48,7 +53,7 @@ public class AddUserServlet extends HttpServlet {
 
         userService.add(user);
 
-        response.setContentType("text/html");
+
         response.sendRedirect("/admin/users");
     }
 }

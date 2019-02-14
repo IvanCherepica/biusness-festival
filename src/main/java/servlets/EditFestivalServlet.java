@@ -35,7 +35,9 @@ public class EditFestivalServlet extends HttpServlet {
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("text/html");
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html;UTF-8");
+
 		String paramId = request.getParameter("festivalId");
 		Festival festival;
 		
@@ -60,7 +62,9 @@ public class EditFestivalServlet extends HttpServlet {
 	
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html;UTF-8");
+
 		String paramId = request.getParameter("id");
 		String name = request.getParameter("name");
 		String description = request.getParameter("description");
@@ -81,8 +85,7 @@ public class EditFestivalServlet extends HttpServlet {
 			festival.setCenter(center == null ? "" : center);
 			
 			festivalService.update(festival);
-			
-			response.setContentType("text/html");
+
 			response.sendRedirect("/admin/editFestival?festivalId="+paramId);
 		} catch (HibernateException | NumberFormatException e) {
 			System.out.println(e);

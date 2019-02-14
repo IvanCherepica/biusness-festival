@@ -19,6 +19,9 @@ public class RegistrationServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html;UTF-8");
+
         RequestDispatcher dispatcher = request.getRequestDispatcher("/registration.jsp");
         dispatcher.forward(request, response);
     }
@@ -26,6 +29,9 @@ public class RegistrationServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html;UTF-8");
+
         String login = request.getParameter("name");
         String password = request.getParameter("password");
         if(login.isEmpty()|| password.isEmpty()){

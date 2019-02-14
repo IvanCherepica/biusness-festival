@@ -1,5 +1,7 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://sargue.net/jsptags/time" prefix="javatime" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,7 +11,6 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
 </head>
@@ -39,9 +40,9 @@
             <div class="tab-content">
                 <div role="tabpanel" class="tab-pane active" id="admin-page">
                     <h2>Admin panel</h2>
-                    <h4> ${festival.name} (${festival.id})</h4>
+                    <h4> ${festival.name}</h4>
                     <ul class="nav nav-tabs nav-content" role="tablist">
-                        <li id="festival-edit-nav" class="active">
+                        <li id="festival-edit-nav">
                             <a href="#festival-panel" aria-controls="festival-panel" role="tab" data-toggle="tab">Festival</a>
                         </li>
                         <li id="hotpoint-list-nav">
@@ -56,7 +57,7 @@
                     </ul>
 
                     <div class="tab-content">
-                        <div role="tabpanel" class="tab-pane active" id="festival-panel">
+                        <div role="tabpanel" class="tab-pane" id="festival-panel">
                             <div class="panel panel-default table-panel">
                                 <div class="tab-content">
                                     <div class="panel-body">
@@ -284,6 +285,7 @@
                                                                 <a id="evEditButton${event.id}" class="btn btn-primary">Edit</a>
                                                                 <a id="evDeleteButton" onclick="deleteEvent(${event.id}, ${festival.id})" class="btn btn-primary">Delete</a>
                                                             </form>
+
                                                         </td>
                                                         <script type="text/javascript">
                                                             jQuery(document).ready( function() {
@@ -332,11 +334,11 @@
             </div>
             <div class="modal-body">
                 <div class="raw">
-                    <label for="festival_id">Festival id:</label>
-                    <input id="festival_id" name="festival_id" readonly>
+                    <!--<label for="festival_id">Festival id:</label>-->
+                    <input id="festival_id" name="festival_id" readonly type="hidden">
 
-                    <label for="ep-id">ID:</label>
-                    <input id="ep-id" name="eventPointId" readonly>
+                    <!--<label for="ep-id">ID:</label>-->
+                    <input id="ep-id" name="eventPointId" readonly type="hidden">
                 </div>
 
                 <div class="raw">
@@ -377,11 +379,11 @@
             </div>
             <div class="modal-body">
                 <div class="raw">
-                    <label for="hfestival_id">Festival id:</label>
-                    <input id="hfestival_id" name="festival_id" readonly>
+                    <!--<label for="hfestival_id">Festival id:</label>-->
+                    <input id="hfestival_id" name="festival_id" readonly type="hidden">
 
-                    <label for="hp-id">ID:</label>
-                    <input id="hp-id" name="eventPointId" readonly>
+                    <!--<label for="hp-id">ID:</label>-->
+                    <input id="hp-id" name="eventPointId" readonly type="hidden">
                 </div>
 
                 <div class="raw">
@@ -393,6 +395,7 @@
                 <textarea id="hp-description" placeholder="введите краткое описание" name="description"
                           class="form-control" rows="3"></textarea>
 
+                <label for="hp-geometry">Geometry</label>
                 <textarea id="hp-geometry" placeholder="введите координаты" name="geometry" class="form-control" rows="3"></textarea>
                 <label for="hp-color">Color</label>
                 <input id="hp-color" type="color" name="color" class="form-control">
@@ -453,7 +456,7 @@
                     <div class="col-xs-6">
                         <div class="form-group">
                             <div class="input-group date" id="datetimepicker7">
-                                <input id="ev-date-from" type="text" class="form-control"/>
+                                <input id="ev-date-from" type="text" pattern="dd.MM.yyyy HH:mm" class="form-control"/>
                                 <span class="input-group-addon">
                                     <i class="glyphicon glyphicon-calendar"></i>
                                 </span>
@@ -463,7 +466,7 @@
                     <div class="col-xs-6">
                         <div class="form-group">
                             <div class="input-group date" id="datetimepicker8">
-                                <input id="ev-date-to" type="text" class="form-control"/>
+                                <input id="ev-date-to" type="text" pattern="dd.MM.yyyy HH:mm" class="form-control"/>
                                 <span class="input-group-addon">
                                     <i class="glyphicon glyphicon-calendar"></i>
                                 </span>
@@ -507,6 +510,80 @@
 </div>
 
 <script type="text/javascript">
+
+    $( document ).ready(function() {
+        var url = new URL(window.location.href);
+        var activePanel = url.searchParams.get("active-panel");
+
+        /*if (activePanel === null) {
+            window.location.href = url.toString() + '&active-panel=edit-fest';
+        }*/
+
+        switch (activePanel) {
+            case 'edit-fest':
+                resetAllActivePanels();
+                $('#festival-edit-nav').addClass('active');
+                $('#festival-panel').addClass('active');
+                break;
+            case 'edit-hp':
+                resetAllActivePanels();
+                $('#hotpoint-list-nav').addClass('active');
+                $('#hotpoints_panel').addClass('active');
+                break;
+            case 'edit-ep':
+                resetAllActivePanels();
+                $('#eventpoint-list-nav').addClass('active');
+                $('#eventpoints-panel').addClass('active');
+                break;
+            case 'edit-ev':
+                resetAllActivePanels();
+                $('#event-list-nav').addClass('active');
+                $('#events-panel').addClass('active');
+                break;
+            default:
+                resetAllActivePanels();
+                $('#festival-edit-nav').addClass('active');
+                $('#festival-panel').addClass('active');
+        }
+
+
+
+        $("#festival-edit-nav").click(function(){
+            var path = '/' + window.location.href.split('/')[3] + '/' + window.location.href.split('/')[4].split('?')[0];
+            var param = window.location.href.split('/')[4].split('?')[1].split('&')[0];
+            window.history.pushState("object or string", "Title", path + '?' + param + '&' + 'active-panel=edit-fest');
+        });
+
+        $("#hotpoint-list-nav").click(function(){
+            var path = '/' + window.location.href.split('/')[3] + '/' + window.location.href.split('/')[4].split('?')[0];
+            var param = window.location.href.split('/')[4].split('?')[1].split('&')[0];
+            window.history.pushState("object or string", "Title", path + '?' + param + '&' + 'active-panel=edit-hp');
+        });
+
+        $("#eventpoint-list-nav").click(function(){
+            var path = '/' + window.location.href.split('/')[3] + '/' + window.location.href.split('/')[4].split('?')[0];
+            var param = window.location.href.split('/')[4].split('?')[1].split('&')[0];
+            window.history.pushState("object or string", "Title", path + '?' + param + '&' + 'active-panel=edit-ep');
+        });
+
+        $("#event-list-nav").click(function(){
+            var path = '/' + window.location.href.split('/')[3] + '/' + window.location.href.split('/')[4].split('?')[0];
+            var param = window.location.href.split('/')[4].split('?')[1].split('&')[0];
+            window.history.pushState("object or string", "Title", path + '?' + param + '&' + 'active-panel=edit-ev');
+        });
+
+    });
+
+    function resetAllActivePanels() {
+        $('#festival-edit-nav').removeClass('active');
+        $('#festival-panel').removeClass('active');
+        $('#hotpoint-list-nav').removeClass('active');
+        $('#hotpoints_panel').removeClass('active');
+        $('#eventpoint-list-nav').removeClass('active');
+        $('#eventpoints-panel').removeClass('active');
+        $('#event-list-nav').removeClass('active');
+        $('#events-panel').removeClass('active');
+    }
 
     function deleteEventPoint(id, festivalId) {
         console.log("Delete event point button "+festivalId);
@@ -581,11 +658,13 @@
 
         $("#datetimepicker7").datetimepicker({
             locale: 'ru',
-            stepping: 10
+            stepping: 10,
+            format: "DD.MM.YYYY HH:mm"
         });
         $("#datetimepicker8").datetimepicker({
             locale: 'ru',
-            stepping: 10
+            stepping: 10,
+            format: "DD.MM.YYYY HH:mm"
         });
 
         $("#ep-save-btn").click(function(){
@@ -602,7 +681,7 @@
                 },
                 success : function() {
                     // обработка ответа от сервера
-                    $('#ep-close-btn').click();
+                    location.reload();
 
                 }
             });
@@ -618,14 +697,17 @@
                     name : $('#hp-name').val(),
                     description : $('#hp-description').val(),
                     geometry : $('#hp-geometry').val(),
-                    color : $('#hp-color').val()
+                    color : $('#hp-color').val(),
+
+                    //redirect :
                 },
                 success : function(data) {
+                    location.reload();
                     //alert('wow');
                     //window.location.href = "/admin/editFestival";
                 },
                 error : function (error) {
-                    console.log(error);
+                    console.log(error.message);
                 }
             });
         })
