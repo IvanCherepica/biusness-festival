@@ -57,7 +57,7 @@ public class HotPointEditorServlet extends HttpServlet {
 
         HotPointServiceImpl.getInstance().update(hPoint);
 
-        response.sendRedirect("/admin/editFestival?festivalId="+fId);
+        response.sendRedirect("/admin/editFestival");
     }
 
 }

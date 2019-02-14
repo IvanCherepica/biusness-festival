@@ -17,7 +17,7 @@ To change this template use File | Settings | File Templates.
         }
         .usermap {
             margin: 3px 3px 3px 3px;
-            z-index: 1;
+            /*z-index: 1;*/
             position: relative;
         }
         .container{
@@ -25,7 +25,7 @@ To change this template use File | Settings | File Templates.
         }
         .main{
             position: relative;
-            z-index: 0;
+            /*z-index: 0;*/
         }
 
         .informUser {
@@ -53,7 +53,7 @@ To change this template use File | Settings | File Templates.
             background: #eeeeee;
             height: 270px;
         }
-        #festivalBlock{
+        #festivalBlock {
             border-radius: 20px;
             text-align: center;
             position: initial;
@@ -64,6 +64,11 @@ To change this template use File | Settings | File Templates.
             background: #eeeeee;
             height: 0px;
             margin: 20px 0 0 0;
+        }
+
+        #events{
+            all: initial;
+            margin: 10px 10px 10px 10px;
         }
     </style>
 </head>
@@ -77,6 +82,7 @@ To change this template use File | Settings | File Templates.
         <div id="festivalBlock">
             <p id="festivalInfo1"></p>
             <p id="festivalInfo2"></p>
+            <div id="events"></div>
         </div>
     </div>
     <div class="usermap">

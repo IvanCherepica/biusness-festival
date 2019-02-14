@@ -75,21 +75,20 @@ public class EditFestivalServlet extends HttpServlet {
 		
 		try {
 			long id = Long.parseLong(paramId);
-			long r = Long.parseLong(radius);
 			
 			Festival festival = festivalService.getById(id);
 			festival.setName(name == null ? "" : name);
 			festival.setDescription(description == null ? "" : description);
 			festival.setGeometry(geometry == null ? "" : geometry);
 			festival.setColor(color == null ? "" : color);
-			festival.setRadius(Long.valueOf(radius));
+			festival.setRadius(Double.valueOf(radius));
 			festival.setCenter(center == null ? "" : center);
 			
 			festivalService.update(festival);
 
 			response.sendRedirect("/admin/editFestival?festivalId="+paramId);
 		} catch (HibernateException | NumberFormatException e) {
-			response.sendRedirect("/error.html");
+			System.out.println(e);
 		}
 	}
 }

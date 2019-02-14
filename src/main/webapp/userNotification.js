@@ -42,7 +42,7 @@ function connect() {
         };
     webSocketClient.onmessage = function (event) {
             var messageToUser = JSON.parse(event.data).message;
-            processDataForFestivalBlock(event);
+            processDataForFestivalBlock(event, festivalEvents);
             if (messageToUser.localeCompare("") != 0 ) {
                 sendWelcomMessage(messageToUser);
             }
@@ -105,11 +105,26 @@ function processDataForUserPage(data) {
     $("#userLg").append("<p> Your Role: " + data.user.role + "</p>");
 }
 
-function processDataForFestivalBlock(event) {
-    isInFestival = JSON.parse(event.data).isInFestival;
-    festival = JSON.parse(event.data).festival;
-    $("#festivalInfo1").text("You are at " + festival.name);
-    $("#festivalInfo2").text("About: " + festival.description);
-    $("#informUserBlock").css('height','770');
-    $("#festivalBlock").css('height','450');
+var flag = false;
+
+function processDataForFestivalBlock(event, eventspoints) {
+    console.log(eventspoints);
+    if(event!==undefined && eventspoints!==undefined) {
+        isInFestival = JSON.parse(event.data).isInFestival;
+        festival = JSON.parse(event.data).festival;
+        $("#festivalInfo1").text("You are at " + festival.name);
+        $("#festivalInfo2").text("About: " + festival.description);
+        $("#informUserBlock").css('height', '770');
+        $("#festivalBlock").css('height', '450');
+        if (flag === false) {
+            $("#events").append("<h4><b>Todays events</b></h4>");
+            for (var i = 0; i < eventspoints.length; i++) {
+                var j = i + 1;
+                $("#events").append("<p>" + j + ")" + eventspoints[i].name + "</p>");
+                if (i === eventspoints.length - 1) {
+                    flag = true;
+                }
+            }
+        }
+    }
 }
