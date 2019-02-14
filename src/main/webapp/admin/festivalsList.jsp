@@ -11,8 +11,8 @@
     <title>Фестивали</title>
 
     <link rel="stylesheet" href="https://bootswatch.com/3/united/bootstrap.min.css">
-    <style>
-        <jsp:include page="/admin/dashboard.jsp"/>
+    <style type="text/css">
+        <%@ include file="/css/dashboard.css" %>
     </style>
 </head>
 
