@@ -5,9 +5,16 @@
 <html>
 <head>
     <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <title>Редактирование пользователя</title>
 
-    <link rel="stylesheet" href="https://bootswatch.com/3/united/bootstrap.min.css" >
+    <link rel="stylesheet" href="https://bootswatch.com/3/united/bootstrap.min.css">
+    <style type="text/css">
+        <%@ include file="/css/dashboard.css" %>
+    </style>
 
     <script
             src="http://code.jquery.com/jquery-3.3.1.js"
@@ -25,16 +32,32 @@
 
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-
-
 </head>
 
+
+
 <body>
-<div class="container">
+
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <jsp:include page="/admin/admin-top-panel.jsp"/>
+    </div>
+</nav>
+
+
+
+<div class="container-fluid">
     <div class="row">
-        <div class="col-lg-6 col-md-6 col-xs-11 col-md-offset-3 col-xs-offset-2 edit-form">
-            <div class="col-xs-8 col-md-offset-2">
-                <h2>Редактирование пользователя</h2>
+        <div class="col-sm-3 col-md-2 sidebar">
+            <jsp:include page="/admin/admin-left-panel.jsp">
+                <jsp:param name='selected' value='users'/>
+            </jsp:include>
+        </div>
+
+
+        <div class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-2 main">
+                <h1>Редактирование пользователя</h1>
                 <form action="${pageContext.request.contextPath}/admin/editUser" method="POST">
                     <div class="form-group edit-group">
                         <label for="id">Id</label>
@@ -70,8 +93,8 @@
                     </div>
                     <input type="submit" class="btn btn-primary btn-block" value="Сохранить"/>
                 </form>
-            </div>
         </div>
+        <div class="col-sm-3 col-md-6"></div>
     </div>
 </div>
 </body>

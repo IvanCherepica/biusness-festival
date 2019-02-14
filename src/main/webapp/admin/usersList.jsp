@@ -29,7 +29,7 @@
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
             <jsp:include page="/admin/admin-left-panel.jsp">
-                <jsp:param name='selected' value='festivals'/>
+                <jsp:param name='selected' value='users'/>
             </jsp:include>
         </div>
 
