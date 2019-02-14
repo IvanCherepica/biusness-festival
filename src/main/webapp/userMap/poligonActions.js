@@ -1,5 +1,7 @@
 var festivalPolygons= {};
 var eventPointsPolygons= {};
+var festivalEvents;
+var Event
 
 function getKeyByValue(object, value) {
     return Object.keys(object).find(key => object[key] === value);
@@ -85,7 +87,7 @@ function GetEventPoints(){
         success: function (data) {
 
             console.log("[GetData] EventPoints received. Count=" + data.length);
-
+            festivalEvents = data;
             DrawMapUnits(data);
         }
     });
