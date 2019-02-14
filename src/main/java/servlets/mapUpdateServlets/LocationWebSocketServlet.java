@@ -115,7 +115,7 @@ public class LocationWebSocketServlet {
                     public void run() {
                         userSession.getAsyncRemote().sendText(new Gson().toJson(dto));
                     }
-                }, 5000);
+                }, 10000);
 
                 System.out.println(isInFestivalNew + " " + userSession.getId());
             } catch (Exception ex) {
