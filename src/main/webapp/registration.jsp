@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: matvey
@@ -9,36 +10,47 @@
 <html>
 <head>
     <title>Registration</title>
-    <link rel="stylesheet" href="https://bootswatch.com/3/united/bootstrap.min.css" >
+    <link rel="stylesheet" href="https://bootswatch.com/3/united/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <style>
-        .form-control{
-            width: 20%;
+        .form-control {
+            width: 26%;
         }
-        .submit{
-            width: 20%;
+
+        .container{
+            width: 26%;
+        }
+        .submit {
+            width: 26%;
         }
     </style>
 </head>
 <body>
 <div align="center">
     <div class="main">
-        <%--<c:if test="${isNotValid}">--%>
-            <%--<p class="warning">Invalid name or password!</p>--%>
-        <%--</c:if>--%>
-            <h2>Регистрация</h2>
+
+        <h2>Регистрация</h2>
         <form action="${pageContext.servletContext.contextPath}/registration" method="POST">
+
             <div class="field">
-                <input type="text" class="form-control" id="uName" name="name" placeholder="Login"/>
+                <input type="text" class="form-control" id="uName" name="name" placeholder="Login" required/>
             </div>
             <br>
             <div class="field">
-                <input type="password" class="form-control" id="uPass" name="password" placeholder="Password" />
+                <input type="password" class="form-control" id="uPass" name="password" placeholder="Password"
+                       required/>
             </div>
             <br>
             <div class="submit">
                 <input type="submit" class="btn btn-primary btn-block" align="center" value="Submit"/>
             </div>
+            <br>
+            <c:if test="${isExists}">
+                <div id="login-message" class="alert alert-danger container">
+                    <h3>Пользователь уже Сущетвует</h3>
+                    <div id="error-message">попробуйте еще раз</div>
+                </div>
+            </c:if>
         </form>
     </div>
 </div>
