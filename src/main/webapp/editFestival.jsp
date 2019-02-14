@@ -620,10 +620,11 @@
                     geometry : $('#hp-geometry').val(),
                     color : $('#hp-color').val()
                 },
-                success : function() {
-                    // обработка ответа от сервера
-                    $('#hp-close-btn').click();
-
+                success : function(data) {
+                    window.location.href = "/admin/editFestival";
+                },
+                error : function (error) {
+                    console.log(error);
                 }
             });
         })

@@ -52,8 +52,6 @@ public class HotPointEditorServlet extends HttpServlet {
         hPoint.setGeometry(Geometry);
 
         HotPointServiceImpl.getInstance().update(hPoint);
-
-        response.sendRedirect("/admin/editFestival?festivalId="+fId);
     }
 
 }
