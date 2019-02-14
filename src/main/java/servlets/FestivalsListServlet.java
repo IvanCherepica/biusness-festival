@@ -20,7 +20,7 @@ public class FestivalsListServlet extends HttpServlet {
         List<Festival> festivals = FestivalServiceImpl.getInstance().getAllList();
         request.setAttribute("FestivalsList", festivals);
         
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/festivalsList.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/admin/festivalsList.jsp");
         dispatcher.forward(request, response);
     }
 }
