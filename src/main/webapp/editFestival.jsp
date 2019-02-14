@@ -212,8 +212,7 @@
                                                     <th>Description</th>
                                                     <th>Geometry</th>
                                                     <th>Color</th>
-
-                                                    <th><a id="addEventpointButton" class="btn btn-primary" href="${pageContext.servletContext.contextPath}/admin/eventpoints/create">Add</a></th>
+                                                    <th><a id="addEventpointButton" onclick="addEventpoint(${festival.id})" class="btn btn-primary">Add</a></th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
@@ -237,7 +236,7 @@
                                                             jQuery(document).ready( function() {
                                                                 jQuery("#epEditButton${eventPoint.id}").click(function(){
                                                                     putEventpointValues("${eventPoint.id}", "${eventPoint.festival.id}", "${eventPoint.name}", "${eventPoint.description}", "${eventPoint.geometry}", "${eventPoint.color}");
-                                                                    $("#editEventpointModal").modal('show');
+                                                                    editEventPoint("${festival.id}");
                                                                 });
                                                             })
                                                         </script>
@@ -333,27 +332,27 @@
             </div>
             <div class="modal-body">
                 <div class="raw">
-                    <!--<label for="festival_id">Festival id:</label>-->
-                    <input id="festival_id" name="festival_id" readonly type="hidden">
-
-                    <!--<label for="ep-id">ID:</label>-->
-                    <input id="ep-id" name="eventPointId" readonly type="hidden">
+                    <input id="ep-festival_id" name="festival_id" readonly type="text">
+                    <input id="ep-id" name="eventPointId" readonly type="text">
                 </div>
 
                 <div class="raw">
                     <label for="ep-name">Name</label>
                     <input id="ep-name" placeholder="введите имя" name="name" class="form-control" required>
                 </div>
-
-                <label for="ep-description">Description</label>
-                <textarea id="ep-description" placeholder="введите краткое описание" name="description"
-                          class="form-control" rows="3"></textarea>
-
-                <label for="ep-geometry">Geometry</label>
-                <textarea id="ep-geometry" placeholder="введите координаты" name="geometry" class="form-control" rows="3"></textarea>
-
-                <label for="ep-color">Color</label>
-                <input id="ep-color" type="color" name="color" class="form-control">
+                <div class="raw">
+                    <label for="ep-description">Description</label>
+                    <textarea id="ep-description" placeholder="введите краткое описание" name="description"
+                              class="form-control" rows="3"></textarea>
+                </div>
+                <div class="raw">
+                    <label for="ep-geometry">Geometry</label>
+                    <textarea id="ep-geometry" placeholder="введите координаты" name="geometry" class="form-control" rows="3"></textarea>
+                </div>
+                <div class="raw">
+                    <label for="ep-color">Color</label>
+                    <input id="ep-color" type="color" name="color" class="form-control">
+                </div>
             </div>
             <div class="modal-footer">
                 <form  class="form-inline">
@@ -361,6 +360,7 @@
                     <button id="ep-close-btn" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </form>
             </div>
+            <input id="ep-q-type" type="hidden" readonly>
         </div>
 
     </div>
@@ -594,11 +594,25 @@
 
     function putEventpointValues(id, festival_id, name, description, geometry, color ) {
         $('#ep-id').val(id);
-        $('#festival_id').val(festival_id);
+        $('#ep-festival_id').val(festival_id);
         $('#ep-name').val(name);
         $('#ep-description').val(description);
         $('#ep-geometry').val(geometry);
         $('#ep-color').val(color);
+    }
+    function addEventpoint(festivalId) {
+        $('#ep-q-type').val("new");
+        $('#ep-festival_id').val(festivalId);
+        $('#ep-name').val("");
+        $('#ep-description').val("");
+        $('#ep-geometry').val("");
+        $('#ep-color').val("");
+        $("#editEventpointModal").modal('show');
+    }
+    function editEventPoint(festivalId) {
+        $('#ep-q-type').val("");
+        $('#ep-festival_id').val(festivalId);
+        $("#editEventpointModal").modal('show');
     }
     function deleteEventPoint(id, festivalId) {
         console.log("Delete event point button "+festivalId);
@@ -684,10 +698,10 @@
 
         $("#ep-save-btn").click(function(){
             $.ajax({
-                url : '/admin/eventpoints/edit',     // URL - сервлет
+                url : ($('#ep-q-type').val()=="new") ? '/admin/eventpoints/create' : '/admin/eventpoints/edit',
                 type : "POST",
                 data : {                 // передаваемые сервлету данные
-                    festivalId : $('#festival_id').val(),
+                    festivalId : $('#ep-festival_id').val(),
                     eventPointId : $('#ep-id').val(),
                     name : $('#ep-name').val(),
                     description : $('#ep-description').val(),
@@ -697,10 +711,8 @@
                 success : function() {
                     // обработка ответа от сервера
                     (location).reload();
-                    $('#eventpoint-list-nav').show();
-
+                    //$('#eventpoint-list-nav').show();
                     $('#ep-close-btn').click();
-
                 },
                 error : function (error) {
                     console.log(error.message);
@@ -725,7 +737,7 @@
                 success : function() {
                     // обработка ответа от сервера
                     (location).reload();
-                    $('event-list-nav').click();
+                    //$('event-list-nav').click();
                     $('#ev-close-btn').click();
                 },
                 error : function (error) {
