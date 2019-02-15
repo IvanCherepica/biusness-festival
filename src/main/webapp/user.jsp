@@ -142,5 +142,8 @@ To change this template use File | Settings | File Templates.
         <jsp:include page="userMap/pageWithMap.jsp"/>
     </div>
 </div>
+
+
+
 </body>
 </html>
