@@ -16,7 +16,7 @@
         <%@include file="userNotification.js" %>
     </script>
     <script type="text/javascript">
-        <%@include file="userMap/poligonActions.js" %>
+        <%@include file="poligonActions.js" %>
     </script>
     <style>
         .check-material input[type="checkbox"]{display:none}

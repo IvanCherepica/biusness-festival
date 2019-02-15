@@ -139,7 +139,7 @@ To change this template use File | Settings | File Templates.
         </div>
     </div>
     <div class="usermap">
-        <jsp:include page="pageWithMap.jsp"/>
+        <jsp:include page="userMap/pageWithMap.jsp"/>
     </div>
 </div>
 </body>
