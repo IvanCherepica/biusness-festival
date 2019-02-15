@@ -54,8 +54,8 @@ public class EditEventServlet extends HttpServlet {
 		String name = request.getParameter("name");
 		String description = request.getParameter("description");
 		String eventPointIdParam = request.getParameter("eventPointId");
-		String dateBeginParam = request.getParameter("dateBegin");
-		String dateEndParam = request.getParameter("dateEnd");
+//		String dateBeginParam = request.getParameter("dateBegin");
+//		String dateEndParam = request.getParameter("dateEnd");
 		
 		LocalDateTime dateBegin = LocalDateTime.now();
 		LocalDateTime dateEnd = LocalDateTime.now();
@@ -65,8 +65,8 @@ public class EditEventServlet extends HttpServlet {
 			long eventId = Long.parseLong(eventIdParam);
 			long eventPointId = Long.parseLong(eventPointIdParam);
 			
-			dateBegin = DateTimeConverter.parse(dateBeginParam);
-			dateEnd = DateTimeConverter.parse(dateEndParam);
+//			dateBegin = DateTimeConverter.parse(dateBeginParam);
+//			dateEnd = DateTimeConverter.parse(dateEndParam);
 			
 			EventPoint eventPoint = eventPoinService.getById(eventPointId);
 			
