@@ -4,6 +4,7 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MappedSuperclass;
+import java.util.Objects;
 
 @MappedSuperclass
 public abstract class PointUnit extends MapUnit {
@@ -25,5 +26,12 @@ public abstract class PointUnit extends MapUnit {
 
     public void setFestival(Festival festival) {
         this.festival = festival;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        return super.equals(o);
     }
 }

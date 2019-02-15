@@ -1,5 +1,9 @@
 package models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.google.gson.annotations.Expose;
+import org.json.JSONPropertyIgnore;
+
 import javax.persistence.*;
 import java.util.*;
 
@@ -17,12 +21,14 @@ public class User {
     private String role;
     private String imagePath;
 
+    @Expose
     @ManyToMany(fetch = FetchType.EAGER, targetEntity = EventPoint.class)
     @JoinTable(name = "users_on_eventpoints",
             joinColumns = {@JoinColumn(name = "users_id")},
             inverseJoinColumns = {@JoinColumn(name = "event_point_id")})
     private Set<EventPoint> eventPoints;
 
+    @Expose
     @ManyToMany(fetch = FetchType.EAGER, targetEntity = Event.class)
     @JoinTable(name = "users_on_event",
             joinColumns = {@JoinColumn(name = "users_id")},
@@ -93,6 +99,10 @@ public class User {
             events.add(event);
     }
 
+    public void removeEvent(Event event) {
+        events.remove(event);
+    }
+
     public long getId() {
         return id;
     }
@@ -133,27 +143,31 @@ public class User {
         this.imagePath = imagePath;
     }
 
-
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof User)) return false;
 
         User user = (User) o;
 
         if (id != user.id) return false;
-        if (!name.equals(user.name)) return false;
-        if (!password.equals(user.password)) return false;
-        return role.equals(user.role);
+        if (name != null ? !name.equals(user.name) : user.name != null) return false;
+        if (password != null ? !password.equals(user.password) : user.password != null) return false;
+        if (role != null ? !role.equals(user.role) : user.role != null) return false;
+        if (imagePath != null ? !imagePath.equals(user.imagePath) : user.imagePath != null) return false;
+
+        return true;
     }
 
     @Override
     public int hashCode() {
         int result = (int) (id ^ (id >>> 32));
-        result = 31 * result + name.hashCode();
-        result = 31 * result + password.hashCode();
-        result = 31 * result + role.hashCode();
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (password != null ? password.hashCode() : 0);
+        result = 31 * result + (role != null ? role.hashCode() : 0);
+        result = 31 * result + (imagePath != null ? imagePath.hashCode() : 0);
         return result;
     }
+
+
 }

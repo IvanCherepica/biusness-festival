@@ -18,7 +18,15 @@
     <script type="text/javascript">
         <%@include file="userMap/poligonActions.js" %>
     </script>
-
+    <style>
+        .check-material input[type="checkbox"]{display:none}
+        .check-material input[type="checkbox"]:checked + label{background:#009688;border-color:#009688}
+        .check-material input[type="checkbox"]:checked + label:after{transform:scale(1.3)}
+        .check-material label{display:block;box-sizing:border-box;width:25px;height:25px;background:#CCC;border:5px solid #7A7A7A;border-radius:10%;position:relative;cursor:pointer;transition:.2s}
+        .check-material label:before{content:'';position:absolute;display:block;height:300%;width:300%;top:-100%;left:-100%;z-index:-1;border-radius:50%;transition:.3s}
+        .check-material label:after{content:'';display:block;height:100%;width:100%;background:url(https://cbwconline.com/IMG/Codepen/Check.svg) center center no-repeat;background-size:contain;transform:scale(0);transition:.2s}
+        .check-material label:active:before{background:#bfbfbf}
+    </style>
 <%--<script type="text/javascript">--%>
     <%--<%@include file="mapDataReceive.js" %>--%>
 <%--</script>--%>
@@ -162,11 +170,11 @@
         </div>
 
     </div>
-    <div class='customAlert'>
-        <p class='message'></p>
-        <input type='button' class='confirmButton' value='Ok'>
-    </div>
-    <input type='button' class='rab' value='Raise alert'>
+    <%--<div class='customAlert'>--%>
+        <%--<p class='message'></p>--%>
+        <%--<input type='button' class='confirmButton' value='Ok'>--%>
+    <%--</div>--%>
+    <%--<input type='button' class='rab' value='Raise alert'>--%>
 </div>
 </body>
 </html>

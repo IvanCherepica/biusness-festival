@@ -1,5 +1,7 @@
 package models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import util.LocalDateTimeAttributeConverter;
 
@@ -28,24 +30,29 @@ public class Event {
 	@SerializedName("description")
 	private String description;
 
+	@Expose
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "eventpoint_id")
 	private EventPoint eventPoint;
-	
+
+	@Expose
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "festival_id")
 	private Festival festival;
 
 	@Column(name = "date_begin", columnDefinition="TIMESTAMP")
+    @Expose
 	@SerializedName("date_begin")
 	@Convert(converter = LocalDateTimeAttributeConverter.class)
 	private LocalDateTime dateBegin = LocalDateTime.now();
 
+    @Expose
 	@Column(name = "date_end", columnDefinition="TIMESTAMP")
 	@SerializedName("date_end")
 	@Convert(converter = LocalDateTimeAttributeConverter.class)
 	private LocalDateTime dateEnd = LocalDateTime.now();
 
+	@Expose
 	@ManyToMany(fetch= FetchType.EAGER, targetEntity = User.class)
 	@JoinTable(name ="users_on_event",
 			joinColumns = {@JoinColumn(name="events_id")},
@@ -137,20 +144,30 @@ public class Event {
 				'}';
 	}
 
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
-		Event event = (Event) o;
-		return id == event.id &&
-				Objects.equals(name, event.name) &&
-				Objects.equals(description, event.description) &&
-				Objects.equals(eventPoint, event.eventPoint) &&
-				Objects.equals(users, event.users);
-	}
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(id, name, description, eventPoint, users);
-	}
+        Event event = (Event) o;
+
+        if (id != event.id) return false;
+        if (name != null ? !name.equals(event.name) : event.name != null) return false;
+        if (description != null ? !description.equals(event.description) : event.description != null) return false;
+        if (dateBegin != null ? !dateBegin.equals(event.dateBegin) : event.dateBegin != null) return false;
+        if (dateEnd != null ? !dateEnd.equals(event.dateEnd) : event.dateEnd != null) return false;
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = (int) (id ^ (id >>> 32));
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + (dateBegin != null ? dateBegin.hashCode() : 0);
+        result = 31 * result + (dateEnd != null ? dateEnd.hashCode() : 0);
+        return result;
+    }
+
+
 }

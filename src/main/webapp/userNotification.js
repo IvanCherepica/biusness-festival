@@ -19,19 +19,19 @@ $.ajax({
 });
 
 
-//send message to server with user coordinates
-function sendMessage(webSocketClient) {
-        navigator.geolocation.getCurrentPosition(function (position) {
-            userX = position.coords.latitude;
-            userY = position.coords.longitude;
-            var message = '{ "coordinates": "' + userX + " " + userY + '", "userName" : "' +  userName + '", "userID" : "' + userID + '"}';
-            //var jsonObj = {"x" : userX, "y" : userY};
-            //webSocketClient.send(JSON.stringify(jsonObj));
-            webSocketClient.send(message);
-            newPlacemark(myMap);
-
-        });
-}
+// //send message to server with user coordinates
+// function sendMessage(webSocketClient) {
+//         navigator.geolocation.getCurrentPosition(function (position) {
+//             userX = position.coords.latitude;
+//             userY = position.coords.longitude;
+//             var message = '{ "coordinates": "' + userX + " " + userY + '", "userName" : "' +  userName + '", "userID" : "' + userID + '"}';
+//             //var jsonObj = {"x" : userX, "y" : userY};
+//             //webSocketClient.send(JSON.stringify(jsonObj));
+//             webSocketClient.send(message);
+//             newPlacemark(myMap);
+//
+//         });
+// }
 
 //connect to server
 function connect() {
@@ -46,13 +46,17 @@ function connect() {
             if (messageToUser.localeCompare("") != 0 ) {
                 sendWelcomMessage(messageToUser);
             }
-            var messaaaage = "dsdsdsdsds";
-            sendMessage(messaaaage);
+
+            sendMessage(webSocketClient);
         };
     webSocketClient.onclose = function (event) {
             console.log("close");
-
+            //connect();
         }
+    webSocketClient.onerror = function (event) {
+        console.log("error " + event);
+
+    }
 }
 
 
@@ -60,6 +64,25 @@ function sendWelcomMessage(message) {
     confirm(message);
 }
 
+
+function newPlacemark(myMap, x ,y) {
+    if (myMap != undefined) {
+
+        myMap.geoObjects.remove(myPlacemark);
+        //обновляем местоположение метки
+        myPlacemark = new ymaps.Placemark([x, y], {
+            hitContent: 'Hello',
+            balloonContent: 'It is you'
+        }, {
+            iconLayout: 'default#image',
+            iconImageHref: 'http://thebestapp.ru/wp-content/uploads/2016/07/Location_marker@2x.png',
+            iconImageSize: [32, 32],
+            iconImageOffset: [-15, -15]
+        });
+        // добавляем метку на карту
+        myMap.geoObjects.add(myPlacemark);
+    }
+}
 // function newPlacemark(myMap) {
 //     if (myMap != undefined) {
 //
@@ -169,3 +192,19 @@ window.setInterval(function(){
     });
     console.log("server, give mi coordinats!");
 }, 10000);
+
+//send message to server with user coordinates
+function sendMessage(webSocketClient) {
+    navigator.geolocation.watchPosition(function (position) {
+        userX = position.coords.latitude;
+        userY = position.coords.longitude;
+
+        var message = '{ "coordinates": "' + userX + " " + userY + '", "userName" : "' +  userName + '", "userID" : "' + userID + '"}';
+        //var jsonObj = {"x" : userX, "y" : userY};
+        //webSocketClient.send(JSON.stringify(jsonObj));
+        webSocketClient.send(message);
+        newPlacemark(myMap, userX, userY);
+    });
+
+
+}

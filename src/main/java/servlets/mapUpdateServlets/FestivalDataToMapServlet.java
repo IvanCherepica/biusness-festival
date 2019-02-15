@@ -46,6 +46,8 @@ public class FestivalDataToMapServlet  extends HttpServlet {
 //        for (Object currentEventPoint : eventPoints) {
 //            eventPointsGson = new Gson().toJson((EventPoint)currentEventPoint);
 //        }
+
+
         UserSocketDto userSocketDto = new UserSocketDto();
         userSocketDto.setFestival(festival);
         userSocketDto.setEventPointList(eventPoints);

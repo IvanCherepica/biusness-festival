@@ -9,7 +9,9 @@ public interface EventDAO {
 	Event getByName(String name);
 	void remove(long id);
 	void update(Event event);
-	
+	void addEventToUser (Long userID, Long eventID);
+	void addRemoveEventFromUser (Long userID, Long eventID);
+
 	List<Event> getAllList();
 	List<Event> getAllByEventPoint(long id);
 	List<Event> getAllByFestival(long fetsivalId);
