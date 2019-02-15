@@ -56,7 +56,7 @@ public class EditFestivalServlet extends HttpServlet {
 			request.setAttribute("hotPointList", hotPoints);
 			request.setAttribute("eventList", events);
 		}
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/editFestival.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/festivalEdit.jsp");
 		dispatcher.forward(request, response);
 	}
 	
