@@ -60,6 +60,18 @@
                         </select>
                     </div>
                     <input type="submit" class="btn btn-primary btn-block" value="Создать"/>
+                    <c:if test="${isExists}">
+                        <div id="login-message" class="alert alert-danger container">
+                            <h3>Пользователь уже Сущетвует</h3>
+                            <div id="error">попробуйте еще раз</div>
+                        </div>
+                    </c:if>
+                    <c:if test="${isInvalid}">
+                        <div id="login-message" class="alert alert-danger">
+                            <h3>Неверные Данные</h3>
+                            <div id="error-message">попробуйте еще раз</div>
+                        </div>
+                    </c:if>
                 </form>
         </div>
         <div class="col-sm-3 col-md-6"></div>

@@ -28,6 +28,7 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException { response.setContentType("text/html");
+
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;UTF-8");
         String succes = request.getParameter("regSucces");
@@ -37,7 +38,8 @@ public class LoginServlet extends HttpServlet {
         }
         request.setAttribute("isInvalid",isInvalid);
         request.setAttribute("isPass", isPass);
-
+        isInvalid = false;
+        isPass = false;
         RequestDispatcher dispatcher = request.getRequestDispatcher("/login/login.jsp");
         dispatcher.forward(request, response);
     }

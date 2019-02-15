@@ -45,7 +45,7 @@
                     </div>
                 </c:if>
                 <c:if test="${regSucces}">
-                    <div id="login-message" class="alert alert-danger">
+                    <div id="login-message" class="alert alert-success">
                         <h3>Вы Зарегистрированы</h3>
                         <div id="succses-message">введити логин и пароль для входа</div>
                     </div>
