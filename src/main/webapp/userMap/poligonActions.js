@@ -28,12 +28,12 @@ function openListOfFesivalEventPoints(data,festival_id) {
 
     $("#festival_list_body").append("<table id=\"festival_list_table\" class=\"table table-striped\"></table>");
     //Column names
-    $("#festival_list_table").append("<thead> <tr><th>Event Point</th><th>Description</th><th>Working time</th></tr></thead><tbody>");
+    $("#festival_list_table").append("<thead> <tr><th>Event Point</th><th>Description</th></tr></thead><tbody>");
 
     //fill the table
     $.each(data.eventPointList, function (index, value) {
 
-        $("#festival_list_table").append("<tr href=\"javascript:void(0)\" onclick=\"moveMapCentrToPoint('"+ value.center + "', '"+ value.id + "')\" id='" + value.id + "' ><td>" + value.name + "</td><td>" + value.description + "</td><td></td></tr>");
+        $("#festival_list_table").append("<tr href=\"javascript:void(0)\" onclick=\"moveMapCentrToPoint('"+ value.center + "', '"+ value.id + "')\" id='" + value.id + "' ><td>" + value.name + "</td><td>" + value.description + "</td></tr>");
 
     });
 
@@ -194,13 +194,13 @@ function openListOfEventPointsEvents(data,festival_id) {
 
     festivalListBody.append("<table id=\"festival_list_table\" class=\"table table-striped\"></table>");
     //Column names
-    $("#festival_list_table").append("<thead> <tr><th>Event</th><th>Description</th><th>Working time</th><th>Add to \n personal \n schedule</th></tr></thead><tbody>");
+    $("#festival_list_table").append("<thead> <tr><th>Event</th><th>Description</th><th>Add to \n personal \n schedule</th></tr></thead><tbody>");
 
     //fill the table
     $.each(data.eventList, function (index, value) {
 
-        //checked="checked"
-        $("#festival_list_table").append("<tr id='" + value.id + "' ><td>" + value.name + "</td><td>" + value.description + "</td><td></td><td><div class=\"check-material\"><input id=\"toggle-1\"  type=\"checkbox\" href=\"javascript:void(0)\" onclick=\"checkBoxOnClick(event,"+ value.id + ")\"><label for=\"toggle-1-\"></label></label></div></td></tr>");
+        //checked="checked"  class="check-material"
+        $("#festival_list_table").append("<tr id='" + value.id + "' ><td>" + value.name + "</td><td>" + value.description + "</td><td><div ><input id=\"toggle-1\"  type=\"checkbox\" href=\"javascript:void(0)\" onclick=\"checkBoxOnClick(event,"+ value.id + ")\"><label for=\"toggle-1-\"></label></label></div></td></tr>");
 //<input id="toggle-2" type="checkbox" checked="checked"><label for="toggle-2">
     });
 

@@ -9,15 +9,15 @@ function getDataForFestival(fesivalId) {
                 console.log(message);
             },
             success: function(data) {
-                console.log(data);
-                //processDataForFestivalBlock(event, eventspoints);
+                console.log(JSON.stringify(data));
+                processDataForFestivalBlock(data)
             }
         });
 
 }
 
 
-function processDataForFestivalBlock(event, eventspoints) {
+function processDataForFestivalBlock(data) {
     console.log(eventspoints);
     if(event!==undefined && eventspoints!==undefined) {
         isInFestival = JSON.parse(event.data).isInFestival;
