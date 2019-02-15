@@ -82,9 +82,9 @@
                         balloonContent: 'It is you'
                     }, {
                         iconLayout: 'default#image',
-                        iconImageHref: 'http://thebestapp.ru/wp-content/uploads/2016/07/Location_marker@2x.png',
-                        iconImageSize: [32, 32],
-                        iconImageOffset: [-15, -15]
+                        // iconImageHref: 'http://thebestapp.ru/wp-content/uploads/2016/07/Location_marker@2x.png',
+                        // iconImageSize: [32, 32],
+                        // iconImageOffset: [-15, -15]
                     });
                     // добавляем метку на карту
                     myMap.geoObjects.add(myPlacemark);
@@ -157,9 +157,9 @@
                 balloonContent: 'It is you'
             }, {
                 iconLayout: 'default#image',
-                iconImageHref:'http://thebestapp.ru/wp-content/uploads/2016/07/Location_marker@2x.png',
-                iconImageSize: [32, 32],
-                iconImageOffset: [-15, -15]
+                // iconImageHref:'http://thebestapp.ru/wp-content/uploads/2016/07/Location_marker@2x.png',
+                // iconImageSize: [32, 32],
+                // iconImageOffset: [-15, -15]
             });
             // добавляем метку на карту
             myMap.geoObjects.add(myPlacemark);

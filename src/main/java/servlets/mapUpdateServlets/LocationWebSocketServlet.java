@@ -11,6 +11,7 @@ import services.abstraction.FestivalService;
 import services.implementation.FestivalServiceImpl;
 import services.userNotificationServices.LocationWebSocketConfigurator;
 import services.userNotificationServices.UserSessionService;
+import util.GeoDataHolder;
 import util.UserJSONDataDeserializer;
 
 
@@ -23,11 +24,12 @@ import java.util.*;
 @ServerEndpoint(value = "/compareLocations", configurator= LocationWebSocketConfigurator.class)
 public class LocationWebSocketServlet {
 
+        private GeoDataHolder geoDataHolder = GeoDataHolder.getGeoDataHolder();
+
         private FestivalService festivalService = FestivalServiceImpl.getInstance();
 
-        private UserSessionService userSessionService = UserSessionService.getInstance();
 
-        private String point;
+        private UserSessionService userSessionService = UserSessionService.getInstance();
 
         public LocationWebSocketServlet() throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
         }
@@ -45,12 +47,14 @@ public class LocationWebSocketServlet {
         }
 
         @OnMessage
-        public void onMessage(String message, Session userSession) throws Throwable {
+        public void onMessage(String message, Session userSession)  {
             System.out.println("Message Received: " + message);
 
             //разбираем данные из JSON строки
             GsonBuilder gsonBuilder = new GsonBuilder();
             gsonBuilder.registerTypeAdapter(UserServerDto.class, new UserJSONDataDeserializer());
+
+
 
             UserServerDto userServerDto = gsonBuilder.create().fromJson(message,UserServerDto.class);
 
@@ -58,7 +62,16 @@ public class LocationWebSocketServlet {
 
             //String userName = userServerDto.getUserName();
             Long userID = userServerDto.getId();
+
+
+            String point;
+
             point = userServerDto.getCoordinates();
+            double[] userCoords = getCoordinates(point);
+
+            geoDataHolder.setLatitude(userCoords[0]);
+            geoDataHolder.setLongitude(userCoords[1]);
+
 
             //find user http session
 
@@ -66,9 +79,12 @@ public class LocationWebSocketServlet {
             boolean isInFestivalOld = Boolean.parseBoolean((String) userHttpSession.getAttribute("userInFestival"));
 
             Long currentFestivalID;
+
             boolean isInFestivalNew = false;
             Festival usersActivFestival = null;
             //at first check if user still in current Festival
+
+
             if (isInFestivalOld) {
                 currentFestivalID = Long.parseLong((String) userHttpSession.getAttribute("currentFestivalID"));
                 Festival currentFestivale = festivalService.getById(currentFestivalID);
@@ -123,6 +139,9 @@ public class LocationWebSocketServlet {
             }
             userHttpSession.setAttribute("userInFestival",Boolean.toString(isInFestivalNew));
 
+
+//            sendRequestToUpdate(userSession);
+//            LocationWedSocketService.getInstance().sendRequestToUpdate(message, userSession);
         }
 
         @OnError
@@ -143,6 +162,9 @@ public class LocationWebSocketServlet {
             double sum = dx2 + dy2;
             double sqrt = Math.sqrt(sum);
             double meters = sqrt*100000;
+
+            System.out.println("distance=" + meters);
+
             return meters - festival.getRadius()<=0;
         }
 

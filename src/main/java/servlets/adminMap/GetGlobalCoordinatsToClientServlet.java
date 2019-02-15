@@ -1,4 +1,4 @@
-package servlets.mapUpdateServlets;
+package servlets.adminMap;
 
 import com.google.gson.Gson;
 import dto.GetGlobalCoordinatsDto;
@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/user/get_coordinats_to_client")
+@WebServlet("/admin/getUsersCoordinates")
 public class GetGlobalCoordinatsToClientServlet  extends HttpServlet {
     GeoDataHolder geoDataHolder = GeoDataHolder.getGeoDataHolder();
 
@@ -19,22 +19,21 @@ public class GetGlobalCoordinatsToClientServlet  extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
 
-        double longitudeX = geoDataHolder.getLongitude();
-        double latitudeY = geoDataHolder.getLatitude();
+        //x - latitude, y - longitude
 
-        //geoDataHolder.setUserGeoposition(longitudeX + " " + latitudeY);
+        double longitudeY = geoDataHolder.getLongitude();
+        double latitudeX = geoDataHolder.getLatitude();
 
         GetGlobalCoordinatsDto dto = new GetGlobalCoordinatsDto();
-        dto.setLongitudeX(longitudeX);
-        dto.setLatitudeY(latitudeY);
+        dto.setLongitudeY(longitudeY);
+        dto.setLatitudeX(latitudeX);
 
         String json = new Gson().toJson(dto);
 
         response.setContentType("application/json");
-        //response.setContentType("text/html");
         response.setCharacterEncoding("UTF-8");
         response.getWriter().write(json);
 
-        System.out.println("Coordinats sent");
+        System.out.println("Coordinates sent");
     }
 }

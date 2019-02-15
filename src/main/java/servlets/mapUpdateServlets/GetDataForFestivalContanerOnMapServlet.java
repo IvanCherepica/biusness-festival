@@ -33,7 +33,7 @@ public class GetDataForFestivalContanerOnMapServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
 
-        String fesivalID = request.getParameter("festival_id");
+        String fesivalID = request.getParameter("fesivalId");
 
         Long festivalId = Long.parseLong(fesivalID);
         List<EventPoint>  eventPoints = eventPointService.getAllEventPointByFestivalId(festivalId);

@@ -14,18 +14,27 @@ public class FestivalDataToMapSerealializer implements JsonSerializer<FestivalDa
 
     @Override
     public JsonElement serialize(FestivalDataDto src, Type typeOfSrc, JsonSerializationContext context) {
-        JsonObject festivalDataJson = new JsonObject();
 
-        JsonObject festivalJson = new JsonObject();
-        festivalJson.addProperty("id",src.getFestival().getId());
-        festivalJson.addProperty("name",src.getFestival().getName());
-        festivalJson.addProperty("description",src.getFestival().getDescription());
+        JsonObject festivalDataJson = new JsonObject(); //итоговый результат
 
-        festivalDataJson.add("festival",festivalJson);
+        //JsonObject festivalJson = new JsonObject();
+        festivalDataJson.addProperty("id",src.getFestival().getId());
+        festivalDataJson.addProperty("name",src.getFestival().getName());
+        festivalDataJson.addProperty("description",src.getFestival().getDescription());
 
-        JsonArray jsonEventPointsList = new JsonArray();
+        //festivalDataJson.add("festival",festivalJson);
 
+        JsonArray jsonEventPointsList = new JsonArray(); //список ивентпоинтов
+
+        //forming list of eventPoint
         for (EventPoint currentEventPoint : src.getEventPointList()) {
+
+            JsonObject eventPointJson = new JsonObject();
+
+            eventPointJson.addProperty("id", currentEventPoint.getId());
+            eventPointJson.addProperty("name",currentEventPoint.getName());
+            eventPointJson.addProperty("description",currentEventPoint.getDescription());
+
 
             JsonArray jsonEventsList = new JsonArray();
 
@@ -33,6 +42,7 @@ public class FestivalDataToMapSerealializer implements JsonSerializer<FestivalDa
 
             List<Event> eventList = eventService.getAllByEventPoint(currentEventPointID);
 
+            //add to eventpoint event list
             for (Event currentEvent : eventList) {
                 JsonObject currentJson = new JsonObject();
 
@@ -43,9 +53,17 @@ public class FestivalDataToMapSerealializer implements JsonSerializer<FestivalDa
                 jsonEventsList.add(currentJson);
             }
 
-            jsonEventPointsList.add(jsonEventsList);
+            eventPointJson.add("eventsList", jsonEventsList);
+            jsonEventPointsList.add(eventPointJson);
         }
-        festivalDataJson.add("eventPointList",jsonEventPointsList);
+
+        //jsonEventPointsList.
+
+        festivalDataJson.add("eventPointsList", jsonEventPointsList);
+
+
+
+
         return festivalDataJson;
     }
 }
