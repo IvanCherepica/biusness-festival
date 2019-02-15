@@ -5,9 +5,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
-    <title>Admin page</title>
-    <link rel="stylesheet" href="https://bootswatch.com/3/united/bootstrap.min.css" >
+    <meta charset="UTF-8">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Редактирование фестивалей</title>
+
+    <link rel="stylesheet" href="https://bootswatch.com/3/united/bootstrap.min.css">
+    <style type="text/css">
+        <%@ include file="/css/dashboard.css" %>
+    </style>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -17,307 +25,302 @@
 
 <body>
 
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <jsp:include page="/admin/admin-top-panel.jsp"/>
+    </div>
+</nav>
+
+
+
 <div class="container-fluid">
     <div class="row">
-        <div class="navbar navbar-inverse navbar-static-top header">
-            <a class="navbar-brand" href="/admin/festivals">Business Festival</a>
-            <a class="navbar-brand pull-right" href="/admin/users">Logout</a>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-2 col-md-1 col-xs-1 left-bar left-menu">
-            <ul class="nav nav-pills nav-stacked nav-content">
-                <li class="active" role="presentation">
-                    <a href="/admin/festivals" aria-controls="admin-page">Festivals</a>
-                </li>
-                <li>
-                    <a href="/admin/users" aria-controls="user-page">Users</a>
-                </li>
-            </ul>
+        <div class="col-sm-3 col-md-2 sidebar">
+            <jsp:include page="/admin/admin-left-panel.jsp">
+                <jsp:param name='selected' value='festivals'/>
+            </jsp:include>
         </div>
 
-        <div class="col-lg-10 col-md-11 col-xs-11">
+
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <h1 class="page-header">Редактирование фестиваля</h1>
+
             <div class="tab-content">
                 <div role="tabpanel" class="tab-pane active" id="admin-page">
-                    <h2>Admin panel</h2>
-                    <h4> ${festival.name}</h4>
+                    <h3> ${festival.name}</h3>
                     <ul class="nav nav-tabs nav-content" role="tablist">
-                        <li id="festival-edit-nav">
-                            <a id="festival-tab" href="#festival-panel" aria-controls="festival-panel" role="tab" data-toggle="tab">Festival</a>
-                        </li>
-                        <li id="hotpoint-list-nav">
-                            <a id="hotpoint-tab" href="#hotpoints_panel" aria-controls="hotpoints_panel" role="tab" data-toggle="tab">Hot-points</a>
-                        </li>
-                        <li id="eventpoint-list-nav">
-                            <a id="eventpoint-tab" href="#eventpoints-panel" aria-controls="eventpoints-panel" role="tab" data-toggle="tab">Event-points</a>
-                        </li>
-                        <li id="event-list-nav">
-                            <a id="event-tab" href="#events-panel" aria-controls="events-panel" role="tab" data-toggle="tab">Events</a>
-                        </li>
-                    </ul>
+                    <li id="festival-edit-nav">
+                        <a id="festival-tab" href="#festival-panel" aria-controls="festival-panel" role="tab" data-toggle="tab">Festival</a>
+                    </li>
+                    <li id="hotpoint-list-nav">
+                        <a id="hotpoint-tab" href="#hotpoints_panel" aria-controls="hotpoints_panel" role="tab" data-toggle="tab">Hot-points</a>
+                    </li>
+                    <li id="eventpoint-list-nav">
+                        <a id="eventpoint-tab" href="#eventpoints-panel" aria-controls="eventpoints-panel" role="tab" data-toggle="tab">Event-points</a>
+                    </li>
+                    <li id="event-list-nav">
+                        <a id="event-tab" href="#events-panel" aria-controls="events-panel" role="tab" data-toggle="tab">Events</a>
+                    </li>
+                </ul>
 
                     <div class="tab-content">
-                        <div role="tabpanel" class="tab-pane" id="festival-panel">
-                            <div class="panel panel-default table-panel">
-                                <div class="tab-content">
-                                    <div class="panel-body">
+                    <div role="tabpanel" class="tab-pane" id="festival-panel">
+                        <div class="panel panel-default table-panel">
+                            <div class="tab-content">
+                                <div class="panel-body">
 
-                                        <h4>Edit festival</h4>
-                                        <form action="${pageContext.request.contextPath}/admin/editFestival" method="POST">
-                                            <div class="form-group edit-group col-md-9">
-                                                <div class="form-group row">
-                                                    <div class="col-xs-9 col-md-2">
-                                                        <label for="id">Id</label>
-                                                    </div>
-                                                    <div class="col-xs-9 col-md-6">
-                                                        <input type="text" class="form-control" id="id" name="id"
-                                                               value="${festival.id}" readonly>
-                                                    </div>
+                                    <h4>Edit festival</h4>
+                                    <form action="${pageContext.request.contextPath}/admin/editFestival" method="POST">
+                                        <div class="form-group edit-group col-md-9">
+                                            <div class="form-group row">
+                                                <div class="col-xs-9 col-md-2">
+                                                    <label for="id">Id</label>
                                                 </div>
-                                                <div class="form-group row">
-                                                    <div  class="col-xs-9 col-md-2">
-                                                        <label for="name">Name</label>
-                                                    </div>
-                                                    <div  class="col-xs-9 col-md-6">
-                                                        <input type="text" class="form-control" id="name" name="name"
-                                                               value="${festival.name}">
-                                                    </div>
+                                                <div class="col-xs-9 col-md-6">
+                                                    <input type="text" class="form-control" id="id" name="id"
+                                                           value="${festival.id}" readonly>
                                                 </div>
-                                                <div class="form-group row">
-                                                    <div  class="col-xs-9 col-md-2">
-                                                        <label for="description">Description</label>
-                                                    </div>
-                                                    <div  class="col-xs-9 col-md-6">
+                                            </div>
+                                            <div class="form-group row">
+                                                <div  class="col-xs-9 col-md-2">
+                                                    <label for="name">Name</label>
+                                                </div>
+                                                <div  class="col-xs-9 col-md-6">
+                                                    <input type="text" class="form-control" id="name" name="name"
+                                                           value="${festival.name}">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <div  class="col-xs-9 col-md-2">
+                                                    <label for="description">Description</label>
+                                                </div>
+                                                <div  class="col-xs-9 col-md-6">
                                                         <textarea class="form-control" id="description" rows="3" name="description" style="max-width: 25vw;"
                                                                   value="${festival.description}">${festival.description}</textarea>
-                                                    </div>
                                                 </div>
-                                                <div class="form-group row">
-                                                    <div  class="col-xs-9 col-md-2">
-                                                        <label for="geometry">Geometry</label>
-                                                    </div>
-                                                    <div  class="col-xs-9 col-md-6">
+                                            </div>
+                                            <div class="form-group row">
+                                                <div  class="col-xs-9 col-md-2">
+                                                    <label for="geometry">Geometry</label>
+                                                </div>
+                                                <div  class="col-xs-9 col-md-6">
                                                         <textarea class="form-control" id="geometry" rows="4" name="geometry"
                                                                   style="white-space: nowrap;
                                                                 overflow: hidden;
                                                                 text-overflow: ellipsis;
                                                                 max-width: 25vw;"
                                                                   value="${festival.geometry}">${festival.geometry}</textarea>
-                                                    </div>
                                                 </div>
-                                                <div class="form-group row">
-                                                    <div  class="col-xs-9 col-md-2">
-                                                        <label for="center">Center</label>
-                                                    </div>
-                                                    <div  class="col-xs-9 col-md-6">
+                                            </div>
+                                            <div class="form-group row">
+                                                <div  class="col-xs-9 col-md-2">
+                                                    <label for="center">Center</label>
+                                                </div>
+                                                <div  class="col-xs-9 col-md-6">
                                                         <textarea class="form-control" id="center" rows="4" name="center"
                                                                   style="white-space: nowrap;
                                                                 overflow: hidden;
                                                                 text-overflow: ellipsis;
                                                                 max-width: 25vw;"
                                                                   value="${festival.center}">${festival.center}</textarea>
-                                                    </div>
-                                                </div>
-                                                <div class="form-group row">
-                                                    <div  class="col-xs-9 col-md-2">
-                                                        <label for="radius">Radius</label>
-                                                    </div>
-                                                    <div  class="col-xs-9 col-md-6">
-                                                        <input class="form-control" id="radius" name="radius"
-                                                                  value="${festival.radius}">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group row">
-                                                    <div  class="col-xs-9 col-md-2">
-                                                        <label for="color">Color</label>
-                                                    </div>
-                                                    <div  class="col-xs-9 col-md-6">
-                                                        <input type="color" class="form-control" id="color" name="color"
-                                                               value="${festival.color}">
-                                                    </div>
-                                                </div>
-                                                <div  class="col-xs-9 col-md-6">
-                                                    <input type="submit" class="btn btn-primary btn-block" value="Сохранить"/>
                                                 </div>
                                             </div>
-
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div id="hotpoints_panel" role="tabpanel" class="tab-pane">
-                            <div class="panel panel-default table-panel">
-                                <div class="tab-content">
-                                    <div class="panel-body">
-                                        <h4>Hot-points list</h4>
-                                        <div class="container-fluid">
-                                            <table class="table table-striped table-responsive">
-                                                <thead>
-                                                <tr>
-                                                    <th>id</th>
-                                                    <th>Name</th>
-                                                    <th>Description</th>
-                                                    <th>Geometry</th>
-                                                    <th>Color</th>
-                                                    <th><a id="addHotpointButton" onclick="addHotpoint(${festival.id})" class="btn btn-primary">Add</a></th>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                <c:forEach var="hotPoint" items="${hotPointList}">
-                                                    <tr id="hprow${hotPoint.id}">
-                                                        <td width="5%">${hotPoint.id}</td>
-                                                        <td width="15%">${hotPoint.name}</td>
-                                                        <td width="25%">${hotPoint.description}</td>
-                                                        <td width="25%">${hotPoint.geometry}</td>
-                                                        <td width="5%" style="background-color:${hotPoint.color};"></td>
-                                                        <td width="20%">
-                                                            <form  class="form-inline hp-edit-form">
-                                                                <a id="hpEditButton${hotPoint.id}" class="btn btn-primary">Edit</a>
-                                                                <a id="hpDeleteButton" onclick="deleteHotPoint(${hotPoint.id}, ${hotPoint.festival.id})" class="btn btn-primary">Delete</a>
-                                                            </form>
-                                                        </td>
-                                                        <script type="text/javascript">
-                                                            jQuery(document).ready( function() {
-                                                                jQuery("#hpEditButton${hotPoint.id}").click(function(){
-                                                                    putHotpointValues("${hotPoint.id}", "${hotPoint.festival.id}", "${hotPoint.name}", "${hotPoint.description}", "${hotPoint.geometry}", "${hotPoint.color}");
-                                                                    editHotpoint("${festival.id}");
-                                                                });
-                                                            })
-
-                                                        </script>
-                                                    </tr>
-                                                </c:forEach>
-                                                </tbody>
-                                            </table>
+                                            <div class="form-group row">
+                                                <div  class="col-xs-9 col-md-2">
+                                                    <label for="radius">Radius</label>
+                                                </div>
+                                                <div  class="col-xs-9 col-md-6">
+                                                    <input class="form-control" id="radius" name="radius"
+                                                           value="${festival.radius}">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <div  class="col-xs-9 col-md-2">
+                                                    <label for="color">Color</label>
+                                                </div>
+                                                <div  class="col-xs-9 col-md-6">
+                                                    <input type="color" class="form-control" id="color" name="color"
+                                                           value="${festival.color}">
+                                                </div>
+                                            </div>
+                                            <div  class="col-xs-9 col-md-6">
+                                                <input type="submit" class="btn btn-primary btn-block" value="Сохранить"/>
+                                            </div>
                                         </div>
-                                    </div>
+
+                                    </form>
                                 </div>
                             </div>
                         </div>
-
-                        <div role="tabpanel" class="tab-pane" id="eventpoints-panel">
-                            <div class="panel panel-default table-panel">
-                                <div class="tab-content">
-                                    <div class="panel-body">
-                                        <h4>Event-points list</h4>
-                                        <div class="container-fluid">
-
-                                            <table class="table table-striped table-responsive">
-                                                <thead>
-                                                <tr>
-                                                    <th>id</th>
-                                                    <th>Name</th>
-                                                    <th>Description</th>
-                                                    <th>Geometry</th>
-                                                    <th>Color</th>
-                                                    <th><a id="addEventpointButton" onclick="addEventpoint(${festival.id})" class="btn btn-primary">Add</a></th>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-
-                                                <c:forEach var="eventPoint" items="${eventPointsList}">
-
-                                                    <tr id="eprow${eventPoint.id}">
-                                                        <td width="5%">${eventPoint.id}</td>
-                                                        <td width="15%">${eventPoint.name}</td>
-                                                        <td width="25%">${eventPoint.description}</td>
-                                                        <td width="25%">${eventPoint.geometry}</td>
-                                                        <td width="5%" style="background-color:${eventPoint.color};"></td>
-
-                                                        <td width="20%">
-                                                            <form  class="form-inline ep-edit-form">
-                                                                <a id="epEditButton${eventPoint.id}" class="btn btn-primary">Edit</a>
-                                                                <a id="epDeleteButton" onclick="deleteEventPoint(${eventPoint.id}, ${eventPoint.festival.id})" name="eventPointId" class="btn btn-primary">Delete</a>
-                                                            </form>
-                                                        </td>
-                                                        <script type="text/javascript">
-                                                            jQuery(document).ready( function() {
-                                                                jQuery("#epEditButton${eventPoint.id}").click(function(){
-                                                                    putEventpointValues("${eventPoint.id}", "${eventPoint.festival.id}", "${eventPoint.name}", "${eventPoint.description}", "${eventPoint.geometry}", "${eventPoint.color}");
-                                                                    editEventPoint("${festival.id}");
-                                                                });
-                                                            })
-                                                        </script>
-                                                    </tr>
-
-                                                </c:forEach>
-
-                                                </tbody>
-                                            </table>
-
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div role="tabpanel" class="tab-pane" id="events-panel">
-                            <div class="panel panel-default table-panel">
-                                <div class="tab-content">
-                                    <div class="panel-body">
-                                        <h4>Events list</h4>
-                                        <div class="container-fluid">
-                                            <table class="table table-striped table-responsive">
-                                                <thead>
-                                                <tr>
-                                                    <th>id</th>
-                                                    <th>Name</th>
-                                                    <th>Description</th>
-                                                    <th>Event-point</th>
-
-                                                    <th><a id="addEventButton" onclick="addEvent(${festival.id})"class="btn btn-primary">Add</a></th>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                <c:forEach var="event" items="${eventList}">
-                                                    <tr id="erow${event.id}">
-                                                        <td width="5%">${event.id}</td>
-                                                        <td width="15%">${event.name}</td>
-                                                        <td width="25%">${event.description}</td>
-                                                        <td width="25%">${event.eventPoint.name}</td>
-                                                        <td width="20%">
-                                                            <form  class="form-inline ev-edit-form">
-                                                                <a id="evEditButton${event.id}" class="btn btn-primary">Edit</a>
-                                                                <a id="evDeleteButton" onclick="deleteEvent(${event.id}, ${festival.id})" class="btn btn-primary">Delete</a>
-                                                            </form>
-
-                                                        </td>
-                                                        <script type="text/javascript">
-                                                            jQuery(document).ready( function() {
-                                                                jQuery("#evEditButton${event.id}").click(function(){
-                                                                    putEventValues("${event.id}", "${event.eventPoint.id}", "${festival.id}", "${event.name}", "${event.description}", "${event.dateBegin}", "${event.dateEnd}");
-                                                                    editEvent("${festival.id}");
-                                                                });
-                                                            })
-
-                                                        </script>
-                                                    </tr>
-                                                </c:forEach>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        </div>
-
                     </div>
 
+                    <div id="hotpoints_panel" role="tabpanel" class="tab-pane">
+                        <div class="panel panel-default table-panel">
+                            <div class="tab-content">
+                                <div class="panel-body">
+                                    <h4>Hot-points list</h4>
+                                    <div class="container-fluid">
+                                        <table class="table table-striped table-responsive">
+                                            <thead>
+                                            <tr>
+                                                <th>id</th>
+                                                <th>Name</th>
+                                                <th>Description</th>
+                                                <th>Geometry</th>
+                                                <th>Color</th>
+                                                <th><a id="addHotpointButton" onclick="addHotpoint(${festival.id})" class="btn btn-primary">Add</a></th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <c:forEach var="hotPoint" items="${hotPointList}">
+                                                <tr id="hprow${hotPoint.id}">
+                                                    <td width="5%">${hotPoint.id}</td>
+                                                    <td width="15%">${hotPoint.name}</td>
+                                                    <td width="25%">${hotPoint.description}</td>
+                                                    <td width="25%">${hotPoint.geometry}</td>
+                                                    <td width="5%" style="background-color:${hotPoint.color};"></td>
+                                                    <td width="20%">
+                                                        <form  class="form-inline hp-edit-form">
+                                                            <a id="hpEditButton${hotPoint.id}" class="btn btn-primary">Edit</a>
+                                                            <a id="hpDeleteButton" onclick="deleteHotPoint(${hotPoint.id}, ${hotPoint.festival.id})" class="btn btn-primary">Delete</a>
+                                                        </form>
+                                                    </td>
+                                                    <script type="text/javascript">
+                                                        jQuery(document).ready( function() {
+                                                            jQuery("#hpEditButton${hotPoint.id}").click(function(){
+                                                                putHotpointValues("${hotPoint.id}", "${hotPoint.festival.id}", "${hotPoint.name}", "${hotPoint.description}", "${hotPoint.geometry}", "${hotPoint.color}");
+                                                                editHotpoint("${festival.id}");
+                                                            });
+                                                        })
 
+                                                    </script>
+                                                </tr>
+                                            </c:forEach>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div role="tabpanel" class="tab-pane" id="eventpoints-panel">
+                        <div class="panel panel-default table-panel">
+                            <div class="tab-content">
+                                <div class="panel-body">
+                                    <h4>Event-points list</h4>
+                                    <div class="container-fluid">
+
+                                        <table class="table table-striped table-responsive">
+                                            <thead>
+                                            <tr>
+                                                <th>id</th>
+                                                <th>Name</th>
+                                                <th>Description</th>
+                                                <th>Geometry</th>
+                                                <th>Color</th>
+                                                <th><a id="addEventpointButton" onclick="addEventpoint(${festival.id})" class="btn btn-primary">Add</a></th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+
+                                            <c:forEach var="eventPoint" items="${eventPointsList}">
+
+                                                <tr id="eprow${eventPoint.id}">
+                                                    <td width="5%">${eventPoint.id}</td>
+                                                    <td width="15%">${eventPoint.name}</td>
+                                                    <td width="25%">${eventPoint.description}</td>
+                                                    <td width="25%">${eventPoint.geometry}</td>
+                                                    <td width="5%" style="background-color:${eventPoint.color};"></td>
+
+                                                    <td width="20%">
+                                                        <form  class="form-inline ep-edit-form">
+                                                            <a id="epEditButton${eventPoint.id}" class="btn btn-primary">Edit</a>
+                                                            <a id="epDeleteButton" onclick="deleteEventPoint(${eventPoint.id}, ${eventPoint.festival.id})" name="eventPointId" class="btn btn-primary">Delete</a>
+                                                        </form>
+                                                    </td>
+                                                    <script type="text/javascript">
+                                                        jQuery(document).ready( function() {
+                                                            jQuery("#epEditButton${eventPoint.id}").click(function(){
+                                                                putEventpointValues("${eventPoint.id}", "${eventPoint.festival.id}", "${eventPoint.name}", "${eventPoint.description}", "${eventPoint.geometry}", "${eventPoint.color}");
+                                                                editEventPoint("${festival.id}");
+                                                            });
+                                                        })
+                                                    </script>
+                                                </tr>
+
+                                            </c:forEach>
+
+                                            </tbody>
+                                        </table>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div role="tabpanel" class="tab-pane" id="events-panel">
+                        <div class="panel panel-default table-panel">
+                            <div class="tab-content">
+                                <div class="panel-body">
+                                    <h4>Events list</h4>
+                                    <div class="container-fluid">
+                                        <table class="table table-striped table-responsive">
+                                            <thead>
+                                            <tr>
+                                                <th>id</th>
+                                                <th>Name</th>
+                                                <th>Description</th>
+                                                <th>Event-point</th>
+
+                                                <th><a id="addEventButton" onclick="addEvent(${festival.id})"class="btn btn-primary">Add</a></th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <c:forEach var="event" items="${eventList}">
+                                                <tr id="erow${event.id}">
+                                                    <td width="5%">${event.id}</td>
+                                                    <td width="15%">${event.name}</td>
+                                                    <td width="25%">${event.description}</td>
+                                                    <td width="25%">${event.eventPoint.name}</td>
+                                                    <td width="20%">
+                                                        <form  class="form-inline ev-edit-form">
+                                                            <a id="evEditButton${event.id}" class="btn btn-primary">Edit</a>
+                                                            <a id="evDeleteButton" onclick="deleteEvent(${event.id}, ${festival.id})" class="btn btn-primary">Delete</a>
+                                                        </form>
+
+                                                    </td>
+                                                    <script type="text/javascript">
+                                                        jQuery(document).ready( function() {
+                                                            jQuery("#evEditButton${event.id}").click(function(){
+                                                                putEventValues("${event.id}", "${event.eventPoint.id}", "${festival.id}", "${event.name}", "${event.description}", "${event.dateBegin}", "${event.dateEnd}");
+                                                                editEvent("${festival.id}");
+                                                            });
+                                                        })
+
+                                                    </script>
+                                                </tr>
+                                            </c:forEach>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                 </div>
-                <div role="tabpanel" class="tab-pane" id="user-page">
 
                 </div>
+
             </div>
+
         </div>
     </div>
-
+</div>
 
 
 <!-- Modal edit Eventpoint-->
