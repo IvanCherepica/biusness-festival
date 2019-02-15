@@ -36,17 +36,7 @@
 
         connect();
 
-        // в массиве будут храниться координаты геометрической фигуры.
-        var array;
-
-        //Карта, метка на карте.
-        //Ширина,долгота.
-        var myMap, myPlacemark;
-        var x, y;
-        var myPolygon;
-        var a, b;
-
-        // get запрос GeometryServlet
+        // get запрос GeometryServlet, get user data
         $.ajax({
             url: "/rest/geometry",
             method: "get",
@@ -70,6 +60,78 @@
 
             }
         });
+
+
+        //regular update user position
+        function geo_success(position) {
+            x = position.coords.latitude;
+            y = position.coords.longitude;
+
+           // window.setInterval(function(){
+                if (myMap != undefined) {
+
+                    if (myPlacemark != undefined) myMap.geoObjects.remove(myPlacemark);
+
+                    //обновляем местоположение метки
+                    myPlacemark = new ymaps.Placemark([x, y], {
+                        hitContent: 'Hello',
+                        balloonContent: 'It is you'
+                    }, {
+                        iconLayout: 'default#image',
+                        iconImageHref: 'http://thebestapp.ru/wp-content/uploads/2016/07/Location_marker@2x.png',
+                        iconImageSize: [32, 32],
+                        iconImageOffset: [-15, -15]
+                    });
+                    // добавляем метку на карту
+                    myMap.geoObjects.add(myPlacemark);
+                }
+
+                if (webSocketClient != undefined) {
+                    var message = '{ "coordinates": "' + x + " " + y + '", "userName" : "' +  userName + '", "userID" : "' + userID + '"}';
+                    console.log("send to server: " + message);
+                    //var jsonObj = {"x" : userX, "y" : userY};
+                    //webSocketClient.send(JSON.stringify(jsonObj));
+                    webSocketClient.send(message);
+                }
+
+                //----------------------------------------------------------------------------------------------------------------
+                //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                //НЕ УДАЛЯТЬ! НЕ УДАЛЯТЬ! НЕ УДАЛЯТЬ! НЕ УДАЛЯТЬ! НЕ УДАЛЯТЬ! НЕ УДАЛЯТЬ! НЕ УДАЛЯТЬ!
+                //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                //----------------------------------------------------------------------------------------------------------------
+                // $.ajax({
+                //     url: "/user/geoposition",
+                //     method: "post",
+                //     async: true,
+                //     data: {longitude: position.coords.latitude, latitude: position.coords.longitude},
+                //     error: function(message) {
+                //         console.log(message);
+                //     },
+                //     success: function(data) {
+                //
+                //     }
+                // });
+                //----------------------------------------------------------------------------------------------------------------
+                //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                //----------------------------------------------------------------------------------------------------------------
+     //       }, 5000);
+        }
+
+
+        function errorCallback(error){
+        alert('ERROR(' + error.code + '): ' + error.message);
+        }
+
+        var geo_options = {
+            enableHighAccuracy: true,
+            maximumAge        : 0,
+            timeout           : 5000
+        };
+
+        navigator.geolocation.watchPosition(geo_success,errorCallback,geo_options);
+
+
 
         // инициализация карты.
         function init() {

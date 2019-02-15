@@ -1,9 +1,18 @@
+// в массиве будут храниться координаты геометрической фигуры.
+var array;
 
+//Карта, метка на карте.
+//Ширина,долгота.
+var myMap, myPlacemark;
+var x, y;
+var myPolygon;
+var webSocketClient
 var userName;
 var userID;
 var isInFestival;
 var festival;
 var user;
+
 
 // get request for user name and id
 $.ajax({
@@ -35,19 +44,20 @@ $.ajax({
 
 //connect to server
 function connect() {
-    var webSocketClient = new WebSocket("ws://localhost:8080/compareLocations");
+    webSocketClient = new WebSocket("ws://localhost:8080/compareLocations");
     webSocketClient.onopen = function (event) {
         console.log("onopen " );
-        sendMessage(webSocketClient);
+        //sendMessage(webSocketClient);
         };
     webSocketClient.onmessage = function (event) {
-            var messageToUser = JSON.parse(event.data).message;
-            processDataForFestivalBlock(event, festivalEvents);
-            if (messageToUser.localeCompare("") != 0 ) {
-                sendWelcomMessage(messageToUser);
-            }
+        console.log("onMessage: " + event.data);
+            // var messageToUser = JSON.parse(event.data).message;
+            // processDataForFestivalBlock(event, festivalEvents);
+            // if (messageToUser.localeCompare("") != 0 ) {
+            //     sendWelcomMessage(messageToUser);
+            // }
 
-            sendMessage(webSocketClient);
+            //sendMessage(webSocketClient);
         };
     webSocketClient.onclose = function (event) {
             console.log("close");
@@ -65,50 +75,7 @@ function sendWelcomMessage(message) {
 }
 
 
-function newPlacemark(myMap, x ,y) {
-    if (myMap != undefined) {
 
-        myMap.geoObjects.remove(myPlacemark);
-        //обновляем местоположение метки
-        myPlacemark = new ymaps.Placemark([x, y], {
-            hitContent: 'Hello',
-            balloonContent: 'It is you'
-        }, {
-            iconLayout: 'default#image',
-            iconImageHref: 'http://thebestapp.ru/wp-content/uploads/2016/07/Location_marker@2x.png',
-            iconImageSize: [32, 32],
-            iconImageOffset: [-15, -15]
-        });
-        // добавляем метку на карту
-        myMap.geoObjects.add(myPlacemark);
-    }
-}
-// function newPlacemark(myMap) {
-//     if (myMap != undefined) {
-//
-//         // получение текщей геопопзиции.
-//         navigator.geolocation.getCurrentPosition(function (position) {
-//
-//             x = position.coords.latitude;
-//             y = position.coords.longitude;
-//
-//             myMap.geoObjects.remove(myPlacemark);
-//             //обновляем местоположение метки
-//             myPlacemark = new ymaps.Placemark([x, y], {
-//                 hitContent: 'Hello',
-//                 balloonContent: 'It is you'
-//                 }, {
-//                     iconLayout: 'default#image',
-//                     iconImageHref: 'http://thebestapp.ru/wp-content/uploads/2016/07/Location_marker@2x.png',
-//                     iconImageSize: [32, 32],
-//                     iconImageOffset: [-15, -15]
-//                 });
-//             // добавляем метку на карту
-//             myMap.geoObjects.add(myPlacemark);
-//             //setTimeout(newPlacemark(myMap),10000);
-//         });
-//     }
-// }
 
 
 function processDataForUserPage(data) {
@@ -202,19 +169,3 @@ function processDataForFestivalBlock(event, eventspoints) {
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 //----------------------------------------------------------------------------------------------------------------
 
-
-//send message to server with user coordinates
-function sendMessage(webSocketClient) {
-    navigator.geolocation.watchPosition(function (position) {
-        userX = position.coords.latitude;
-        userY = position.coords.longitude;
-
-        var message = '{ "coordinates": "' + userX + " " + userY + '", "userName" : "' +  userName + '", "userID" : "' + userID + '"}';
-        //var jsonObj = {"x" : userX, "y" : userY};
-        //webSocketClient.send(JSON.stringify(jsonObj));
-        webSocketClient.send(message);
-        newPlacemark(myMap, userX, userY);
-    });
-
-
-}

@@ -13,6 +13,8 @@ public class UserSocketDto {
 
     private String name;
 
+    private long fesivalId;
+
     private boolean isInFestival;
 
     private String message = "";
@@ -37,6 +39,14 @@ public class UserSocketDto {
     }
 
     public UserSocketDto() {
+    }
+
+    public long getFesivalId() {
+        return fesivalId;
+    }
+
+    public void setFesivalId(long fesivalId) {
+        this.fesivalId = fesivalId;
     }
 
     public long getId() {

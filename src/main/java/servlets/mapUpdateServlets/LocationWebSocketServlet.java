@@ -34,8 +34,17 @@ public class LocationWebSocketServlet {
 
         @OnOpen
         public void start(Session userSession) {
-            System.out.println("Connected user:" + userSession.getId());
+            System.out.println("Connected user: " + userSession.getId());
 
+//            Timer timer = new Timer();
+//            timer.schedule(new TimerTask() {
+//                @Override
+//                public void run() {
+//                    String ss = "User session: " + userSession.getId();
+//                    System.out.println(ss);
+//                    userSession.getAsyncRemote().sendText(ss);
+//                }
+//            }, 10000);
         }
 
         @OnClose
@@ -48,84 +57,85 @@ public class LocationWebSocketServlet {
         public void onMessage(String message, Session userSession) throws Throwable {
             System.out.println("Message Received: " + message);
 
-            //разбираем данные из JSON строки
-            GsonBuilder gsonBuilder = new GsonBuilder();
-            gsonBuilder.registerTypeAdapter(UserServerDto.class, new UserJSONDataDeserializer());
-
-            UserServerDto userServerDto = gsonBuilder.create().fromJson(message,UserServerDto.class);
-            String userName = userServerDto.getUserName();
-            Long userID = userServerDto.getId();
-            point = userServerDto.getCoordinates();
-
-            //find user http session
-
-            HttpSession userHttpSession = userSessionService.getUserSession(userID);
-            boolean isInFestivalOld = Boolean.parseBoolean((String) userHttpSession.getAttribute("userInFestival"));
-
-            Long currentFestivalID;
-            boolean isInFestivalNew = false;
-            Festival usersActivFestival = null;
-            //at first check if user still in current Festival
-            if (isInFestivalOld) {
-                currentFestivalID = Long.parseLong((String) userHttpSession.getAttribute("currentFestivalID"));
-                Festival currentFestivale = festivalService.getById(currentFestivalID);
-                isInFestivalNew =  isInUnit(point,currentFestivale);
-                if (isInFestivalNew) {
-                    usersActivFestival = currentFestivale;
-                }
-            }
-
-            //Check for All active festivales
-            if (!isInFestivalNew) {
-                for (Festival currentFestivale : festivalService.getAllList()) {
-                    isInFestivalNew = isInUnit(point, currentFestivale);
-                    if (isInFestivalNew) {
-                        userHttpSession.setAttribute("currentFestivalID",Long.toString(currentFestivale.getId()));
-                        usersActivFestival = currentFestivale;
-                        break;
-                    }
-                }
-            }
-//            boolean isInFestivalNew = isInUnit(point, festival);
-
-            UserSocketDto dto = new UserSocketDto();
-            dto.setId(userID);
-            dto.setName(userName);
-            dto.setInFestival(isInFestivalNew);
-            dto.setFestival(usersActivFestival);
-
-
-            if (!isInFestivalOld && isInFestivalNew) {
-
-
-
-                dto.setMessage("Wellcome to " + usersActivFestival.getName() + "! \n" + usersActivFestival.getDescription());
-
-            }
-
-            try {
-                Timer timer = new Timer();
-                timer.schedule(new TimerTask() {
-                    @Override
-                    public void run() {
-                        userSession.getAsyncRemote().sendText(new Gson().toJson(dto));
-                    }
-                }, 10000);
-
-                System.out.println(isInFestivalNew + " " + userSession.getId());
-            } catch (Exception ex) {
-                System.out.println("WebSocket session closed");
-            }
-
-            if (usersActivFestival == null) {
-                userHttpSession.setAttribute("currentFestivalID",null);
-            }
-            userHttpSession.setAttribute("userInFestival",Boolean.toString(isInFestivalNew));
-
+//            //разбираем данные из JSON строки
+//            GsonBuilder gsonBuilder = new GsonBuilder();
+//            gsonBuilder.registerTypeAdapter(UserServerDto.class, new UserJSONDataDeserializer());
+//
+//            UserServerDto userServerDto = gsonBuilder.create().fromJson(message,UserServerDto.class);
+//            String userName = userServerDto.getUserName();
+//            Long userID = userServerDto.getId();
+//            point = userServerDto.getCoordinates();
+//
+//            //find user http session
+//
+//            HttpSession userHttpSession = userSessionService.getUserSession(userID);
+//            boolean isInFestivalOld = Boolean.parseBoolean((String) userHttpSession.getAttribute("userInFestival"));
+//
+//            Long currentFestivalID;
+//            boolean isInFestivalNew = false;
+//            Festival usersActivFestival = null;
+//            //at first check if user still in current Festival
+//            if (isInFestivalOld) {
+//                currentFestivalID = Long.parseLong((String) userHttpSession.getAttribute("currentFestivalID"));
+//                Festival currentFestivale = festivalService.getById(currentFestivalID);
+//                isInFestivalNew =  isInUnit(point,currentFestivale);
+//                if (isInFestivalNew) {
+//                    usersActivFestival = currentFestivale;
+//                }
+//            }
+//
+//            //Check for All active festivales
+//            if (!isInFestivalNew) {
+//                for (Festival currentFestivale : festivalService.getAllList()) {
+//                    isInFestivalNew = isInUnit(point, currentFestivale);
+//                    if (isInFestivalNew) {
+//                        userHttpSession.setAttribute("currentFestivalID",Long.toString(currentFestivale.getId()));
+//                        usersActivFestival = currentFestivale;
+//                        break;
+//                    }
+//                }
+//            }
+////            boolean isInFestivalNew = isInUnit(point, festival);
+//
+//            UserSocketDto dto = new UserSocketDto();
+//            dto.setId(userID);
+//            dto.setName(userName);
+//            dto.setInFestival(isInFestivalNew);
+//            //dto.setFestival(usersActivFestival);
+//
+//
+//            if (!isInFestivalOld && isInFestivalNew) {
+//
+//
+//
+//                dto.setMessage("Wellcome to " + usersActivFestival.getName() + "! \n" + usersActivFestival.getDescription());
+//
+//            }
+//
+//            try {
+//                Timer timer = new Timer();
+//                timer.schedule(new TimerTask() {
+//                    @Override
+//                    public void run() {
+//                        userSession.getAsyncRemote().sendText(new Gson().toJson(dto));
+//                    }
+//                }, 10000);
+//
+//                System.out.println(isInFestivalNew + " " + userSession.getId());
+//            } catch (Exception ex) {
+//                System.out.println("WebSocket session closed");
+//            }
+//
+//            if (usersActivFestival == null) {
+//                userHttpSession.setAttribute("currentFestivalID",null);
+//            }
+//            userHttpSession.setAttribute("userInFestival",Boolean.toString(isInFestivalNew));
+            userSession.getAsyncRemote().sendText("From server ");
         }
 
         @OnError
         public void onError(Throwable t) throws Throwable {
+            t.printStackTrace();
             //TODO
         }
 
