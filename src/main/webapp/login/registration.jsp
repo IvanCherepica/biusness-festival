@@ -17,9 +17,10 @@
             width: 26%;
         }
 
-        .container{
+        .container {
             width: 26%;
         }
+
         .submit {
             width: 26%;
         }
@@ -30,27 +31,40 @@
     <div class="main">
 
         <h2>Регистрация</h2>
-        <form action="${pageContext.servletContext.contextPath}/registration" method="POST">
 
-            <div class="field">
-                <input type="text" class="form-control" id="uName" name="name" placeholder="Логин" required/>
-            </div>
-            <br>
-            <div class="field">
-                <input type="password" class="form-control" id="uPass" name="password" placeholder="Пароль"
-                       required/>
-            </div>
-            <br>
-            <div class="submit">
-                <input type="submit" class="btn btn-primary btn-block" align="center" value="Зарегистрироваться"/>
-            </div>
-            <br>
-            <c:if test="${isExists}">
-                <div id="login-message" class="alert alert-danger container">
-                    <h3>Пользователь уже Сущетвует</h3>
-                    <div id="error-message">попробуйте еще раз</div>
+        <form action="${pageContext.servletContext.contextPath}/registration" method="POST">
+            <c:if test="${!regSucces}">
+                <div class="field">
+                    <input type="text" class="form-control" id="uName" name="name" placeholder="Логин" required/>
+                </div>
+                <br>
+                <div class="field">
+                    <input type="password" class="form-control" id="uPass" name="password" placeholder="Пароль"
+                           required/>
+                </div>
+                <br>
+                <div class="submit">
+                    <input type="submit" class="btn btn-primary btn-block" align="center" value="Зарегистрироваться"/>
+                </div>
+                <br>
+                <c:if test="${isExists}">
+                    <div id="login-message" class="alert alert-danger container">
+                        <h3>Пользователь уже Сущетвует</h3>
+                        <div id="error-message">попробуйте еще раз</div>
+                    </div>
+                </c:if>
+            </c:if>
+
+            <c:if test="${regSucces}">
+                <div id="login-message" class="alert alert-success container">
+                    <h3>Вы Зарегистрированы</h3>
+                    <div id="succses-message">перейдите на страницу логина</div>
+                </div>
+                <div class="submit">
+                <input type="submit" class="btn btn-primary btn-block " value="Перейти"/>
                 </div>
             </c:if>
+
         </form>
     </div>
 </div>
