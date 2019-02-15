@@ -18,10 +18,10 @@ public interface UserService {
     void remove(long id);
 
     List<User> getAllList();
-    Set<EventPoint> getEventsFromUserId(long id);
-
-    void addEventsListToUserbyId(long id, Set<EventPoint> events);
-
-    void addEventToUserId(long id, EventPoint event);
+//    Set<EventPoint> getEventsFromUserId(long id);
+//
+//    void addEventsListToUserbyId(long id, Set<EventPoint> events);
+//
+//    void addEventToUserId(long id, EventPoint event);
 
 }

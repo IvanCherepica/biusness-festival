@@ -5,9 +5,11 @@ import org.hibernate.SessionFactory;
 
 public class GeoDataHolder {
 
-    double latitude;
+    private double latitude;
 
-    double longitude;
+    private double longitude;
+
+    private String userGeoposition;
 
     private static volatile GeoDataHolder instance;
 
@@ -40,5 +42,13 @@ public class GeoDataHolder {
 
     public void setLongitude(double longitude) {
         this.longitude = longitude;
+    }
+
+    public String getUserGeoposition() {
+        return userGeoposition;
+    }
+
+    public void setUserGeoposition(String userGeoposition) {
+        this.userGeoposition = userGeoposition;
     }
 }

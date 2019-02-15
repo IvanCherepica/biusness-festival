@@ -1,11 +1,16 @@
 package models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.google.gson.annotations.Expose;
+
 import javax.persistence.*;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "event_point")
 public class EventPoint extends PointUnit {
+    @Expose
     @ManyToMany(fetch = FetchType.EAGER, targetEntity = User.class)
     @JoinTable(name = "users_on_eventpoints",
             joinColumns = {@JoinColumn(name = "event_point_id")},
@@ -37,4 +42,13 @@ public class EventPoint extends PointUnit {
     public EventPoint(String name, String description, String geometry, String color, Festival festival, String center, double radius) {
         super(name, description, geometry, color, festival, center, radius);
     }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        return super.equals(o);
+    }
+
 }

@@ -14,4 +14,10 @@ public class HotPoint extends PointUnit{
         super(name, description, geometry, color, festival, center, radius);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        return super.equals(o);
+    }
 }

@@ -66,4 +66,13 @@ public class EventServiceImpl implements EventService {
 		return eventDAO.getAllByFestival(fetsivalId);
 	}
 
+	public void addEventToUser (Long userID, Long eventID) {
+		eventDAO.addEventToUser(userID,eventID);
+	}
+
+
+	public void addRemoveEventFromUser (Long userID, Long eventID) {
+		eventDAO.addRemoveEventFromUser(userID,eventID);
+	}
+
 }
