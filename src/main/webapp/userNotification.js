@@ -42,7 +42,7 @@ $.ajax({
 
 //connect to server
 function connect() {
-    webSocketClient = new WebSocket("wss://42afe76b.ngrok.io/compareLocations");
+    webSocketClient = new WebSocket("wss://594d738d.ngrok.io/compareLocations");
 
     webSocketClient.onopen = function (event) {
         console.log("onopen. event=" + event );
