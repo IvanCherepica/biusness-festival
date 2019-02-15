@@ -10,7 +10,7 @@ public class UserJSONDataDeserializer implements JsonDeserializer<UserServerDto>
         JsonObject obj = json.getAsJsonObject();
         UserServerDto userServerDto = new UserServerDto();
         userServerDto.setCoordinates(obj.get("coordinates").getAsString());
-        userServerDto.setUserName(obj.get("userName").getAsString());
+//        userServerDto.setUserName(obj.get("userName").getAsString());
         userServerDto.setId(obj.get("userID").getAsLong());
 
         return userServerDto;
