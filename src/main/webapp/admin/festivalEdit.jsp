@@ -451,7 +451,7 @@
                     <textarea id="ev-description" placeholder="введите краткое описание" name="description"
                           class="form-control" rows="3"></textarea>
                 </div>
-
+            <!--
                 <div class="raw">
                     <div class="col-xs-6">
                         <div class="form-group">
@@ -474,9 +474,9 @@
                         </div>
                     </div>
                 </div>
+            -->
                 <input id="ev-q-type" type="hidden" readonly>
             </div>
-
             <div class="modal-footer">
                 <form  class="form-inline">
                     <button id="ev-save-btn" type="button" class="btn btn-primary">Save</button>
@@ -632,8 +632,6 @@
         $('#ev-id').val(id);
         $('#ev-name').val(name);
         $('#ev-description').val(description);
-        $('#ev-date-from').val(dateFrom);
-        $('#ev-date-to').val(dateTo);
     }
     function addEvent(festivalId) {
         $('#ev-q-type').val("new");
@@ -733,9 +731,7 @@
                     eventId : $('#ev-id').val(),
                     name : $('#ev-name').val(),
                     description : $('#ev-description').val(),
-                    eventPointId : $('#ev_eventPoint').val(),
-                    dateBegin : $('#ev-date-from').val(),
-                    dateEnd  :$('#ev-date-to').val()
+                    eventPointId : $('#ev_eventPoint').val()
                 },
                 success : function() {
                     // обработка ответа от сервера
