@@ -38,8 +38,8 @@ public class AddEventServlet extends HttpServlet {
 	    String eventPointIdParam = request.getParameter("eventPointId");
 	    String name = request.getParameter("name");
 	    String description = request.getParameter("description");
-	    String dateBeginParam = request.getParameter("dateBegin");
-	    String dateEndParam = request.getParameter("dateEnd");
+//	    String dateBeginParam = request.getParameter("dateBegin");
+//	    String dateEndParam = request.getParameter("dateEnd");
 	    
 	    if (name==null || name.isEmpty() || eventPointIdParam.isEmpty()) {
 		    response.sendRedirect("/error.html");
@@ -53,8 +53,8 @@ public class AddEventServlet extends HttpServlet {
 		    eventPoint = eventPoinService.getById(eventPointId);
 		    long festivalId = Long.parseLong(festivalIdParam);
 		    festival = festivalService.getById(festivalId);
-		    dateBegin = DateTimeConverter.parse(dateBeginParam);
-		    dateEnd = DateTimeConverter.parse(dateEndParam);
+//		    dateBegin = DateTimeConverter.parse(dateBeginParam);
+//		    dateEnd = DateTimeConverter.parse(dateEndParam);
 		    
 		    if (!(eventPoint instanceof EventPoint || festival instanceof Festival)) {
 			    response.sendRedirect("/error.html");
