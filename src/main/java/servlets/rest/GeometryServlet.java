@@ -1,4 +1,4 @@
-package servlets;
+package servlets.rest;
 
 import com.google.gson.Gson;
 import models.Festival;
@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet("/rest/geometry")
+@WebServlet("/rest/geometry/get-all-festivals")
 public class GeometryServlet extends HttpServlet {
 
     @Override

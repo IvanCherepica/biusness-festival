@@ -5,7 +5,7 @@ function GetFestivalsForAdmin(callback) {
     console.log("[GetData] Receiving festivals...");
 // get запрос GeometryServlet
     $.ajax({
-        url: "/rest/geometry/festivals",
+        url: "/rest/geometry/get-all-festivals",
         method: "get",
         async: true,
         error: function (message) {
@@ -25,7 +25,7 @@ function GetEventPointsForAdmin(callback){
 
 // get запрос EventPointToMapServlet
     $.ajax({
-        url: "/rest/geometry/event-points",
+        url: "/rest/geometry/event-points", //TODO
         method: "get",
         async: true,
         error: function (message) {
