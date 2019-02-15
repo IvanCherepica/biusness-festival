@@ -10,6 +10,7 @@ function getDataForFestival(fesivalId) {
             },
             success: function(data) {
                 console.log(data);
+                processDataForFestivalBlock(data);
                 //processDataForFestivalBlock(event, eventspoints);
             }
         });
@@ -17,18 +18,17 @@ function getDataForFestival(fesivalId) {
 }
 
 
-function processDataForFestivalBlock(event, eventspoints) {
-    console.log(eventspoints);
-    if(event!==undefined && eventspoints!==undefined) {
-        isInFestival = JSON.parse(event.data).isInFestival;
-        festival = JSON.parse(event.data).festival;
-        $("#festivalInfo1").text("You are at " + festival.name);
-        $("#festivalInfo2").text("About: " + festival.description);
+function processDataForFestivalBlock(data) {
+    console.log(data);
+    if(data!==undefined);
+        console.log(festival);
+        $("#festivalInfo1").text("You are at " + data.festival.name);
+        $("#festivalInfo2").text("About: " + data.festival.description);
         $("#informUserBlock").css('height', '770');
         $("#festivalBlock").css('height', '450');
         if (flag === false) {
             $("#events").append("<h4><b>Todays events</b></h4>");
-            for (var i = 0; i < eventspoints.length; i++) {
+            for (var i = 0; i < data.eventPointList.length; i++) {
                 var j = i + 1;
                 $("#events").append("<li style='margin: 3px 3px 3px 3px;'><a href=\"#\"><button style='color: #fff; /* цвет текста */\n" +
                     "  text-decoration: none; /* убирать подчёркивание у ссылок */\n" +
@@ -36,15 +36,15 @@ function processDataForFestivalBlock(event, eventspoints) {
                     "  background: rgb(212,75,56); /* фон кнопки */\n" +
                     "  padding: .1em 0.5em; /* отступ от текста */\n" +
                     "  outline: none; /* убирать контур в Mozilla */' data-toggle=\"collapse\" data-target=\"#demo" + j
-                    + "\">"+ eventspoints[i].name +"</button></li></a>\n" +
-                    "\n" +
-                    "<div id=\"demo" + j + "\" class=\"collapse\">\n" +
-                    "Description:"+ eventspoints[i].description +"\n" +
-                    "</div>");
+                        + "\">" + data.eventPointLists[i].name + "</button></li></a>\n" +
+                        "<div id=\"demo" + j + "\" class=\"collapse\">\n");
+                        for (var k = 0; k < data.eventPointList[i].evets.length; k++) {
+                            $("#events").append("<li>Description:" + event.eventspoints[i].events[j].name + "\n</li>");
+                        }
+                     $("#events").append("</div>");
                 if (i === eventspoints.length - 1) {
                     flag = true;
                 }
             }
         }
-    }
 }
