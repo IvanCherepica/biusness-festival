@@ -129,10 +129,10 @@ To change this template use File | Settings | File Templates.
             <div id="userImage"></div>
             <div id="userLg"></div>
         </div>
-        <div id="festivalBlock">
+        <div style="overflow-y: scroll;" id="festivalBlock">
             <p id="festivalInfo1"></p>
             <p id="festivalInfo2"></p>
-            <div>
+            <div style="margin-bottom: 20px">
                 <ol id="events" class="rectangle">
                 </ol>
             </div>
