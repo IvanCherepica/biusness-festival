@@ -5,7 +5,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>HotPoint edit</title>
+    <title>Редакция Хот-Поинта</title>
     <link rel="stylesheet" href="https://bootswatch.com/3/united/bootstrap.min.css" >
 </head>
 
@@ -14,7 +14,7 @@
     <div class="row">
         <div class="col-lg-6 col-md-6 col-xs-11 col-md-offset-3 col-xs-offset-2 login-form">
             <div class="col-xs-8 col-md-offset-2">
-                <h2>Hot PoInt EdiTor</h2>
+                <h2>Редакция Хот-Поинта</h2>
                 <form action="" method="POST" class="form-group login-group">
                     <select name="fId" value="${hPoint.festival.id}"  class="form-control" id="sel1">
                         <c:forEach var="item" items="${festivals}">
@@ -42,7 +42,7 @@
                            name="color" value="${hPoint.color}" required
                            class="form-control"/>
 
-                    <button type="submit" class="btn btn-primary btn-block">Save</button>
+                    <button type="submit" class="btn btn-primary btn-block">Сохранить</button>
                 </form>
             </div>
         </div>
