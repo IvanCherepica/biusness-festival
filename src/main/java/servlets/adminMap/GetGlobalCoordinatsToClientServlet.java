@@ -1,4 +1,4 @@
-package servlets.geoDataServlet;
+package servlets.adminMap;
 
 import com.google.gson.Gson;
 import dto.GetGlobalCoordinatsDto;

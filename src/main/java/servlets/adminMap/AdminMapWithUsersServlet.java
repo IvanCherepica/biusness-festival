@@ -1,4 +1,4 @@
-package servlets.geoDataServlet;
+package servlets.adminMap;
 
 
 
