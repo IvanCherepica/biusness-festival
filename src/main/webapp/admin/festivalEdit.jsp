@@ -44,23 +44,23 @@
 
 
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-            <h1 class="page-header">Редактирование фестиваля</h1>
+            <h1 class="page-header">Редакция фестиваля</h1>
 
             <div class="tab-content">
                 <div role="tabpanel" class="tab-pane active" id="admin-page">
                     <h3> ${festival.name}</h3>
                     <ul class="nav nav-tabs nav-content" role="tablist">
                     <li id="festival-edit-nav">
-                        <a id="festival-tab" href="#festival-panel" aria-controls="festival-panel" role="tab" data-toggle="tab">Festival</a>
+                        <a id="festival-tab" href="#festival-panel" aria-controls="festival-panel" role="tab" data-toggle="tab">Фестиваль</a>
                     </li>
                     <li id="hotpoint-list-nav">
-                        <a id="hotpoint-tab" href="#hotpoints_panel" aria-controls="hotpoints_panel" role="tab" data-toggle="tab">Hot-points</a>
+                        <a id="hotpoint-tab" href="#hotpoints_panel" aria-controls="hotpoints_panel" role="tab" data-toggle="tab">Хот-поинт</a>
                     </li>
                     <li id="eventpoint-list-nav">
-                        <a id="eventpoint-tab" href="#eventpoints-panel" aria-controls="eventpoints-panel" role="tab" data-toggle="tab">Event-points</a>
+                        <a id="eventpoint-tab" href="#eventpoints-panel" aria-controls="eventpoints-panel" role="tab" data-toggle="tab">Место Событий</a>
                     </li>
                     <li id="event-list-nav">
-                        <a id="event-tab" href="#events-panel" aria-controls="events-panel" role="tab" data-toggle="tab">Events</a>
+                        <a id="event-tab" href="#events-panel" aria-controls="events-panel" role="tab" data-toggle="tab">События</a>
                     </li>
                 </ul>
 
@@ -70,7 +70,7 @@
                             <div class="tab-content">
                                 <div class="panel-body">
 
-                                    <h4>Edit festival</h4>
+                                    <h4>Редакция Фестиваля</h4>
                                     <form action="${pageContext.request.contextPath}/admin/editFestival" method="POST">
                                         <div class="form-group edit-group col-md-9">
                                             <div class="form-group row">
@@ -84,7 +84,7 @@
                                             </div>
                                             <div class="form-group row">
                                                 <div  class="col-xs-9 col-md-2">
-                                                    <label for="name">Name</label>
+                                                    <label for="name">Название</label>
                                                 </div>
                                                 <div  class="col-xs-9 col-md-6">
                                                     <input type="text" class="form-control" id="name" name="name"
@@ -93,7 +93,7 @@
                                             </div>
                                             <div class="form-group row">
                                                 <div  class="col-xs-9 col-md-2">
-                                                    <label for="description">Description</label>
+                                                    <label for="description">Описание</label>
                                                 </div>
                                                 <div  class="col-xs-9 col-md-6">
                                                         <textarea class="form-control" id="description" rows="3" name="description" style="max-width: 25vw;"
@@ -102,7 +102,7 @@
                                             </div>
                                             <div class="form-group row">
                                                 <div  class="col-xs-9 col-md-2">
-                                                    <label for="geometry">Geometry</label>
+                                                    <label for="geometry">Координаты</label>
                                                 </div>
                                                 <div  class="col-xs-9 col-md-6">
                                                         <textarea class="form-control" id="geometry" rows="4" name="geometry"
@@ -115,7 +115,7 @@
                                             </div>
                                             <div class="form-group row">
                                                 <div  class="col-xs-9 col-md-2">
-                                                    <label for="center">Center</label>
+                                                    <label for="center">Центр</label>
                                                 </div>
                                                 <div  class="col-xs-9 col-md-6">
                                                         <textarea class="form-control" id="center" rows="4" name="center"
@@ -128,7 +128,7 @@
                                             </div>
                                             <div class="form-group row">
                                                 <div  class="col-xs-9 col-md-2">
-                                                    <label for="radius">Radius</label>
+                                                    <label for="radius">Радиус</label>
                                                 </div>
                                                 <div  class="col-xs-9 col-md-6">
                                                     <input class="form-control" id="radius" name="radius"
@@ -137,7 +137,7 @@
                                             </div>
                                             <div class="form-group row">
                                                 <div  class="col-xs-9 col-md-2">
-                                                    <label for="color">Color</label>
+                                                    <label for="color">Цвет</label>
                                                 </div>
                                                 <div  class="col-xs-9 col-md-6">
                                                     <input type="color" class="form-control" id="color" name="color"
@@ -159,17 +159,17 @@
                         <div class="panel panel-default table-panel">
                             <div class="tab-content">
                                 <div class="panel-body">
-                                    <h4>Hot-points list</h4>
+                                    <h4>Список Хот-Поинтов</h4>
                                     <div class="container-fluid">
                                         <table class="table table-striped table-responsive">
                                             <thead>
                                             <tr>
                                                 <th>id</th>
-                                                <th>Name</th>
-                                                <th>Description</th>
-                                                <th>Geometry</th>
-                                                <th>Color</th>
-                                                <th><a id="addHotpointButton" onclick="addHotpoint(${festival.id})" class="btn btn-primary">Add</a></th>
+                                                <th>Название</th>
+                                                <th>Описание</th>
+                                                <th>Координты</th>
+                                                <th>Цвет</th>
+                                                <th><a id="addHotpointButton" onclick="addHotpoint(${festival.id})" class="btn btn-primary">Добавить</a></th>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -182,8 +182,8 @@
                                                     <td width="5%" style="background-color:${hotPoint.color};"></td>
                                                     <td width="20%">
                                                         <form  class="form-inline hp-edit-form">
-                                                            <a id="hpEditButton${hotPoint.id}" class="btn btn-primary">Edit</a>
-                                                            <a id="hpDeleteButton" onclick="deleteHotPoint(${hotPoint.id}, ${hotPoint.festival.id})" class="btn btn-primary">Delete</a>
+                                                            <a id="hpEditButton${hotPoint.id}" class="btn btn-primary">Изменить</a>
+                                                            <a id="hpDeleteButton" onclick="deleteHotPoint(${hotPoint.id}, ${hotPoint.festival.id})" class="btn btn-primary">Удалить</a>
                                                         </form>
                                                     </td>
                                                     <script type="text/javascript">
@@ -209,18 +209,18 @@
                         <div class="panel panel-default table-panel">
                             <div class="tab-content">
                                 <div class="panel-body">
-                                    <h4>Event-points list</h4>
+                                    <h4>Список Мест Событий</h4>
                                     <div class="container-fluid">
 
                                         <table class="table table-striped table-responsive">
                                             <thead>
                                             <tr>
                                                 <th>id</th>
-                                                <th>Name</th>
-                                                <th>Description</th>
-                                                <th>Geometry</th>
-                                                <th>Color</th>
-                                                <th><a id="addEventpointButton" onclick="addEventpoint(${festival.id})" class="btn btn-primary">Add</a></th>
+                                                <th>Название</th>
+                                                <th>Описание</th>
+                                                <th>Координаты</th>
+                                                <th>Цвет</th>
+                                                <th><a id="addEventpointButton" onclick="addEventpoint(${festival.id})" class="btn btn-primary">Добавить</a></th>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -236,8 +236,8 @@
 
                                                     <td width="20%">
                                                         <form  class="form-inline ep-edit-form">
-                                                            <a id="epEditButton${eventPoint.id}" class="btn btn-primary">Edit</a>
-                                                            <a id="epDeleteButton" onclick="deleteEventPoint(${eventPoint.id}, ${eventPoint.festival.id})" name="eventPointId" class="btn btn-primary">Delete</a>
+                                                            <a id="epEditButton${eventPoint.id}" class="btn btn-primary">Изменить</a>
+                                                            <a id="epDeleteButton" onclick="deleteEventPoint(${eventPoint.id}, ${eventPoint.festival.id})" name="eventPointId" class="btn btn-primary">Удалить</a>
                                                         </form>
                                                     </td>
                                                     <script type="text/javascript">
@@ -266,17 +266,17 @@
                         <div class="panel panel-default table-panel">
                             <div class="tab-content">
                                 <div class="panel-body">
-                                    <h4>Events list</h4>
+                                    <h4>Список Событий</h4>
                                     <div class="container-fluid">
                                         <table class="table table-striped table-responsive">
                                             <thead>
                                             <tr>
                                                 <th>id</th>
-                                                <th>Name</th>
-                                                <th>Description</th>
-                                                <th>Event-point</th>
+                                                <th>Название</th>
+                                                <th>Описсание</th>
+                                                <th>Место Событий</th>
 
-                                                <th><a id="addEventButton" onclick="addEvent(${festival.id})"class="btn btn-primary">Add</a></th>
+                                                <th><a id="addEventButton" onclick="addEvent(${festival.id})"class="btn btn-primary">Добавить</a></th>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -288,8 +288,8 @@
                                                     <td width="25%">${event.eventPoint.name}</td>
                                                     <td width="20%">
                                                         <form  class="form-inline ev-edit-form">
-                                                            <a id="evEditButton${event.id}" class="btn btn-primary">Edit</a>
-                                                            <a id="evDeleteButton" onclick="deleteEvent(${event.id}, ${festival.id})" class="btn btn-primary">Delete</a>
+                                                            <a id="evEditButton${event.id}" class="btn btn-primary">Изменить</a>
+                                                            <a id="evDeleteButton" onclick="deleteEvent(${event.id}, ${festival.id})" class="btn btn-primary">Удалить</a>
                                                         </form>
 
                                                     </td>
@@ -331,7 +331,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Event-point</h4>
+                <h4 class="modal-title">Место Событий</h4>
             </div>
             <div class="modal-body">
                 <div class="raw">
@@ -340,27 +340,27 @@
                 </div>
 
                 <div class="raw">
-                    <label for="ep-name">Name</label>
+                    <label for="ep-name">Название</label>
                     <input id="ep-name" placeholder="введите имя" name="name" class="form-control" required>
                 </div>
                 <div class="raw">
-                    <label for="ep-description">Description</label>
+                    <label for="ep-description">Описание</label>
                     <textarea id="ep-description" placeholder="введите краткое описание" name="description"
                               class="form-control" rows="3"></textarea>
                 </div>
                 <div class="raw">
-                    <label for="ep-geometry">Geometry</label>
+                    <label for="ep-geometry">Координаты</label>
                     <textarea id="ep-geometry" placeholder="введите координаты" name="geometry" class="form-control" rows="3"></textarea>
                 </div>
                 <div class="raw">
-                    <label for="ep-color">Color</label>
+                    <label for="ep-color">Цвет</label>
                     <input id="ep-color" type="color" name="color" class="form-control">
                 </div>
             </div>
             <div class="modal-footer">
                 <form  class="form-inline">
-                    <button id="ep-save-btn" type="button" class="btn btn-primary">Save</button>
-                    <button id="ep-close-btn" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button id="ep-save-btn" type="button" class="btn btn-primary">Сохранить</button>
+                    <button id="ep-close-btn" type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
                 </form>
             </div>
             <input id="ep-q-type" type="hidden" readonly>
@@ -377,7 +377,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Hot-point</h4>
+                <h4 class="modal-title">Хот-Поинт</h4>
             </div>
 
             <div class="modal-body">
@@ -386,27 +386,27 @@
                     <input type="hidden" id="hp-id" name="eventPointId" readonly>
                 </div>
                 <div class="raw">
-                    <label for="hp-name">Name</label>
+                    <label for="hp-name">Название</label>
                     <input id="hp-name" placeholder="введите имя" name="name" class="form-control" required>
                 </div>
                 <div class="raw">
-                    <label for="hp-description">Description</label>
+                    <label for="hp-description">Описание</label>
                     <textarea id="hp-description" placeholder="введите краткое описание" name="description"
                               class="form-control" rows="3"></textarea>
                 </div>
                 <div class="raw">
-                    <label for="hp-geometry">Geometry</label>
+                    <label for="hp-geometry">Координаты</label>
                     <textarea id="hp-geometry" placeholder="введите координаты" name="geometry" class="form-control" rows="3"></textarea>
                 </div>
                 <div class="raw">
-                    <label for="hp-color">Color</label>
+                    <label for="hp-color">Цвет</label>
                     <input id="hp-color" type="color" name="color" class="form-control">
                 </div>
             </div>
             <div class="modal-footer">
                 <form  class="form-inline">
-                    <button id="hp-save-btn" type="button" class="btn btn-primary">Save</button>
-                    <button id="hp-close-btn" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button id="hp-save-btn" type="button" class="btn btn-primary">Сохранить</button>
+                    <button id="hp-close-btn" type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
                 </form>
             </div>
             <input id="hp-q-type" type="hidden" readonly>
@@ -423,7 +423,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Event</h4>
+                <h4 class="modal-title">События</h4>
             </div>
             <div class="modal-body">
                 <div class="raw">
@@ -432,7 +432,7 @@
                 </div>
 
                 <div class="raw">
-                    <label for="ev_eventPoint">Event-point id:</label>
+                    <label for="ev_eventPoint">id Места Событий:</label>
                     <select id="ev_eventPoint" name="eventpoint_id">
                         <c:forEach var="item" items="${eventPointsList}">
                             <option value="${item.id}">${item.name} (id:${item.id})</option>
@@ -442,12 +442,12 @@
                 </div>
 
                 <div class="raw">
-                    <label for="ev-name">Name</label>
+                    <label for="ev-name">Название</label>
                     <input id="ev-name" placeholder="введите имя" name="name" class="form-control" required>
                 </div>
 
                 <div class="raw">
-                    <label for="ev-description">Description</label>
+                    <label for="ev-description">Описание</label>
                     <textarea id="ev-description" placeholder="введите краткое описание" name="description"
                           class="form-control" rows="3"></textarea>
                 </div>
@@ -480,8 +480,8 @@
 
             <div class="modal-footer">
                 <form  class="form-inline">
-                    <button id="ev-save-btn" type="button" class="btn btn-primary">Save</button>
-                    <button id="ev-close-btn" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button id="ev-save-btn" type="button" class="btn btn-primary">Сохранить</button>
+                    <button id="ev-close-btn" type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
                 </form>
             </div>
         </div>

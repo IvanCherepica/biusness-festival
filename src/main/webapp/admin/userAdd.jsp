@@ -68,7 +68,6 @@
                             </div>
                         </c:if>
                     </div>
-                    <input type="submit" class="btn btn-primary btn-block" value="Создать"/>
                 </form>
         </div>
         <div class="col-sm-3 col-md-6"></div>

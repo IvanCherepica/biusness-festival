@@ -79,7 +79,7 @@
                             <option>admin</option>
                         </select>
 
-                        <label for="epoint">Мероприятия</label>
+                        <label for="epoint">События</label>
                         <select name="epoint" id="epoint" class="selectpicker" multiple="multiple" data-live-search="true">
                             <c:forEach var="uevent" items="${ueventsp}">
                                 <option value="${uevent.id}" selected>${uevent.name}</option>
