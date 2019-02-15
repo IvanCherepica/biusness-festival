@@ -9,7 +9,7 @@ function getDataForFestival(fesivalId) {
                 console.log(message);
             },
             success: function(data) {
-                console.log(data);
+                console.log(JSON.stringify(data));
                 processDataForFestivalBlock(data)
             }
         });
