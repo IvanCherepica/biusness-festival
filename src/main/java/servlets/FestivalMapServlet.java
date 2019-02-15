@@ -16,7 +16,7 @@ public class FestivalMapServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;UTF-8");
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/pageWithMap.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/userMap/pageWithMap.jsp");
         dispatcher.forward(request, response);
     }
 }

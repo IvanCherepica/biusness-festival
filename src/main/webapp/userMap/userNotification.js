@@ -44,9 +44,9 @@ $.ajax({
 
 //connect to server
 function connect() {
-    webSocketClient = new WebSocket("ws://localhost:8080/compareLocations");
+    webSocketClient = new WebSocket("wss://594d738d.ngrok.io/compareLocations");
     webSocketClient.onopen = function (event) {
-        console.log("onopen " );
+        console.log("onopen:" + event.data );
         //sendMessage(webSocketClient);
         };
     webSocketClient.onmessage = function (event) {
@@ -63,11 +63,11 @@ function connect() {
             //sendMessage(webSocketClient);
         };
     webSocketClient.onclose = function (event) {
-            console.log("close");
+            console.log("close: " + event.data);
             //connect();
         }
     webSocketClient.onerror = function (event) {
-        console.log("error " + event);
+        console.log("error " + event.data);
 
     }
 }
