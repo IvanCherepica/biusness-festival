@@ -64,22 +64,22 @@
                         <input type="text" class="form-control" id="id" name="id"
                                value="${user.id}" readonly>
 
-                        <label for="name">Name</label>
+                        <label for="name">Имя</label>
                         <input type="text" class="form-control" id="name" name="name"
                                value="${user.name}">
 
-                        <label for="password">Password</label>
+                        <label for="password">Пароль</label>
                         <input class="form-control" id="password" rows="3" name="password"
                                   value="${user.password}">
 
-                        <label for="role">Role</label>
+                        <label for="role">Роль</label>
                         <select class="form-control" id="role" rows="2" name="role"
                                 placeholder="${user.role}" >
                             <option>user</option>
                             <option>admin</option>
                         </select>
 
-                        <label for="epoint">Events</label>
+                        <label for="epoint">События</label>
                         <select name="epoint" id="epoint" class="selectpicker" multiple="multiple" data-live-search="true">
                             <c:forEach var="uevent" items="${ueventsp}">
                                 <option value="${uevent.id}" selected>${uevent.name}</option>

@@ -46,19 +46,19 @@
                         <input type="text" class="form-control" id="id" name="id"
                                value="${festival.id}" readonly>
 
-                        <label for="name">Name</label>
+                        <label for="name">Название</label>
                         <input type="text" class="form-control" id="name" name="name"
-                               placeholder="${festival.name}">
+                               placeholder="введите название">
 
-                        <label for="description">Description</label>
+                        <label for="description">Описание</label>
                         <textarea class="form-control" id="description" rows="3" name="description"
-                                  placeholder="${festival.description}"></textarea>
+                                  placeholder="введите описание"></textarea>
 
-                        <label for="geometry">Geometry</label>
+                        <label for="geometry">Координаты</label>
                         <textarea class="form-control" id="geometry" rows="4" name="geometry"
                                   placeholder="${festival.geometry}"></textarea>
 
-                        <label for="color">Color</label>
+                        <label for="color">Цвет</label>
                         <input type="color" class="form-control" id="color" name="color"
                                value="${festival.color}">
                     </div>

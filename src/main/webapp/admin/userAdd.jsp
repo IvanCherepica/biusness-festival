@@ -48,12 +48,10 @@
                     <div class="form-group edit-group">
 
                         <label for="name">Имя</label>
-                        <input type="text" class="form-control" id="name" name="name"
-                               placeholder="${user.name}" required>
+                        <input type="text" class="form-control" id="name" name="name">
 
                         <label for="password">Пароль</label>
-                        <input class="form-control" id="password" rows="3" name="password"
-                                  placeholder="${user.password}" required>
+                        <input class="form-control" id="password" rows="3" name="password">
 
                         <label for="role">Роль</label>
                         <select class="form-control" id="role" rows="2" name="role"
@@ -70,7 +68,6 @@
                             </div>
                         </c:if>
                     </div>
-
                 </form>
         </div>
         <div class="col-sm-3 col-md-6"></div>
