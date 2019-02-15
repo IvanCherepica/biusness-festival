@@ -26,7 +26,7 @@
 </html>
     <script type="text/javascript">
 
-        connect();
+        //connect();
 
         // в массиве будут храниться координаты геометрической фигуры.
         var array;

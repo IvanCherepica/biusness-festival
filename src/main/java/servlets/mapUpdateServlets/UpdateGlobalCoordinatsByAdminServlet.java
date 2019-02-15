@@ -3,6 +3,7 @@ package servlets.mapUpdateServlets;
 import com.google.gson.Gson;
 import dto.UserSocketDto;
 import models.User;
+import util.GeoDataHolder;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,15 +16,22 @@ import java.io.IOException;
 @WebServlet("/user/geoposition")
 public class UpdateGlobalCoordinatsByAdminServlet extends HttpServlet {
 
+    GeoDataHolder geoDataHolder = GeoDataHolder.getGeoDataHolder();
+
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
 
-        HttpSession session = request.getSession();
-        String longitudeX = (String) session.getAttribute("longitude");
-        String latitudeY = (String) session.getAttribute("latitude");
+//        HttpSession session = request.getParameter()getSession();
+        String longitudeX = request.getParameter("longitude"); //session.getAttribute("longitude");
+        String latitudeY = request.getParameter("latitude");//(String) session.getAttribute("latitude");
 
+        geoDataHolder.setUserGeoposition(longitudeX + " " + latitudeY);
 
+        geoDataHolder.setLongitude(Double.parseDouble(longitudeX));
+        geoDataHolder.setLatitude(Double.parseDouble(latitudeY));
+
+        System.out.println("coordinats from mobile : " + longitudeX + " " + latitudeY);
 
 
 //        response.setContentType("application/json");

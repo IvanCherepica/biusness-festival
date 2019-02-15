@@ -60,32 +60,32 @@ function sendWelcomMessage(message) {
     confirm(message);
 }
 
-function newPlacemark(myMap) {
-    if (myMap != undefined) {
-
-        // получение текщей геопопзиции.
-        navigator.geolocation.getCurrentPosition(function (position) {
-
-            x = position.coords.latitude;
-            y = position.coords.longitude;
-
-            myMap.geoObjects.remove(myPlacemark);
-            //обновляем местоположение метки
-            myPlacemark = new ymaps.Placemark([x, y], {
-                hitContent: 'Hello',
-                balloonContent: 'It is you'
-                }, {
-                    iconLayout: 'default#image',
-                    iconImageHref: 'http://thebestapp.ru/wp-content/uploads/2016/07/Location_marker@2x.png',
-                    iconImageSize: [32, 32],
-                    iconImageOffset: [-15, -15]
-                });
-            // добавляем метку на карту
-            myMap.geoObjects.add(myPlacemark);
-            //setTimeout(newPlacemark(myMap),10000);
-        });
-    }
-}
+// function newPlacemark(myMap) {
+//     if (myMap != undefined) {
+//
+//         // получение текщей геопопзиции.
+//         navigator.geolocation.getCurrentPosition(function (position) {
+//
+//             x = position.coords.latitude;
+//             y = position.coords.longitude;
+//
+//             myMap.geoObjects.remove(myPlacemark);
+//             //обновляем местоположение метки
+//             myPlacemark = new ymaps.Placemark([x, y], {
+//                 hitContent: 'Hello',
+//                 balloonContent: 'It is you'
+//                 }, {
+//                     iconLayout: 'default#image',
+//                     iconImageHref: 'http://thebestapp.ru/wp-content/uploads/2016/07/Location_marker@2x.png',
+//                     iconImageSize: [32, 32],
+//                     iconImageOffset: [-15, -15]
+//                 });
+//             // добавляем метку на карту
+//             myMap.geoObjects.add(myPlacemark);
+//             //setTimeout(newPlacemark(myMap),10000);
+//         });
+//     }
+// }
 
 
 function processDataForUserPage(data) {
@@ -139,3 +139,33 @@ function processDataForFestivalBlock(event, eventspoints) {
         }
     }
 }
+
+
+window.setInterval(function(){
+    $.ajax({
+        url: "/user/get_coordinats_to_client",
+        method: "get",
+        async: true,
+        error: function(message) {
+            console.log(message);
+        },
+        success: function(data) {
+            console.log("Take it! " + data.longitudeX + " " + data.latitudeY);
+            myMap.geoObjects.remove(myPlacemark);
+            myPlacemark = new ymaps.Placemark([data.longitudeX, data.latitudeY], {
+                hitContent: 'Hello',
+                balloonContent: 'It is you'
+            }, {
+                iconLayout: 'default#image',
+                iconImageHref: 'http://thebestapp.ru/wp-content/uploads/2016/07/Location_marker@2x.png',
+                iconImageSize: [32, 32],
+                iconImageOffset: [-15, -15]
+            });
+            // добавляем метку на карту
+            myMap.geoObjects.add(myPlacemark);
+
+            //myMap.setCenter([Number(data.longitudeX), Number(data.latitudeY)], 17, {checkZoomRange: true});
+        }
+    });
+    console.log("server, give mi coordinats!");
+}, 10000);
