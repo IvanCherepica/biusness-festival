@@ -23,7 +23,7 @@ public class UserSocketDto {
 
     private User user;
 
-    private List<Event> eventList;
+//    private List<Event> eventList;
 
     private List<EventPoint> eventPointList;
 
@@ -112,11 +112,5 @@ public class UserSocketDto {
         this.eventPoint = eventPoint;
     }
 
-    public List<Event> getEventList() {
-        return eventList;
-    }
 
-    public void setEventList(List<Event> eventList) {
-        this.eventList = eventList;
-    }
 }

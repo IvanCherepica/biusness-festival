@@ -100,11 +100,52 @@ public class EventDAOImpl extends AbstactDAO<Event> implements EventDAO {
 			transaction.commit();
 		} catch (Exception e) {
 			System.out.println("Can`t get list of Events by Festival: " + e.getMessage());
+			e.printStackTrace();
 			transaction.rollback();
 		} finally {
 			session.close();
 		}
 		return events;
 		
+	}
+
+	public void addEventToUser (Long userID, Long eventID) {
+		Session session = sessionFactory.openSession();
+		String queryString = "INSERT INTO users_on_event (users_id, events_id) VALUES (:userId, :eventId)";
+		Transaction transaction = session.beginTransaction();
+		try {
+
+			Query query = session.createSQLQuery(queryString);
+			query.setParameter("userId", userID);
+			query.setParameter("eventId", eventID);
+			query.executeUpdate();
+			transaction.commit();
+		} catch (Exception e) {
+			System.out.println("Can`t update users_on_event: " + e.getMessage());
+			e.printStackTrace();
+			transaction.rollback();
+		} finally {
+			session.close();
+		}
+	}
+
+	public void addRemoveEventFromUser (Long userID, Long eventID) {
+		Session session = sessionFactory.openSession();
+		String queryString = "DELETE FROM users_on_event WHERE users_id =:userId AND events_id = :eventId";
+		Transaction transaction = session.beginTransaction();
+		try {
+
+			Query query = session.createSQLQuery(queryString);
+			query.setParameter("userId", userID);
+			query.setParameter("eventId", eventID);
+			query.executeUpdate();
+			transaction.commit();
+		} catch (Exception e) {
+			System.out.println("Can`t update users_on_event: " + e.getMessage());
+			e.printStackTrace();
+			transaction.rollback();
+		} finally {
+			session.close();
+		}
 	}
 }

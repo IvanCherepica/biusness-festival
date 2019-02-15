@@ -1,8 +1,10 @@
 package servlets.mapUpdateServlets;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import dto.UserSocketDto;
 import models.User;
+import util.UserSocketSerializer;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -29,11 +31,15 @@ public class UpdateUserSessionData extends HttpServlet {
         dto.setUser(user);
         dto.setInFestival(Boolean.parseBoolean(userInFestival));
 
-        String json = new Gson().toJson(dto);
+        //String json = new Gson().toJson(dto);
+
+        Gson gson = new GsonBuilder()
+                .registerTypeAdapter(UserSocketDto.class, new UserSocketSerializer())
+                .create();
 
         response.setContentType("application/json");
         //response.setContentType("text/html");
         response.setCharacterEncoding("UTF-8");
-        response.getWriter().write(json);
+        response.getWriter().write(gson.toJson(dto));
     }
 }

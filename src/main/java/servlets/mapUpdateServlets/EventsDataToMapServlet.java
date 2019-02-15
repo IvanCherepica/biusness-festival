@@ -1,11 +1,15 @@
 package servlets.mapUpdateServlets;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import dto.EventListDto;
 import dto.UserSocketDto;
 import models.Event;
 import models.EventPoint;
 import services.implementation.EventPoinServiceImpl;
 import services.implementation.EventServiceImpl;
+import util.EventListDtoSerealiser;
+import util.UserSocketSerializer;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,6 +21,9 @@ import java.util.List;
 
 @WebServlet("/map/data_for_eventPointList")
 public class EventsDataToMapServlet extends HttpServlet {
+    private EventPoinServiceImpl eventPoinService = EventPoinServiceImpl.getInstance();
+    private EventServiceImpl eventService = EventServiceImpl.getInstance();
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
@@ -24,13 +31,13 @@ public class EventsDataToMapServlet extends HttpServlet {
         String eventPointID = request.getParameter("eventPoint_id");
         List<Event> events = null;
         EventPoint eventPoint = null;
-        EventPoinServiceImpl eventPoinService = EventPoinServiceImpl.getInstance();
+
 
 
         if (eventPointID != null) {
             Long eventPointIdL = Long.parseLong(eventPointID);
-            events = EventServiceImpl.getInstance().getAllByEventPoint(eventPointIdL);
-            eventPoint = EventPoinServiceImpl.getInstance().getById(eventPointIdL);
+            events = eventService.getAllByEventPoint(eventPointIdL);
+            eventPoint = eventPoinService.getById(eventPointIdL);
         } else {
             events = EventServiceImpl.getInstance().getAllList();
         }
@@ -41,16 +48,22 @@ public class EventsDataToMapServlet extends HttpServlet {
 //        for (Object currentEventPoint : eventPoints) {
 //            eventPointsGson = new Gson().toJson((EventPoint)currentEventPoint);
 //        }
-        UserSocketDto userSocketDto = new UserSocketDto();
-        userSocketDto.setEventPoint(eventPoint);
-        userSocketDto.setEventList(events);
+        EventListDto eventListDto = new EventListDto();
+        eventListDto.setEventPoinName(eventPoint.getName());
+        eventListDto.setEventPoinDescription(eventPoint.getDescription());
+        eventListDto.setEventList(events);
+
 
 //        eventPointsGson = new Gson().toJson(eventPoints);
 //        userSocketDto.setEventPointsGson(eventPointsGson);
 
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
-        String gson = new Gson().toJson(userSocketDto);
-        response.getWriter().write(gson);
+
+        Gson gson = new GsonBuilder()
+                .registerTypeAdapter(EventListDto.class, new EventListDtoSerealiser())
+                .create();
+
+        response.getWriter().write(gson.toJson(eventListDto));
     }
 }
