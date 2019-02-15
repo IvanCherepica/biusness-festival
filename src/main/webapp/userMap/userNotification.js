@@ -163,35 +163,45 @@ function processDataForFestivalBlock(event, eventspoints) {
     }
 }
 
+//----------------------------------------------------------------------------------------------------------------
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+//НЕ УДАЛЯТЬ! НЕ УДАЛЯТЬ! НЕ УДАЛЯТЬ! НЕ УДАЛЯТЬ! НЕ УДАЛЯТЬ! НЕ УДАЛЯТЬ! НЕ УДАЛЯТЬ!
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+//----------------------------------------------------------------------------------------------------------------
+// window.setInterval(function(){
+//     $.ajax({
+//         url: "/user/get_coordinats_to_client",
+//         method: "get",
+//         async: true,
+//         error: function(message) {
+//             console.log(message);
+//         },
+//         success: function(data) {
+//             console.log("Take it! " + data.longitudeX + " " + data.latitudeY);
+//             myMap.geoObjects.remove(myPlacemark);
+//             myPlacemark = new ymaps.Placemark([data.longitudeX, data.latitudeY], {
+//                 hitContent: 'Hello',
+//                 balloonContent: 'It is you'
+//             }, {
+//                 iconLayout: 'default#image',
+//                 iconImageHref: 'http://thebestapp.ru/wp-content/uploads/2016/07/Location_marker@2x.png',
+//                 iconImageSize: [32, 32],
+//                 iconImageOffset: [-15, -15]
+//             });
+//             // добавляем метку на карту
+//             myMap.geoObjects.add(myPlacemark);
+//
+//             //myMap.setCenter([Number(data.longitudeX), Number(data.latitudeY)], 17, {checkZoomRange: true});
+//         }
+//     });
+//     console.log("server, give mi coordinats!");
+// }, 10000);
+//
+//----------------------------------------------------------------------------------------------------------------
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+//----------------------------------------------------------------------------------------------------------------
 
-window.setInterval(function(){
-    $.ajax({
-        url: "/user/get_coordinats_to_client",
-        method: "get",
-        async: true,
-        error: function(message) {
-            console.log(message);
-        },
-        success: function(data) {
-            console.log("Take it! " + data.longitudeX + " " + data.latitudeY);
-            myMap.geoObjects.remove(myPlacemark);
-            myPlacemark = new ymaps.Placemark([data.longitudeX, data.latitudeY], {
-                hitContent: 'Hello',
-                balloonContent: 'It is you'
-            }, {
-                iconLayout: 'default#image',
-                iconImageHref: 'http://thebestapp.ru/wp-content/uploads/2016/07/Location_marker@2x.png',
-                iconImageSize: [32, 32],
-                iconImageOffset: [-15, -15]
-            });
-            // добавляем метку на карту
-            myMap.geoObjects.add(myPlacemark);
-
-            //myMap.setCenter([Number(data.longitudeX), Number(data.latitudeY)], 17, {checkZoomRange: true});
-        }
-    });
-    console.log("server, give mi coordinats!");
-}, 10000);
 
 //send message to server with user coordinates
 function sendMessage(webSocketClient) {
