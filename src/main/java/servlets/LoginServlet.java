@@ -22,7 +22,7 @@ public class LoginServlet extends HttpServlet {
     private UserSessionService userSessionService = UserSessionService.getInstance();
     private boolean isInvalid;
     private boolean isPass;
-    private boolean regSucces;
+
     public LoginServlet() throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
     }
 
@@ -30,13 +30,7 @@ public class LoginServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException { response.setContentType("text/html");
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;UTF-8");
-        String succes = request.getParameter("regSucces");
-        if (succes !=null){
-            regSucces=true;
-            isInvalid=false;
-            isPass=false;
-        }
-        request.setAttribute("regSucces",regSucces);
+
         request.setAttribute("isInvalid",isInvalid);
         request.setAttribute("isPass", isPass);
 

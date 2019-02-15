@@ -27,11 +27,9 @@
                         <input type="submit" class="btn btn-primary btn-block" value="Войти"/>
                     </div>
                 </form>
-                <c:if test="${!regSucces}">
                     <form action="${pageContext.request.contextPath}/registration" method="GET">
                         <input type="submit" class="btn btn-primary btn-block" value="Зарегистрироваться"/>
                     </form>
-                </c:if>
                 <br>
                 <c:if test="${isInvalid}">
                     <div id="login-message" class="alert alert-danger">
