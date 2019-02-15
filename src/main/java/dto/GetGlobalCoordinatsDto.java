@@ -1,22 +1,29 @@
 package dto;
 
 public class GetGlobalCoordinatsDto {
-    private double longitudeX;
-    private double latitudeY;
 
-    public double getLongitudeX() {
-        return longitudeX;
+    //x - latitude, y - longitude
+
+    private double latitudeX;
+    private double longitudeY;
+
+
+    public double getLatitudeX() {
+        return latitudeX;
     }
 
-    public void setLongitudeX(double longitudeX) {
-        this.longitudeX = longitudeX;
+    public void setLatitudeX(double latitudeX) {
+        this.latitudeX = latitudeX;
     }
 
-    public double getLatitudeY() {
-        return latitudeY;
+
+    public double getLongitudeY() {
+        return longitudeY;
     }
 
-    public void setLatitudeY(double latitudeY) {
-        this.latitudeY = latitudeY;
+    public void setLongitudeY(double longitudeY) {
+        this.longitudeY = longitudeY;
     }
+
+
 }
