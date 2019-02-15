@@ -21,6 +21,8 @@ public class FestivalDataToMapSerealializer implements JsonSerializer<FestivalDa
         festivalDataJson.addProperty("id",src.getFestival().getId());
         festivalDataJson.addProperty("name",src.getFestival().getName());
         festivalDataJson.addProperty("description",src.getFestival().getDescription());
+        festivalDataJson.addProperty("coordinates",src.getFestival().getCenter());
+
 
         //festivalDataJson.add("festival",festivalJson);
 

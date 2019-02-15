@@ -32,8 +32,8 @@ To change this template use File | Settings | File Templates.
         .informUser {
             border-radius: 20px;
             position: absolute;
-            width: 300px;
-            height: 293px;
+            width: 0;
+            /*height: 0px;*/
             right: 10px;
             padding: 10px;
             background: #D3D4DA;
@@ -43,18 +43,6 @@ To change this template use File | Settings | File Templates.
             color: #292929;
         }
 
-        #userBlock{
-            border-radius: 20px;
-            text-align: center;
-            position: initial;
-            width: initial;
-            height: initial;
-            right: 10px;
-            z-index: 2001;
-            opacity: 1;
-            background: #ffffff;
-            height: 270px;
-        }
         #festivalBlock {
             border-radius: 20px;
             text-align: center;
@@ -64,8 +52,8 @@ To change this template use File | Settings | File Templates.
             z-index: 2003;
             opacity: 1;
             background: #eeeeee;
-            height: 0px;
-            margin: 20px 0 0 0;
+            max-height: 800px;
+            margin: 5px 0 0 0;
         }
 
         #events{
@@ -82,6 +70,7 @@ To change this template use File | Settings | File Templates.
             text-shadow: 0 1px 0 rgba(255,255,255,.5);
         }
         .rectangle a {
+            border-radius: 20px;
             position: relative;
             display: block;
             padding: .4em .4em .4em .8em;
@@ -124,15 +113,13 @@ To change this template use File | Settings | File Templates.
 </head>
 <body>
 <div class="main">
+
     <div id="informUserBlock" class="informUser">
-        <div id="userBlock">
-            <div id="userImage"></div>
-            <div id="userLg"></div>
-        </div>
-        <div id="festivalBlock">
-            <p id="festivalInfo1"></p>
-            <p id="festivalInfo2"></p>
-            <div>
+        <div style="overflow-y: scroll;" id="festivalBlock">
+            <br>
+            <h3 style="margin-top: 10px" id="festivalInfo1"></h3>
+            <h5 id="festivalInfo2"></h5>
+            <div style="margin-bottom: 20px">
                 <ol id="events" class="rectangle">
                 </ol>
             </div>
