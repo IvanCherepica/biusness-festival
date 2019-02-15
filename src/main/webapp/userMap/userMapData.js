@@ -1,17 +1,18 @@
 
 function getDataForFestival(fesivalId) {
-    // $.ajax({
-    //         url: "/user/data_for_festival",
-    //         method: "post",
-    //         async: true,
-    //         data: {fesivalId: fesivalId},
-    //         error: function(message) {
-    //             console.log(message);
-    //         },
-    //         success: function(data) {
-    //             processDataForFestivalBlock(event, eventspoints);
-    //         }
-    //     });
+    $.ajax({
+            url: "/user/data_for_festival",
+            method: "get",
+            async: true,
+            data: {fesivalId: fesivalId},
+            error: function(message) {
+                console.log(message);
+            },
+            success: function(data) {
+                console.log(data);
+                //processDataForFestivalBlock(event, eventspoints);
+            }
+        });
 
 }
 
