@@ -5,6 +5,13 @@ var isInFestival;
 var festival;
 var user;
 
+
+var userX;
+var userY;
+var webSocketClient;
+
+//getPositionTimeless();
+
 // get request for user name and id
 $.ajax({
     url: "/rest/userdata",
@@ -35,24 +42,34 @@ $.ajax({
 
 //connect to server
 function connect() {
-    var webSocketClient = new WebSocket("ws://localhost:8080/compareLocations");
+    webSocketClient = new WebSocket("wss://8964a519.ngrok.io/compareLocations");
+
     webSocketClient.onopen = function (event) {
-        console.log("onopen " );
-        sendMessage(webSocketClient);
+        console.log("onopen. event=" + event );
+        MyWatchPosition(SendCoordinates);
         };
+
     webSocketClient.onmessage = function (event) {
-            var messageToUser = JSON.parse(event.data).message;
+        console.log("onmessage. event=" + event );
+
+
+
+        var messageToUser = JSON.parse(event.data).message;
             processDataForFestivalBlock(event, festivalEvents);
+
             if (messageToUser.localeCompare("") != 0 ) {
                 sendWelcomMessage(messageToUser);
             }
-            var messaaaage = "dsdsdsdsds";
-            sendMessage(webSocketClient);
+
+            //MyWatchPosition(SendCoordinates);
+
         };
+
     webSocketClient.onclose = function (event) {
-            console.log("close");
+            console.log("onclose. event" + event);
             connect();
         }
+
     webSocketClient.onerror = function (event) {
         console.log("error " + event);
 
@@ -65,19 +82,29 @@ function sendWelcomMessage(message) {
 }
 
 
+function SendCoordinates(xxx, yyy) {
+
+    var message = '{ "coordinates": "' + xxx + " " + yyy + '", "userName" : "' +  userName + '", "userID" : "' + userID + '"}';
+    console.log("webSocketClient.onmessage=" + message);
+    newPlacemark(myMap, xxx, yyy);
+    webSocketClient.send(message);
+};
+
+
 function newPlacemark(myMap, x ,y) {
     if (myMap != undefined) {
 
-        myMap.geoObjects.remove(myPlacemark);
+        if (myPlacemark != undefined) myMap.geoObjects.remove(myPlacemark);
+
         //обновляем местоположение метки
         myPlacemark = new ymaps.Placemark([x, y], {
             hitContent: 'Hello',
             balloonContent: 'It is you'
         }, {
-            iconLayout: 'default#image',
-            iconImageHref: 'http://thebestapp.ru/wp-content/uploads/2016/07/Location_marker@2x.png',
-            iconImageSize: [32, 32],
-            iconImageOffset: [-15, -15]
+            iconLayout: 'default#image'
+            //iconImageHref: 'http://thebestapp.ru/wp-content/uploads/2016/07/Location_marker@2x.png',
+            //iconImageSize: [32, 32],
+            //iconImageOffset: [-15, -15]
         });
         // добавляем метку на карту
         myMap.geoObjects.add(myPlacemark);
@@ -163,18 +190,45 @@ function processDataForFestivalBlock(event, eventspoints) {
     }
 }
 
-//send message to server with user coordinates
-function sendMessage(webSocketClient) {
-    navigator.geolocation.watchPosition(function (position) {
-        userX = position.coords.latitude;
-        userY = position.coords.longitude;
 
-        var message = '{ "coordinates": "' + userX + " " + userY + '", "userName" : "' +  userName + '", "userID" : "' + userID + '"}';
-        //var jsonObj = {"x" : userX, "y" : userY};
-        //webSocketClient.send(JSON.stringify(jsonObj));
-        webSocketClient.send(message);
-        newPlacemark(myMap, userX, userY);
-    });
+
+
+function MyWatchPosition(callback) {
+    console.log("MyWatchPosition...")
+
+    var options = {
+        timeout: 5000, // timeout at 60000 milliseconds (60 seconds)
+        enableHighAccuracy: true,
+        maximumAge: 0
+    };
+    //https://developer.mozilla.org/en-US/docs/Web/API/PositionOptions
+
+
+
+    navigator.geolocation.watchPosition(function (position) {
+        x = position.coords.latitude;
+        y = position.coords.longitude;
+
+        userX = x;
+        userY = y;
+
+        console.log(x, y);
+
+        SendCoordinates(x, y);
+
+        //if (callback != undefined) callback(x, y);
+
+
+    }, function (err) {
+            console.log(err);
+            if(err.code == 1) {
+                alert("Error: Access is denied!");
+            } else if( err.code == 2) {
+                alert("Error: Position is unavailable!");
+            }
+        },
+        options
+    );
 
 
 }

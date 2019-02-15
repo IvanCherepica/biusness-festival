@@ -52,7 +52,7 @@ public class LocationWebSocketServlet {
         }
 
         @OnMessage
-        public void onMessage(String message, Session userSession) throws Throwable {
+        public void onMessage(String message, Session userSession)  {
             System.out.println("Message Received: " + message);
 //            JSONObject obj = new JSONObject(message);
 //            String userName = obj.getJSONObject("userName").getString("userName");
@@ -133,7 +133,8 @@ public class LocationWebSocketServlet {
         }
 
         @OnError
-        public void onError(Throwable t) throws Throwable {
+        public void onError(Throwable t) {
+            System.out.println("onError ");
             //TODO
         }
 
@@ -149,6 +150,9 @@ public class LocationWebSocketServlet {
             double sum = dx2 + dy2;
             double sqrt = Math.sqrt(sum);
             double meters = sqrt*100000;
+
+            System.out.println("distance=" + meters);
+
             return meters - festival.getRadius()<=0;
         }
 
