@@ -46,12 +46,12 @@ function connect() {
             if (messageToUser.localeCompare("") != 0 ) {
                 sendWelcomMessage(messageToUser);
             }
-            var messaaaage = "dsdsdsdsds";
+
             sendMessage(webSocketClient);
         };
     webSocketClient.onclose = function (event) {
             console.log("close");
-            connect();
+            //connect();
         }
     webSocketClient.onerror = function (event) {
         console.log("error " + event);

@@ -25,37 +25,28 @@ public class LocationWebSocketServlet {
 
         private FestivalService festivalService = FestivalServiceImpl.getInstance();
 
+        private UserSessionService userSessionService = UserSessionService.getInstance();
+
         private String point;
 
-    public LocationWebSocketServlet() throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
-    }
-//        private Festival festival = new Festival("Test", "Testing", "Red" ,
-//            "Some", "60.11173060613703 30.267900556923905", 75);
-
-         //список сессий
-//        private Set<Session> userSessions = Collections.synchronizedSet(new HashSet<Session>());
-
-
+        public LocationWebSocketServlet() throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
+        }
 
         @OnOpen
         public void start(Session userSession) {
             System.out.println("Connected user:" + userSession.getId());
-            //userSessions.add(userSession);
-//            LocationWedSocketService.getInstance().setUserSessions(userSession);
+
         }
 
         @OnClose
         public void onClose(Session userSession) {
-//            userSessions.remove(userSession);
-//            LocationWedSocketService.getInstance().removeUserSession(userSession);
+
             System.out.println("Disconnect user:" + userSession.getId());
         }
 
         @OnMessage
         public void onMessage(String message, Session userSession) throws Throwable {
             System.out.println("Message Received: " + message);
-//            JSONObject obj = new JSONObject(message);
-//            String userName = obj.getJSONObject("userName").getString("userName");
 
             //разбираем данные из JSON строки
             GsonBuilder gsonBuilder = new GsonBuilder();
@@ -67,7 +58,7 @@ public class LocationWebSocketServlet {
             point = userServerDto.getCoordinates();
 
             //find user http session
-            UserSessionService userSessionService = UserSessionService.getInstance();
+
             HttpSession userHttpSession = userSessionService.getUserSession(userID);
             boolean isInFestivalOld = Boolean.parseBoolean((String) userHttpSession.getAttribute("userInFestival"));
 
@@ -105,7 +96,11 @@ public class LocationWebSocketServlet {
 
 
             if (!isInFestivalOld && isInFestivalNew) {
+
+
+
                 dto.setMessage("Wellcome to " + usersActivFestival.getName() + "! \n" + usersActivFestival.getDescription());
+
             }
 
             try {
@@ -127,9 +122,6 @@ public class LocationWebSocketServlet {
             }
             userHttpSession.setAttribute("userInFestival",Boolean.toString(isInFestivalNew));
 
-
-//            sendRequestToUpdate(userSession);
-//            LocationWedSocketService.getInstance().sendRequestToUpdate(message, userSession);
         }
 
         @OnError
