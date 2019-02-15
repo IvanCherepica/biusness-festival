@@ -40,17 +40,17 @@ public class Event {
 	@JoinColumn(name = "festival_id")
 	private Festival festival;
 
-	@Column(name = "date_begin", columnDefinition="TIMESTAMP")
-    @Expose
-	@SerializedName("date_begin")
-	@Convert(converter = LocalDateTimeAttributeConverter.class)
-	private LocalDateTime dateBegin = LocalDateTime.now();
-
-    @Expose
-	@Column(name = "date_end", columnDefinition="TIMESTAMP")
-	@SerializedName("date_end")
-	@Convert(converter = LocalDateTimeAttributeConverter.class)
-	private LocalDateTime dateEnd = LocalDateTime.now();
+//	@Column(name = "date_begin", columnDefinition="TIMESTAMP")
+//    @Expose
+//	@SerializedName("date_begin")
+//	@Convert(converter = LocalDateTimeAttributeConverter.class)
+//	private LocalDateTime dateBegin = LocalDateTime.now();
+//
+//    @Expose
+//	@Column(name = "date_end", columnDefinition="TIMESTAMP")
+//	@SerializedName("date_end")
+//	@Convert(converter = LocalDateTimeAttributeConverter.class)
+//	private LocalDateTime dateEnd = LocalDateTime.now();
 
 	@Expose
 	@ManyToMany(fetch= FetchType.EAGER, targetEntity = User.class)
@@ -118,19 +118,19 @@ public class Event {
 		this.festival = festival;
 	}
 
-	public LocalDateTime getDateBegin () {
-		return dateBegin;
-	}
-	public void setDateBegin (LocalDateTime dateBegin) {
-		this.dateBegin = dateBegin;
-	}
-
-	public LocalDateTime getDateEnd () {
-		return dateEnd;
-	}
-	public void setDateEnd (LocalDateTime dateEnd) {
-		this.dateEnd = dateEnd;
-	}
+//	public LocalDateTime getDateBegin () {
+//		return dateBegin;
+//	}
+//	public void setDateBegin (LocalDateTime dateBegin) {
+//		this.dateBegin = dateBegin;
+//	}
+//
+//	public LocalDateTime getDateEnd () {
+//		return dateEnd;
+//	}
+//	public void setDateEnd (LocalDateTime dateEnd) {
+//		this.dateEnd = dateEnd;
+//	}
 
 	@Override
 	public String toString () {
@@ -139,8 +139,8 @@ public class Event {
 				", name='" + name + '\'' +
 				", description='" + description + '\'' +
 				", eventPoint='" + eventPoint + '\'' +
-				", beginDate='" + dateBegin + '\'' +
-				", endDate='"+ dateEnd + '\'' +
+//				", beginDate='" + dateBegin + '\'' +
+//				", endDate='"+ dateEnd + '\'' +
 				'}';
 	}
 
@@ -154,8 +154,8 @@ public class Event {
         if (id != event.id) return false;
         if (name != null ? !name.equals(event.name) : event.name != null) return false;
         if (description != null ? !description.equals(event.description) : event.description != null) return false;
-        if (dateBegin != null ? !dateBegin.equals(event.dateBegin) : event.dateBegin != null) return false;
-        if (dateEnd != null ? !dateEnd.equals(event.dateEnd) : event.dateEnd != null) return false;
+//        if (dateBegin != null ? !dateBegin.equals(event.dateBegin) : event.dateBegin != null) return false;
+//        if (dateEnd != null ? !dateEnd.equals(event.dateEnd) : event.dateEnd != null) return false;
         return true;
     }
 
@@ -164,8 +164,8 @@ public class Event {
         int result = (int) (id ^ (id >>> 32));
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
-        result = 31 * result + (dateBegin != null ? dateBegin.hashCode() : 0);
-        result = 31 * result + (dateEnd != null ? dateEnd.hashCode() : 0);
+//        result = 31 * result + (dateBegin != null ? dateBegin.hashCode() : 0);
+//        result = 31 * result + (dateEnd != null ? dateEnd.hashCode() : 0);
         return result;
     }
 
