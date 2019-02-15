@@ -1,10 +1,12 @@
 
 
 var userPlaceMark;
-
+var userCurrentFestivalId;
 
 
 function startUsersHandler() {
+
+    userCurrentFestivalId = -1;
 
     window.setInterval(function(){
         console.log("[adminMapUsersHandler.js] Server, give me user`s coordinates!");
@@ -19,8 +21,19 @@ function startUsersHandler() {
             success: function(data) {
                 //x - latitude, y - longitude
 
-                console.log("[adminMapUsersHandler.js] Received: " + "latitude(x)=" + data.latitudeX + " longitude(y)=" + data.longitudeY);
                 updateUserPlaceMark(data.latitudeX, data.longitudeY);
+
+                var isNeedToInform = false;
+
+                if (userCurrentFestivalId != data.userCurrentFestivalId){
+                    isNeedToInform =  true;
+                    userCurrentFestivalId = data.userCurrentFestivalId;
+                }
+
+                console.log("[adminMapUsersHandler.js] userCurrentFestivalId: " + data.userCurrentFestivalId + " isNeedToInform: " + isNeedToInform);
+                console.log("[adminMapUsersHandler.js] Received: " + "latitude(x)=" + data.latitudeX + " longitude(y)=" + data.longitudeY);
+
+                if (isNeedToInform) alert("AAAAAAAAAAAAA");
             }
         });
 

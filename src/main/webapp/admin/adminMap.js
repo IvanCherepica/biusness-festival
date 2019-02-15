@@ -76,11 +76,14 @@ function DrawMapUnits(arrayOfMapUnits){
         myMap.geoObjects.add(myPolygon);
 
 
+        // var xc = mapObject.center.substr(0,str.indexOf(' '));
+        //
+        // console.log(xc);
 
 
         // var myCircle = new ymaps.Circle([
         //     // Координаты центра круга.
-        //     JSON.parse(mapObject.geometry),
+        //     JSON.parse(mapObject.center),
         //     // Радиус круга в метрах.
         //     10000
         // ], {

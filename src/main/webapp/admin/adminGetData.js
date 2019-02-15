@@ -45,7 +45,7 @@ function GetUserForAdmin(callback) {
     // get request for user name and id
     console.log("[GetData] UserData recieving...");
     $.ajax({
-        url: "/rest/userdata",
+        url: "/rest/userdata", //TODO
         method: "get",
         async: true,
         error: function(message) {
