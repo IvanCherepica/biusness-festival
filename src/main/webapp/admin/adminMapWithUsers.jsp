@@ -22,11 +22,15 @@
     </div>
 
     <script type="text/javascript">
-        <%@include file="adminMap.js" %>
+        <%@include file="/admin/adminGetData.js" %>
     </script>
 
     <script type="text/javascript">
-        <%@include file="adminMapUsersHandler.js" %>
+        <%@include file="/admin/adminMap.js" %>
+    </script>
+
+    <script type="text/javascript">
+        <%@include file="/admin/adminMapUsersHandler.js" %>
     </script>
 
     <script>
