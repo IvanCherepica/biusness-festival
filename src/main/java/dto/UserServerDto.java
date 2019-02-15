@@ -8,14 +8,14 @@ public class UserServerDto {
 
     //private boolean isInFestival;
 
-//    private String userName;
-//
+    private String userName;
+
     private Long id;
 
     public UserServerDto(String coordinates, String userName, Long id) {
         this.coordinates = coordinates;
-//        this.userName = userName;
-//        this.id = id;
+        this.userName = userName;
+        this.id = id;
     }
 
     public UserServerDto() {
@@ -30,14 +30,14 @@ public class UserServerDto {
         this.coordinates = coordinates;
     }
 
-//    public String getUserName() {
-//        return userName;
-//    }
-//
-//    public void setUserName(String userName) {
-//        this.userName = userName;
-//    }
-//
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
     public Long getId() {
         return id;
     }

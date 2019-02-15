@@ -13,15 +13,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     <script type="text/javascript">
-        <%@include file="userMapData.js" %>
-    </script>
-    <script type="text/javascript">
         <%@include file="userNotification.js" %>
     </script>
     <script type="text/javascript">
         <%@include file="poligonActions.js" %>
     </script>
-
     <style>
         .check-material input[type="checkbox"]{display:none}
         .check-material input[type="checkbox"]:checked + label{background:#009688;border-color:#009688}
@@ -90,7 +86,7 @@
                     myMap.geoObjects.add(myPlacemark);
                 }
 
-                if (webSocketClient != undefined && userName!= undefined && userID != undefined) {
+                if (webSocketClient != undefined) {
                     var message = '{ "coordinates": "' + x + " " + y + '", "userName" : "' +  userName + '", "userID" : "' + userID + '"}';
                     console.log("send to server: " + message);
                     //var jsonObj = {"x" : userX, "y" : userY};
