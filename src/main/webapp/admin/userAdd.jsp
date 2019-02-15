@@ -44,15 +44,13 @@
                 <form action="${pageContext.request.contextPath}/admin/addUser" method="POST">
                     <div class="form-group edit-group">
 
-                        <label for="name">Name</label>
-                        <input type="text" class="form-control" id="name" name="name"
-                               placeholder="${user.name}">
+                        <label for="name">Имя</label>
+                        <input type="text" class="form-control" id="name" name="name">
 
-                        <label for="password">Password</label>
-                        <input class="form-control" id="password" rows="3" name="password"
-                                  placeholder="${user.password}">
+                        <label for="password">Пароль</label>
+                        <input class="form-control" id="password" rows="3" name="password">
 
-                        <label for="role">Role</label>
+                        <label for="role">Роль</label>
                         <select class="form-control" id="role" rows="2" name="role"
                                   placeholder="${user.role}">
                             <option>user</option>
