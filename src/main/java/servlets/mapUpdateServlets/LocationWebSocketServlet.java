@@ -38,10 +38,14 @@ public class LocationWebSocketServlet {
         public void start(Session userSession) {
             System.out.println("Connected user: " + userSession.getId());
 
+
+            geoDataHolder.setCurrentFestivalId(0);
         }
 
         @OnClose
         public void onClose(Session userSession) {
+            geoDataHolder.setCurrentFestivalId(0);
+
 
             System.out.println("Disconnect user:" + userSession.getId());
         }
@@ -62,16 +66,12 @@ public class LocationWebSocketServlet {
 
             //String userName = userServerDto.getUserName();
             Long userID = userServerDto.getId();
+            String point = userServerDto.getCoordinates();
 
 
-            String point;
-
-            point = userServerDto.getCoordinates();
             double[] userCoords = getCoordinates(point);
-
             geoDataHolder.setLatitude(userCoords[0]);
             geoDataHolder.setLongitude(userCoords[1]);
-
 
             //find user http session
 
@@ -87,6 +87,9 @@ public class LocationWebSocketServlet {
 
             if (isInFestivalOld) {
                 currentFestivalID = Long.parseLong((String) userHttpSession.getAttribute("currentFestivalID"));
+
+                geoDataHolder.setCurrentFestivalId(currentFestivalID);
+
                 Festival currentFestivale = festivalService.getById(currentFestivalID);
                 isInFestivalNew =  isInUnit(point,currentFestivale);
                 if (isInFestivalNew) {

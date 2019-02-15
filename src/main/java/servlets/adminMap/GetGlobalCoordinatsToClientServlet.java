@@ -23,10 +23,13 @@ public class GetGlobalCoordinatsToClientServlet  extends HttpServlet {
 
         double longitudeY = geoDataHolder.getLongitude();
         double latitudeX = geoDataHolder.getLatitude();
+        long currentUserFestivalId = geoDataHolder.getCurrentFestivalId();
+
 
         GetGlobalCoordinatsDto dto = new GetGlobalCoordinatsDto();
         dto.setLongitudeY(longitudeY);
         dto.setLatitudeX(latitudeX);
+        dto.setUserCurrentFestivalId(currentUserFestivalId);
 
         String json = new Gson().toJson(dto);
 

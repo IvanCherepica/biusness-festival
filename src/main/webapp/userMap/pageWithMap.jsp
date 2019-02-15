@@ -42,7 +42,7 @@
 
         // get запрос GeometryServlet, get user data
         $.ajax({
-            url: "/rest/geometry",
+            url: "/rest/geometry/get-all-festivals",
             method: "get",
             async: true,
             error: function (message) {

@@ -73,7 +73,7 @@ function moveMapCentrToPoint(centr, eventPoinID) {
 
 
 function GetEventPoints(){
-    console.log("[GetData] Receiving event points...");
+    console.log("[poligonActions.js] Receiving event points...");
 
 
     // get запрос EventPointToMapServlet
@@ -86,7 +86,7 @@ function GetEventPoints(){
         },
         success: function (data) {
 
-            console.log("[GetData] EventPoints received. Count=" + data.length);
+            console.log("[poligonActions.js] EventPoints received. Count=" + data.length);
             festivalEvents = data;
             DrawMapUnits(data);
         }
@@ -94,7 +94,7 @@ function GetEventPoints(){
 }
 
 function GetEventPointsForFesival(festival_id){
-    console.log("[GetData] Receiving event points...");
+    console.log("[poligonActions.js] Receiving event points...");
 
     // get запрос EventPointToMapServlet
     $.ajax({
@@ -107,7 +107,7 @@ function GetEventPointsForFesival(festival_id){
         },
         success: function (data) {
 
-            console.log("[GetData] EventPoints received. Count=" + data.length);
+            console.log("[poligonActions.js] EventPoints received. Count=" + data.length);
 
             openListOfFesivalEventPoints(data,festival_id);
 
@@ -120,8 +120,8 @@ function DrawMapUnits(arrayOfMapUnits){
 
         var mapObject = arrayOfMapUnits[i];
 
-        console.log("[PageWithMap] DrawMapUnit: name: " +mapObject.name + " fillColor: " + mapObject.color);
-        console.log("[PageWithMap] DrawMapUnit: geometry: " + mapObject.geometry);
+        console.log("[poligonActions.js] DrawMapUnit: name: " +mapObject.name + " fillColor: " + mapObject.color);
+        console.log("[poligonActions.js] DrawMapUnit: geometry: " + mapObject.geometry);
 
 
         // объект геометрицесской фигуры
@@ -161,7 +161,7 @@ function eventPointsOnClick(event) {
 }
 
 function GetEventsForEventPoint(eventPoint_id){
-    console.log("[GetData] Receiving event points...");
+    console.log("[poligonActions.js] Receiving event points...");
 
     // get запрос EventPointToMapServlet
     $.ajax({
@@ -174,7 +174,7 @@ function GetEventsForEventPoint(eventPoint_id){
         },
         success: function (data) {
 
-            console.log("[GetData] EventPoints received. Count=" + data.length);
+            console.log("[poligonActions.js] EventPoints received. Count=" + data.length);
 
             openListOfEventPointsEvents(data,eventPoint_id);
 
