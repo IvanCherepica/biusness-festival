@@ -11,8 +11,8 @@
     <title>Фестивали</title>
 
     <link rel="stylesheet" href="https://bootswatch.com/3/united/bootstrap.min.css">
-    <style>
-        <jsp:include page="/admin/dashboard.jsp"/>
+    <style type="text/css">
+        <%@ include file="/css/dashboard.css" %>
     </style>
 </head>
 
@@ -54,7 +54,7 @@
                     </thead>
 
                     <tbody>
-                    <c:forEach var="festival" items="${FestivalsList}">
+                        <c:forEach var="festival" items="${FestivalsList}">
                         <tr>
                             <td width="5%" scope="row">${festival.id}</td>
                             <td width="15%">${festival.name}</td>

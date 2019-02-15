@@ -31,7 +31,7 @@ public class EditFestivalServlet extends HttpServlet {
 	private final HotPointService hotPointService =  HotPointServiceImpl.getInstance();
 	private final EventService eventService =  EventServiceImpl.getInstance();
 
-	public EditFestivalServlet() throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
+	public EditFestivalServlet() {
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -56,7 +56,7 @@ public class EditFestivalServlet extends HttpServlet {
 			request.setAttribute("hotPointList", hotPoints);
 			request.setAttribute("eventList", events);
 		}
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/editFestival.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/admin/festivalEdit.jsp");
 		dispatcher.forward(request, response);
 	}
 	

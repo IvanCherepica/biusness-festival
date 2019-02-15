@@ -40,7 +40,7 @@ public class EditEventServlet extends HttpServlet {
 //			request.setAttribute("eventPointsList", eventPoints);
 //			request.setAttribute("hotPointList", hotPoints);
 //		}
-//		RequestDispatcher dispatcher = request.getRequestDispatcher("/editFestival.jsp");
+//		RequestDispatcher dispatcher = request.getRequestDispatcher("/admin/festivalEdit.jsp");
 //		dispatcher.forward(request, response);
 	}
 	
@@ -80,7 +80,7 @@ public class EditEventServlet extends HttpServlet {
 			
 			eventService.update(event);
 
-			response.sendRedirect("/admin/editFestival?festivalId="+festivalId);
+			//response.sendRedirect("/admin/editFestival?festivalId="+festivalId);
 		} catch (HibernateException | NumberFormatException e) {
 			response.sendRedirect("/error.html");
 		}

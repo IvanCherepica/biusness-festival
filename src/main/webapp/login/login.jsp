@@ -5,7 +5,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Login page</title>
+    <title>Festival Map</title>
     <link rel="stylesheet" href="https://bootswatch.com/3/united/bootstrap.min.css" >
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 </head>
@@ -18,13 +18,13 @@
                 <h2 style="text-align: center;">Добро пожаловать</h2>
                 <form action="${pageContext.request.contextPath}/login" method="POST">
                     <div class="form-group login-group">
-                        <input type="text" class="form-control" id="uName" name="login" placeholder="Login"
+                        <input type="text" class="form-control" id="uName" name="login" placeholder="Логин"
                                required/>
                         <br>
                         <input type="password" class="form-control" type="text" id="uPass" name="password"
-                               required placeholder="Password" required/>
+                               required placeholder="Пароль" required/>
                         <br>
-                        <input type="submit" class="btn btn-primary btn-block" value="Sign in"/>
+                        <input type="submit" class="btn btn-primary btn-block" value="Войти"/>
                     </div>
                 </form>
                 <c:if test="${!regSucces}">
