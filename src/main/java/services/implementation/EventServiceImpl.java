@@ -4,6 +4,7 @@ import dao.SessionFactoryHolder;
 import dao.abstraction.EventDAO;
 import dao.implementation.EventDAOImpl;
 import models.Event;
+import models.EventPoint;
 import services.abstraction.EventService;
 
 import java.util.List;
@@ -74,5 +75,6 @@ public class EventServiceImpl implements EventService {
 	public void addRemoveEventFromUser (Long userID, Long eventID) {
 		eventDAO.addRemoveEventFromUser(userID,eventID);
 	}
+
 
 }

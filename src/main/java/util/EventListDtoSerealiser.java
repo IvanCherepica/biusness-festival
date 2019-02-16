@@ -3,11 +3,16 @@ package util;
 import com.google.gson.*;
 import dto.EventListDto;
 import models.Event;
+import services.implementation.EventServiceImpl;
+import services.implementation.UserServiceImpl;
 
 import java.lang.reflect.Type;
+import java.util.List;
 
 
 public class EventListDtoSerealiser implements JsonSerializer<EventListDto> {
+    private UserServiceImpl userService = UserServiceImpl.getInstance();
+
     @Override
     public JsonElement serialize(EventListDto src, Type typeOfSrc, JsonSerializationContext context) {
         JsonObject eventJson = new JsonObject();
@@ -18,13 +23,20 @@ public class EventListDtoSerealiser implements JsonSerializer<EventListDto> {
 
         JsonArray jsonEventsList = new JsonArray();
 
+        List<Event> userEventList = userService.getUserSchedule(src.getUserId());
+
 
         for (Event currentEvent : src.getEventList()) {
+            boolean inUserSchedule = false;
             JsonObject currentJson = new JsonObject();
+            if (userEventList.contains(currentEvent)) {
+                inUserSchedule = true;
+            }
 
             currentJson.addProperty("id",currentEvent.getId());
             currentJson.addProperty("name",currentEvent.getName());
             currentJson.addProperty("description",currentEvent.getDescription());
+            currentJson.addProperty("inUserSchedule",inUserSchedule);
 
             jsonEventsList.add(currentJson);
         }
