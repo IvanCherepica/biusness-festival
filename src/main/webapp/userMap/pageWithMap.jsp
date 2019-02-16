@@ -1,3 +1,5 @@
+<%@page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
+
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>Geoposition</title>
@@ -210,8 +212,10 @@
     </script>
 </head>
 <body >
-<div class="map" id="map" style="width: 100%; height: 100%">
-</div>
+    <div class="container-fluid">
+        <div class="map" id="map" style="width: 100%; height: 100%">
+        </div>
+    </div>
 
 <!-- Modal -->
 <div id="festival_list_Modal" class="modal fade" role="dialog">
@@ -244,6 +248,7 @@
     <%--</div>--%>
     <%--<input type='button' class='rab' value='Raise alert'>--%>
 </div>
+
 
 
 
