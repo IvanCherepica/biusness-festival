@@ -4,8 +4,7 @@
 <head>
     <title>Geoposition</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <!--<link rel="stylesheet" href="https://bootswatch.com/4/united/bootstrap.min.css" >-->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://bootswatch.com/3/united/bootstrap.min.css" >
 
     <script src="https://api-maps.yandex.ru/2.1/?apikey=e6f8dfbf-7c6d-464f-9a6a-4308cb58f188&lang=ru_RU"
             type="text/javascript">
@@ -249,7 +248,7 @@
     <%--<input type='button' class='rab' value='Raise alert'>--%>
 </div>
 
-<%@include file="toastWindow.jsp" %>
+
 
 
 </body>

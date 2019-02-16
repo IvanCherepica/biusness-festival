@@ -9,8 +9,8 @@ To change this template use File | Settings | File Templates.
 <html>
 <head>
     <title>User</title>
-    <link rel="stylesheet" href="https://bootswatch.com/3/united/bootstrap.min.css" >
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!--<link rel="stylesheet" href="https://bootswatch.com/3/united/bootstrap.min.css" >
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>-->
 
     <style>
         body {
