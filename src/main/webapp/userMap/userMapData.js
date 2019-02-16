@@ -16,6 +16,40 @@ function getDataForFestival(fesivalId) {
 
 }
 
+function getUserSchedule() {
+    $.ajax({
+        url: "/user/get_user_schedule",
+        method: "get",
+        async: true,
+        data: {userId: userID},
+        error: function(message) {
+            console.log(message);
+        },
+        success: function(data) {
+            console.log(JSON.stringify(data));
+            fillUserSchedule(data);
+        }
+    });
+
+
+}
+
+
+function fillUserSchedule(data) {
+    $("#user_schedule").empty();
+
+    $("#user_schedule").append("<table id=\"schedule_table\" class=\"table table-striped\"></table>");
+
+    $.each(data.eventsList, function (index, value) {
+
+        // $("#schedule_table").append("<tr href=\"javascript:void(0)\" onclick=\"moveMapCentrToPoint('"+ value.center + "', '"+ value.id + "')\" id='" + value.id + "' ><td>" + value.name + "</td><td>" + value.description + "</td></tr>");
+        $("#schedule_table").append("<tr id='" + value.id + "' ><td>" + value.name + "</td><td>" + value.description + "</td></tr>");
+
+    });
+
+
+}
+
 
 function processDataForFestivalBlock(data) {
     console.log(eventspoints);

@@ -244,4 +244,6 @@ function checkBoxOnClick(event,eventID) {
         }
     });
 
+    //setTimeout(getUserSchedule(),2000);
+    getUserSchedule();
 }

@@ -12,6 +12,7 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <script type="text/javascript">
         <%@include file="userMapData.js" %>
     </script>
@@ -242,5 +243,8 @@
     <%--</div>--%>
     <%--<input type='button' class='rab' value='Raise alert'>--%>
 </div>
+
+
+
 </body>
 </html>

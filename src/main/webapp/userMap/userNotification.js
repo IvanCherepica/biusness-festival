@@ -44,7 +44,7 @@ $.ajax({
 
 //connect to server
 function connect() {
-    webSocketClient = new WebSocket("wss://594d738d.ngrok.io/compareLocations");
+    webSocketClient = new WebSocket("ws://localhost:8080/compareLocations");
     webSocketClient.onopen = function (event) {
         console.log("onopen:" + event.data );
         //sendMessage(webSocketClient);
@@ -140,4 +140,6 @@ var flag = false;
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 //----------------------------------------------------------------------------------------------------------------
-
+// $(document).ready(function() {
+//     getUserSchedule();
+// });
