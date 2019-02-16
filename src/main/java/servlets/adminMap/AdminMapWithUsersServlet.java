@@ -1,4 +1,6 @@
-package servlets;
+package servlets.adminMap;
+
+
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,15 +10,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/user/map")
-public class FestivalMapServlet extends HttpServlet {
-
-
+@WebServlet("/admin/mapWithUsers")
+public class AdminMapWithUsersServlet extends HttpServlet {
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
+
         response.setContentType("text/html;UTF-8");
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/userMap/pageWithMap.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/admin/adminMapWithUsers.jsp");
         dispatcher.forward(request, response);
     }
 }

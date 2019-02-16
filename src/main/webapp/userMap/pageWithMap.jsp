@@ -14,7 +14,11 @@
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript">
+        <%@include file="userMapData.js" %>
+    </script>
     <script type="text/javascript">
         <%@include file="userNotification.js" %>
     </script>
@@ -35,7 +39,6 @@
     <%--<%@include file="mapDataReceive.js" %>--%>
 <%--</script>--%>
 
-
 </html>
     <script type="text/javascript">
 
@@ -43,7 +46,7 @@
 
         // get запрос GeometryServlet, get user data
         $.ajax({
-            url: "/rest/geometry",
+            url: "/rest/geometry/get-all-festivals",
             method: "get",
             async: true,
             error: function (message) {
@@ -83,15 +86,15 @@
                         balloonContent: 'It is you'
                     }, {
                         iconLayout: 'default#image',
-                        iconImageHref: 'http://thebestapp.ru/wp-content/uploads/2016/07/Location_marker@2x.png',
-                        iconImageSize: [32, 32],
-                        iconImageOffset: [-15, -15]
+                        // iconImageHref: 'http://thebestapp.ru/wp-content/uploads/2016/07/Location_marker@2x.png',
+                        // iconImageSize: [32, 32],
+                        // iconImageOffset: [-15, -15]
                     });
                     // добавляем метку на карту
                     myMap.geoObjects.add(myPlacemark);
                 }
 
-                if (webSocketClient != undefined) {
+                if (webSocketClient != undefined && userName!= undefined && userID != undefined) {
                     var message = '{ "coordinates": "' + x + " " + y + '", "userName" : "' +  userName + '", "userID" : "' + userID + '"}';
                     console.log("send to server: " + message);
                     //var jsonObj = {"x" : userX, "y" : userY};
@@ -158,9 +161,9 @@
                 balloonContent: 'It is you'
             }, {
                 iconLayout: 'default#image',
-                iconImageHref:'http://thebestapp.ru/wp-content/uploads/2016/07/Location_marker@2x.png',
-                iconImageSize: [32, 32],
-                iconImageOffset: [-15, -15]
+                // iconImageHref:'http://thebestapp.ru/wp-content/uploads/2016/07/Location_marker@2x.png',
+                // iconImageSize: [32, 32],
+                // iconImageOffset: [-15, -15]
             });
             // добавляем метку на карту
             myMap.geoObjects.add(myPlacemark);

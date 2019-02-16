@@ -15,6 +15,7 @@ import java.io.IOException;
 @WebServlet("/registration")
 public class RegistrationServlet extends HttpServlet {
     private boolean isExists;
+    private boolean regOK;
     UserService service = UserServiceImpl.getInstance();
 
     @Override
@@ -22,6 +23,7 @@ public class RegistrationServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;UTF-8");
         request.setAttribute("isExists",isExists);
+        request.setAttribute("regSucces",regOK );
         RequestDispatcher dispatcher = request.getRequestDispatcher("/login/registration.jsp");
         dispatcher.forward(request, response);
     }
@@ -32,6 +34,11 @@ public class RegistrationServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;UTF-8");
 
+        if (regOK){
+            regOK=false;
+            response.sendRedirect("/login");
+            return;
+        }
         String login = request.getParameter("name");
         String password = request.getParameter("password");
 
@@ -48,7 +55,8 @@ public class RegistrationServlet extends HttpServlet {
 
         service.add(user);
         service.update(user);
+        regOK=true;
 
-        response.sendRedirect("/login?regSucces=succes");
+        response.sendRedirect("registration");
     }
 }

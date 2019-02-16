@@ -28,12 +28,12 @@ function openListOfFesivalEventPoints(data,festival_id) {
 
     $("#festival_list_body").append("<table id=\"festival_list_table\" class=\"table table-striped\"></table>");
     //Column names
-    $("#festival_list_table").append("<thead> <tr><th>Event Point</th><th>Description</th><th>Working time</th></tr></thead><tbody>");
+    $("#festival_list_table").append("<thead> <tr><th>Event Point</th><th>Description</th></tr></thead><tbody>");
 
     //fill the table
     $.each(data.eventPointList, function (index, value) {
 
-        $("#festival_list_table").append("<tr href=\"javascript:void(0)\" onclick=\"moveMapCentrToPoint('"+ value.center + "', '"+ value.id + "')\" id='" + value.id + "' ><td>" + value.name + "</td><td>" + value.description + "</td><td></td></tr>");
+        $("#festival_list_table").append("<tr href=\"javascript:void(0)\" onclick=\"moveMapCentrToPoint('"+ value.center + "', '"+ value.id + "')\" id='" + value.id + "' ><td>" + value.name + "</td><td>" + value.description + "</td></tr>");
 
     });
 
@@ -73,7 +73,7 @@ function moveMapCentrToPoint(centr, eventPoinID) {
 
 
 function GetEventPoints(){
-    console.log("[GetData] Receiving event points...");
+    console.log("[poligonActions.js] Receiving event points...");
 
 
     // get запрос EventPointToMapServlet
@@ -86,7 +86,7 @@ function GetEventPoints(){
         },
         success: function (data) {
 
-            console.log("[GetData] EventPoints received. Count=" + data.length);
+            console.log("[poligonActions.js] EventPoints received. Count=" + data.length);
             festivalEvents = data;
             DrawMapUnits(data);
         }
@@ -94,7 +94,7 @@ function GetEventPoints(){
 }
 
 function GetEventPointsForFesival(festival_id){
-    console.log("[GetData] Receiving event points...");
+    console.log("[poligonActions.js] Receiving event points...");
 
     // get запрос EventPointToMapServlet
     $.ajax({
@@ -107,7 +107,7 @@ function GetEventPointsForFesival(festival_id){
         },
         success: function (data) {
 
-            console.log("[GetData] EventPoints received. Count=" + data.length);
+            console.log("[poligonActions.js] EventPoints received. Count=" + data.length);
 
             openListOfFesivalEventPoints(data,festival_id);
 
@@ -120,8 +120,8 @@ function DrawMapUnits(arrayOfMapUnits){
 
         var mapObject = arrayOfMapUnits[i];
 
-        console.log("[PageWithMap] DrawMapUnit: name: " +mapObject.name + " fillColor: " + mapObject.color);
-        console.log("[PageWithMap] DrawMapUnit: geometry: " + mapObject.geometry);
+        console.log("[poligonActions.js] DrawMapUnit: name: " +mapObject.name + " fillColor: " + mapObject.color);
+        console.log("[poligonActions.js] DrawMapUnit: geometry: " + mapObject.geometry);
 
 
         // объект геометрицесской фигуры
@@ -161,7 +161,7 @@ function eventPointsOnClick(event) {
 }
 
 function GetEventsForEventPoint(eventPoint_id){
-    console.log("[GetData] Receiving event points...");
+    console.log("[poligonActions.js] Receiving event points...");
 
     // get запрос EventPointToMapServlet
     $.ajax({
@@ -174,7 +174,7 @@ function GetEventsForEventPoint(eventPoint_id){
         },
         success: function (data) {
 
-            console.log("[GetData] EventPoints received. Count=" + data.length);
+            console.log("[poligonActions.js] EventPoints received. Count=" + data.length);
 
             openListOfEventPointsEvents(data,eventPoint_id);
 
@@ -194,13 +194,13 @@ function openListOfEventPointsEvents(data,festival_id) {
 
     festivalListBody.append("<table id=\"festival_list_table\" class=\"table table-striped\"></table>");
     //Column names
-    $("#festival_list_table").append("<thead> <tr><th>Event</th><th>Description</th><th>Working time</th><th>Add to \n personal \n schedule</th></tr></thead><tbody>");
+    $("#festival_list_table").append("<thead> <tr><th>Event</th><th>Description</th><th>Add to \n personal \n schedule</th></tr></thead><tbody>");
 
     //fill the table
     $.each(data.eventList, function (index, value) {
 
-        //checked="checked"
-        $("#festival_list_table").append("<tr id='" + value.id + "' ><td>" + value.name + "</td><td>" + value.description + "</td><td></td><td><div class=\"check-material\"><input id=\"toggle-1\"  type=\"checkbox\" href=\"javascript:void(0)\" onclick=\"checkBoxOnClick(event,"+ value.id + ")\"><label for=\"toggle-1-\"></label></label></div></td></tr>");
+        //checked="checked"  class="check-material"
+        $("#festival_list_table").append("<tr id='" + value.id + "' ><td>" + value.name + "</td><td>" + value.description + "</td><td><div ><input id=\"toggle-1\"  type=\"checkbox\" href=\"javascript:void(0)\" onclick=\"checkBoxOnClick(event,"+ value.id + ")\"><label for=\"toggle-1-\"></label></label></div></td></tr>");
 //<input id="toggle-2" type="checkbox" checked="checked"><label for="toggle-2">
     });
 
@@ -244,4 +244,6 @@ function checkBoxOnClick(event,eventID) {
         }
     });
 
+    //setTimeout(getUserSchedule(),2000);
+    getUserSchedule();
 }

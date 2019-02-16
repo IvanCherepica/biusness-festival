@@ -4,6 +4,7 @@ package services.implementation;
 import dao.SessionFactoryHolder;
 import dao.abstraction.UserDAO;
 import dao.implementation.UserDAOImpl;
+import models.Event;
 import models.EventPoint;
 import models.User;
 import services.abstraction.UserService;
@@ -65,6 +66,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<User> getAllList() {
         return userDAO.getAllList();
+    }
+
+    public List<Event> getUserSchedule(long userId) {
+        return userDAO.getUserSchedule(userId);
     }
 
 //    @Override

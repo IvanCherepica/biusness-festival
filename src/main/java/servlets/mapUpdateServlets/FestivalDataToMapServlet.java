@@ -17,6 +17,8 @@ import java.util.List;
 
 @WebServlet("/map/data_for_festivalList")
 public class FestivalDataToMapServlet  extends HttpServlet {
+    private FestivalServiceImpl festivalService = FestivalServiceImpl.getInstance();
+    private EventPoinServiceImpl eventPointService = EventPoinServiceImpl.getInstance();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -25,19 +27,15 @@ public class FestivalDataToMapServlet  extends HttpServlet {
         String fesivalID = request.getParameter("festival_id");
         List<EventPoint> eventPoints = null;
         Festival festival = null;
-        EventPoinServiceImpl eventPoinService = null;
-
-        eventPoinService = EventPoinServiceImpl.getInstance();
 
 
         if (fesivalID != null) {
             Long festivalId = Long.parseLong(fesivalID);
-            eventPoints = eventPoinService.getAllEventPointByFestivalId(festivalId);
-
-            festival = FestivalServiceImpl.getInstance().getById(festivalId);
+            eventPoints = eventPointService.getAllEventPointByFestivalId(festivalId);
+            festival = festivalService.getById(festivalId);
 
         } else {
-            eventPoints = eventPoinService.getAllList();
+            eventPoints = eventPointService.getAllList();
         }
 
         String eventPointsGson = "";

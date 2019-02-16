@@ -3,7 +3,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>HotSPots</title>
+    <title>Список Хот-Поинтов</title>
     <link rel="stylesheet" href="https://bootswatch.com/3/united/bootstrap.min.css" >
 </head>
 <body>
@@ -12,18 +12,18 @@
 
 
 <div class="panel-body">
-    <h4>All Hot Spots</h4>
+    <h4>Список Хот-поинтрв</h4>
     <table class="table table-striped table-responsive">
         <thead>
         <tr>
             <th>id</th>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Geometry</th>
-            <th>Color</th>
-            <th>FestivalId</th>
+            <th>Название</th>
+            <th>Описание</th>
+            <th>Координаты</th>
+            <th>Цвет</th>
+            <th>Id фестиваля</th>
             <form>
-                <button formmethod="get" formaction="/admin/hotpoints/addhot" class="btn btn-primary">Add</button>
+                <button formmethod="get" formaction="/admin/hotpoints/addhot" class="btn btn-primary">Добваить</button>
             </form>
         </tr>
         </thead>
@@ -38,8 +38,8 @@
                     <td  bgcolor="${hotPoint.color}"></td>
                     <td>${hotPoint.festival.name} (id:${hotPoint.festival.id})</td>
                     <td>
-                        <button name="hPointId" value="${hotPoint.id}" formmethod="post" formaction="\admin\hotpoints\delete" class="btn btn-primary">Delete</button>
-                        <button name="hPointId" value="${hotPoint.id}" formmethod="get" formaction="\admin\hotpoints\edit" class="btn btn-primary">Edit</button>
+                        <button name="hPointId" value="${hotPoint.id}" formmethod="post" formaction="\admin\hotpoints\delete" class="btn btn-primary">Удалить</button>
+                        <button name="hPointId" value="${hotPoint.id}" formmethod="get" formaction="\admin\hotpoints\edit" class="btn btn-primary">Изменить</button>
                     </td>
                 </form>
             </tr>
@@ -48,7 +48,7 @@
     </table>
 
     <form>
-        <button formmethod="get" formaction="\logout" class="btn btn-primary">Logout</button>
+        <button formmethod="get" formaction="\logout" class="btn btn-primary">Выйти</button>
     </form>
 </div>
 

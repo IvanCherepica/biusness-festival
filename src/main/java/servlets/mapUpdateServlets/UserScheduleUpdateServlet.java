@@ -35,7 +35,7 @@ public class UserScheduleUpdateServlet extends HttpServlet {
             eventService.addRemoveEventFromUser(user.getId(),eventID);
         }
 
-        userService.update(user);
+        //userService.update(user);
 
         response.setContentType("text/html");
         response.setCharacterEncoding("UTF-8");

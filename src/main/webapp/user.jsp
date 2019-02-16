@@ -29,11 +29,23 @@ To change this template use File | Settings | File Templates.
             /*z-index: 0;*/
         }
 
+        .container1{
+            /*position: absolute;*/
+            float: left;
+            left: 10px;
+            width: 300px;
+            height: 50px;
+            position:fixed;
+            z-index:10000;
+            top:10px;
+            /*z-index: 0;*/
+        }
+
         .informUser {
             border-radius: 20px;
             position: absolute;
-            width: 300px;
-            height: 293px;
+            width: 0;
+            /*height: 0px;*/
             right: 10px;
             padding: 10px;
             background: #D3D4DA;
@@ -43,18 +55,6 @@ To change this template use File | Settings | File Templates.
             color: #292929;
         }
 
-        #userBlock{
-            border-radius: 20px;
-            text-align: center;
-            position: initial;
-            width: initial;
-            height: initial;
-            right: 10px;
-            z-index: 2001;
-            opacity: 1;
-            background: #ffffff;
-            height: 270px;
-        }
         #festivalBlock {
             border-radius: 20px;
             text-align: center;
@@ -64,8 +64,8 @@ To change this template use File | Settings | File Templates.
             z-index: 2003;
             opacity: 1;
             background: #eeeeee;
-            height: 0px;
-            margin: 20px 0 0 0;
+            max-height: 800px;
+            margin: 5px 0 0 0;
         }
 
         #events{
@@ -82,6 +82,7 @@ To change this template use File | Settings | File Templates.
             text-shadow: 0 1px 0 rgba(255,255,255,.5);
         }
         .rectangle a {
+            border-radius: 20px;
             position: relative;
             display: block;
             padding: .4em .4em .4em .8em;
@@ -124,15 +125,13 @@ To change this template use File | Settings | File Templates.
 </head>
 <body>
 <div class="main">
+
     <div id="informUserBlock" class="informUser">
-        <div id="userBlock">
-            <div id="userImage"></div>
-            <div id="userLg"></div>
-        </div>
-        <div id="festivalBlock">
-            <p id="festivalInfo1"></p>
-            <p id="festivalInfo2"></p>
-            <div>
+        <div style="overflow-y: scroll;" id="festivalBlock">
+            <br>
+            <h3 style="margin-top: 10px" id="festivalInfo1"></h3>
+            <h5 id="festivalInfo2"></h5>
+            <div style="margin-bottom: 20px">
                 <ol id="events" class="rectangle">
                 </ol>
             </div>
@@ -140,6 +139,24 @@ To change this template use File | Settings | File Templates.
     </div>
     <div class="usermap">
         <jsp:include page="userMap/pageWithMap.jsp"/>
+    </div>
+</div>
+
+<div class="container1">
+    <%--<h2>Collapsible Panel</h2>--%>
+    <%--<p>Click on the collapsible panel to open and close it.</p>--%>
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-heading" onclick="getUserSchedule()" href=javascript:void(0) >
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" href="#collapse1">My Events</a>
+                </h4>
+            </div>
+            <div id="collapse1" class="panel-collapse collapse">
+                <div class="panel-body" id="user_schedule"></div>
+                <%--<div class="panel-footer">Panel Footer</div>--%>
+            </div>
+        </div>
     </div>
 </div>
 </body>
