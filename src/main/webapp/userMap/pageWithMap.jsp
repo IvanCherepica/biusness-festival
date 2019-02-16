@@ -1,8 +1,11 @@
+<%@page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
+
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>Geoposition</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <link rel="stylesheet" href="https://bootswatch.com/3/united/bootstrap.min.css" >
+    <!--<link rel="stylesheet" href="https://bootswatch.com/4/united/bootstrap.min.css" >-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" />
 
     <script src="https://api-maps.yandex.ru/2.1/?apikey=e6f8dfbf-7c6d-464f-9a6a-4308cb58f188&lang=ru_RU"
             type="text/javascript">
@@ -209,8 +212,10 @@
     </script>
 </head>
 <body >
-<div class="map" id="map" style="width: 100%; height: 100%">
-</div>
+    <div class="container-fluid">
+        <div class="map" id="map" style="width: 100%; height: 100%">
+        </div>
+    </div>
 
 <!-- Modal -->
 <div id="festival_list_Modal" class="modal fade" role="dialog">
@@ -244,6 +249,7 @@
     <%--<input type='button' class='rab' value='Raise alert'>--%>
 </div>
 
+<%@include file="toastWindow.jsp" %>
 
 
 </body>

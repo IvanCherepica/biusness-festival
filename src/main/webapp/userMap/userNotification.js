@@ -73,8 +73,12 @@ function connect() {
 }
 
 
-function sendWelcomMessage(message) {
-    confirm(message);
+function sendWelcomMessage() {
+    //var toastHeader = header;
+    //var toastMessage = message;
+    document.getElementById("toastHeader").innerHTML = "Welcome";
+    document.getElementById("toastMessage").innerHTML = "Вы прибыли на <b>JavaBootCamp</b>";
+    $('.toast').toast('show');
 }
 
 
