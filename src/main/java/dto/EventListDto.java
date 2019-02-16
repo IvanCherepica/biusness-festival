@@ -8,6 +8,7 @@ public class EventListDto {
     private String eventPoinName;
     private String eventPoinDescription;
     private List<Event> eventList;
+    private Long userId;
 
     public String getEventPoinName() {
         return eventPoinName;
@@ -31,5 +32,13 @@ public class EventListDto {
 
     public void setEventList(List<Event> eventList) {
         this.eventList = eventList;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 }

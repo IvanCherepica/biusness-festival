@@ -29,6 +29,7 @@ public class EventsDataToMapServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
 
         String eventPointID = request.getParameter("eventPoint_id");
+        Long userId = Long.parseLong(request.getParameter("userId"));
         List<Event> events = null;
         EventPoint eventPoint = null;
 
@@ -52,6 +53,7 @@ public class EventsDataToMapServlet extends HttpServlet {
         eventListDto.setEventPoinName(eventPoint.getName());
         eventListDto.setEventPoinDescription(eventPoint.getDescription());
         eventListDto.setEventList(events);
+        eventListDto.setUserId(userId);
 
 
 //        eventPointsGson = new Gson().toJson(eventPoints);

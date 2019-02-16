@@ -168,7 +168,7 @@ function GetEventsForEventPoint(eventPoint_id){
         url: "/map/data_for_eventPointList",
         method: "get",
         async: true,
-        data: {eventPoint_id : eventPoint_id},
+        data: {eventPoint_id : eventPoint_id, userId: userID},
         error: function (message) {
             console.log(message);
         },
@@ -198,9 +198,13 @@ function openListOfEventPointsEvents(data,festival_id) {
 
     //fill the table
     $.each(data.eventList, function (index, value) {
+        var isChecked = "";
+        if (value.inUserSchedule) {
+            isChecked = "checked=\"checked\"";
+        }
 
         //checked="checked"  class="check-material"
-        $("#festival_list_table").append("<tr id='" + value.id + "' ><td>" + value.name + "</td><td>" + value.description + "</td><td><div ><input id=\"toggle-1\"  type=\"checkbox\" href=\"javascript:void(0)\" onclick=\"checkBoxOnClick(event,"+ value.id + ")\"><label for=\"toggle-1-\"></label></label></div></td></tr>");
+        $("#festival_list_table").append("<tr id='" + value.id + "' ><td>" + value.name + "</td><td>" + value.description + "</td><td><div ><input id=\"toggle-1\"  " + isChecked + "  type=\"checkbox\" href=\"javascript:void(0)\" onclick=\"checkBoxOnClick(event,"+ value.id + ")\"><label for=\"toggle-1-\"></label></label></div></td></tr>");
 //<input id="toggle-2" type="checkbox" checked="checked"><label for="toggle-2">
     });
 
@@ -240,10 +244,9 @@ function checkBoxOnClick(event,eventID) {
         success: function (data) {
 
             console.log("UpdateUserSchedule : " + data);
-
+            getUserSchedule();
         }
     });
 
-    //setTimeout(getUserSchedule(),2000);
-    getUserSchedule();
+
 }
