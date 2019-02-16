@@ -72,34 +72,6 @@ function DrawFestivals(array) {
 
         var mapObject = array[i];
 
-        // объект геометрицесской фигуры
-        myPolygon = new ymaps.Polygon(
-            JSON.parse(mapObject.geometry), // Указываем координаты вершин многоугольника, являющиеся массивом в формате JSON.
-            // {
-            //     balloonContent: mapObject.name
-            // }, // Содержимое балуна.
-            {
-                hintContent: mapObject.name
-            },
-            {
-                strokeColor: mapObject.color,
-                strokeOpacity: 1,
-                fillColor: mapObject.color, //Цвет обводки и цвет поля.
-                //fillMethod: 'stretch', // Тип заливки фоном
-                opacity: 0.5,
-
-                // stroke: falseУбираем видимость обводки.
-            }
-        );
-
-        // Добавляем многоугольник на карту.
-        myMap.geoObjects.add(myPolygon);
-        festivalPolygons[mapObject.id] = myPolygon;
-        myPolygon.events.add('click', function (event) {
-
-            festilvalPoligonOnClick(event);
-
-        });
 
 
         var ccc = mapObject.center;
@@ -136,6 +108,50 @@ function DrawFestivals(array) {
             strokeWidth: 1
         });
         myMap.geoObjects.add(myCircle);// Добавляем круг на карту.
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // объект геометрицесской фигуры
+        myPolygon = new ymaps.Polygon(
+            JSON.parse(mapObject.geometry), // Указываем координаты вершин многоугольника, являющиеся массивом в формате JSON.
+            // {
+            //     balloonContent: mapObject.name
+            // }, // Содержимое балуна.
+            {
+                hintContent: mapObject.name
+            },
+            {
+                strokeColor: mapObject.color,
+                strokeOpacity: 1,
+                fillColor: mapObject.color, //Цвет обводки и цвет поля.
+                //fillMethod: 'stretch', // Тип заливки фоном
+                opacity: 0.5,
+
+                // stroke: falseУбираем видимость обводки.
+            }
+        );
+
+        // Добавляем многоугольник на карту.
+        myMap.geoObjects.add(myPolygon);
+        festivalPolygons[mapObject.id] = myPolygon;
+        myPolygon.events.add('click', function (event) {
+
+            festilvalPoligonOnClick(event);
+
+        });
+
+
+
     }
 
 //draw event points
