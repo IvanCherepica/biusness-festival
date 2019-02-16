@@ -6,7 +6,7 @@ var userCurrentFestivalId;
 
 function startUsersHandler() {
 
-    userCurrentFestivalId = -1;
+    userCurrentFestivalId = 0;
 
     window.setInterval(function(){
         console.log("[adminMapUsersHandler.js] Server, give me user`s coordinates!");
@@ -28,6 +28,7 @@ function startUsersHandler() {
                 if (userCurrentFestivalId != data.userCurrentFestivalId){
                     isNeedToInform =  true;
                     userCurrentFestivalId = data.userCurrentFestivalId;
+                    getDataForFestival(userCurrentFestivalId);
                 }
 
                 console.log("[adminMapUsersHandler.js] userCurrentFestivalId: " + data.userCurrentFestivalId + " isNeedToInform: " + isNeedToInform);
