@@ -41,6 +41,72 @@ function ShowMap(xCenterMap, yCenterMap){
         });
     }
 
-    // GetFestivals(DrawMapUnits);
+    GetFestivalsForAdmin(DrawMapUnits);
     // GetEventPoints(DrawMapUnits);
+}
+
+
+function DrawMapUnits(arrayOfMapUnits){
+    for (var i = 0; i < arrayOfMapUnits.length; i++) {
+
+        var mapObject = arrayOfMapUnits[i];
+
+        console.log("[adminMap.js] DrawMapUnit: name: " +mapObject.name + " fillColor: " + mapObject.color);
+        console.log("[adminMap.js] DrawMapUnit: geometry: " + mapObject.geometry);
+
+
+        // объект геометрицесской фигуры
+        var myPolygon = new ymaps.Polygon(
+            JSON.parse(mapObject.geometry), // Указываем координаты вершин многоугольника, являющиеся массивом в формате JSON.
+            //{ balloonContent: mapObject.name}, // Содержимое балуна.
+            {
+                hintContent: mapObject.name
+            },
+            {
+                strokeColor: mapObject.color,
+                strokeOpacity: 1,
+                fillColor: mapObject.color, //Цвет обводки и цвет поля.
+                //fillMethod: 'stretch', // Тип заливки фоном
+                opacity: 0.5,
+                // stroke: falseУбираем видимость обводки.
+            }
+        );
+
+        // Добавляем многоугольник на карту.
+        myMap.geoObjects.add(myPolygon);
+
+
+        // var xc = mapObject.center.substr(0,str.indexOf(' '));
+        //
+        // console.log(xc);
+
+
+        // var myCircle = new ymaps.Circle([
+        //     // Координаты центра круга.
+        //     JSON.parse(mapObject.center),
+        //     // Радиус круга в метрах.
+        //     10000
+        // ], {
+        //     // Описываем свойства круга.
+        //     // Содержимое балуна.
+        //     balloonContent: "Радиус круга - 10 км",
+        //     // Содержимое хинта.
+        //     hintContent: "Подвинь меня"
+        // }, {
+        //     // Задаем опции круга.
+        //     // Включаем возможность перетаскивания круга.
+        //     draggable: true,
+        //     // Цвет заливки.
+        //     // Последний байт (77) определяет прозрачность.
+        //     // Прозрачность заливки также можно задать используя опцию "fillOpacity".
+        //     fillColor: "#DB709377",
+        //     // Цвет обводки.
+        //     strokeColor: "#990000",
+        //     // Прозрачность обводки.
+        //     strokeOpacity: 0.8,
+        //     // Ширина обводки в пикселях.
+        //     strokeWidth: 1
+        // });
+        // myMap.geoObjects.add(myCircle);// Добавляем круг на карту.
+    }
 }

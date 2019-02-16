@@ -4,6 +4,8 @@ public class GetGlobalCoordinatsDto {
 
     //x - latitude, y - longitude
 
+
+    private long userCurrentFestivalId;
     private double latitudeX;
     private double longitudeY;
 
@@ -25,5 +27,12 @@ public class GetGlobalCoordinatsDto {
         this.longitudeY = longitudeY;
     }
 
+    public long getUserCurrentFestivalId() {
+        return userCurrentFestivalId;
+    }
+
+    public void setUserCurrentFestivalId(long festivalId) {
+        this.userCurrentFestivalId = festivalId;
+    }
 
 }

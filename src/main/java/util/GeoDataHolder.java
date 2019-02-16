@@ -11,11 +11,18 @@ public class GeoDataHolder {
 
     private String userGeoposition;
 
+    //private int userNotificationCount;
+
+    private long currentFestivalId;
+
+
+
     private static volatile GeoDataHolder instance;
 
     private GeoDataHolder() {
 
     }
+
 
     public static GeoDataHolder getGeoDataHolder() {
         if (instance == null) {
@@ -50,5 +57,23 @@ public class GeoDataHolder {
 
     public void setUserGeoposition(String userGeoposition) {
         this.userGeoposition = userGeoposition;
+    }
+
+
+//    public int getUserNotificationCount() {
+//        return userNotificationCount;
+//    }
+//
+//    public void setUserCurrentFestivalId(int userNotificationCount) {
+//        this.userNotificationCount = userNotificationCount;
+//    }
+
+
+    public long getCurrentFestivalId() {
+        return currentFestivalId;
+    }
+
+    public void setCurrentFestivalId(long currentFestivalId) {
+        this.currentFestivalId = currentFestivalId;
     }
 }

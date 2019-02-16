@@ -296,7 +296,7 @@
                                                     <script type="text/javascript">
                                                         jQuery(document).ready( function() {
                                                             jQuery("#evEditButton${event.id}").click(function(){
-                                                                putEventValues("${event.id}", "${event.eventPoint.id}", "${festival.id}", "${event.name}", "${event.description}", "${event.dateBegin}", "${event.dateEnd}");
+                                                                putEventValues("${event.id}", "${event.eventPoint.id}", "${festival.id}", "${event.name}", "${event.description}");
                                                                 editEvent("${festival.id}");
                                                             });
                                                         })
@@ -335,8 +335,8 @@
             </div>
             <div class="modal-body">
                 <div class="raw">
-                    <input id="ep-festival_id" name="festival_id" readonly type="text">
-                    <input id="ep-id" name="eventPointId" readonly type="text">
+                    <input id="ep-festival_id" name="festival_id" readonly type="hidden">
+                    <input id="ep-id" name="eventPointId" readonly type="hidden">
                 </div>
 
                 <div class="raw">
@@ -627,7 +627,7 @@
     }
 
 
-    function putEventValues(id, eventpoint_id, festival_id, name, description, dateFrom, dateTo) {
+    function putEventValues(id, eventpoint_id, festival_id, name, description) {
         $('#efestival_id').val(festival_id);
         $('#ev_eventPoint').val(eventpoint_id);
         $('#ev-id').val(id);
