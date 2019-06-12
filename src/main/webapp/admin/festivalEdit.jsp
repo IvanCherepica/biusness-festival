@@ -44,7 +44,7 @@
 
 
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-            <h1 class="page-header">Редакция фестиваля</h1>
+            <h1 class="page-header">Редактирование фестиваля</h1>
 
             <div class="tab-content">
                 <div role="tabpanel" class="tab-pane active" id="admin-page">
