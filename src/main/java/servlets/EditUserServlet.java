@@ -1,12 +1,12 @@
 package servlets;
 
-import models.EventPoint;
+import models.Event;
 import models.User;
 import org.hibernate.HibernateException;
-import services.EventPoinService;
-import services.EventPoinServiceImpl;
-import services.UserService;
-import services.UserServiceImpl;
+import services.abstraction.EventService;
+import services.abstraction.UserService;
+import services.implementation.EventServiceImpl;
+import services.implementation.UserServiceImpl;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,18 +15,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @WebServlet("/admin/editUser")
 public class EditUserServlet extends HttpServlet {
 
     private final UserService userService = UserServiceImpl.getInstance();
-    private final EventPoinService eventPoinService= EventPoinServiceImpl.getInstance();
+    private final EventService eventService= EventServiceImpl.getInstance();
 
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setContentType("text/html");
+        request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html;UTF-8");
+
         String paramId = request.getParameter("edit");
         User user;
 
@@ -36,19 +39,21 @@ public class EditUserServlet extends HttpServlet {
         } else {
             long id = Long.parseLong(paramId);
             user = userService.getById(id);
-            List<EventPoint> eventFromUser = user.getEvents();
-            List<EventPoint> allEventsFromDB=eventPoinService.getAllList();
+            Set<Event> eventFromUser = user.getEvents();
+            List<Event> allEventsFromDB=eventService.getAllList();
             request.setAttribute("user", user);
             boolean p= allEventsFromDB.removeAll(eventFromUser);
             request.setAttribute("eventsp",allEventsFromDB);
             request.setAttribute( "ueventsp",eventFromUser);
         }
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/editUser.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/admin/userEdit.jsp");
         dispatcher.forward(request, response);
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html;UTF-8");
 
         String paramId = request.getParameter("id");
         String name = request.getParameter("name");
@@ -62,26 +67,25 @@ public class EditUserServlet extends HttpServlet {
             user.setName(name == null ? "" : name);
             user.setPassword(password == null ? "" : password);
             user.setRole(role == null ? "" : role);
-            List<EventPoint> userEvents= user.getEvents();
+            Set<Event> userEvents= user.getEvents();
             //добавление ивентов для участника
             if (userEvents != null) {
                if (eventId != null) {
-                   List<EventPoint> events = new ArrayList<>();
+                   Set<Event> events = new HashSet<>();
                    for (String eve : eventId) {
-                       events.add(eventPoinService.getById(Long.parseLong(eve)));
+                       events.add(eventService.getById(Long.parseLong(eve)));
                    }
-                   user.setEventsToUser(events);
+//                   user.setEventsFromFest(events);
                }
                else {
                    userEvents.removeAll(userEvents);
-                   user.setEventsToUser(userEvents);
+//                   user.setEventsFromFest(userEvents);
                }
             }
 
             //конец добавления
             userService.update(user);
 
-            response.setContentType("text/html");
             response.sendRedirect("/admin/users");
         } catch (HibernateException | NumberFormatException e) {
             response.sendRedirect("/error.html");

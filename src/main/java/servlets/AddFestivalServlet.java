@@ -1,8 +1,8 @@
 package servlets;
 
 import models.Festival;
-import services.FestivalService;
-import services.FestivalServiceImpl;
+import services.abstraction.FestivalService;
+import services.implementation.FestivalServiceImpl;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -12,13 +12,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 @WebServlet("/admin/addFest")
 public class AddFestivalServlet extends HttpServlet {
     private final FestivalService festivalService=  FestivalServiceImpl.getInstance();
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	    response.setContentType("text/html");
+	public AddFestivalServlet() throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
+	}
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	    response.setContentType("text/html;UTF-8");
 		String paramId = request.getParameter("edit");
     	Festival festival;
     	
@@ -30,13 +34,16 @@ public class AddFestivalServlet extends HttpServlet {
 	    }
 		request.setAttribute("festival", festival);
 	    
-	    RequestDispatcher dispatcher = request.getRequestDispatcher("/addFest.jsp");
+	    RequestDispatcher dispatcher = request.getRequestDispatcher("/admin/festivalAdd.jsp");
         dispatcher.forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	    String name = request.getParameter("name");
+	    request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html;UTF-8");
+
+		String name = request.getParameter("name");
 	    String description = request.getParameter("description");
 	    String geometry = request.getParameter("geometry");
 	    String color = request.getParameter("color");
@@ -48,7 +55,7 @@ public class AddFestivalServlet extends HttpServlet {
 	    
         festivalService.add(festival);
 
-        response.setContentType("text/html");
+
         response.sendRedirect("/admin/festivals");
     }
 }

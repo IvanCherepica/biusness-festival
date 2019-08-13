@@ -1,9 +1,6 @@
 package dto;
 
-import models.EventPoint;
-import models.Festival;
-import models.PointUnit;
-import models.User;
+import models.*;
 
 import java.util.List;
 
@@ -16,13 +13,19 @@ public class UserSocketDto {
 
     private String name;
 
+    private long fesivalId;
+
     private boolean isInFestival;
 
     private String message = "";
 
     private Festival festival;
 
+    private EventPoint eventPoint;
+
     private User user;
+
+//    private List<Event> eventList;
 
     private List<EventPoint> eventPointList;
 
@@ -36,6 +39,14 @@ public class UserSocketDto {
     }
 
     public UserSocketDto() {
+    }
+
+    public long getFesivalId() {
+        return fesivalId;
+    }
+
+    public void setFesivalId(long fesivalId) {
+        this.fesivalId = fesivalId;
     }
 
     public long getId() {
@@ -102,4 +113,14 @@ public class UserSocketDto {
     public void setEventPointsGson(String eventPointsGson) {
         this.eventPointsGson = eventPointsGson;
     }
+
+    public EventPoint getEventPoint() {
+        return eventPoint;
+    }
+
+    public void setEventPoint(EventPoint eventPoint) {
+        this.eventPoint = eventPoint;
+    }
+
+
 }

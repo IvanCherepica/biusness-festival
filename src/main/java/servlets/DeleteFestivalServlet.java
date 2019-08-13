@@ -1,11 +1,9 @@
 package servlets;
 
-import models.Festival;
 import org.hibernate.HibernateException;
-import services.FestivalService;
-import services.FestivalServiceImpl;
+import services.abstraction.FestivalService;
+import services.implementation.FestivalServiceImpl;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,7 +17,9 @@ public class DeleteFestivalServlet extends HttpServlet {
 	private final FestivalService festivalService = FestivalServiceImpl.getInstance();
 	
 	protected void doGet (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("text/html");
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html;UTF-8");
+
 		String paramId = request.getParameter("festivalId");
 		
 		if (paramId == null) {
@@ -32,7 +32,7 @@ public class DeleteFestivalServlet extends HttpServlet {
 				response.sendRedirect("/error.html");
 			}
 		}
-		response.setContentType("text/html");
+
 		response.sendRedirect("/admin/festivals");
 	}
 	

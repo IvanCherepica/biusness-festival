@@ -2,3 +2,8 @@
 .gitignore
 .idea/
 crud-jdbc-servlet-jsp.iml
+business-festival.iml
+target/
+test/test.iml
+/src/main/webapp/user2.jsp
+/src/main/webapp/mapDataReceive.js

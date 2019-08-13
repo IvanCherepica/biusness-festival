@@ -8,7 +8,7 @@ import org.hibernate.Transaction;
 import java.lang.reflect.ParameterizedType;
 
 
-abstract class AbstactDAO<T> {
+public abstract class AbstactDAO<T> {
     private final Class<T> persistentClass;
 
     private String className;
@@ -65,7 +65,7 @@ abstract class AbstactDAO<T> {
         Transaction transaction = session.beginTransaction();
         Long itemID = null;
         try {
-            itemID = (Long) session.save(item);
+            itemID = (long) session.save(item);
             transaction.commit();
         } catch (Exception e) {
             System.out.println("Can`t add " + className + ": " + e.getMessage());

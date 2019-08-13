@@ -3,16 +3,21 @@ package servlets.events;
 import models.Event;
 import models.EventPoint;
 import models.Festival;
-import services.*;
+import services.abstraction.EventPoinService;
+import services.abstraction.EventService;
+import services.abstraction.FestivalService;
+import services.implementation.EventPoinServiceImpl;
+import services.implementation.EventServiceImpl;
+import services.implementation.FestivalServiceImpl;
+import util.DateTimeConverter;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.time.LocalDate;
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 
 @WebServlet("/admin/events/add")
@@ -21,14 +26,20 @@ public class AddEventServlet extends HttpServlet {
 	private final EventPoinService eventPoinService = EventPoinServiceImpl.getInstance();
 	private final FestivalService festivalService=  FestivalServiceImpl.getInstance();
 
-    @Override
+	public AddEventServlet() throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
+	}
+
+	@Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	    String festivalIdParam = request.getParameter("festivalId");
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html;UTF-8");
+
+		String festivalIdParam = request.getParameter("festivalId");
 	    String eventPointIdParam = request.getParameter("eventPointId");
 	    String name = request.getParameter("name");
 	    String description = request.getParameter("description");
-	    String dateBeginParam = request.getParameter("dateBegin");
-	    String dateEndParam = request.getParameter("dateEnd");
+//	    String dateBeginParam = request.getParameter("dateBegin");
+//	    String dateEndParam = request.getParameter("dateEnd");
 	    
 	    if (name==null || name.isEmpty() || eventPointIdParam.isEmpty()) {
 		    response.sendRedirect("/error.html");
@@ -42,8 +53,8 @@ public class AddEventServlet extends HttpServlet {
 		    eventPoint = eventPoinService.getById(eventPointId);
 		    long festivalId = Long.parseLong(festivalIdParam);
 		    festival = festivalService.getById(festivalId);
-		    dateBegin = LocalDateTime.parse(dateBeginParam);
-		    dateEnd = LocalDateTime.parse(dateEndParam);
+//		    dateBegin = DateTimeConverter.parse(dateBeginParam);
+//		    dateEnd = DateTimeConverter.parse(dateEndParam);
 		    
 		    if (!(eventPoint instanceof EventPoint || festival instanceof Festival)) {
 			    response.sendRedirect("/error.html");
@@ -52,12 +63,11 @@ public class AddEventServlet extends HttpServlet {
 		    response.sendRedirect("/error.html");
 	    }
         Event event = new Event(name, description, eventPoint, festival);
-	    event.setDateBegin(dateBegin);
-	    event.setDateEnd(dateEnd);
+//	    event.setDateBegin(dateBegin);
+//	    event.setDateEnd(dateEnd);
 	    
         eventService.add(event);
 
-        response.setContentType("text/html");
-        response.sendRedirect("/admin/festivals");
+        //response.sendRedirect("/admin/festivals");
     }
 }

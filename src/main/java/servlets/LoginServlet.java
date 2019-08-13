@@ -1,8 +1,8 @@
 package servlets;
 
 import models.User;
-import services.UserService;
-import services.UserServiceImpl;
+import services.abstraction.UserService;
+import services.implementation.UserServiceImpl;
 import services.userNotificationServices.UserSessionService;
 
 import javax.servlet.RequestDispatcher;
@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.sql.SQLException;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
@@ -20,24 +21,32 @@ public class LoginServlet extends HttpServlet {
     private UserService service = UserServiceImpl.getInstance();
     private UserSessionService userSessionService = UserSessionService.getInstance();
     private boolean isInvalid;
+    private boolean isPass;
 
-    public LoginServlet() {
+    public LoginServlet() throws ClassNotFoundException, SQLException, InstantiationException, IllegalAccessException {
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException { response.setContentType("text/html");
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/login.jsp");
+        request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html;UTF-8");
+
+        request.setAttribute("isInvalid",isInvalid);
+        request.setAttribute("isPass", isPass);
+
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/login/login.jsp");
         dispatcher.forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        isInvalid=false;
+        isPass=false;
+        request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html;UTF-8");
+
         String login = request.getParameter("login");
         String password = request.getParameter("password");
-        if (login.isEmpty() || password.isEmpty()) {
-            isInvalid = true;
-            return;
-        }
 
         User user = service.getByName(login);
 
@@ -51,7 +60,6 @@ public class LoginServlet extends HttpServlet {
             userSessionService.addUserSessions(user.getId(),session);
             session.setAttribute("user", user);
             session.setAttribute("userInFestival","false");
-            response.setContentType("text/html");
             if (user.getRole().equals("admin")) {
                 response.sendRedirect("/admin/festivals"); //исправить на путь к админке
                 return;
@@ -59,11 +67,10 @@ public class LoginServlet extends HttpServlet {
             response.sendRedirect("/user");
         }
 
-        if (!user.getPassword().equals(password) || !user.getName().equals(login)) {
-            HttpSession session = request.getSession();
-            session.setAttribute("user", user);
-            response.setContentType("text/html");
-            response.sendRedirect("/error.html");
+        if (!user.getPassword().equals(password)) {
+            isPass = true;
+            response.sendRedirect("/login");
+            return;
         }
     }
 }

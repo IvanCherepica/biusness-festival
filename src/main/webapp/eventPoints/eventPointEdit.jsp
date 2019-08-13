@@ -12,9 +12,8 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>EventPoint edit</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <title>Редакция Места Событий</title>
+    <link rel="stylesheet" href="https://bootswatch.com/3/united/bootstrap.min.css" >
 </head>
 
 <body>
@@ -22,7 +21,7 @@
     <div class="row">
         <div class="col-lg-6 col-md-6 col-xs-11 col-md-offset-3 col-xs-offset-2 login-form">
             <div class="col-xs-8 col-md-offset-2">
-                <h2>Edit event point</h2>
+                <h2>Редакия Места событий</h2>
                 <form action="/admin/eventpoints/edit" method="POST" class="form-group login-group">
                     <select name="festivalId" value="${eventPoint.festival.id}"  class="form-control" id="sel1">
                         <c:forEach var="item" items="${festivals}">
@@ -50,7 +49,7 @@
                            name="color" value="${eventPoint.color}" required
                            class="form-control"/>
 
-                    <button type="submit" class="btn btn-primary btn-block">Save</button>
+                    <button type="submit" class="btn btn-primary btn-block">Сохранить</button>
                 </form>
             </div>
         </div>

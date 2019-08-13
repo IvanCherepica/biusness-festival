@@ -2,8 +2,8 @@ package servlets.hotpoints;
 
 import models.HotPoint;
 import models.Festival;
-import services.HotPointServiceImpl;
-import services.FestivalServiceImpl;
+import services.implementation.HotPointServiceImpl;
+import services.implementation.FestivalServiceImpl;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.RequestDispatcher;
@@ -18,6 +18,8 @@ import java.util.List;
 public class HotPointEditorServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html;UTF-8");
 
         List<Festival> festivals = FestivalServiceImpl.getInstance().getAllList();
         request.setAttribute("festivals", festivals);
@@ -33,6 +35,8 @@ public class HotPointEditorServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html;UTF-8");
 
         long hPointId = Long.parseLong(request.getParameter("hotPointId"));
         long fId = Long.parseLong(request.getParameter("festivalId"));
@@ -53,7 +57,9 @@ public class HotPointEditorServlet extends HttpServlet {
 
         HotPointServiceImpl.getInstance().update(hPoint);
 
-        response.sendRedirect("/admin/editFestival?festivalId="+fId);
+        //response.sendRedirect("/admin/editFestival");
+
+        //response.sendRedirect("/admin/editFestival");
     }
 
 }

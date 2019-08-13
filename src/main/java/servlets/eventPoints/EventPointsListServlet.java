@@ -2,8 +2,8 @@ package servlets.eventPoints;
 
 import models.EventPoint;
 import org.hibernate.HibernateException;
-import services.EventPoinService;
-import services.EventPoinServiceImpl;
+import services.abstraction.EventPoinService;
+import services.implementation.EventPoinServiceImpl;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -18,7 +18,9 @@ import java.util.List;
 public class EventPointsListServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    
+        request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html;UTF-8");
+
         String paramId = request.getParameter("id");
         EventPoinService eventPoinService = EventPoinServiceImpl.getInstance();
     

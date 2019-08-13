@@ -2,8 +2,8 @@ package servlets.hotpoints;
 
 import models.HotPoint;
 import org.hibernate.HibernateException;
-import services.HotPointService;
-import services.HotPointServiceImpl;
+import services.abstraction.HotPointService;
+import services.implementation.HotPointServiceImpl;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -20,7 +20,9 @@ public class HotPointListServlet extends HttpServlet {
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    
+        request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html;UTF-8");
+
         String paramId = request.getParameter("id");
         HotPointService hotPoinService = HotPointServiceImpl.getInstance();
     

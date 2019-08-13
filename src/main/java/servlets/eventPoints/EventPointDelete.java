@@ -1,10 +1,10 @@
 package servlets.eventPoints;
 
 import org.hibernate.HibernateException;
-import services.EventPoinService;
-import services.EventPoinServiceImpl;
-import services.FestivalService;
-import services.FestivalServiceImpl;
+import services.abstraction.EventPoinService;
+import services.implementation.EventPoinServiceImpl;
+import services.abstraction.FestivalService;
+import services.implementation.FestivalServiceImpl;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,6 +20,8 @@ public class EventPointDelete extends HttpServlet {
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        request.setCharacterEncoding("UTF-8");
+        response.setContentType("text/html;UTF-8");
 
         String paramEventPontId = request.getParameter("eventPointId");
         String festivalId = request.getParameter("festivalId");
